@@ -3,8 +3,10 @@ import { getProducts, type Product } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 export function ProductGridSection() {
+  const { t } = useLanguage();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -29,7 +31,7 @@ export function ProductGridSection() {
   return (
     <SectionWrapper id="collection" className="py-16 md:py-24">
       <h2 className="font-serif text-3xl font-semibold text-foreground mb-8 md:text-4xl">
-        The Collection
+        {t("collection.title")}
       </h2>
 
       {loading && (
@@ -49,22 +51,18 @@ export function ProductGridSection() {
 
       {error && (
         <div className="text-center py-16 space-y-4">
-          <p className="text-muted-foreground">
-            We couldn't load the collection right now. Please try again.
-          </p>
+          <p className="text-muted-foreground">{t("collection.error")}</p>
           <button
             onClick={fetchProducts}
             className="cta-press inline-flex h-10 items-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground transition-colors duration-150 hover:bg-navy-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
-            Try again
+            {t("collection.retry")}
           </button>
         </div>
       )}
 
       {!loading && !error && products.length === 0 && (
-        <p className="text-center text-muted-foreground py-16">
-          No watches available at the moment. Check back soon.
-        </p>
+        <p className="text-center text-muted-foreground py-16">{t("collection.empty")}</p>
       )}
 
       {!loading && !error && products.length > 0 && (

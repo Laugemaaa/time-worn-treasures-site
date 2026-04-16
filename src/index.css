@@ -48,6 +48,11 @@
     --surface-espresso: 24 30% 13%;
     --text-warm-gray: 20 4% 40%;
     --navy-hover: 210 55% 17%;
+
+    /* Tradera brand */
+    --tradera: 48 100% 50%;
+    --tradera-hover: 45 100% 45%;
+    --tradera-foreground: 0 0% 10%;
   }
 
   .dark {
