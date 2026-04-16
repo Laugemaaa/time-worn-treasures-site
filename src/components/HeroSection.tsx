@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useScrollProgress } from "@/hooks/useScrollProgress";
+import { useLanguage } from "@/i18n/LanguageProvider";
 import heroWatch1 from "@/assets/hero-watch-1.jpg";
 import heroWatch2 from "@/assets/hero-watch-2.jpg";
 import heroWatch3 from "@/assets/hero-watch-3.jpg";
