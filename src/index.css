@@ -49,10 +49,11 @@
     --text-warm-gray: 20 4% 40%;
     --navy-hover: 210 55% 17%;
 
-    /* Tradera brand */
-    --tradera: 48 100% 50%;
-    --tradera-hover: 45 100% 45%;
-    --tradera-foreground: 0 0% 10%;
+    /* Tradera brand — matches tradera.com (#fef880 branded, #fefca6 highlighted, #121212 dark) */
+    --tradera: 56 99% 75%;
+    --tradera-hover: 56 98% 83%;
+    --tradera-active: 56 98% 65%;
+    --tradera-foreground: 0 0% 7%;
   }
 
   .dark {
