@@ -55,6 +55,11 @@ export default {
         espresso: "hsl(var(--surface-espresso))",
         "warm-gray": "hsl(var(--text-warm-gray))",
         "navy-hover": "hsl(var(--navy-hover))",
+        tradera: {
+          DEFAULT: "hsl(var(--tradera))",
+          hover: "hsl(var(--tradera-hover))",
+          foreground: "hsl(var(--tradera-foreground))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
