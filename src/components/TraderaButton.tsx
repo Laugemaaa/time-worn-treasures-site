@@ -1,6 +1,7 @@
 import { ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/i18n/LanguageProvider";
+import traderaIcon from "@/assets/tradera-icon.png";
 
 const TRADERA_URL = "https://www.tradera.com";
 
@@ -9,11 +10,6 @@ type Props = {
   size?: "sm" | "md";
 };
 
-/**
- * Square yellow Tradera CTA.
- * - Tradera logo slot on the LEFT (drop the official SVG into /src/assets/tradera-logo.svg)
- * - External-link icon appears on the RIGHT, only on hover/focus
- */
 export function TraderaButton({ className, size = "md" }: Props) {
   const { t } = useLanguage();
   const dim = size === "sm" ? "h-9" : "h-10";
@@ -35,13 +31,12 @@ export function TraderaButton({ className, size = "md" }: Props) {
         className,
       )}
     >
-      {/* Logo slot — replace with official SVG once uploaded */}
-      <span
-        aria-hidden
-        className="flex h-6 w-6 items-center justify-center font-serif text-base font-bold leading-none"
-      >
-        T
-      </span>
+      <img
+        src={traderaIcon}
+        alt=""
+        aria-hidden="true"
+        className="h-4 w-4 shrink-0"
+      />
       <span className="text-sm">{t("nav.tradera")}</span>
       <ExternalLink
         aria-hidden

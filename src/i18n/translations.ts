@@ -60,13 +60,13 @@ const en: Dict = {
   "skip.toContent": "Skip to content",
   "hero.title": "Every watch tells a story worth hearing",
   "hero.subtitle":
-    "A curated collection of vintage timepieces — chosen for character, provenance, and the kind of patina that only decades of real life can produce.",
+    "A curated collection of vintage timepieces - chosen for character, provenance, and the kind of patina that only decades of real life can produce.",
   "hero.cta": "Explore the Collection",
   "philosophy.title": "Why vintage?",
   "philosophy.p1":
-    "A new watch tells you the time. A vintage watch tells you about time — decades of it, compressed into scratches on a case back, a dial that's slowly turned from silver to champagne, a movement that's been wound ten thousand mornings in a row.",
+    "A new watch tells you the time. A vintage watch tells you about time - decades of it, compressed into scratches on a case back, a dial that's slowly turned from silver to champagne, a movement that's been wound ten thousand mornings in a row.",
   "philosophy.p2":
-    "We look for watches that have been worn honestly. Not safe queens preserved behind glass, but daily companions that carry the evidence of real life. That's where the character lives — in the imperfections.",
+    "We look for watches that have been worn honestly. Not safe queens preserved behind glass, but daily companions that carry the evidence of real life. That's where the character lives - in the imperfections.",
   "philosophy.p3":
     "Each piece in this collection has been chosen because it has something to say. A provenance worth knowing, a design that still holds up, or simply a presence on the wrist that modern watches struggle to replicate.",
   "collection.title": "The Collection",
@@ -80,8 +80,8 @@ const en: Dict = {
   "footer.navigate": "Navigate",
   "footer.trust": "Trust",
   "footer.trustDesc":
-    "Curated vintage watches since 2024. Every piece is authenticated and described honestly — wear, patina, and all.",
-  "footer.copyright": "© {year} Vintage Watches. All auctions hosted on Tradera.",
+    "Curated vintage watches since 2024. Every piece is authenticated and described honestly - wear, patina, and all.",
+  "footer.copyright": "(c) {year} Vintage Watches. All auctions hosted on Tradera.",
   "footer.language": "Language",
   "detail.back": "Back to Collection",
   "detail.auctionDetails": "Auction Details",
@@ -106,13 +106,13 @@ const da: Dict = {
   "skip.toContent": "Spring til indhold",
   "hero.title": "Hvert ur fortæller en historie værd at høre",
   "hero.subtitle":
-    "En kurateret samling af vintage-ure — udvalgt for karakter, proveniens og den slags patina, som kun årtiers virkeligt liv kan skabe.",
+    "En kurateret samling af vintage-ure - udvalgt for karakter, proveniens og den slags patina, som kun årtiers virkeligt liv kan skabe.",
   "hero.cta": "Udforsk samlingen",
   "philosophy.title": "Hvorfor vintage?",
   "philosophy.p1":
-    "Et nyt ur fortæller dig tiden. Et vintage-ur fortæller dig om tiden — årtier af den, komprimeret i ridser på bagsiden, en skive der langsomt er blevet sølv til champagne, et værk der er trukket op ti tusind morgener i træk.",
+    "Et nyt ur fortæller dig tiden. Et vintage-ur fortæller dig om tiden - årtier af den, komprimeret i ridser på bagsiden, en skive der langsomt er blevet fra sølv til champagne, et værk der er trukket op ti tusind morgener i træk.",
   "philosophy.p2":
-    "Vi leder efter ure, der er båret ærligt. Ikke museumsstykker bag glas, men daglige følgesvende, der bærer beviser på et virkeligt liv. Det er der, karakteren bor — i ufuldkommenhederne.",
+    "Vi leder efter ure, der er båret ærligt. Ikke museumsstykker bag glas, men daglige følgesvende, der bærer beviser på et virkeligt liv. Det er der, karakteren bor - i ufuldkommenhederne.",
   "philosophy.p3":
     "Hvert stykke i denne samling er valgt, fordi det har noget at sige. En proveniens værd at kende, et design der stadig holder, eller blot en tilstedeværelse på håndleddet, som moderne ure har svært ved at gengive.",
   "collection.title": "Samlingen",
@@ -126,8 +126,8 @@ const da: Dict = {
   "footer.navigate": "Naviger",
   "footer.trust": "Tillid",
   "footer.trustDesc":
-    "Kuraterede vintage-ure siden 2024. Hvert stykke er autentificeret og beskrevet ærligt — slid, patina og det hele.",
-  "footer.copyright": "© {year} Vintage Watches. Alle auktioner hostes på Tradera.",
+    "Kuraterede vintage-ure siden 2024. Hvert stykke er autentificeret og beskrevet ærligt - slid, patina og det hele.",
+  "footer.copyright": "(c) {year} Vintage Watches. Alle auktioner hostes på Tradera.",
   "footer.language": "Sprog",
   "detail.back": "Tilbage til samlingen",
   "detail.auctionDetails": "Auktionsoplysninger",
@@ -152,13 +152,13 @@ const sv: Dict = {
   "skip.toContent": "Hoppa till innehåll",
   "hero.title": "Varje klocka berättar en historia värd att höra",
   "hero.subtitle":
-    "En kurerad samling vintageklockor — utvalda för karaktär, härkomst och den sortens patina som bara årtionden av verkligt liv kan ge.",
+    "En kurerad samling vintageklockor - utvalda för karaktär, härkomst och den sortens patina som bara årtionden av verkligt liv kan ge.",
   "hero.cta": "Utforska kollektionen",
   "philosophy.title": "Varför vintage?",
   "philosophy.p1":
-    "En ny klocka berättar tiden för dig. En vintageklocka berättar om tiden — årtionden av den, komprimerade i repor på baksidan, en urtavla som långsamt gått från silver till champagne, ett verk som dragits upp tiotusen morgnar i rad.",
+    "En ny klocka berättar tiden för dig. En vintageklocka berättar om tiden - årtionden av den, komprimerade i repor på baksidan, en urtavla som långsamt gått från silver till champagne, ett verk som dragits upp tiotusen morgnar i rad.",
   "philosophy.p2":
-    "Vi letar efter klockor som burits ärligt. Inte museiföremål bakom glas, utan dagliga följeslagare som bär bevis på ett verkligt liv. Det är där karaktären bor — i ofullkomligheterna.",
+    "Vi letar efter klockor som burits ärligt. Inte museiföremål bakom glas, utan dagliga följeslagare som bär bevis på ett verkligt liv. Det är där karaktären bor - i ofullkomligheterna.",
   "philosophy.p3":
     "Varje pjäs i denna samling har valts för att den har något att säga. En härkomst värd att känna till, en design som fortfarande håller, eller helt enkelt en närvaro på handleden som moderna klockor har svårt att återskapa.",
   "collection.title": "Kollektionen",
@@ -172,8 +172,8 @@ const sv: Dict = {
   "footer.navigate": "Navigera",
   "footer.trust": "Förtroende",
   "footer.trustDesc":
-    "Kurerade vintageklockor sedan 2024. Varje pjäs är autentiserad och ärligt beskriven — slitage, patina och allt.",
-  "footer.copyright": "© {year} Vintage Watches. Alla auktioner hostas på Tradera.",
+    "Kurerade vintageklockor sedan 2024. Varje pjäs är autentiserad och ärligt beskriven - slitage, patina och allt.",
+  "footer.copyright": "(c) {year} Vintage Watches. Alla auktioner hostas på Tradera.",
   "footer.language": "Språk",
   "detail.back": "Tillbaka till kollektionen",
   "detail.auctionDetails": "Auktionsdetaljer",
@@ -198,15 +198,15 @@ const no: Dict = {
   "skip.toContent": "Hopp til innhold",
   "hero.title": "Hver klokke forteller en historie verdt å høre",
   "hero.subtitle":
-    "En kuratert samling vintageklokker — valgt for karakter, opprinnelse og den typen patina som bare tiår med ekte liv kan skape.",
+    "En kuratert samling vintageklokker - valgt for karakter, opprinnelse og den typen patina som bare tiår med ekte liv kan skape.",
   "hero.cta": "Utforsk kolleksjonen",
   "philosophy.title": "Hvorfor vintage?",
   "philosophy.p1":
-    "En ny klokke forteller deg klokkeslettet. En vintageklokke forteller deg om tiden — tiår av den, komprimert i riper på baksiden, en skive som sakte har gått fra sølv til champagne, et verk som er trukket opp ti tusen morgener på rad.",
+    "En ny klokke forteller deg klokkeslettet. En vintageklokke forteller deg om tiden - tiår av den, komprimert i riper på baksiden, en skive som sakte har gått fra sølv til champagne, et verk som er trukket opp ti tusen morgener på rad.",
   "philosophy.p2":
-    "Vi leter etter klokker som har blitt brukt ærlig. Ikke museumsstykker bak glass, men daglige følgesvenner som bærer bevis på et virkelig liv. Det er der karakteren bor — i ufullkommenhetene.",
+    "Vi leter etter klokker som har blitt brukt ærlig. Ikke museumsstykker bak glass, men daglige følgesvenner som bærer bevis på et virkelig liv. Det er der karakteren bor - i ufullkommenhetene.",
   "philosophy.p3":
-    "Hver pjäs i denne samlingen er valgt fordi den har noe å si. En opprinnelse verdt å kjenne, et design som fortsatt holder, eller bare en tilstedeværelse på håndleddet som moderne klokker sliter med å gjenskape.",
+    "Hver del i denne samlingen er valgt fordi den har noe å si. En opprinnelse verdt å kjenne, et design som fortsatt holder, eller bare en tilstedeværelse på håndleddet som moderne klokker sliter med å gjenskape.",
   "collection.title": "Kolleksjonen",
   "collection.empty": "Ingen klokker tilgjengelig akkurat nå. Kom tilbake snart.",
   "collection.error": "Vi kunne ikke laste kolleksjonen akkurat nå. Prøv igjen.",
@@ -218,8 +218,8 @@ const no: Dict = {
   "footer.navigate": "Naviger",
   "footer.trust": "Tillit",
   "footer.trustDesc":
-    "Kuraterte vintageklokker siden 2024. Hver pjäs er autentisert og ærlig beskrevet — slitasje, patina og alt.",
-  "footer.copyright": "© {year} Vintage Watches. Alle auksjoner hostes på Tradera.",
+    "Kuraterte vintageklokker siden 2024. Hver del er autentisert og ærlig beskrevet - slitasje, patina og alt.",
+  "footer.copyright": "(c) {year} Vintage Watches. Alle auksjoner hostes på Tradera.",
   "footer.language": "Språk",
   "detail.back": "Tilbake til kolleksjonen",
   "detail.auctionDetails": "Auksjonsdetaljer",
