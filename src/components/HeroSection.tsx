@@ -16,6 +16,7 @@ const ROTATION_MS = 5000;
 export function HeroSection() {
   const [active, setActive] = useState(0);
   const scroll = useScrollProgress(700);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const id = window.setInterval(() => {
@@ -85,16 +86,16 @@ export function HeroSection() {
             }}
           >
             <h1 className="font-serif text-4xl font-bold leading-[1.05] text-foreground md:text-5xl lg:text-6xl">
-              Every watch tells a story worth hearing
+              {t("hero.title")}
             </h1>
             <p className="max-w-md text-lg leading-relaxed text-muted-foreground">
-              A curated collection of vintage timepieces — chosen for character, provenance, and the kind of patina that only decades of real life can produce.
+              {t("hero.subtitle")}
             </p>
             <button
               onClick={scrollToCollection}
               className="cta-press inline-flex h-12 items-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground transition-colors duration-150 hover:bg-navy-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
-              Explore the Collection
+              {t("hero.cta")}
             </button>
           </div>
 

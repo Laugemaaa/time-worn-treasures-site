@@ -6,9 +6,11 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowLeft, ExternalLink } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 const ProductDetail = () => {
   const { slug } = useParams<{ slug: string }>();
+  const { t } = useLanguage();
   const [product, setProduct] = useState<Product | undefined>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -41,7 +43,7 @@ const ProductDetail = () => {
           className="inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-colors duration-150 hover:text-navy-hover mb-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to Collection
+          {t("detail.back")}
         </Link>
 
         {loading && (
@@ -59,15 +61,13 @@ const ProductDetail = () => {
 
         {error && (
           <div className="text-center py-16 space-y-4">
-            <p className="text-muted-foreground">
-              We couldn't load this watch right now. Please try again.
-            </p>
+            <p className="text-muted-foreground">{t("detail.errorLoad")}</p>
             <div className="flex items-center justify-center gap-4">
               <button
                 onClick={fetchProduct}
                 className="cta-press inline-flex h-10 items-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground transition-colors duration-150 hover:bg-navy-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
-                Try again
+                {t("detail.tryAgain")}
               </button>
               <a
                 href="https://www.tradera.com"
@@ -75,7 +75,7 @@ const ProductDetail = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 text-sm text-primary hover:text-navy-hover"
               >
-                Browse on Tradera
+                {t("detail.browseTradera")}
                 <ExternalLink className="h-3 w-3" />
               </a>
             </div>
@@ -84,9 +84,9 @@ const ProductDetail = () => {
 
         {!loading && !error && !product && (
           <div className="text-center py-16">
-            <p className="text-muted-foreground">This watch could not be found.</p>
+            <p className="text-muted-foreground">{t("detail.notFound")}</p>
             <Link to="/" className="text-primary hover:text-navy-hover text-sm mt-4 inline-block">
-              Return to the collection
+              {t("detail.return")}
             </Link>
           </div>
         )}
@@ -131,7 +131,7 @@ const ProductDetail = () => {
               {/* Auction data */}
               <div className="rounded-lg border border-border bg-card p-5 space-y-3">
                 <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-                  Auction Details
+                  {t("detail.auctionDetails")}
                 </h2>
                 <AuctionMetadata product={product} />
               </div>
@@ -144,12 +144,10 @@ const ProductDetail = () => {
                   rel="noopener noreferrer"
                   className="cta-press inline-flex h-12 items-center gap-2 rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground transition-colors duration-150 hover:bg-navy-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
-                  View on Tradera
+                  {t("detail.viewOnTradera")}
                   <ExternalLink className="h-4 w-4" />
                 </a>
-                <p className="text-xs text-muted-foreground">
-                  This auction is hosted on Tradera. You'll be redirected to complete your purchase.
-                </p>
+                <p className="text-xs text-muted-foreground">{t("detail.handoff")}</p>
               </div>
             </div>
           </article>
