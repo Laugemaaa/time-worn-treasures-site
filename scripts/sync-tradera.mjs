@@ -43,7 +43,7 @@ if (!xml.includes("<GetSellerItemsResult")) {
   process.exit(1);
 }
 
-const items = [...xml.matchAll(/<Item>([\s\S]*?)<\/Item>/g)].map((match) => match[1]);
+const items = findBlocks(xml, "Item");
 
 const products = items
   .map((itemXml) => mapItem(itemXml, now))
@@ -127,21 +127,35 @@ function mapItem(itemXml, referenceDate) {
 }
 
 function readTag(xml, tag) {
-  const match = xml.match(new RegExp(`<${tag}>([\\s\\S]*?)<\\/${tag}>`));
+  const match = xml.match(new RegExp(`<(?:(?:\\w+):)?${tag}\\b[^>]*>([\\s\\S]*?)<\\/(?:(?:\\w+):)?${tag}>`));
   return match ? decodeXml(match[1]).trim() : "";
 }
 
 function readDetailedImageUrls(xml) {
-  return [...xml.matchAll(/<DetailedImageLinks>([\s\S]*?)<\/DetailedImageLinks>/g)]
-    .map((match) => readTag(match[1], "Url"))
+  return findBlocks(xml, "DetailedImageLinks")
+    .map((block) => readTag(block, "Url"))
     .filter(Boolean);
 }
 
 function readLegacyImageUrls(xml) {
-  const section = xml.match(/<ImageLinks>([\s\S]*?)<\/ImageLinks>/);
-  if (!section) return [];
-  return [...section[1].matchAll(/<string>([\s\S]*?)<\/string>/g)]
-    .map((match) => decodeXml(match[1]).trim())
+  const sections = findBlocks(xml, "ImageLinks");
+  if (sections.length === 0) return [];
+
+  return sections.flatMap((section) =>
+    findBlocks(section, "string")
+      .map((value) => decodeXml(value).trim())
+      .filter(Boolean)
+  );
+}
+
+function findBlocks(xml, tag) {
+  const pattern = new RegExp(
+    `<(?:(?:\\w+):)?${tag}\\b[^>]*>([\\s\\S]*?)<\\/(?:(?:\\w+):)?${tag}>`,
+    "g"
+  );
+
+  return [...xml.matchAll(pattern)]
+    .map((match) => match[1])
     .filter(Boolean);
 }
 
