@@ -38,7 +38,7 @@ export function Navbar() {
             to="/"
             className="font-serif text-xl font-semibold tracking-tight text-foreground"
           >
-            Vintage Watches
+            Grandpa's Heritage
           </Link>
 
           {/* Desktop nav */}

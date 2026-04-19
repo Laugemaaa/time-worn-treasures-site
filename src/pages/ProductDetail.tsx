@@ -110,6 +110,23 @@ const ProductDetail = () => {
                 {product.title}
               </h1>
 
+              <div className="rounded-lg border border-border bg-card p-5 space-y-3">
+                <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+                  {t("detail.auctionDetails")}
+                </h2>
+                <AuctionMetadata product={product} />
+                <p className="text-xs leading-relaxed text-muted-foreground">{t("detail.handoff")}</p>
+                <a
+                  href={product.traderaUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cta-press inline-flex h-12 items-center gap-2 rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground transition-colors duration-150 hover:bg-navy-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                >
+                  {t("detail.viewOnTradera")}
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+              </div>
+
               {product.fullDescription && (
                 <div className="space-y-4">
                   {product.fullDescription.split("\n\n").map((para, i) => (
@@ -128,27 +145,6 @@ const ProductDetail = () => {
                 </blockquote>
               )}
 
-              {/* Auction data */}
-              <div className="rounded-lg border border-border bg-card p-5 space-y-3">
-                <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-                  {t("detail.auctionDetails")}
-                </h2>
-                <AuctionMetadata product={product} />
-              </div>
-
-              {/* CTA */}
-              <div className="space-y-2">
-                <a
-                  href={product.traderaUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cta-press inline-flex h-12 items-center gap-2 rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground transition-colors duration-150 hover:bg-navy-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                >
-                  {t("detail.viewOnTradera")}
-                  <ExternalLink className="h-4 w-4" />
-                </a>
-                <p className="text-xs text-muted-foreground">{t("detail.handoff")}</p>
-              </div>
             </div>
           </article>
         )}
