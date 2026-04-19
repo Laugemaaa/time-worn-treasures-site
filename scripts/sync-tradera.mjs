@@ -217,21 +217,34 @@ function matchMeta(html, property) {
 }
 
 function extractImageUrls(html) {
-  const rawUrls = [
-    ...html.matchAll(/https?:\/\/[^"'\\\s>]+(?:jpe?g|png|webp)(?:\?[^"'\\\s>]*)?/gi),
+  const carouselMatches = [
+    ...html.matchAll(/<img[^>]+src=["']([^"']+)["'][^>]+alt=["'](?:thumbnail|galleryimage[^"']*)["'][^>]*>/gi),
+    ...html.matchAll(/<img[^>]+alt=["'](?:thumbnail|galleryimage[^"']*)["'][^>]+src=["']([^"']+)["'][^>]*>/gi),
+    ...html.matchAll(/<img[^>]+class=["'][^"']*view-item-carousel[^"']*["'][^>]+src=["']([^"']+)["'][^>]*>/gi),
+    ...html.matchAll(/<img[^>]+src=["']([^"']+)["'][^>]+class=["'][^"']*view-item-carousel[^"']*["'][^>]*>/gi),
   ]
-    .map((match) => decodeXml(match[0]))
+    .map((match) => decodeXml(match[1]))
     .map(normalizeImageUrl)
     .filter(Boolean);
 
-  const filteredUrls = rawUrls.filter((url) => {
+  const prioritized = [...new Set(carouselMatches)].filter((url) => {
     const lower = url.toLowerCase();
-    if (!/(tradera|cdn)/i.test(lower)) return false;
-    if (/(logo|icon|sprite|avatar|flag|payment|trustpilot|placeholder)/i.test(lower)) return false;
-    return true;
+    return lower.includes("img.tradera.net");
   });
 
-  return [...new Set(filteredUrls)];
+  if (prioritized.length > 0) {
+    return dedupeByImageIdentity(prioritized);
+  }
+
+  const fallback = [
+    matchMeta(html, "og:image:secure_url"),
+    matchMeta(html, "og:image"),
+    matchMeta(html, "twitter:image"),
+  ]
+    .map(normalizeImageUrl)
+    .filter(Boolean);
+
+  return dedupeByImageIdentity(fallback);
 }
 
 function normalizeImageUrl(url) {
@@ -240,6 +253,24 @@ function normalizeImageUrl(url) {
     .replace(/\\\//g, "/")
     .replace(/&amp;/g, "&")
     .trim();
+}
+
+function dedupeByImageIdentity(urls) {
+  const byIdentity = new Map();
+
+  for (const url of urls) {
+    const identity = url
+      .replace(/https?:\/\/img\.tradera\.net\//i, "")
+      .replace(/^(?:large-fit|medium-fit|large|medium|images)\//i, "")
+      .split("?")[0]
+      .toLowerCase();
+
+    if (!byIdentity.has(identity)) {
+      byIdentity.set(identity, url);
+    }
+  }
+
+  return [...byIdentity.values()];
 }
 
 function matchTag(html, tag) {
