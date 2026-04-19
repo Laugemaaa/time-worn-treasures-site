@@ -52,16 +52,30 @@ type Props = {
 
 export function AuctionMetadata({ product, compact = false }: Props) {
   const liveDuration = durationFromEndDate(product.auctionEndDate) ?? product.timeRemaining;
-  const hasAnyData = product.currentBidPrice || product.numberOfBids || product.numberOfViewers || liveDuration;
+  const hasAnyData =
+    product.currentBidPrice || product.startingBidPrice || product.numberOfBids || product.numberOfViewers || liveDuration;
   if (!hasAnyData) return null;
 
   const urgent = liveDuration ? isUrgent(liveDuration) : false;
+  const currency = product.currency || "SEK";
+  const currentPrice = product.currentBidPrice;
+  const startingPrice = product.startingBidPrice;
 
   return (
     <div className={`flex flex-wrap items-center gap-x-4 gap-y-1 text-muted-foreground ${compact ? "text-xs" : "text-sm"}`}>
-      {product.currentBidPrice != null && (
+      {currentPrice != null && compact && (
         <span className="font-semibold text-foreground">
-          {product.currentBidPrice.toLocaleString("sv-SE")} {product.currency || "SEK"}
+          {currentPrice.toLocaleString("sv-SE")} {currency}
+        </span>
+      )}
+      {currentPrice != null && !compact && (
+        <span className="inline-flex items-center gap-1 font-semibold text-foreground">
+          Live: {currentPrice.toLocaleString("sv-SE")} {currency}
+        </span>
+      )}
+      {startingPrice != null && !compact && (
+        <span className="inline-flex items-center gap-1">
+          Start: {startingPrice.toLocaleString("sv-SE")} {currency}
         </span>
       )}
       {product.numberOfBids != null && (

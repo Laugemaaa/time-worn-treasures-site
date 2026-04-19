@@ -117,6 +117,8 @@ async function scrapeItemPage(itemUrl, referenceDate) {
     || matchTag(html, "h1");
   const endLabel = matchText(text, /Slutter\s+([^\n]+)/i);
   const priceText = matchText(text, /Udbudspris\s+([\d.\u00a0 ]+)\s*(DKK|SEK|NOK)/i);
+  const bidCount = Number((matchText(text, /(\d+)\s+bud/i) || "").replace(/[^\d]/g, "")) || 0;
+  const startPriceText = matchText(text, /(?:Startpris|Udbudspris)\s+([\d.\u00a0 ]+)\s*(DKK|SEK|NOK)/i);
   const description = cleanDescription(
     matchText(text, /Beskrivelse\s+([\s\S]*?)\s+Varenr\./i)
     || ""
@@ -135,6 +137,7 @@ async function scrapeItemPage(itemUrl, referenceDate) {
   }
 
   const parsedPrice = parseMoney(priceText);
+  const parsedStartingPrice = parseMoney(startPriceText);
   const auctionEndDate = parseTraderaDate(endLabel, referenceDate);
 
   return {
@@ -146,7 +149,9 @@ async function scrapeItemPage(itemUrl, referenceDate) {
     shortDescription: buildShortDescription(description),
     fullDescription: description || undefined,
     currentBidPrice: parsedPrice.amount,
+    startingBidPrice: parsedStartingPrice.amount || parsedPrice.amount,
     currency: parsedPrice.currency,
+    numberOfBids: bidCount,
     numberOfViewers: views,
     timeRemaining: auctionEndDate ? toDuration(referenceDate, auctionEndDate) : undefined,
     auctionEndDate: auctionEndDate || published || undefined,
@@ -356,6 +361,7 @@ function mapItem(itemXml, referenceDate) {
     shortDescription: buildShortDescription(longDescription),
     fullDescription: longDescription || undefined,
     currentBidPrice,
+    startingBidPrice: openingBid || buyItNowPrice || currentBidPrice,
     currency: "SEK",
     numberOfBids: toNumber(readTag(itemXml, "TotalBids")) || undefined,
     timeRemaining: toDuration(referenceDate, endDate),

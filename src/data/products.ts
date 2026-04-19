@@ -8,6 +8,7 @@ export type Product = {
   fullDescription?: string;
   historyNote?: string;
   currentBidPrice?: number;
+  startingBidPrice?: number;
   currency?: string;
   numberOfBids?: number;
   numberOfViewers?: number;
@@ -71,6 +72,12 @@ function normalizeProduct(value: unknown): Product {
         ? product.currentBidPrice
         : product.currentBidPrice != null
           ? Number(product.currentBidPrice)
+          : undefined,
+    startingBidPrice:
+      typeof product.startingBidPrice === "number"
+        ? product.startingBidPrice
+        : product.startingBidPrice != null
+          ? Number(product.startingBidPrice)
           : undefined,
     currency: product.currency ? String(product.currency) : undefined,
     numberOfBids:
