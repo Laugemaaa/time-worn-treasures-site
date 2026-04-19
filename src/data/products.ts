@@ -87,6 +87,8 @@ function normalizeProduct(value: unknown): Product {
           : undefined,
     timeRemaining: product.timeRemaining ? String(product.timeRemaining) : undefined,
     auctionEndDate: product.auctionEndDate ? String(product.auctionEndDate) : undefined,
-    traderaUrl: String(product.traderaUrl ?? "https://www.tradera.com"),
+    traderaUrl: String(
+      product.traderaUrl ?? "https://www.tradera.com/da/profile/items/6841860/grandpasheritage"
+    ),
   };
 }

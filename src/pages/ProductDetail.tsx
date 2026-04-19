@@ -70,7 +70,7 @@ const ProductDetail = () => {
                 {t("detail.tryAgain")}
               </button>
               <a
-                href="https://www.tradera.com"
+                href="https://www.tradera.com/da/profile/items/6841860/grandpasheritage"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 text-sm text-primary hover:text-navy-hover"

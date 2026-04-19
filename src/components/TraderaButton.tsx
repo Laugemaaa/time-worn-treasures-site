@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import traderaIcon from "@/assets/tradera-icon.png";
 
-const TRADERA_URL = "https://www.tradera.com";
+const TRADERA_URL = "https://www.tradera.com/da/profile/items/6841860/grandpasheritage";
 
 type Props = {
   className?: string;

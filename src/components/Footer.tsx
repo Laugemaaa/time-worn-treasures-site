@@ -27,7 +27,7 @@ export function Footer() {
                 {t("nav.about")}
               </Link>
               <a
-                href="https://www.tradera.com"
+                href="https://www.tradera.com/da/profile/items/6841860/grandpasheritage"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 text-sm opacity-70 transition-opacity duration-150 hover:opacity-100 w-fit"

@@ -19,10 +19,9 @@ endpoint.search = new URLSearchParams({
   appKey: APP_KEY,
   userId: SELLER_ID,
   categoryId: "0",
-  filterActive: "Active",
+  filterType: "1",
   minEndDate: "0001-01-01T00:00:00",
   maxEndDate: "9999-12-31T23:59:59",
-  filterItemType: "All",
 }).toString();
 
 const response = await fetch(endpoint, {
