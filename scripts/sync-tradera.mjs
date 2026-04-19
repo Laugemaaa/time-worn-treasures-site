@@ -6,54 +6,151 @@ await loadLocalEnvFile();
 const APP_ID = process.env.TRADERA_APP_ID;
 const APP_KEY = process.env.TRADERA_APP_KEY;
 const SELLER_ID = process.env.TRADERA_SELLER_ID;
+const SELLER_ALIAS = process.env.TRADERA_SELLER_ALIAS || "grandpasheritage";
 
-if (!APP_ID || !APP_KEY || !SELLER_ID) {
-  console.error("Missing TRADERA_APP_ID, TRADERA_APP_KEY, or TRADERA_SELLER_ID.");
+if (!SELLER_ID) {
+  console.error("Missing TRADERA_SELLER_ID.");
   process.exit(1);
 }
 
 const now = new Date();
-const endpoint = new URL("https://api.tradera.com/v3/PublicService.asmx/GetSellerItems");
-endpoint.search = new URLSearchParams({
-  appId: APP_ID,
-  appKey: APP_KEY,
-  userId: SELLER_ID,
-  categoryId: "0",
-  filterType: "1",
-  minEndDate: "0001-01-01T00:00:00",
-  maxEndDate: "9999-12-31T23:59:59",
-}).toString();
+let products = [];
 
-const response = await fetch(endpoint, {
-  headers: {
-    Accept: "text/xml, application/xml",
-    "User-Agent": "grandpas-heritage-site-sync/1.0",
-  },
-});
-
-if (!response.ok) {
-  console.error(`Tradera request failed with ${response.status} ${response.statusText}`);
-  process.exit(1);
+if (APP_ID && APP_KEY) {
+  products = await fetchProductsFromApi(now);
 }
 
-const xml = await response.text();
-
-if (!xml.includes("<GetSellerItemsResult")) {
-  console.error("Unexpected Tradera response shape.");
-  process.exit(1);
+if (products.length === 0) {
+  products = await scrapeProductsFromSellerProfile(now);
 }
-
-const items = findBlocks(xml, "Item");
-
-const products = items
-  .map((itemXml) => mapItem(itemXml, now))
-  .filter(Boolean)
-  .sort((a, b) => new Date(a.auctionEndDate).getTime() - new Date(b.auctionEndDate).getTime());
 
 const outputPath = path.join(process.cwd(), "public", "tradera-products.json");
 await fs.writeFile(outputPath, JSON.stringify(products, null, 2), "utf8");
 
 console.log(`Wrote ${products.length} Tradera products to public/tradera-products.json`);
+
+async function fetchProductsFromApi(referenceDate) {
+  const endpoint = new URL("https://api.tradera.com/v3/PublicService.asmx/GetSellerItems");
+  endpoint.search = new URLSearchParams({
+    appId: APP_ID,
+    appKey: APP_KEY,
+    userId: SELLER_ID,
+    categoryId: "0",
+    filterType: "1",
+    minEndDate: "0001-01-01T00:00:00",
+    maxEndDate: "9999-12-31T23:59:59",
+  }).toString();
+
+  const response = await fetch(endpoint, {
+    headers: {
+      Accept: "text/xml, application/xml",
+      "User-Agent": "grandpas-heritage-site-sync/1.0",
+    },
+  });
+
+  if (!response.ok) {
+    console.warn(`Tradera API request failed with ${response.status} ${response.statusText}`);
+    return [];
+  }
+
+  const xml = await response.text();
+  if (!xml.includes("GetSellerItemsResult")) {
+    console.warn("Unexpected Tradera API response shape.");
+    return [];
+  }
+
+  return findBlocks(xml, "Item")
+    .map((itemXml) => mapItem(itemXml, referenceDate))
+    .filter(Boolean)
+    .sort((a, b) => new Date(a.auctionEndDate).getTime() - new Date(b.auctionEndDate).getTime());
+}
+
+async function scrapeProductsFromSellerProfile(referenceDate) {
+  const sellerProfileUrl = `https://www.tradera.com/da/profile/items/${SELLER_ID}/${SELLER_ALIAS}`;
+  const response = await fetch(sellerProfileUrl, {
+    headers: {
+      Accept: "text/html,application/xhtml+xml",
+      "User-Agent": "grandpas-heritage-site-sync/1.0",
+    },
+  });
+
+  if (!response.ok) {
+    console.warn(`Seller profile request failed with ${response.status} ${response.statusText}`);
+    return [];
+  }
+
+  const html = await response.text();
+  const itemUrls = [...new Set(
+    [...html.matchAll(/https:\/\/www\.tradera\.com\/da\/item\/\d+\/\d+\/[a-z0-9-]+|\/da\/item\/\d+\/\d+\/[a-z0-9-]+/gi)]
+      .map((match) => match[0].startsWith("http") ? match[0] : `https://www.tradera.com${match[0]}`)
+  )];
+
+  const scrapedProducts = [];
+  for (const itemUrl of itemUrls) {
+    const product = await scrapeItemPage(itemUrl, referenceDate);
+    if (product) {
+      scrapedProducts.push(product);
+    }
+  }
+
+  return scrapedProducts.sort((a, b) => new Date(a.auctionEndDate).getTime() - new Date(b.auctionEndDate).getTime());
+}
+
+async function scrapeItemPage(itemUrl, referenceDate) {
+  const response = await fetch(itemUrl, {
+    headers: {
+      Accept: "text/html,application/xhtml+xml",
+      "User-Agent": "grandpas-heritage-site-sync/1.0",
+    },
+  });
+
+  if (!response.ok) {
+    console.warn(`Item page request failed for ${itemUrl} with ${response.status}`);
+    return null;
+  }
+
+  const html = await response.text();
+  const text = toTextContent(html);
+
+  const title = matchText(text, /#?\s*([^\n]+?)\n\s*Slutter\s+\d{1,2}\s+\w+\s+\d{2}:\d{2}/i)
+    || matchMeta(html, "og:title")
+    || matchTag(html, "h1");
+  const endLabel = matchText(text, /Slutter\s+([^\n]+)/i);
+  const priceText = matchText(text, /Udbudspris\s+([\d.\u00a0 ]+)\s*(DKK|SEK|NOK)/i);
+  const description = cleanDescription(
+    matchText(text, /Beskrivelse\s+([\s\S]*?)\s+Varenr\./i)
+    || ""
+  );
+  const itemNumber = matchText(text, /Varenr\.\s*([\d\u00a0 ]+)/i)?.replace(/[^\d]/g, "");
+  const views = Number((matchText(text, /Visninger\s+(\d+)/i) || "").replace(/[^\d]/g, "")) || undefined;
+  const published = matchText(text, /Publiceret\s+([^\n]+)/i);
+  const imageUrl = matchMeta(html, "og:image")
+    || matchMeta(html, "twitter:image")
+    || "https://placehold.co/600x600/d7c7ad/2f2117?text=Grandpa%27s+Heritage";
+
+  if (!title || !endLabel) {
+    return null;
+  }
+
+  const parsedPrice = parseMoney(priceText);
+  const auctionEndDate = parseTraderaDate(endLabel, referenceDate);
+
+  return {
+    id: itemNumber || itemUrl.match(/\/(\d+)\/[a-z0-9-]+$/i)?.[1] || slugify(title),
+    title: normalizeWhitespace(title),
+    slug: `${slugify(title)}-${itemNumber || "tradera"}`,
+    imageUrl,
+    images: [imageUrl],
+    shortDescription: buildShortDescription(description),
+    fullDescription: description || undefined,
+    currentBidPrice: parsedPrice.amount,
+    currency: parsedPrice.currency,
+    numberOfViewers: views,
+    timeRemaining: auctionEndDate ? toDuration(referenceDate, auctionEndDate) : undefined,
+    auctionEndDate: auctionEndDate || published || undefined,
+    traderaUrl: itemUrl,
+  };
+}
 
 async function loadLocalEnvFile() {
   const envPath = path.join(process.cwd(), ".env.local");
@@ -84,6 +181,88 @@ async function loadLocalEnvFile() {
 
     throw error;
   }
+}
+
+function toTextContent(html) {
+  return decodeXml(
+    html
+      .replace(/<script[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style[\s\S]*?<\/style>/gi, " ")
+      .replace(/<[^>]+>/g, "\n")
+  )
+    .replace(/\r/g, "")
+    .replace(/\u00a0/g, " ")
+    .replace(/[ \t]+\n/g, "\n")
+    .replace(/\n[ \t]+/g, "\n")
+    .replace(/\n{2,}/g, "\n")
+    .trim();
+}
+
+function matchMeta(html, property) {
+  const escaped = property.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const patterns = [
+    new RegExp(`<meta[^>]+property=["']${escaped}["'][^>]+content=["']([^"']+)["']`, "i"),
+    new RegExp(`<meta[^>]+content=["']([^"']+)["'][^>]+property=["']${escaped}["']`, "i"),
+    new RegExp(`<meta[^>]+name=["']${escaped}["'][^>]+content=["']([^"']+)["']`, "i"),
+  ];
+
+  for (const pattern of patterns) {
+    const match = html.match(pattern);
+    if (match) return decodeXml(match[1]).trim();
+  }
+
+  return "";
+}
+
+function matchTag(html, tag) {
+  const match = html.match(new RegExp(`<${tag}\\b[^>]*>([\\s\\S]*?)<\\/${tag}>`, "i"));
+  return match ? cleanDescription(match[1]) : "";
+}
+
+function matchText(text, pattern) {
+  const match = text.match(pattern);
+  return match ? normalizeWhitespace(match[1]) : "";
+}
+
+function parseMoney(raw) {
+  if (!raw) {
+    return { amount: undefined, currency: undefined };
+  }
+
+  const match = raw.match(/([\d.\u00a0 ]+)\s*(DKK|SEK|NOK)/i);
+  if (!match) {
+    return { amount: undefined, currency: undefined };
+  }
+
+  return {
+    amount: Number(match[1].replace(/[^\d]/g, "")) || undefined,
+    currency: match[2].toUpperCase(),
+  };
+}
+
+function parseTraderaDate(label, referenceDate) {
+  const match = label.match(/(\d{1,2})\s+([A-Za-zÆØÅæøå]{3,})\s+(\d{2}:\d{2})/i);
+  if (!match) return undefined;
+
+  const monthMap = {
+    jan: 0, feb: 1, mar: 2, apr: 3, maj: 4, may: 4, jun: 5,
+    jul: 6, aug: 7, sep: 8, okt: 9, oct: 9, nov: 10, dec: 11, des: 11,
+  };
+
+  const day = Number(match[1]);
+  const monthKey = match[2].slice(0, 3).toLowerCase();
+  const month = monthMap[monthKey];
+  if (month == null) return undefined;
+
+  const [hours, minutes] = match[3].split(":").map(Number);
+  let year = referenceDate.getFullYear();
+  const candidate = new Date(Date.UTC(year, month, day, hours - 2, minutes));
+  if (candidate.getTime() < referenceDate.getTime() - 30 * 24 * 60 * 60 * 1000) {
+    year += 1;
+  }
+
+  const date = new Date(year, month, day, hours, minutes, 0);
+  return date.toISOString();
 }
 
 function mapItem(itemXml, referenceDate) {
