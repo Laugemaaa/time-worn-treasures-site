@@ -67,8 +67,8 @@ export function ProductGridSection() {
 
       {!loading && !error && products.length > 0 && (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {products.map((product, i) => (
-            <ProductCard key={product.id} product={product} index={i} />
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
       )}

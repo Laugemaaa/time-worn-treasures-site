@@ -7,19 +7,28 @@ type Props = {
   className?: string;
   id?: string;
   as?: "section" | "div";
+  reveal?: "none" | "up" | "fade";
 };
 
-export function SectionWrapper({ children, className, id, as: Tag = "section" }: Props) {
+export function SectionWrapper({
+  children,
+  className,
+  id,
+  as: Tag = "section",
+  reveal = "none",
+}: Props) {
+  const shouldReveal = reveal !== "none";
   const { ref, revealed } = useReveal(0.1);
 
   return (
     <Tag
-      ref={ref}
+      ref={shouldReveal ? ref : undefined}
       id={id}
       className={cn(
         "mx-auto max-w-[1200px] px-6",
-        "reveal-up",
-        revealed && "revealed",
+        reveal === "up" && "reveal-up",
+        reveal === "fade" && "reveal-fade",
+        shouldReveal && revealed && "revealed",
         className
       )}
     >

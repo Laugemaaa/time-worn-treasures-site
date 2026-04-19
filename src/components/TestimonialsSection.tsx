@@ -6,7 +6,7 @@ export function TestimonialsSection() {
   const { t } = useLanguage();
   return (
     <section className="bg-sand py-16 md:py-24">
-      <SectionWrapper as="div">
+      <SectionWrapper as="div" reveal="fade">
         <h2 className="font-serif text-3xl font-semibold text-foreground mb-8 text-center md:text-4xl">
           {t("testimonials.title")}
         </h2>

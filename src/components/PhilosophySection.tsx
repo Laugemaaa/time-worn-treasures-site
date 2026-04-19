@@ -9,7 +9,7 @@ export function PhilosophySection() {
       className="text-primary-foreground"
       style={{ backgroundColor: "hsl(var(--surface-espresso))" }}
     >
-      <SectionWrapper className="py-16 md:py-24">
+      <SectionWrapper className="py-16 md:py-24" reveal="fade">
         <div className="mx-auto max-w-[680px] space-y-6 text-center">
           <h2 className="font-serif text-3xl font-semibold text-primary-foreground md:text-4xl">
             {t("philosophy.title")}

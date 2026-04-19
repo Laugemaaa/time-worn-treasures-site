@@ -4,15 +4,13 @@ import { AuctionMetadata } from "./AuctionMetadata";
 
 type Props = {
   product: Product;
-  index: number;
 };
 
-export function ProductCard({ product, index }: Props) {
+export function ProductCard({ product }: Props) {
   return (
     <Link
       to={`/watch/${product.slug}`}
       className="group block rounded-lg border border-border bg-card overflow-hidden card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-      style={{ transitionDelay: `${Math.min(index * 60, 400)}ms` }}
       aria-label={`View ${product.title}`}
     >
       {/* Image */}
@@ -20,7 +18,7 @@ export function ProductCard({ product, index }: Props) {
         <img
           src={product.imageUrl}
           alt={product.title}
-          className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+          className="h-full w-full object-cover card-hover-media"
           loading="lazy"
         />
       </div>
