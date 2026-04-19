@@ -1,6 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
+await loadLocalEnvFile();
+
 const APP_ID = process.env.TRADERA_APP_ID;
 const APP_KEY = process.env.TRADERA_APP_KEY;
 const SELLER_ID = process.env.TRADERA_SELLER_ID;
@@ -53,6 +55,37 @@ const outputPath = path.join(process.cwd(), "public", "tradera-products.json");
 await fs.writeFile(outputPath, JSON.stringify(products, null, 2), "utf8");
 
 console.log(`Wrote ${products.length} Tradera products to public/tradera-products.json`);
+
+async function loadLocalEnvFile() {
+  const envPath = path.join(process.cwd(), ".env.local");
+  try {
+    const raw = await fs.readFile(envPath, "utf8");
+    for (const line of raw.split(/\r?\n/)) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith("#")) continue;
+
+      const separatorIndex = trimmed.indexOf("=");
+      if (separatorIndex <= 0) continue;
+
+      const key = trimmed.slice(0, separatorIndex).trim();
+      let value = trimmed.slice(separatorIndex + 1).trim();
+
+      if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+        value = value.slice(1, -1);
+      }
+
+      if (!(key in process.env)) {
+        process.env[key] = value;
+      }
+    }
+  } catch (error) {
+    if (error && typeof error === "object" && "code" in error && error.code === "ENOENT") {
+      return;
+    }
+
+    throw error;
+  }
+}
 
 function mapItem(itemXml, referenceDate) {
   const id = readTag(itemXml, "Id");

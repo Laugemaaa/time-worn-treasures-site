@@ -3,7 +3,9 @@ import { getProducts, type Product } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { Skeleton } from "@/components/ui/skeleton";
+import { TraderaButton } from "@/components/TraderaButton";
 import { useLanguage } from "@/i18n/LanguageProvider";
+import { PackageOpen } from "lucide-react";
 
 export function ProductGridSection() {
   const { t } = useLanguage();
@@ -62,7 +64,22 @@ export function ProductGridSection() {
       )}
 
       {!loading && !error && products.length === 0 && (
-        <p className="text-center text-muted-foreground py-16">{t("collection.empty")}</p>
+        <div className="rounded-lg border border-border bg-card px-6 py-14 text-center md:px-10">
+          <div className="mx-auto flex max-w-xl flex-col items-center gap-5">
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-secondary text-muted-foreground">
+              <PackageOpen className="h-6 w-6" />
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-serif text-2xl font-semibold text-foreground">
+                {t("collection.empty")}
+              </h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                {t("detail.handoff")}
+              </p>
+            </div>
+            <TraderaButton className="mt-2" />
+          </div>
+        </div>
       )}
 
       {!loading && !error && products.length > 0 && (
