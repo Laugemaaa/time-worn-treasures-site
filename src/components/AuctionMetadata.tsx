@@ -22,16 +22,40 @@ function isUrgent(duration: string): boolean {
   return days === 0 && hours < 1;
 }
 
+function durationFromEndDate(endDateString?: string): string | undefined {
+  if (!endDateString) return undefined;
+
+  const endDate = new Date(endDateString);
+  const diff = endDate.getTime() - Date.now();
+  if (!Number.isFinite(diff) || diff <= 0) return undefined;
+
+  const totalMinutes = Math.floor(diff / 60000);
+  const days = Math.floor(totalMinutes / (24 * 60));
+  const hours = Math.floor((totalMinutes % (24 * 60)) / 60);
+  const minutes = totalMinutes % 60;
+
+  let duration = "P";
+  if (days > 0) duration += `${days}D`;
+  if (hours > 0 || minutes > 0) {
+    duration += "T";
+    if (hours > 0) duration += `${hours}H`;
+    if (minutes > 0) duration += `${minutes}M`;
+  }
+
+  return duration === "P" ? "PT0M" : duration;
+}
+
 type Props = {
   product: Product;
   compact?: boolean;
 };
 
 export function AuctionMetadata({ product, compact = false }: Props) {
-  const hasAnyData = product.currentBidPrice || product.numberOfBids || product.numberOfViewers || product.timeRemaining;
+  const liveDuration = durationFromEndDate(product.auctionEndDate) ?? product.timeRemaining;
+  const hasAnyData = product.currentBidPrice || product.numberOfBids || product.numberOfViewers || liveDuration;
   if (!hasAnyData) return null;
 
-  const urgent = product.timeRemaining ? isUrgent(product.timeRemaining) : false;
+  const urgent = liveDuration ? isUrgent(liveDuration) : false;
 
   return (
     <div className={`flex flex-wrap items-center gap-x-4 gap-y-1 text-muted-foreground ${compact ? "text-xs" : "text-sm"}`}>
@@ -52,10 +76,10 @@ export function AuctionMetadata({ product, compact = false }: Props) {
           {product.numberOfViewers}
         </span>
       )}
-      {product.timeRemaining && (
+      {liveDuration && (
         <span className={`inline-flex items-center gap-1 ${urgent ? "text-destructive font-medium" : ""}`}>
           <Clock className="h-3 w-3" />
-          {parseISO8601Duration(product.timeRemaining)}
+          {parseISO8601Duration(liveDuration)}
         </span>
       )}
     </div>
