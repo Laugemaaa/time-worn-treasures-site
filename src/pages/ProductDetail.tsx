@@ -5,14 +5,16 @@ import { AuctionMetadata } from "@/components/AuctionMetadata";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { ArrowLeft, ChevronLeft, ChevronRight, Expand, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
 const ProductDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const { t } = useLanguage();
   const [product, setProduct] = useState<Product | undefined>();
-  const [selectedImage, setSelectedImage] = useState<string>("");
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -23,7 +25,7 @@ const ProductDetail = () => {
     try {
       const data = await getProductBySlug(slug);
       setProduct(data);
-      setSelectedImage(data?.images?.[0] || data?.imageUrl || "");
+      setSelectedImageIndex(0);
     } catch {
       setError(true);
     } finally {
@@ -35,6 +37,19 @@ const ProductDetail = () => {
     fetchProduct();
     window.scrollTo(0, 0);
   }, [slug]);
+
+  const galleryImages = product?.images?.length ? product.images : product ? [product.imageUrl] : [];
+  const selectedImage = galleryImages[selectedImageIndex] || product?.imageUrl || "";
+
+  const showPreviousImage = () => {
+    if (galleryImages.length < 2) return;
+    setSelectedImageIndex((current) => (current === 0 ? galleryImages.length - 1 : current - 1));
+  };
+
+  const showNextImage = () => {
+    if (galleryImages.length < 2) return;
+    setSelectedImageIndex((current) => (current === galleryImages.length - 1 ? 0 : current + 1));
+  };
 
   return (
     <div className="min-h-screen bg-background paper-texture">
@@ -97,28 +112,66 @@ const ProductDetail = () => {
           <article className="grid gap-8 md:grid-cols-2 md:gap-12">
             {/* Image */}
             <div className="space-y-4">
-              <div className="overflow-hidden rounded-lg bg-secondary">
+              <div className="group relative overflow-hidden rounded-lg border border-border/70 bg-secondary shadow-[0_18px_50px_-24px_rgba(44,33,24,0.45)]">
                 <img
                   src={selectedImage || product.imageUrl}
                   alt={product.title}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.015]"
                   width={600}
                   height={600}
                 />
+
+                {galleryImages.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={showPreviousImage}
+                      className="absolute left-3 top-1/2 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/35 bg-black/35 text-white backdrop-blur-sm transition-all duration-150 hover:bg-black/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                      aria-label={`Show previous image for ${product.title}`}
+                    >
+                      <ChevronLeft className="h-5 w-5" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={showNextImage}
+                      className="absolute right-3 top-1/2 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/35 bg-black/35 text-white backdrop-blur-sm transition-all duration-150 hover:bg-black/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                      aria-label={`Show next image for ${product.title}`}
+                    >
+                      <ChevronRight className="h-5 w-5" />
+                    </button>
+                  </>
+                )}
+
+                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between bg-gradient-to-t from-black/55 via-black/10 to-transparent px-4 pb-4 pt-10">
+                  <span className="rounded-full border border-white/20 bg-black/35 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+                    {selectedImageIndex + 1} / {galleryImages.length}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setLightboxOpen(true)}
+                    className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/35 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm transition-all duration-150 hover:bg-black/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                    aria-label={`Open larger image view for ${product.title}`}
+                  >
+                    <Expand className="h-3.5 w-3.5" />
+                    View larger
+                  </button>
+                </div>
               </div>
 
-              {product.images && product.images.length > 1 && (
+              {galleryImages.length > 1 && (
                 <div className="grid grid-cols-4 gap-3 sm:grid-cols-5">
-                  {product.images.map((image, index) => {
-                    const isActive = image === (selectedImage || product.imageUrl);
+                  {galleryImages.map((image, index) => {
+                    const isActive = index === selectedImageIndex;
 
                     return (
                       <button
                         key={`${product.id}-image-${index}`}
                         type="button"
-                        onClick={() => setSelectedImage(image)}
+                        onClick={() => setSelectedImageIndex(index)}
                         className={`overflow-hidden rounded-md border bg-secondary transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
-                          isActive ? "border-primary shadow-sm" : "border-border hover:border-primary/50"
+                          isActive
+                            ? "border-primary shadow-[0_10px_24px_-16px_rgba(27,58,92,0.65)]"
+                            : "border-border hover:border-primary/50"
                         }`}
                         aria-label={`Show image ${index + 1} for ${product.title}`}
                       >
@@ -176,12 +229,80 @@ const ProductDetail = () => {
                   </p>
                 </blockquote>
               )}
-
             </div>
           </article>
         )}
       </main>
       <Footer />
+
+      <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
+        <DialogContent className="max-w-5xl border-border/70 bg-card p-3 sm:p-4">
+          <DialogTitle className="sr-only">
+            {product ? `${product.title} image gallery` : "Image gallery"}
+          </DialogTitle>
+
+          {product && (
+            <div className="space-y-4">
+              <div className="relative overflow-hidden rounded-lg bg-secondary">
+                <img
+                  src={selectedImage || product.imageUrl}
+                  alt={product.title}
+                  className="max-h-[78vh] w-full object-contain"
+                />
+
+                {galleryImages.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={showPreviousImage}
+                      className="absolute left-3 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-black/40 text-white backdrop-blur-sm transition-all duration-150 hover:bg-black/55 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                      aria-label={`Show previous image for ${product.title}`}
+                    >
+                      <ChevronLeft className="h-5 w-5" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={showNextImage}
+                      className="absolute right-3 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-black/40 text-white backdrop-blur-sm transition-all duration-150 hover:bg-black/55 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                      aria-label={`Show next image for ${product.title}`}
+                    >
+                      <ChevronRight className="h-5 w-5" />
+                    </button>
+                  </>
+                )}
+              </div>
+
+              {galleryImages.length > 1 && (
+                <div className="flex gap-3 overflow-x-auto pb-1">
+                  {galleryImages.map((image, index) => {
+                    const isActive = index === selectedImageIndex;
+
+                    return (
+                      <button
+                        key={`${product.id}-lightbox-image-${index}`}
+                        type="button"
+                        onClick={() => setSelectedImageIndex(index)}
+                        className={`shrink-0 overflow-hidden rounded-md border bg-secondary transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                          isActive ? "border-primary" : "border-border hover:border-primary/50"
+                        }`}
+                        aria-label={`Show image ${index + 1} for ${product.title}`}
+                      >
+                        <img
+                          src={image}
+                          alt=""
+                          aria-hidden="true"
+                          className="h-20 w-20 object-cover"
+                          loading="lazy"
+                        />
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
