@@ -12,6 +12,7 @@ const ProductDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const { t } = useLanguage();
   const [product, setProduct] = useState<Product | undefined>();
+  const [selectedImage, setSelectedImage] = useState<string>("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -22,6 +23,7 @@ const ProductDetail = () => {
     try {
       const data = await getProductBySlug(slug);
       setProduct(data);
+      setSelectedImage(data?.images?.[0] || data?.imageUrl || "");
     } catch {
       setError(true);
     } finally {
@@ -94,14 +96,44 @@ const ProductDetail = () => {
         {!loading && !error && product && (
           <article className="grid gap-8 md:grid-cols-2 md:gap-12">
             {/* Image */}
-            <div className="overflow-hidden rounded-lg bg-secondary">
-              <img
-                src={product.imageUrl}
-                alt={product.title}
-                className="h-full w-full object-cover"
-                width={600}
-                height={600}
-              />
+            <div className="space-y-4">
+              <div className="overflow-hidden rounded-lg bg-secondary">
+                <img
+                  src={selectedImage || product.imageUrl}
+                  alt={product.title}
+                  className="h-full w-full object-cover"
+                  width={600}
+                  height={600}
+                />
+              </div>
+
+              {product.images && product.images.length > 1 && (
+                <div className="grid grid-cols-4 gap-3 sm:grid-cols-5">
+                  {product.images.map((image, index) => {
+                    const isActive = image === (selectedImage || product.imageUrl);
+
+                    return (
+                      <button
+                        key={`${product.id}-image-${index}`}
+                        type="button"
+                        onClick={() => setSelectedImage(image)}
+                        className={`overflow-hidden rounded-md border bg-secondary transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                          isActive ? "border-primary shadow-sm" : "border-border hover:border-primary/50"
+                        }`}
+                        aria-label={`Show image ${index + 1} for ${product.title}`}
+                      >
+                        <img
+                          src={image}
+                          alt=""
+                          aria-hidden="true"
+                          className="aspect-square h-full w-full object-cover"
+                          loading="lazy"
+                        />
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
 
             {/* Content */}

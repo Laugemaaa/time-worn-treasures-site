@@ -124,7 +124,9 @@ async function scrapeItemPage(itemUrl, referenceDate) {
   const itemNumber = matchText(text, /Varenr\.\s*([\d\u00a0 ]+)/i)?.replace(/[^\d]/g, "");
   const views = Number((matchText(text, /Visninger\s+(\d+)/i) || "").replace(/[^\d]/g, "")) || undefined;
   const published = matchText(text, /Publiceret\s+([^\n]+)/i);
-  const imageUrl = matchMeta(html, "og:image")
+  const imageUrls = extractImageUrls(html);
+  const imageUrl = imageUrls[0]
+    || matchMeta(html, "og:image")
     || matchMeta(html, "twitter:image")
     || "https://placehold.co/600x600/d7c7ad/2f2117?text=Grandpa%27s+Heritage";
 
@@ -140,7 +142,7 @@ async function scrapeItemPage(itemUrl, referenceDate) {
     title: normalizeWhitespace(title),
     slug: `${slugify(title)}-${itemNumber || "tradera"}`,
     imageUrl,
-    images: [imageUrl],
+    images: imageUrls.length > 0 ? imageUrls : [imageUrl],
     shortDescription: buildShortDescription(description),
     fullDescription: description || undefined,
     currentBidPrice: parsedPrice.amount,
@@ -212,6 +214,32 @@ function matchMeta(html, property) {
   }
 
   return "";
+}
+
+function extractImageUrls(html) {
+  const rawUrls = [
+    ...html.matchAll(/https?:\/\/[^"'\\\s>]+(?:jpe?g|png|webp)(?:\?[^"'\\\s>]*)?/gi),
+  ]
+    .map((match) => decodeXml(match[0]))
+    .map(normalizeImageUrl)
+    .filter(Boolean);
+
+  const filteredUrls = rawUrls.filter((url) => {
+    const lower = url.toLowerCase();
+    if (!/(tradera|cdn)/i.test(lower)) return false;
+    if (/(logo|icon|sprite|avatar|flag|payment|trustpilot|placeholder)/i.test(lower)) return false;
+    return true;
+  });
+
+  return [...new Set(filteredUrls)];
+}
+
+function normalizeImageUrl(url) {
+  return url
+    .replace(/\\u002F/g, "/")
+    .replace(/\\\//g, "/")
+    .replace(/&amp;/g, "&")
+    .trim();
 }
 
 function matchTag(html, tag) {
