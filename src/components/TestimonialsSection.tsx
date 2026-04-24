@@ -4,7 +4,7 @@ import { useLanguage } from "@/i18n/LanguageProvider";
 export function TestimonialsSection() {
   const { t } = useLanguage();
   return (
-    <section className="bg-white px-5 pb-12 md:px-8">
+    <section className="mx-auto max-w-[1440px] bg-white px-5 pb-12 md:px-8">
       <div className="border-t border-black/10 pt-8">
         <div className="mb-6 flex items-end justify-between gap-4">
           <h2 className="font-serif text-4xl font-semibold leading-none text-black md:text-5xl">
