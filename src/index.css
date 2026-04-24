@@ -119,10 +119,6 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-
-  .hero-watch-object {
-    animation: none !important;
-  }
 }
 
 /* Hover effects gated for pointer devices */
@@ -150,20 +146,6 @@
 /* CTA button press */
 .cta-press:active {
   transform: scale(0.97);
-}
-
-.hero-watch-object {
-  animation: hero-watch-rise 1100ms var(--motion-ease-enter) both;
-}
-
-@keyframes hero-watch-rise {
-  from {
-    opacity: 0;
-    transform: translate3d(-50%, 18%, 0) scale(0.78) rotate(-2deg);
-  }
-  to {
-    opacity: 1;
-  }
 }
 
 /* Section reveal animation */
