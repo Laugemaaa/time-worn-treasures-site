@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Heart, Menu, Search, ShieldCheck, ShoppingBag, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { TraderaButton } from "@/components/TraderaButton";
@@ -32,37 +32,46 @@ export function Navbar() {
       <a href="#main-content" className="skip-to-content">
         {t("skip.toContent")}
       </a>
-      <header className="sticky top-0 z-50 border-b border-border/50 bg-background/95 backdrop-blur-sm">
-        <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-6">
-          <Link
-            to="/"
-            className="font-serif text-xl font-semibold tracking-tight text-foreground"
-          >
-            Grandpa's Heritage
-          </Link>
-
-          {/* Desktop nav */}
-          <nav className="hidden items-center gap-8 md:flex" aria-label="Main navigation">
+      <header className="sticky top-0 z-50 border-b border-border/40 bg-background">
+        <div className="bg-[#111111] px-4 py-2 text-center text-[10px] font-bold uppercase tracking-[0.28em] text-white">
+          Vintage watches with stories worth hearing
+        </div>
+        <div className="mx-auto grid h-[78px] max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-6">
+          <nav className="hidden items-center gap-7 md:flex" aria-label="Main navigation">
             {navLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
                 onClick={() => handleNavClick(link.to)}
                 className={cn(
-                  "text-sm font-medium text-muted-foreground transition-colors duration-150",
-                  "hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm px-1 py-0.5",
+                  "rounded-sm px-1 py-0.5 text-xs font-medium text-muted-foreground transition-colors duration-150",
+                  "hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                 )}
               >
                 {t(link.key)}
               </Link>
             ))}
-            <TraderaButton size="sm" />
           </nav>
+
+          <Link
+            to="/"
+            className="justify-self-center font-serif text-4xl font-semibold italic leading-none tracking-[-0.04em] text-foreground md:text-5xl"
+          >
+            Grandpa's Heritage
+          </Link>
+
+          <div className="hidden items-center justify-end gap-4 md:flex">
+            <Search className="h-5 w-5 text-foreground" aria-hidden />
+            <ShieldCheck className="h-5 w-5 text-foreground" aria-hidden />
+            <Heart className="h-5 w-5 text-foreground" aria-hidden />
+            <ShoppingBag className="h-5 w-5 text-foreground" aria-hidden />
+            <TraderaButton size="sm" />
+          </div>
 
           {/* Mobile hamburger */}
           <button
             onClick={() => setOpen(true)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-md text-foreground md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            className="inline-flex h-11 w-11 items-center justify-center justify-self-end rounded-md text-foreground md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             aria-label={t("nav.openMenu")}
           >
             <Menu className="h-5 w-5" />
