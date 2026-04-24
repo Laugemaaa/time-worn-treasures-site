@@ -4,10 +4,16 @@ import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import heroWatch2 from "@/assets/hero-watch-2.jpg";
 
+const clamp01 = (value: number) => Math.max(0, Math.min(1, value));
+const smootherstep = (value: number) => {
+  const t = clamp01(value);
+  return t * t * t * (t * (t * 6 - 15) + 10);
+};
+
 export function HeroSection() {
   const [springScroll, setSpringScroll] = useState(0);
   const spring = useRef({ value: 0, velocity: 0 });
-  const scroll = useScrollProgress(1450);
+  const scroll = useScrollProgress(1720);
   const prefersReducedMotion = usePrefersReducedMotion();
   const { t } = useLanguage();
 
@@ -23,9 +29,9 @@ export function HeroSection() {
       const state = spring.current;
       const distance = scroll - state.value;
 
-      state.velocity += distance * 0.085;
-      state.velocity *= 0.74;
-      state.value += state.velocity;
+      state.velocity += distance * 0.052;
+      state.velocity *= 0.82;
+      state.value = clamp01(state.value + state.velocity);
 
       if (Math.abs(distance) < 0.001 && Math.abs(state.velocity) < 0.001) {
         state.value = scroll;
@@ -49,22 +55,20 @@ export function HeroSection() {
   };
 
   const motionScroll = prefersReducedMotion ? 0 : springScroll;
-  const eased = motionScroll * motionScroll * (3 - 2 * motionScroll);
-  const focusProgress = Math.min(1, eased / 0.45);
-  const backgroundProgress = Math.max(0, (eased - 0.45) / 0.55);
-  const focusEase = focusProgress * focusProgress * (3 - 2 * focusProgress);
-  const backgroundEase = backgroundProgress * backgroundProgress * (3 - 2 * backgroundProgress);
+  const eased = smootherstep(motionScroll);
+  const focusEase = smootherstep(eased / 0.54);
+  const backgroundEase = smootherstep((eased - 0.48) / 0.52);
 
-  const backgroundY = eased * 42;
-  const atmosphereScale = 1.04 + eased * 0.045;
-  const watchY = 180 - focusEase * 180 + backgroundEase * 28;
-  const watchScale = 0.72 + focusEase * 0.68 + backgroundEase * 1.05;
-  const watchRotate = -1.5 + focusEase * 1.5 + backgroundEase * 1.2;
-  const watchOpacity = 0.62 + focusEase * 0.34 - backgroundEase * 0.72;
-  const headlineY = -focusEase * 54 - backgroundEase * 26;
-  const headlineOpacity = 1 - backgroundEase * 0.34;
-  const supportY = prefersReducedMotion ? 36 : 80 - focusEase * 42 - backgroundEase * 22;
-  const supportOpacity = prefersReducedMotion ? 1 : 0.08 + backgroundEase * 0.92;
+  const backgroundY = eased * 34;
+  const atmosphereScale = 1.035 + eased * 0.035;
+  const watchY = 172 - focusEase * 172 + backgroundEase * 18;
+  const watchScale = 0.74 + focusEase * 0.58 + backgroundEase * 0.92;
+  const watchRotate = -1.1 + focusEase * 1.1 + backgroundEase * 0.65;
+  const watchOpacity = 0.64 + focusEase * 0.32 - backgroundEase * 0.68;
+  const headlineY = -focusEase * 46 - backgroundEase * 20;
+  const headlineOpacity = 1 - backgroundEase * 0.28;
+  const supportY = prefersReducedMotion ? 36 : 76 - focusEase * 34 - backgroundEase * 20;
+  const supportOpacity = prefersReducedMotion ? 1 : 0.1 + backgroundEase * 0.9;
 
   return (
     <section className="relative isolate h-[220vh] overflow-clip bg-[hsl(var(--surface-espresso))]">
@@ -80,17 +84,17 @@ export function HeroSection() {
           <img
             src={prefersReducedMotion ? heroWatch2 : "/hero-atmosphere.webp"}
             alt=""
-            className="absolute inset-0 h-full w-full object-cover opacity-28 blur-[1px]"
+            className="absolute inset-0 h-full w-full object-cover opacity-24 blur-[1px]"
             style={{
               transform: `scale(${atmosphereScale})`,
               willChange: prefersReducedMotion ? "auto" : "transform",
             }}
           />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_72%,rgba(219,171,92,0.34),transparent_30%),radial-gradient(circle_at_50%_42%,rgba(248,232,190,0.13),transparent_32%),linear-gradient(180deg,rgba(15,11,9,0.84)_0%,rgba(31,22,16,0.72)_50%,rgba(17,12,10,0.96)_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_72%,rgba(219,171,92,0.3),transparent_31%),radial-gradient(circle_at_50%_42%,rgba(248,232,190,0.12),transparent_34%),linear-gradient(180deg,rgba(15,11,9,0.86)_0%,rgba(31,22,16,0.74)_50%,rgba(17,12,10,0.96)_100%)]" />
           <div
             className="absolute inset-x-0 bottom-[-18%] mx-auto h-[48vw] max-h-[640px] w-[86vw] max-w-[1180px] rounded-[999px] bg-[radial-gradient(ellipse_at_center,rgba(224,166,74,0.28),rgba(224,166,74,0.08)_42%,transparent_70%)] blur-3xl"
             style={{
-              opacity: 0.62 + focusEase * 0.18 - backgroundEase * 0.3,
+              opacity: 0.56 + focusEase * 0.18 - backgroundEase * 0.22,
             }}
           />
           <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-b from-transparent to-background" />
