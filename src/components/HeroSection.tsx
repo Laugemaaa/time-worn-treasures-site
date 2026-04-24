@@ -104,7 +104,7 @@ export function HeroSection() {
           <button
             type="button"
             onClick={scrollToCollection}
-            className="mt-7 rounded-full bg-primary px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-primary-foreground transition-colors hover:bg-navy-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            className="mt-7 rounded-full border border-white/15 bg-[#1b3a5c] px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white shadow-[0_12px_28px_rgba(0,0,0,0.28)] transition-colors hover:bg-[#142c47] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1b3a5c] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >
             {t("hero.cta")}
           </button>
