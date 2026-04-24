@@ -30,7 +30,7 @@ export function ProductGridSection() {
   }, []);
 
   return (
-    <section id="collection" className="mx-auto max-w-[1440px] bg-white px-5 py-8 md:px-8 md:py-10">
+    <section id="collection" className="bg-white px-5 py-8 md:px-8 md:py-10">
       <div className="mb-6 flex items-end justify-between gap-4">
         <h2 className="font-serif text-4xl font-semibold leading-none text-black md:text-5xl">
           New In
@@ -94,7 +94,7 @@ export function ProductGridSection() {
       )}
 
       {!loading && !error && products.length > 0 && (
-        <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4 xl:grid-cols-5">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

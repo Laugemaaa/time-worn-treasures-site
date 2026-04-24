@@ -16,28 +16,28 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen overflow-hidden bg-white text-[#171717]">
+    <div className="min-h-screen overflow-hidden bg-[#e8e7e3] px-4 py-10 text-[#171717] md:px-8 md:py-14">
       <a href="#main-content" className="skip-to-content">
         {t("skip.toContent")}
       </a>
 
       <div
         aria-hidden
-        className="pointer-events-none fixed left-1/2 top-4 z-0 w-[160vw] -translate-x-1/2 select-none text-center font-serif text-[clamp(6rem,16vw,17rem)] italic leading-none text-black/[0.035]"
+        className="pointer-events-none fixed left-1/2 top-4 z-0 w-[160vw] -translate-x-1/2 select-none text-center font-serif text-[clamp(6rem,16vw,17rem)] italic leading-none text-white/70"
       >
         Grandpa's Heritage
       </div>
 
       <main
         id="main-content"
-        className="relative z-10 min-h-screen w-full overflow-hidden bg-white"
+        className="relative z-10 mx-auto max-w-[1120px] overflow-hidden rounded-sm border border-black/10 bg-white shadow-[0_34px_90px_rgba(0,0,0,0.18)]"
       >
         <div className="flex h-8 items-center justify-center bg-[#111] px-4 text-center text-[10px] font-semibold uppercase tracking-[0.18em] text-white/75">
           Vintage watches with stories worth hearing
         </div>
 
         <header className="sticky top-0 z-50 border-b border-black/10 bg-white/95 backdrop-blur-sm">
-          <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-4 text-[11px] font-medium text-black/70 md:px-8">
+          <div className="flex h-16 items-center justify-between px-4 text-[11px] font-medium text-black/70 md:px-8">
             <nav className="hidden items-center gap-5 md:flex" aria-label="Main navigation">
               <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="transition-colors hover:text-black">
                 {t("nav.home")}
@@ -79,7 +79,7 @@ const Index = () => {
         <TestimonialsSection />
 
         <footer className="border-t border-black/10 bg-white px-6 py-10 md:px-8">
-          <div className="mx-auto grid max-w-[1440px] gap-8 md:grid-cols-[1.4fr_0.8fr_0.8fr]">
+          <div className="grid gap-8 md:grid-cols-[1.4fr_0.8fr_0.8fr]">
             <div>
               <h2 className="font-serif text-3xl italic leading-none">Grandpa's Heritage</h2>
               <p className="mt-4 max-w-md text-sm leading-relaxed text-black/58">
