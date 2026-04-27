@@ -1,5 +1,6 @@
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { useLanguage } from "@/i18n/LanguageProvider";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import heroWatch2 from "@/assets/hero-watch-2.jpg";
 
 export function HeroSection() {
@@ -13,35 +14,60 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-background">
-      <div className="relative min-h-[520px] md:min-h-[700px]">
+    <section className="relative overflow-hidden bg-[#0f1412]">
+      <div className="relative min-h-[620px] md:min-h-[calc(100vh-116px)]">
         <img
           src={heroWatch2}
           alt="Close-up of a vintage Seiko chronograph with a weathered bezel"
           width={1600}
           height={1000}
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover object-[64%_center]"
           loading="eager"
           decoding="async"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-black/20 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_28%,rgba(0,0,0,0.3)_100%)]" />
+        <div className="absolute inset-0 bg-black/45" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,20,18,0.8)_0%,rgba(15,20,18,0.46)_38%,rgba(15,20,18,0.18)_66%,rgba(15,20,18,0.58)_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-black/55 to-transparent" />
 
-        <div className="relative z-10 mx-auto flex min-h-[520px] max-w-[960px] flex-col items-center justify-center px-6 pt-20 text-center text-white md:min-h-[700px]">
-          <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.32em] text-white/80">
-            New arrivals
+        <div className="relative z-10 mx-auto flex min-h-[620px] max-w-[1240px] items-end px-6 pb-16 pt-24 md:min-h-[calc(100vh-116px)] md:pb-24">
+          <div className="max-w-2xl text-left text-white">
+            <p className="mb-4 text-xl font-extrabold uppercase tracking-[0.04em] text-[#f43f46] md:text-2xl">
+              New
+            </p>
+            <h1 className="font-sans text-5xl font-black leading-[0.92] tracking-[-0.055em] text-white md:text-7xl lg:text-8xl">
+              {t("hero.title")}
+            </h1>
+            <p className="mt-5 max-w-xl text-2xl font-medium leading-tight text-white/95 md:text-3xl">
+              {t("hero.subtitle")}
+            </p>
+            <button
+              onClick={scrollToCollection}
+              className="cta-press mt-9 inline-flex h-14 items-center rounded bg-[#f33242] px-9 text-sm font-extrabold text-white shadow-[0_18px_45px_rgba(0,0,0,0.28)] transition-colors duration-150 hover:bg-[#d92736] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f33242] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            >
+              {t("hero.cta")}
+            </button>
+          </div>
+        </div>
+
+        <div className="pointer-events-none absolute right-[12%] top-1/2 z-10 hidden -translate-y-1/2 text-right md:block">
+          <p className="text-4xl font-black uppercase leading-[0.88] tracking-[-0.04em] text-white/85 lg:text-5xl">
+            Vintage
+            <br />
+            <span className="text-[#f33242]">Heritage</span>
           </p>
-          <h1 className="max-w-3xl font-serif text-5xl font-bold leading-[0.95] tracking-[-0.04em] md:text-7xl">
-            {t("hero.title")}
-          </h1>
-          <p className="mt-6 max-w-xl text-base font-medium leading-relaxed text-white md:text-lg">
-            {t("hero.subtitle")}
-          </p>
-          <button
-            onClick={scrollToCollection}
-            className="cta-press mt-8 inline-flex h-12 items-center rounded-full bg-white px-8 text-xs font-bold uppercase tracking-[0.18em] text-[#111111] shadow-[0_16px_40px_rgba(0,0,0,0.24)] transition-colors duration-150 hover:bg-[#f4efe7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-          >
-            {t("hero.cta")}
+        </div>
+
+        <div className="absolute bottom-5 left-1/2 z-20 hidden -translate-x-1/2 items-center gap-2 md:flex" aria-hidden>
+          <span className="h-1 w-16 bg-[#f33242]" />
+          <span className="h-1 w-16 bg-white" />
+        </div>
+
+        <div className="absolute bottom-8 right-[12%] z-20 hidden items-center gap-2 md:flex" aria-hidden>
+          <button tabIndex={-1} className="flex h-11 w-11 items-center justify-center rounded-lg bg-white text-[#111111] shadow-lg">
+            <ChevronLeft className="h-7 w-7" />
+          </button>
+          <button tabIndex={-1} className="flex h-11 w-11 items-center justify-center rounded-lg bg-white text-[#111111] shadow-lg">
+            <ChevronRight className="h-7 w-7" />
           </button>
         </div>
       </div>
