@@ -7,14 +7,18 @@ import { TraderaButton } from "@/components/TraderaButton";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { PackageOpen } from "lucide-react";
 
+const LIVE_FEED_REFRESH_MS = 30_000;
+
 export function ProductGridSection() {
   const { t } = useLanguage();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const fetchProducts = async () => {
-    setLoading(true);
+  const fetchProducts = async (showLoading = false) => {
+    if (showLoading) {
+      setLoading(true);
+    }
     setError(false);
     try {
       const data = await getProducts();
@@ -27,7 +31,24 @@ export function ProductGridSection() {
   };
 
   useEffect(() => {
-    fetchProducts();
+    fetchProducts(true);
+
+    const intervalId = window.setInterval(() => {
+      fetchProducts();
+    }, LIVE_FEED_REFRESH_MS);
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        fetchProducts();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      window.clearInterval(intervalId);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
   }, []);
 
   return (
@@ -55,7 +76,7 @@ export function ProductGridSection() {
         <div className="text-center py-16 space-y-4">
           <p className="text-muted-foreground">{t("collection.error")}</p>
           <button
-            onClick={fetchProducts}
+            onClick={() => fetchProducts(true)}
             className="cta-press inline-flex h-10 items-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground transition-colors duration-150 hover:bg-navy-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             {t("collection.retry")}

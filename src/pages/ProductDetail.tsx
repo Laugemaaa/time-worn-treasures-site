@@ -9,6 +9,8 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { ArrowLeft, ChevronLeft, ChevronRight, Expand, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
+const LIVE_PRODUCT_REFRESH_MS = 30_000;
+
 const ProductDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const { t } = useLanguage();
@@ -18,14 +20,21 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const fetchProduct = async () => {
+  const fetchProduct = async (showLoading = false) => {
     if (!slug) return;
-    setLoading(true);
+    if (showLoading) {
+      setLoading(true);
+    }
     setError(false);
     try {
       const data = await getProductBySlug(slug);
       setProduct(data);
-      setSelectedImageIndex(0);
+      setSelectedImageIndex((currentIndex) => {
+        if (!data) return 0;
+
+        const imageCount = data.images?.length || 1;
+        return currentIndex >= imageCount ? 0 : currentIndex;
+      });
     } catch {
       setError(true);
     } finally {
@@ -34,8 +43,25 @@ const ProductDetail = () => {
   };
 
   useEffect(() => {
-    fetchProduct();
+    fetchProduct(true);
     window.scrollTo(0, 0);
+
+    const intervalId = window.setInterval(() => {
+      fetchProduct();
+    }, LIVE_PRODUCT_REFRESH_MS);
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        fetchProduct();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      window.clearInterval(intervalId);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
   }, [slug]);
 
   const galleryImages = product?.images?.length ? product.images : product ? [product.imageUrl] : [];
@@ -81,7 +107,7 @@ const ProductDetail = () => {
             <p className="text-muted-foreground">{t("detail.errorLoad")}</p>
             <div className="flex items-center justify-center gap-4">
               <button
-                onClick={fetchProduct}
+                onClick={() => fetchProduct(true)}
                 className="cta-press inline-flex h-10 items-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground transition-colors duration-150 hover:bg-navy-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 {t("detail.tryAgain")}

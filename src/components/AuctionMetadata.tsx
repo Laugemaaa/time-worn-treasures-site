@@ -91,7 +91,7 @@ export function AuctionMetadata({ product, compact = false }: Props) {
         </span>
       )}
       {liveDuration && (
-        <span className={`inline-flex items-center gap-1 ${urgent ? "text-destructive font-medium" : ""}`}>
+        <span className={`inline-flex items-center gap-1 ${urgent ? "font-medium text-primary" : ""}`}>
           <Clock className="h-3 w-3" />
           {parseISO8601Duration(liveDuration)}
         </span>

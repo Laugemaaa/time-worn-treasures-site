@@ -31,7 +31,7 @@ export function HeroSection() {
 
         <div className="relative z-10 mx-auto flex min-h-[620px] max-w-[1240px] items-end px-6 pb-16 pt-24 md:min-h-[calc(100vh-116px)] md:pb-24">
           <div className="max-w-2xl text-left text-white">
-            <p className="mb-4 text-xl font-extrabold uppercase tracking-[0.04em] text-[#f43f46] md:text-2xl">
+            <p className="mb-4 text-xl font-extrabold uppercase tracking-[0.04em] text-[#d7c7ad] md:text-2xl">
               New
             </p>
             <h1 className="font-sans text-5xl font-black leading-[0.92] tracking-[-0.055em] text-white md:text-7xl lg:text-8xl">
@@ -42,7 +42,7 @@ export function HeroSection() {
             </p>
             <button
               onClick={scrollToCollection}
-              className="cta-press mt-9 inline-flex h-14 items-center rounded bg-[#f33242] px-9 text-sm font-extrabold text-white shadow-[0_18px_45px_rgba(0,0,0,0.28)] transition-colors duration-150 hover:bg-[#d92736] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f33242] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+              className="cta-press mt-9 inline-flex h-14 items-center rounded bg-primary px-9 text-sm font-extrabold text-primary-foreground shadow-[0_18px_45px_rgba(0,0,0,0.28)] transition-colors duration-150 hover:bg-navy-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             >
               {t("hero.cta")}
             </button>
@@ -53,12 +53,12 @@ export function HeroSection() {
           <p className="text-4xl font-black uppercase leading-[0.88] tracking-[-0.04em] text-white/85 lg:text-5xl">
             Vintage
             <br />
-            <span className="text-[#f33242]">Heritage</span>
+            <span className="text-[#d7c7ad]">Heritage</span>
           </p>
         </div>
 
         <div className="absolute bottom-5 left-1/2 z-20 hidden -translate-x-1/2 items-center gap-2 md:flex" aria-hidden>
-          <span className="h-1 w-16 bg-[#f33242]" />
+          <span className="h-1 w-16 bg-primary" />
           <span className="h-1 w-16 bg-white" />
         </div>
 

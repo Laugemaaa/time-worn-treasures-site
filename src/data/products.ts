@@ -34,7 +34,7 @@ export function mapTraderaProduct(apiResponse: unknown): Product {
 
 async function loadGeneratedProducts(): Promise<Product[]> {
   try {
-    const response = await fetch(GENERATED_PRODUCTS_PATH, { cache: "no-store" });
+    const response = await fetch(`${GENERATED_PRODUCTS_PATH}?v=${Date.now()}`, { cache: "no-store" });
     if (!response.ok) {
       console.warn("No generated Tradera product feed found at /tradera-products.json.");
       return [];
