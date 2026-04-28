@@ -116,8 +116,14 @@ async function scrapeItemPage(itemUrl, referenceDate) {
     || matchMeta(html, "og:title")
     || matchTag(html, "h1");
   const endLabel = matchText(text, /Slutter\s+([^\n]+)/i);
-  const priceText = matchText(text, /Udbudspris\s+([\d.\u00a0 ]+)\s*(DKK|SEK|NOK)/i);
-  const bidCount = Number((matchText(text, /(\d+)\s+bud/i) || "").replace(/[^\d]/g, "")) || 0;
+  const leadingBidPriceText = matchText(
+    text,
+    /(?:Førende bud|Ledande bud|Leading bid|Højeste bud|Högsta bud)[\s\S]*?([\d.\u00a0 ]+\s*(?:DKK|SEK|NOK))/i
+  );
+  const priceText = leadingBidPriceText || matchText(text, /Udbudspris\s+([\d.\u00a0 ]+)\s*(DKK|SEK|NOK)/i);
+  const embeddedBidCount = Number((matchText(html, /"bidCount"\s*:\s*(\d+)/i) || "").replace(/[^\d]/g, ""));
+  const visibleBidCount = Number((matchText(text, /(\d+)\s+bud/i) || "").replace(/[^\d]/g, ""));
+  const bidCount = embeddedBidCount || visibleBidCount || (leadingBidPriceText ? 1 : 0);
   const startPriceText = matchText(text, /(?:Startpris|Udbudspris)\s+([\d.\u00a0 ]+)\s*(DKK|SEK|NOK)/i);
   const description = cleanDescription(
     matchText(text, /Beskrivelse\s+([\s\S]*?)\s+Varenr\./i)
