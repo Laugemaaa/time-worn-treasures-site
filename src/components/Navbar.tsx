@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Heart, Menu, Search, ShieldCheck, ShoppingBag, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { TraderaButton } from "@/components/TraderaButton";
@@ -61,10 +61,6 @@ export function Navbar() {
           </Link>
 
           <div className="hidden items-center justify-end gap-4 md:flex">
-            <Search className="h-5 w-5 text-foreground" aria-hidden />
-            <ShieldCheck className="h-5 w-5 text-foreground" aria-hidden />
-            <Heart className="h-5 w-5 text-foreground" aria-hidden />
-            <ShoppingBag className="h-5 w-5 text-foreground" aria-hidden />
             <TraderaButton size="sm" />
           </div>
 

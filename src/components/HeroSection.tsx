@@ -1,6 +1,5 @@
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { useLanguage } from "@/i18n/LanguageProvider";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import heroWatch2 from "@/assets/hero-watch-2.jpg";
 
 export function HeroSection() {
@@ -34,10 +33,10 @@ export function HeroSection() {
             <p className="mb-4 text-xl font-extrabold uppercase tracking-[0.04em] text-[#d7c7ad] md:text-2xl">
               New
             </p>
-            <h1 className="font-sans text-5xl font-black leading-[0.92] tracking-[-0.055em] text-white md:text-7xl lg:text-8xl">
+            <h1 className="font-serif text-5xl font-medium leading-[0.98] tracking-[-0.035em] text-white md:text-7xl lg:text-8xl">
               {t("hero.title")}
             </h1>
-            <p className="mt-5 max-w-xl text-2xl font-medium leading-tight text-white/95 md:text-3xl">
+            <p className="mt-5 max-w-xl text-xl font-normal leading-relaxed text-white/90 md:text-2xl">
               {t("hero.subtitle")}
             </p>
             <button
@@ -50,26 +49,13 @@ export function HeroSection() {
         </div>
 
         <div className="pointer-events-none absolute right-[12%] top-1/2 z-10 hidden -translate-y-1/2 text-right md:block">
-          <p className="text-4xl font-black uppercase leading-[0.88] tracking-[-0.04em] text-white/85 lg:text-5xl">
+          <p className="font-serif text-4xl font-medium uppercase leading-[0.92] tracking-[0.03em] text-white/85 lg:text-5xl">
             Vintage
             <br />
             <span className="text-[#d7c7ad]">Heritage</span>
           </p>
         </div>
 
-        <div className="absolute bottom-5 left-1/2 z-20 hidden -translate-x-1/2 items-center gap-2 md:flex" aria-hidden>
-          <span className="h-1 w-16 bg-primary" />
-          <span className="h-1 w-16 bg-white" />
-        </div>
-
-        <div className="absolute bottom-8 right-[12%] z-20 hidden items-center gap-2 md:flex" aria-hidden>
-          <button tabIndex={-1} className="flex h-11 w-11 items-center justify-center rounded-lg bg-white text-[#111111] shadow-lg">
-            <ChevronLeft className="h-7 w-7" />
-          </button>
-          <button tabIndex={-1} className="flex h-11 w-11 items-center justify-center rounded-lg bg-white text-[#111111] shadow-lg">
-            <ChevronRight className="h-7 w-7" />
-          </button>
-        </div>
       </div>
     </section>
   );
