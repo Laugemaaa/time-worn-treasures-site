@@ -1,21 +1,23 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { ChevronDown, Globe, Instagram, Menu, X } from "lucide-react";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { TraderaButton } from "@/components/TraderaButton";
 import { useLanguage } from "@/i18n/LanguageProvider";
+import { LANGUAGE_LABELS, SUPPORTED_LANGUAGES, type Language } from "@/i18n/translations";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
-  const { t } = useLanguage();
+  const { lang, setLang, t } = useLanguage();
 
   const navLinks = [
-    { key: "nav.home" as const, to: "/" },
-    { key: "nav.collection" as const, to: "/#collection" },
-    { key: "nav.about" as const, to: "/#philosophy" },
+    { label: "Hjem", to: "/" },
+    { label: "Kollektion", to: "/#collection" },
+    { label: "Om", to: "/#philosophy" },
   ];
+
+  const instagramUrl = "https://www.instagram.com/granpasheritage/";
 
   const handleNavClick = (to: string) => {
     setOpen(false);
@@ -32,42 +34,67 @@ export function Navbar() {
       <a href="#main-content" className="skip-to-content">
         {t("skip.toContent")}
       </a>
-      <header className="sticky top-0 z-50 border-b border-border/40 bg-background">
-        <div className="bg-[#111111] px-4 py-2 text-center text-[10px] font-bold uppercase tracking-[0.28em] text-white">
-          Vintage watches with stories worth hearing
-        </div>
-        <div className="mx-auto grid h-[78px] max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-6">
-          <nav className="hidden items-center gap-7 md:flex" aria-label="Main navigation">
+      <header className="sticky top-0 z-50 border-b border-[#b9a98f] bg-[#d7c7ad]">
+        <div className="relative mx-auto h-[82px] max-w-[1920px] px-8 font-sans lg:px-11">
+          <nav
+            className="absolute left-8 top-1/2 hidden max-w-[calc(50%-175px)] -translate-y-1/2 items-center gap-12 overflow-hidden lg:left-14 lg:flex xl:gap-14"
+            aria-label="Main navigation"
+          >
             {navLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
                 onClick={() => handleNavClick(link.to)}
-                className={cn(
-                  "rounded-sm px-1 py-0.5 text-xs font-medium text-muted-foreground transition-colors duration-150",
-                  "hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-                )}
+                className="inline-flex items-center whitespace-nowrap rounded-sm py-0.5 font-serif text-[15px] font-semibold leading-none text-[#4a3a2b] transition-colors duration-150 hover:text-[#111111] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#d7c7ad]"
               >
-                {t(link.key)}
+                {link.label}
               </Link>
             ))}
           </nav>
 
           <Link
             to="/"
-            className="justify-self-center font-serif text-4xl font-semibold italic leading-none tracking-[-0.04em] text-foreground md:text-5xl"
+            className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center font-serif text-[42px] font-semibold italic leading-none text-[#2f241b]"
+            aria-label="GrandpasHeritage home"
           >
             Grandpa's Heritage
           </Link>
 
-          <div className="hidden items-center justify-end gap-4 md:flex">
-            <TraderaButton size="sm" />
+          <div className="absolute right-8 top-1/2 hidden -translate-y-1/2 items-center justify-end gap-3 lg:right-14 lg:flex">
+            <label className="inline-flex h-[32px] items-center gap-2 rounded-[7px] border border-[#4a3a2b]/45 bg-transparent px-2.5 font-serif text-[14px] font-semibold leading-none text-[#4a3a2b] focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 focus-within:ring-offset-[#d7c7ad]">
+              <Globe aria-hidden className="h-3.5 w-3.5" />
+              <span className="sr-only">{t("footer.language")}</span>
+              <select
+                value={lang}
+                onChange={(event) => setLang(event.target.value as Language)}
+                aria-label={t("footer.language")}
+                className="appearance-none bg-transparent pr-5 font-serif text-[14px] font-semibold leading-none text-[#4a3a2b] outline-none"
+              >
+                {SUPPORTED_LANGUAGES.map((language) => (
+                  <option key={language} value={language} className="text-[#2f241b]">
+                    {LANGUAGE_LABELS[language]}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown aria-hidden className="pointer-events-none -ml-5 h-3 w-3" />
+            </label>
+            <a
+              href={instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram (opens in new tab)"
+              className="inline-flex h-[42px] items-center gap-2 rounded-[12px] bg-[#2f241b] px-4 font-serif text-[18px] font-semibold leading-none text-[#d7c7ad] transition-colors duration-150 hover:bg-[#4a3a2b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#d7c7ad]"
+            >
+              <Instagram aria-hidden className="h-4 w-4" />
+              <span>Instagram</span>
+            </a>
+            <TraderaButton size="sm" className="h-[42px] px-5" />
           </div>
 
           {/* Mobile hamburger */}
           <button
             onClick={() => setOpen(true)}
-            className="inline-flex h-11 w-11 items-center justify-center justify-self-end rounded-md text-foreground md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            className="absolute right-6 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-md text-[#4a3a2b] lg:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             aria-label={t("nav.openMenu")}
           >
             <Menu className="h-5 w-5" />
@@ -76,7 +103,7 @@ export function Navbar() {
 
         {/* Mobile drawer */}
         <Sheet open={open} onOpenChange={setOpen}>
-          <SheetContent side="right" className="bg-background w-72">
+          <SheetContent side="right" className="w-72 bg-[#d7c7ad]">
             <SheetTitle className="sr-only">{t("nav.menu")}</SheetTitle>
             <div className="flex justify-end p-4">
               <button
@@ -93,12 +120,38 @@ export function Navbar() {
                   key={link.to}
                   to={link.to}
                   onClick={() => handleNavClick(link.to)}
-                  className="text-lg font-medium text-foreground py-2 transition-colors duration-150 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
+                  className="inline-flex items-center rounded-sm py-2 font-serif text-[24px] font-semibold leading-none text-[#4a3a2b] transition-colors duration-150 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
-                  {t(link.key)}
+                  {link.label}
                 </Link>
               ))}
-              <div className="pt-2">
+              <div className="flex flex-col gap-3 pt-5">
+                <label className="inline-flex h-[34px] w-fit items-center gap-2 rounded-[7px] border border-[#4a3a2b]/45 bg-transparent px-2.5 font-serif text-[14px] font-semibold leading-none text-[#4a3a2b]">
+                  <Globe aria-hidden className="h-3.5 w-3.5" />
+                  <span className="sr-only">{t("footer.language")}</span>
+                  <select
+                    value={lang}
+                    onChange={(event) => setLang(event.target.value as Language)}
+                    aria-label={t("footer.language")}
+                    className="appearance-none bg-transparent pr-5 font-serif text-[14px] font-semibold leading-none text-[#4a3a2b] outline-none"
+                  >
+                    {SUPPORTED_LANGUAGES.map((language) => (
+                      <option key={language} value={language} className="text-[#2f241b]">
+                        {LANGUAGE_LABELS[language]}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDown aria-hidden className="pointer-events-none -ml-5 h-3 w-3" />
+                </label>
+                <a
+                  href={instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-11 w-fit items-center gap-2 rounded-[12px] bg-[#2f241b] px-4 font-serif text-[18px] font-semibold leading-none text-[#d7c7ad]"
+                >
+                  <Instagram aria-hidden className="h-4 w-4" />
+                  <span>Instagram</span>
+                </a>
                 <TraderaButton />
               </div>
             </nav>

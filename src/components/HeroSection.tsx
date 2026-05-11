@@ -1,6 +1,6 @@
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { useLanguage } from "@/i18n/LanguageProvider";
-import heroWatch2 from "@/assets/hero-watch-2.jpg";
+import heroWatchLeather from "@/assets/hero-watch-leather.png";
 
 export function HeroSection() {
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -16,11 +16,11 @@ export function HeroSection() {
     <section className="relative overflow-hidden bg-[#0f1412]">
       <div className="relative min-h-[620px] md:min-h-[calc(100vh-116px)]">
         <img
-          src={heroWatch2}
-          alt="Close-up of a vintage Seiko chronograph with a weathered bezel"
+          src={heroWatchLeather}
+          alt="Gold vintage watch on warm brown leather"
           width={1600}
           height={1000}
-          className="absolute inset-0 h-full w-full object-cover object-[64%_center]"
+          className="absolute inset-0 h-full w-full object-cover object-center"
           loading="eager"
           decoding="async"
         />
@@ -41,7 +41,7 @@ export function HeroSection() {
             </p>
             <button
               onClick={scrollToCollection}
-              className="cta-press mt-9 inline-flex h-14 items-center rounded bg-primary px-9 text-sm font-extrabold text-primary-foreground shadow-[0_18px_45px_rgba(0,0,0,0.28)] transition-colors duration-150 hover:bg-navy-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+              className="cta-press mt-9 inline-flex h-14 items-center rounded bg-tradera px-9 text-sm font-extrabold text-tradera-foreground shadow-[0_18px_45px_rgba(0,0,0,0.28)] transition-colors duration-150 hover:bg-tradera-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tradera focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             >
               {t("hero.cta")}
             </button>

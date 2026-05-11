@@ -14,6 +14,8 @@ export function TraderaButton({ className, size = "md" }: Props) {
   const { t } = useLanguage();
   const dim = size === "sm" ? "h-9" : "h-10";
   const padding = size === "sm" ? "px-3" : "px-4";
+  const iconSize = size === "sm" ? "h-4 w-4" : "h-5 w-5";
+  const labelSize = size === "sm" ? "text-[18px]" : "text-[24px]";
 
   return (
     <a
@@ -22,7 +24,7 @@ export function TraderaButton({ className, size = "md" }: Props) {
       rel="noopener noreferrer"
       aria-label={`${t("nav.tradera")} (opens in new tab)`}
       className={cn(
-        "group relative inline-flex items-center gap-2 rounded-none bg-tradera text-tradera-foreground font-semibold tracking-tight",
+        "group relative inline-flex items-center gap-3 rounded-[12px] bg-tradera text-tradera-foreground font-serif font-semibold tracking-tight",
         "transition-colors duration-150 hover:bg-tradera-hover",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tradera focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         "cta-press",
@@ -35,9 +37,9 @@ export function TraderaButton({ className, size = "md" }: Props) {
         src={traderaIcon}
         alt=""
         aria-hidden="true"
-        className="h-4 w-4 shrink-0"
+        className={cn("shrink-0", iconSize)}
       />
-      <span className="text-sm">{t("nav.tradera")}</span>
+      <span className={cn("leading-none", labelSize)}>{t("nav.tradera")}</span>
       <ExternalLink
         aria-hidden
         className="h-3.5 w-3.5 opacity-0 -translate-x-1 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0 group-focus-visible:opacity-100 group-focus-visible:translate-x-0"

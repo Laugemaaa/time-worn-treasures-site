@@ -1,18 +1,13 @@
-import heroWatch1 from "@/assets/hero-watch-1.jpg";
+import { WatchCarousel } from "@/components/WatchCarousel";
 
 export function FounderStorySection() {
   return (
     <section className="border-b border-border/70 bg-[#f7f3eb]">
       <div className="grid min-h-[720px] lg:grid-cols-[1.05fr_1fr]">
-        <div className="relative min-h-[420px] overflow-hidden lg:min-h-full">
-          <img
-            src={heroWatch1}
-            alt="A vintage watch with warm patina, representing Grandpa's Heritage"
-            className="h-full w-full object-cover"
-            loading="lazy"
-            decoding="async"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-black/15" />
+        <div className="flex min-h-[420px] items-center justify-center bg-[#eadfce] p-6 md:p-10 lg:min-h-full lg:p-14">
+          <div className="w-full max-w-[580px]">
+            <WatchCarousel />
+          </div>
         </div>
 
         <div className="flex items-center px-6 py-16 md:px-12 lg:px-24">
