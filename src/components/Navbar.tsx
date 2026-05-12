@@ -5,6 +5,7 @@ import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { TraderaButton } from "@/components/TraderaButton";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { LANGUAGE_LABELS, SUPPORTED_LANGUAGES, type Language } from "@/i18n/translations";
+import grandpasHeritageLogo from "@/assets/grandpas-heritage-logo.png";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -29,13 +30,20 @@ export function Navbar() {
     }
   };
 
+  const handleLogoClick = () => {
+    setOpen(false);
+    if (location.pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       <a href="#main-content" className="skip-to-content">
         {t("skip.toContent")}
       </a>
       <header className="sticky top-0 z-50 border-b border-[#b9a98f] bg-[#d7c7ad]">
-        <div className="relative mx-auto h-[82px] max-w-[1920px] px-8 font-sans lg:px-11">
+        <div className="relative mx-auto h-[96px] max-w-[1920px] px-8 font-sans lg:px-11">
           <nav
             className="absolute left-8 top-1/2 hidden max-w-[calc(50%-175px)] -translate-y-1/2 items-center gap-12 overflow-hidden lg:left-14 lg:flex xl:gap-14"
             aria-label="Main navigation"
@@ -54,10 +62,16 @@ export function Navbar() {
 
           <Link
             to="/"
-            className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center font-serif text-[42px] font-semibold italic leading-none text-[#2f241b]"
+            onClick={handleLogoClick}
+            className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center text-[#2f241b] leading-[24px] transition-colors duration-150 hover:text-[#111111] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#d7c7ad]"
             aria-label="GrandpasHeritage home"
           >
-            Grandpa's Heritage
+            <img
+              src={grandpasHeritageLogo}
+              alt="Grandpa's Heritage"
+              className="h-[72px] w-auto max-w-[min(720px,calc(100vw-112px))] object-contain"
+              decoding="async"
+            />
           </Link>
 
           <div className="absolute right-8 top-1/2 hidden -translate-y-1/2 items-center justify-end gap-3 lg:right-14 lg:flex">

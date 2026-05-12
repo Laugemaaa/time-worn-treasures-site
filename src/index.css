@@ -162,10 +162,13 @@
 
 .testimonials-marquee {
   animation: testimonials-marquee 58s linear infinite;
+  animation-play-state: running !important;
 }
 
-.testimonials-marquee:hover {
-  animation-play-state: paused;
+.testimonials-marquee:hover,
+.testimonials-marquee:focus-within,
+.testimonials-marquee:has(:hover) {
+  animation-play-state: running !important;
 }
 
 /* CTA button press */
