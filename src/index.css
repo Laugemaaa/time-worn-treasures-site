@@ -150,6 +150,24 @@
   transform: scale(1.01);
 }
 
+@keyframes testimonials-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-50% - 0.75rem));
+  }
+}
+
+.testimonials-marquee {
+  animation: testimonials-marquee 58s linear infinite;
+}
+
+.testimonials-marquee:hover {
+  animation-play-state: paused;
+}
+
 /* CTA button press */
 .cta-press:active {
   transform: scale(0.97);

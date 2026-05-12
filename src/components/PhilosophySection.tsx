@@ -5,10 +5,7 @@ export function PhilosophySection() {
   const { t } = useLanguage();
 
   return (
-    <section
-      id="philosophy"
-      className="bg-[#f7f3eb] text-[#2f241b]"
-    >
+    <section id="philosophy" className="text-[#2f241b]">
       <SectionWrapper className="py-16 md:py-24" reveal="fade">
         <div className="mx-auto max-w-[680px] space-y-6 text-center">
           <h2 className="font-serif text-3xl font-semibold text-[#2f241b] md:text-4xl">

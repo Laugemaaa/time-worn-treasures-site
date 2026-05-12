@@ -5,13 +5,8 @@ await loadLocalEnvFile();
 
 const APP_ID = process.env.TRADERA_APP_ID;
 const APP_KEY = process.env.TRADERA_APP_KEY;
-const SELLER_ID = process.env.TRADERA_SELLER_ID;
+const SELLER_ID = process.env.TRADERA_SELLER_ID || "6841860";
 const SELLER_ALIAS = process.env.TRADERA_SELLER_ALIAS || "grandpasheritage";
-
-if (!SELLER_ID) {
-  console.error("Missing TRADERA_SELLER_ID.");
-  process.exit(1);
-}
 
 const now = new Date();
 let products = [];
@@ -28,6 +23,12 @@ const outputPath = path.join(process.cwd(), "public", "tradera-products.json");
 await fs.writeFile(outputPath, JSON.stringify(products, null, 2), "utf8");
 
 console.log(`Wrote ${products.length} Tradera products to public/tradera-products.json`);
+
+const feedback = await fetchFeedbackFromProfile();
+const feedbackOutputPath = path.join(process.cwd(), "public", "tradera-feedback.json");
+await fs.writeFile(feedbackOutputPath, JSON.stringify(feedback, null, 2), "utf8");
+
+console.log(`Wrote ${feedback.length} Tradera feedback items to public/tradera-feedback.json`);
 
 async function fetchProductsFromApi(referenceDate) {
   const endpoint = new URL("https://api.tradera.com/v3/PublicService.asmx/GetSellerItems");
@@ -94,6 +95,111 @@ async function scrapeProductsFromSellerProfile(referenceDate) {
   }
 
   return scrapedProducts.sort((a, b) => new Date(a.auctionEndDate).getTime() - new Date(b.auctionEndDate).getTime());
+}
+
+async function fetchFeedbackFromProfile() {
+  const feedbackPageUrl = `https://www.tradera.com/da/profile/feedback/${SELLER_ID}/${SELLER_ALIAS}`;
+  const pageResponse = await fetch(feedbackPageUrl, {
+    headers: {
+      Accept: "text/html,application/xhtml+xml",
+      "User-Agent": "grandpas-heritage-site-sync/1.0",
+    },
+  });
+
+  if (!pageResponse.ok) {
+    console.warn(`Tradera feedback page request failed with ${pageResponse.status} ${pageResponse.statusText}`);
+    return [];
+  }
+
+  const cookieHeader = getCookieHeader(pageResponse);
+  if (!cookieHeader) {
+    console.warn("Tradera feedback page did not provide an auth cookie.");
+    return [];
+  }
+
+  const feedbackApiUrl = new URL("https://www.tradera.com/api/webapi/member/web/profile-feedback");
+  feedbackApiUrl.search = new URLSearchParams({
+    memberId: SELLER_ID,
+    role: "seller",
+    rating: "positive",
+  }).toString();
+
+  const response = await fetch(feedbackApiUrl, {
+    headers: {
+      Accept: "application/json",
+      Cookie: cookieHeader,
+      Referer: feedbackPageUrl,
+      "User-Agent": "grandpas-heritage-site-sync/1.0",
+    },
+  });
+
+  if (!response.ok) {
+    console.warn(`Tradera feedback API request failed with ${response.status} ${response.statusText}`);
+    return [];
+  }
+
+  const payload = await response.json();
+  const items = Array.isArray(payload.feedbackItems) ? payload.feedbackItems : [];
+
+  return items
+    .map(mapFeedbackItem)
+    .filter(Boolean)
+    .sort((a, b) => new Date(b.createdDateTime).getTime() - new Date(a.createdDateTime).getTime());
+}
+
+function getCookieHeader(response) {
+  const setCookies =
+    typeof response.headers.getSetCookie === "function"
+      ? response.headers.getSetCookie()
+      : [response.headers.get("set-cookie")].filter(Boolean);
+
+  return setCookies
+    .map((cookie) => cookie.split(";")[0])
+    .filter(Boolean)
+    .join("; ");
+}
+
+function mapFeedbackItem(value) {
+  if (!value || typeof value !== "object") {
+    return null;
+  }
+
+  const item = value;
+  const quote = normalizeWhitespace(String(item.text || "Positiv anmeldelse på Tradera.")).trim();
+  const createdDateTime = String(item.createdDateTime || "");
+
+  if (!createdDateTime) {
+    return null;
+  }
+
+  return {
+    id: String(item.gradeId || `${item.feedbackMemberAlias || "tradera"}-${createdDateTime}`),
+    quote,
+    name: String(item.feedbackMemberAlias || "Tradera-køber"),
+    descriptor: buildFeedbackDescriptor(item),
+    rating: String(item.rating || "Positive"),
+    createdDateTime,
+    traderaUrl: item.canonicalUrl ? `https://www.tradera.com${item.canonicalUrl}` : feedbackProfileUrl(),
+  };
+}
+
+function buildFeedbackDescriptor(item) {
+  const date = String(item.createdString || item.createdDateTime || "").trim();
+  const itemDescription = normalizeWhitespace(String(item.itemDescription || "")).trim();
+
+  if (itemDescription && date) {
+    return `Tradera-køber · ${date} · ${itemDescription}`;
+  }
+
+  if (date) {
+    return `Tradera-køber · ${date}`;
+  }
+
+  return "Tradera-køber";
+}
+
+function feedbackProfileUrl() {
+  return `https://www.tradera.com/da/profile/feedback/${SELLER_ID}/${SELLER_ALIAS}`;
 }
 
 async function scrapeItemPage(itemUrl, referenceDate) {
