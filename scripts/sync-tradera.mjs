@@ -7,16 +7,25 @@ const APP_ID = process.env.TRADERA_APP_ID;
 const APP_KEY = process.env.TRADERA_APP_KEY;
 const SELLER_ID = process.env.TRADERA_SELLER_ID || "6841860";
 const SELLER_ALIAS = process.env.TRADERA_SELLER_ALIAS || "grandpasheritage";
+const SITE_URL = (process.env.SITE_URL || "https://grandpasheritage.com").replace(/\/+$/, "");
 
 const now = new Date();
 let products = [];
 
 if (APP_ID && APP_KEY) {
-  products = await fetchProductsFromApi(now);
+  try {
+    products = await fetchProductsFromApi(now);
+  } catch (error) {
+    console.warn(`Tradera API product sync failed: ${error.message}`);
+  }
 }
 
 if (products.length === 0) {
-  products = await scrapeProductsFromSellerProfile(now);
+  try {
+    products = await scrapeProductsFromSellerProfile(now);
+  } catch (error) {
+    console.warn(`Tradera profile product sync failed: ${error.message}`);
+  }
 }
 
 const outputPath = path.join(process.cwd(), "public", "tradera-products.json");
@@ -24,11 +33,21 @@ await fs.writeFile(outputPath, JSON.stringify(products, null, 2), "utf8");
 
 console.log(`Wrote ${products.length} Tradera products to public/tradera-products.json`);
 
-const feedback = await fetchFeedbackFromProfile();
+let feedback = [];
+try {
+  feedback = await fetchFeedbackFromProfile();
+} catch (error) {
+  console.warn(`Tradera feedback sync failed: ${error.message}`);
+}
 const feedbackOutputPath = path.join(process.cwd(), "public", "tradera-feedback.json");
 await fs.writeFile(feedbackOutputPath, JSON.stringify(feedback, null, 2), "utf8");
 
 console.log(`Wrote ${feedback.length} Tradera feedback items to public/tradera-feedback.json`);
+
+const sitemapOutputPath = path.join(process.cwd(), "public", "sitemap.xml");
+await fs.writeFile(sitemapOutputPath, buildSitemap(products), "utf8");
+
+console.log(`Wrote sitemap with ${products.length + 1} URLs to public/sitemap.xml`);
 
 async function fetchProductsFromApi(referenceDate) {
   const endpoint = new URL("https://api.tradera.com/v3/PublicService.asmx/GetSellerItems");
@@ -200,6 +219,47 @@ function buildFeedbackDescriptor(item) {
 
 function feedbackProfileUrl() {
   return `https://www.tradera.com/da/profile/feedback/${SELLER_ID}/${SELLER_ALIAS}`;
+}
+
+function buildSitemap(items) {
+  const urls = [
+    {
+      loc: `${SITE_URL}/`,
+      changefreq: "daily",
+      priority: "1.0",
+    },
+    ...items
+      .filter((item) => item?.slug)
+      .map((item) => ({
+        loc: `${SITE_URL}/watch/${item.slug}`,
+        lastmod: item.auctionEndDate ? new Date(item.auctionEndDate).toISOString().slice(0, 10) : undefined,
+        changefreq: "daily",
+        priority: "0.8",
+      })),
+  ];
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.map(formatSitemapUrl).join("\n")}
+</urlset>
+`;
+}
+
+function formatSitemapUrl(url) {
+  return `  <url>
+    <loc>${escapeXml(url.loc)}</loc>${url.lastmod ? `\n    <lastmod>${url.lastmod}</lastmod>` : ""}
+    <changefreq>${url.changefreq}</changefreq>
+    <priority>${url.priority}</priority>
+  </url>`;
+}
+
+function escapeXml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
 }
 
 async function scrapeItemPage(itemUrl, referenceDate) {

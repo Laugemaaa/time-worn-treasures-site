@@ -8,6 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { ArrowLeft, ChevronLeft, ChevronRight, Expand, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageProvider";
+import { SEO, SITE_NAME, SITE_URL } from "@/components/SEO";
 
 const LIVE_PRODUCT_REFRESH_MS = 30_000;
 
@@ -66,6 +67,11 @@ const ProductDetail = () => {
 
   const galleryImages = product?.images?.length ? product.images : product ? [product.imageUrl] : [];
   const selectedImage = galleryImages[selectedImageIndex] || product?.imageUrl || "";
+  const seoDescription = product
+    ? product.shortDescription ||
+      product.fullDescription?.slice(0, 155) ||
+      `Se ${product.title} hos GrandpasHeritage. Vintage ur med ærlig beskrivelse og køb via Tradera.`
+    : "GrandpasHeritage kuraterer vintage ure med karakter, patina og ærlige beskrivelser.";
 
   const showPreviousImage = () => {
     if (galleryImages.length < 2) return;
@@ -79,6 +85,37 @@ const ProductDetail = () => {
 
   return (
     <div className="min-h-screen bg-background paper-texture">
+      <SEO
+        title={product ? `${product.title} | GrandpasHeritage` : "Vintage ur | GrandpasHeritage"}
+        description={seoDescription}
+        canonicalPath={slug ? `/watch/${slug}` : "/"}
+        image={product?.imageUrl}
+        type={product ? "product" : "website"}
+        robots={product || loading ? "index, follow" : "noindex, follow"}
+        jsonLd={
+          product
+            ? {
+                "@context": "https://schema.org",
+                "@type": "Product",
+                name: product.title,
+                description: seoDescription,
+                image: galleryImages.length > 0 ? galleryImages : [product.imageUrl],
+                url: `${SITE_URL}/watch/${product.slug}`,
+                brand: {
+                  "@type": "Brand",
+                  name: SITE_NAME,
+                },
+                offers: {
+                  "@type": "Offer",
+                  url: product.traderaUrl,
+                  priceCurrency: product.currency || "SEK",
+                  price: product.currentBidPrice || product.startingBidPrice || undefined,
+                  availability: "https://schema.org/InStock",
+                },
+              }
+            : undefined
+        }
+      />
       <Navbar />
       <main id="main-content" className="mx-auto max-w-[1200px] px-6 py-8 md:py-16">
         <Link
