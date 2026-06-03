@@ -30,9 +30,6 @@ export function HeroSection() {
 
         <div className="relative z-10 mx-auto flex min-h-[620px] max-w-[1240px] items-end px-6 pb-16 pt-24 md:min-h-[calc(100vh-116px)] md:pb-24">
           <div className="max-w-2xl text-left text-white">
-            <p className="mb-4 text-xl font-extrabold uppercase tracking-[0.04em] text-[#d7c7ad] md:text-2xl">
-              New
-            </p>
             <h1 className="font-serif text-5xl font-medium leading-[0.98] tracking-[-0.035em] text-white md:text-7xl lg:text-8xl">
               {t("hero.title")}
             </h1>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <rect width="180" height="180" rx="90" fill="#050403"/>
+  <circle cx="90" cy="61" r="37" fill="none" stroke="#eadcc6" stroke-width="4"/>
+  <circle cx="90" cy="18" r="7" fill="none" stroke="#eadcc6" stroke-width="3"/>
+  <path d="M81 18h18M76 12h28M76 24h28" stroke="#eadcc6" stroke-width="3" stroke-linecap="round"/>
+  <text x="72" y="69" fill="#eadcc6" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="500" text-anchor="middle">G</text>
+  <text x="107" y="86" fill="#eadcc6" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="500" text-anchor="middle">H</text>
+  <path d="M73 82L111 43" stroke="#eadcc6" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="90" cy="62" r="4" fill="#050403" stroke="#eadcc6" stroke-width="2"/>
+  <text x="90" y="127" fill="#eadcc6" font-family="Georgia, 'Times New Roman', serif" font-size="27" font-weight="500" text-anchor="middle">Grandpas</text>
+  <text x="90" y="154" fill="#eadcc6" font-family="Georgia, 'Times New Roman', serif" font-size="27" font-weight="500" text-anchor="middle">Heritage</text>
+</svg>
