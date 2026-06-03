@@ -4,33 +4,33 @@
 
 @layer base {
   :root {
-    --background: 36 33% 93%;
-    --foreground: 0 0% 10%;
+    --background: 25 24% 12%;
+    --foreground: 36 33% 90%;
 
-    --card: 36 28% 90%;
-    --card-foreground: 0 0% 10%;
+    --card: 27 22% 18%;
+    --card-foreground: 36 33% 90%;
 
-    --popover: 36 33% 93%;
-    --popover-foreground: 0 0% 10%;
+    --popover: 27 22% 18%;
+    --popover-foreground: 36 33% 90%;
 
-    --primary: 210 53% 23%;
-    --primary-foreground: 36 33% 96%;
+    --primary: 38 36% 66%;
+    --primary-foreground: 24 30% 10%;
 
-    --secondary: 33 25% 86%;
-    --secondary-foreground: 0 0% 10%;
+    --secondary: 28 20% 23%;
+    --secondary-foreground: 36 33% 90%;
 
-    --muted: 33 25% 86%;
-    --muted-foreground: 20 4% 40%;
+    --muted: 27 16% 24%;
+    --muted-foreground: 34 16% 68%;
 
-    --accent: 33 25% 86%;
-    --accent-foreground: 0 0% 10%;
+    --accent: 31 24% 25%;
+    --accent-foreground: 36 33% 90%;
 
-    --destructive: 210 53% 23%;
+    --destructive: 12 42% 46%;
     --destructive-foreground: 36 33% 96%;
 
-    --border: 30 20% 80%;
-    --input: 30 20% 80%;
-    --ring: 210 53% 23%;
+    --border: 30 18% 28%;
+    --input: 30 18% 28%;
+    --ring: 38 36% 66%;
 
     --radius: 0.5rem;
 
@@ -44,10 +44,10 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
 
     /* Custom tokens */
-    --surface-sand: 33 25% 86%;
+    --surface-sand: 28 18% 16%;
     --surface-espresso: 24 30% 13%;
-    --text-warm-gray: 20 4% 40%;
-    --navy-hover: 210 55% 17%;
+    --text-warm-gray: 34 14% 68%;
+    --navy-hover: 38 30% 54%;
     --motion-duration-fast: 180ms;
     --motion-duration-standard: 240ms;
     --motion-duration-slow: 320ms;

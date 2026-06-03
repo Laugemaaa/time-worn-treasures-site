@@ -2,7 +2,7 @@ import { WatchCarousel } from "@/components/WatchCarousel";
 
 export function FounderStorySection() {
   return (
-    <section className="border-b border-border/70 bg-[#f7f3eb]">
+    <section className="border-y border-border/70 bg-[linear-gradient(135deg,hsl(var(--card))_0%,hsl(var(--background))_100%)]">
       <div className="grid min-h-[720px] lg:grid-cols-[1.05fr_1fr]">
         <div className="flex min-h-[420px] items-center justify-center bg-espresso p-6 md:p-10 lg:min-h-full lg:p-14">
           <div className="w-full max-w-[580px]">
