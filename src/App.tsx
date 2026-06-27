@@ -5,6 +5,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import ProductDetail from "./pages/ProductDetail.tsx";
+import SoldWatches from "./pages/SoldWatches.tsx";
+import SoldWatchDetail from "./pages/SoldWatchDetail.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import { LanguageProvider } from "@/i18n/LanguageProvider";
 
@@ -19,6 +21,8 @@ const App = () => (
         <BrowserRouter basename={import.meta.env.BASE_URL}>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/solgte-ure" element={<SoldWatches />} />
+            <Route path="/solgte-ure/:id" element={<SoldWatchDetail />} />
             <Route path="/watch/:slug" element={<ProductDetail />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

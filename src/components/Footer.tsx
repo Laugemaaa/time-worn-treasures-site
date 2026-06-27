@@ -33,6 +33,9 @@ export function Footer() {
               <Link to="/#philosophy" className="text-sm text-[#d8c8aa] transition-colors duration-150 hover:text-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa] rounded-sm w-fit">
                 {t("nav.about")}
               </Link>
+              <Link to="/solgte-ure" className="text-sm text-[#d8c8aa] transition-colors duration-150 hover:text-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa] rounded-sm w-fit">
+                Solgte ure
+              </Link>
               <a
                 href="https://www.tradera.com/da/profile/items/6841860/grandpasheritage"
                 target="_blank"

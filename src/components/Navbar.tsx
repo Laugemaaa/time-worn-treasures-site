@@ -16,6 +16,7 @@ export function Navbar() {
     { label: "Hjem", to: "/" },
     { label: "Kollektion", to: "/#collection" },
     { label: "Om", to: "/#philosophy" },
+    { label: "Solgte ure", to: "/solgte-ure" },
   ];
 
   const instagramUrl = "https://www.instagram.com/granpasheritage/";
