@@ -55,7 +55,10 @@ const Index = () => {
             description,
             areaServed: ["DK", "SE", "NO"],
             makesOffer: "Curated vintage watches, pocket watches, and collectible timepieces sold through Tradera auctions.",
-            sameAs: "https://www.tradera.com/da/profile/items/6841860/grandpasheritage",
+            sameAs: [
+              "https://www.instagram.com/grandpasheritage/",
+              "https://www.tradera.com/da/profile/items/6841860/grandpasheritage",
+            ],
           },
           {
             "@context": "https://schema.org",
