@@ -13,6 +13,7 @@ export type TranslationKey =
   | "nav.home"
   | "nav.collection"
   | "nav.about"
+  | "nav.soldWatches"
   | "nav.tradera"
   | "nav.openMenu"
   | "nav.closeMenu"
@@ -25,6 +26,15 @@ export type TranslationKey =
   | "philosophy.p1"
   | "philosophy.p2"
   | "philosophy.p3"
+  | "founder.eyebrow"
+  | "founder.title"
+  | "founder.p1"
+  | "founder.p2"
+  | "founder.p3"
+  | "founder.p4"
+  | "founder.tagVintage"
+  | "founder.tagCharacter"
+  | "founder.tagProvenance"
   | "collection.title"
   | "collection.empty"
   | "collection.error"
@@ -45,7 +55,27 @@ export type TranslationKey =
   | "detail.return"
   | "detail.errorLoad"
   | "detail.tryAgain"
-  | "detail.browseTradera";
+  | "detail.browseTradera"
+  | "sold.archive"
+  | "sold.title"
+  | "sold.description"
+  | "sold.emptyTitle"
+  | "sold.emptyDescription"
+  | "sold.viewListing"
+  | "sold.viewPreviousListing"
+  | "sold.ended"
+  | "sold.finalPrice"
+  | "sold.askingPrice"
+  | "sold.bids"
+  | "sold.back"
+  | "sold.notFoundTitle"
+  | "sold.notFoundDescription"
+  | "sold.itemLabel"
+  | "sold.imageLabel"
+  | "sold.itemNumber"
+  | "sold.filterByBrand"
+  | "sold.allBrands"
+  | "sold.showingCount";
 
 type Dict = Record<TranslationKey, string>;
 
@@ -53,6 +83,7 @@ const en: Dict = {
   "nav.home": "Home",
   "nav.collection": "Collection",
   "nav.about": "About",
+  "nav.soldWatches": "Sold watches",
   "nav.tradera": "Tradera",
   "nav.openMenu": "Open menu",
   "nav.closeMenu": "Close menu",
@@ -69,6 +100,19 @@ const en: Dict = {
     "We look for watches that have been worn honestly. Not safe queens preserved behind glass, but daily companions that carry the evidence of real life. That's where the character lives - in the imperfections.",
   "philosophy.p3":
     "Each piece in this collection has been chosen because it has something to say. A provenance worth knowing, a design that still holds up, or simply a presence on the wrist that modern watches struggle to replicate.",
+  "founder.eyebrow": "Grandpa's Heritage",
+  "founder.title": "Built around watches with a life before us",
+  "founder.p1":
+    "I created Grandpa's Heritage because I have always been drawn to objects that carry memory. A vintage watch is never just a way to tell the time. It is something that has been worn, repaired, kept, forgotten, found again, and passed from one chapter of life into another.",
+  "founder.p2":
+    "The name comes from that feeling: the idea that a watch can hold a piece of someone's history. Some pieces are inherited, some are discovered, and some simply have the kind of character that modern things rarely get the chance to develop.",
+  "founder.p3":
+    "The watches here are chosen for honesty rather than perfection. We look for vintage pieces with visible character, good design, mechanical charm, and the small signs of age that make each one feel individual. Scratches, patina, softened edges, and a dial that has changed with time are not flaws to hide. They are part of the story.",
+  "founder.p4":
+    "Grandpa's Heritage is for people who want something with presence. Not a watch that looks untouched, but one that feels like it has already lived and is ready to be worn into its next story.",
+  "founder.tagVintage": "Vintage",
+  "founder.tagCharacter": "Character",
+  "founder.tagProvenance": "Provenance",
   "collection.title": "The Collection",
   "collection.empty": "No watches available at the moment. Check back soon.",
   "collection.error": "We couldn't load the collection right now. Please try again.",
@@ -93,12 +137,35 @@ const en: Dict = {
   "detail.errorLoad": "We couldn't load this watch right now. Please try again.",
   "detail.tryAgain": "Try again",
   "detail.browseTradera": "Browse on Tradera",
+  "sold.archive": "Archive",
+  "sold.title": "Sold watches",
+  "sold.description":
+    "An archive of previously sold vintage watches from GrandpasHeritage, with photos, sale prices, and links to completed Tradera listings.",
+  "sold.emptyTitle": "Sold watches coming soon",
+  "sold.emptyDescription":
+    "Previous sales can be added here with an image, sale price, and link to the completed Tradera listing.",
+  "sold.viewListing": "View listing",
+  "sold.viewPreviousListing": "View previous listing",
+  "sold.ended": "Ended {date}",
+  "sold.finalPrice": "Final price",
+  "sold.askingPrice": "Asking price",
+  "sold.bids": "{count} bids",
+  "sold.back": "Back to sold watches",
+  "sold.notFoundTitle": "Listing not found",
+  "sold.notFoundDescription": "This sold watch does not exist in the archive.",
+  "sold.itemLabel": "Sold watch",
+  "sold.imageLabel": "Show image {index} of {title}",
+  "sold.itemNumber": "Item no.",
+  "sold.filterByBrand": "Filter by brand",
+  "sold.allBrands": "All brands",
+  "sold.showingCount": "Showing {count} of {total} sold watches",
 };
 
 const da: Dict = {
   "nav.home": "Hjem",
   "nav.collection": "Kollektion",
   "nav.about": "Om",
+  "nav.soldWatches": "Solgte ure",
   "nav.tradera": "Tradera",
   "nav.openMenu": "Åbn menu",
   "nav.closeMenu": "Luk menu",
@@ -115,6 +182,19 @@ const da: Dict = {
     "Vi leder efter ure, der er båret ærligt. Ikke museumsstykker bag glas, men daglige følgesvende, der bærer beviser på et virkeligt liv. Det er der, karakteren bor - i ufuldkommenhederne.",
   "philosophy.p3":
     "Hvert stykke i denne samling er valgt, fordi det har noget at sige. En proveniens værd at kende, et design der stadig holder, eller blot en tilstedeværelse på håndleddet, som moderne ure har svært ved at gengive.",
+  "founder.eyebrow": "Grandpa's Heritage",
+  "founder.title": "Bygget omkring ure med et liv før os",
+  "founder.p1":
+    "Jeg skabte Grandpa's Heritage, fordi jeg altid har været draget af genstande, der bærer minder. Et vintage-ur er aldrig bare en måde at aflæse tiden på. Det er noget, der er blevet båret, repareret, gemt, glemt, fundet igen og givet videre fra ét kapitel i livet til det næste.",
+  "founder.p2":
+    "Navnet kommer fra den følelse: ideen om, at et ur kan bære et stykke af nogens historie. Nogle stykker er arvet, nogle er fundet, og nogle har ganske enkelt den slags karakter, som moderne ting sjældent får chancen for at udvikle.",
+  "founder.p3":
+    "Urene her er valgt for ærlighed frem for perfektion. Vi leder efter vintage-stykker med synlig karakter, godt design, mekanisk charme og de små alderstegn, der gør hvert ur individuelt. Ridser, patina, blødgjorte kanter og en skive, der har ændret sig med tiden, er ikke fejl, der skal skjules. De er en del af historien.",
+  "founder.p4":
+    "Grandpa's Heritage er for mennesker, der vil have noget med nærvær. Ikke et ur, der ser uberørt ud, men et der føles, som om det allerede har levet og er klar til at blive båret ind i sin næste historie.",
+  "founder.tagVintage": "Vintage",
+  "founder.tagCharacter": "Karakter",
+  "founder.tagProvenance": "Proveniens",
   "collection.title": "Samlingen",
   "collection.empty": "Ingen ure tilgængelige lige nu. Kig forbi snart.",
   "collection.error": "Vi kunne ikke indlæse samlingen lige nu. Prøv igen.",
@@ -139,12 +219,35 @@ const da: Dict = {
   "detail.errorLoad": "Vi kunne ikke indlæse dette ur lige nu. Prøv igen.",
   "detail.tryAgain": "Prøv igen",
   "detail.browseTradera": "Se på Tradera",
+  "sold.archive": "Arkiv",
+  "sold.title": "Solgte ure",
+  "sold.description":
+    "Et arkiv over tidligere solgte vintage-ure fra GrandpasHeritage med billeder, salgspriser og links til de afsluttede Tradera-annoncer.",
+  "sold.emptyTitle": "Solgte ure kommer snart",
+  "sold.emptyDescription":
+    "Tidligere salg kan tilføjes her med billede, salgspris og link til den afsluttede Tradera-annonce.",
+  "sold.viewListing": "Se opslag",
+  "sold.viewPreviousListing": "Se tidligere annonce",
+  "sold.ended": "Afsluttet {date}",
+  "sold.finalPrice": "Slutpris",
+  "sold.askingPrice": "Udbudspris",
+  "sold.bids": "{count} bud",
+  "sold.back": "Tilbage til solgte ure",
+  "sold.notFoundTitle": "Opslaget blev ikke fundet",
+  "sold.notFoundDescription": "Det solgte ur findes ikke i arkivet.",
+  "sold.itemLabel": "Solgt ur",
+  "sold.imageLabel": "Vis billede {index} af {title}",
+  "sold.itemNumber": "Varenr.",
+  "sold.filterByBrand": "Filtrer efter mærke",
+  "sold.allBrands": "Alle mærker",
+  "sold.showingCount": "Viser {count} af {total} solgte ure",
 };
 
 const sv: Dict = {
   "nav.home": "Hem",
   "nav.collection": "Kollektionen",
   "nav.about": "Om",
+  "nav.soldWatches": "Sålda klockor",
   "nav.tradera": "Tradera",
   "nav.openMenu": "Öppna meny",
   "nav.closeMenu": "Stäng meny",
@@ -161,6 +264,19 @@ const sv: Dict = {
     "Vi letar efter klockor som burits ärligt. Inte museiföremål bakom glas, utan dagliga följeslagare som bär bevis på ett verkligt liv. Det är där karaktären bor - i ofullkomligheterna.",
   "philosophy.p3":
     "Varje pjäs i denna samling har valts för att den har något att säga. En härkomst värd att känna till, en design som fortfarande håller, eller helt enkelt en närvaro på handleden som moderna klockor har svårt att återskapa.",
+  "founder.eyebrow": "Grandpa's Heritage",
+  "founder.title": "Byggt kring klockor med ett liv före oss",
+  "founder.p1":
+    "Jag skapade Grandpa's Heritage eftersom jag alltid har dragits till föremål som bär minnen. En vintageklocka är aldrig bara ett sätt att visa tiden. Den är något som har burits, reparerats, sparats, glömts, hittats igen och förts vidare från ett kapitel i livet till ett annat.",
+  "founder.p2":
+    "Namnet kommer från den känslan: idén att en klocka kan bära en bit av någons historia. Vissa föremål är ärvda, vissa är upptäckta, och vissa har helt enkelt den sortens karaktär som moderna saker sällan får chansen att utveckla.",
+  "founder.p3":
+    "Klockorna här väljs för ärlighet snarare än perfektion. Vi letar efter vintageföremål med synlig karaktär, god design, mekanisk charm och de små ålderstecken som gör varje klocka individuell. Repor, patina, mjuknade kanter och en urtavla som förändrats med tiden är inte fel att dölja. De är en del av historien.",
+  "founder.p4":
+    "Grandpa's Heritage är för människor som vill ha något med närvaro. Inte en klocka som ser orörd ut, utan en som känns som att den redan har levt och är redo att bäras in i sin nästa historia.",
+  "founder.tagVintage": "Vintage",
+  "founder.tagCharacter": "Karaktär",
+  "founder.tagProvenance": "Härkomst",
   "collection.title": "Kollektionen",
   "collection.empty": "Inga klockor tillgängliga just nu. Kom tillbaka snart.",
   "collection.error": "Vi kunde inte ladda kollektionen just nu. Försök igen.",
@@ -185,12 +301,35 @@ const sv: Dict = {
   "detail.errorLoad": "Vi kunde inte ladda den här klockan just nu. Försök igen.",
   "detail.tryAgain": "Försök igen",
   "detail.browseTradera": "Bläddra på Tradera",
+  "sold.archive": "Arkiv",
+  "sold.title": "Sålda klockor",
+  "sold.description":
+    "Ett arkiv över tidigare sålda vintageklockor från GrandpasHeritage med bilder, slutpriser och länkar till avslutade Tradera-annonser.",
+  "sold.emptyTitle": "Sålda klockor kommer snart",
+  "sold.emptyDescription":
+    "Tidigare försäljningar kan läggas till här med bild, slutpris och länk till den avslutade Tradera-annonsen.",
+  "sold.viewListing": "Visa inlägg",
+  "sold.viewPreviousListing": "Visa tidigare annons",
+  "sold.ended": "Avslutad {date}",
+  "sold.finalPrice": "Slutpris",
+  "sold.askingPrice": "Utropspris",
+  "sold.bids": "{count} bud",
+  "sold.back": "Tillbaka till sålda klockor",
+  "sold.notFoundTitle": "Inlägget hittades inte",
+  "sold.notFoundDescription": "Den sålda klockan finns inte i arkivet.",
+  "sold.itemLabel": "Såld klocka",
+  "sold.imageLabel": "Visa bild {index} av {title}",
+  "sold.itemNumber": "Varunr.",
+  "sold.filterByBrand": "Filtrera efter märke",
+  "sold.allBrands": "Alla märken",
+  "sold.showingCount": "Visar {count} av {total} sålda klockor",
 };
 
 const no: Dict = {
   "nav.home": "Hjem",
   "nav.collection": "Kolleksjonen",
   "nav.about": "Om",
+  "nav.soldWatches": "Solgte klokker",
   "nav.tradera": "Tradera",
   "nav.openMenu": "Åpne meny",
   "nav.closeMenu": "Lukk meny",
@@ -207,6 +346,19 @@ const no: Dict = {
     "Vi leter etter klokker som har blitt brukt ærlig. Ikke museumsstykker bak glass, men daglige følgesvenner som bærer bevis på et virkelig liv. Det er der karakteren bor - i ufullkommenhetene.",
   "philosophy.p3":
     "Hver del i denne samlingen er valgt fordi den har noe å si. En opprinnelse verdt å kjenne, et design som fortsatt holder, eller bare en tilstedeværelse på håndleddet som moderne klokker sliter med å gjenskape.",
+  "founder.eyebrow": "Grandpa's Heritage",
+  "founder.title": "Bygget rundt klokker med et liv før oss",
+  "founder.p1":
+    "Jeg skapte Grandpa's Heritage fordi jeg alltid har vært tiltrukket av gjenstander som bærer minner. En vintageklokke er aldri bare en måte å vise tiden på. Den er noe som har blitt brukt, reparert, tatt vare på, glemt, funnet igjen og gitt videre fra ett kapittel i livet til et annet.",
+  "founder.p2":
+    "Navnet kommer fra den følelsen: ideen om at en klokke kan holde på en bit av noens historie. Noen deler er arvet, noen er oppdaget, og noen har ganske enkelt den typen karakter som moderne ting sjelden får sjansen til å utvikle.",
+  "founder.p3":
+    "Klokkene her er valgt for ærlighet fremfor perfeksjon. Vi ser etter vintageklokker med synlig karakter, god design, mekanisk sjarm og de små alderstegnene som gjør hver enkelt individuell. Riper, patina, mykere kanter og en urskive som har endret seg med tiden, er ikke feil som skal skjules. De er en del av historien.",
+  "founder.p4":
+    "Grandpa's Heritage er for mennesker som vil ha noe med nærvær. Ikke en klokke som ser urørt ut, men en som føles som om den allerede har levd og er klar til å bæres inn i sin neste historie.",
+  "founder.tagVintage": "Vintage",
+  "founder.tagCharacter": "Karakter",
+  "founder.tagProvenance": "Opprinnelse",
   "collection.title": "Kolleksjonen",
   "collection.empty": "Ingen klokker tilgjengelig akkurat nå. Kom tilbake snart.",
   "collection.error": "Vi kunne ikke laste kolleksjonen akkurat nå. Prøv igjen.",
@@ -231,6 +383,28 @@ const no: Dict = {
   "detail.errorLoad": "Vi kunne ikke laste denne klokken akkurat nå. Prøv igjen.",
   "detail.tryAgain": "Prøv igjen",
   "detail.browseTradera": "Bla på Tradera",
+  "sold.archive": "Arkiv",
+  "sold.title": "Solgte klokker",
+  "sold.description":
+    "Et arkiv over tidligere solgte vintageklokker fra GrandpasHeritage med bilder, salgspriser og lenker til avsluttede Tradera-annonser.",
+  "sold.emptyTitle": "Solgte klokker kommer snart",
+  "sold.emptyDescription":
+    "Tidligere salg kan legges til her med bilde, salgspris og lenke til den avsluttede Tradera-annonsen.",
+  "sold.viewListing": "Se oppføring",
+  "sold.viewPreviousListing": "Se tidligere annonse",
+  "sold.ended": "Avsluttet {date}",
+  "sold.finalPrice": "Sluttpris",
+  "sold.askingPrice": "Prisantydning",
+  "sold.bids": "{count} bud",
+  "sold.back": "Tilbake til solgte klokker",
+  "sold.notFoundTitle": "Oppføringen ble ikke funnet",
+  "sold.notFoundDescription": "Den solgte klokken finnes ikke i arkivet.",
+  "sold.itemLabel": "Solgt klokke",
+  "sold.imageLabel": "Vis bilde {index} av {title}",
+  "sold.itemNumber": "Varenr.",
+  "sold.filterByBrand": "Filtrer etter merke",
+  "sold.allBrands": "Alle merker",
+  "sold.showingCount": "Viser {count} av {total} solgte klokker",
 };
 
 export const translations: Record<Language, Dict> = { en, da, sv, no };

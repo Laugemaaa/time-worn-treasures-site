@@ -14,19 +14,8 @@ type Ctx = {
 
 const LanguageContext = createContext<Ctx | null>(null);
 
-const STORAGE_KEY = "vw.lang";
-
-const COUNTRY_TO_LANG: Record<string, Language> = {
-  DK: "da",
-  SE: "sv",
-  NO: "no",
-  GB: "en",
-  US: "en",
-  IE: "en",
-  AU: "en",
-  CA: "en",
-  NZ: "en",
-};
+const STORAGE_KEY = "gh.lang";
+const LEGACY_STORAGE_KEY = "vw.lang";
 
 function normalize(code: string | undefined | null): Language | null {
   if (!code) return null;
@@ -36,55 +25,21 @@ function normalize(code: string | undefined | null): Language | null {
   return null;
 }
 
-function detectFromBrowser(): Language | null {
-  if (typeof navigator === "undefined") return null;
-  const list = navigator.languages?.length ? navigator.languages : [navigator.language];
-  for (const l of list) {
-    const norm = normalize(l);
-    if (norm) return norm;
-  }
-  return null;
-}
-
-async function detectFromIp(): Promise<Language | null> {
-  try {
-    const ctrl = new AbortController();
-    const timeout = setTimeout(() => ctrl.abort(), 2500);
-    const res = await fetch("https://ipapi.co/json/", { signal: ctrl.signal });
-    clearTimeout(timeout);
-    if (!res.ok) return null;
-    const data = await res.json();
-    const country = (data?.country_code || data?.country) as string | undefined;
-    if (country && COUNTRY_TO_LANG[country.toUpperCase()]) {
-      return COUNTRY_TO_LANG[country.toUpperCase()];
-    }
-    return normalize(data?.languages?.split(",")[0]);
-  } catch {
-    return null;
-  }
-}
-
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Language>("en");
 
   useEffect(() => {
-    // 1) explicit user choice wins
+    try {
+      localStorage.removeItem(LEGACY_STORAGE_KEY);
+    } catch {
+      /* ignore */
+    }
+
     const stored = typeof localStorage !== "undefined" ? localStorage.getItem(STORAGE_KEY) : null;
     const storedLang = normalize(stored);
     if (storedLang) {
       setLangState(storedLang);
-      return;
     }
-    // 2) browser language
-    const fromBrowser = detectFromBrowser();
-    if (fromBrowser) {
-      setLangState(fromBrowser);
-      return;
-    }
-    // 3) IP fallback
-    detectFromIp().then((ipLang) => {
-      if (ipLang) setLangState(ipLang);
-    });
   }, []);
 
   useEffect(() => {

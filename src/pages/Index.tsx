@@ -8,9 +8,9 @@ import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { SEO, SITE_NAME, SITE_URL } from "@/components/SEO";
 
 const Index = () => {
-  const title = "GrandpasHeritage | Vintage ure med historie";
+  const title = "GrandpasHeritage | Vintage watches with history";
   const description =
-    "GrandpasHeritage kuraterer vintage ure, lommeure og samlerure med karakter, patina og ærlige beskrivelser. Se aktuelle auktioner og køb sikkert via Tradera.";
+    "GrandpasHeritage curates vintage watches, pocket watches, and collectible timepieces with character, patina, and honest descriptions. View current auctions and buy securely through Tradera.";
 
   return (
     <div className="min-h-screen bg-background paper-texture">
@@ -33,7 +33,7 @@ const Index = () => {
             name: SITE_NAME,
             url: SITE_URL,
             sameAs: [
-              "https://www.instagram.com/granpasheritage/",
+              "https://www.instagram.com/grandpasheritage/",
               "https://www.tradera.com/da/profile/items/6841860/grandpasheritage",
             ],
           },

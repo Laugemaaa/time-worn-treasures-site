@@ -70,8 +70,8 @@ const ProductDetail = () => {
   const seoDescription = product
     ? product.shortDescription ||
       product.fullDescription?.slice(0, 155) ||
-      `Se ${product.title} hos GrandpasHeritage. Vintage ur med ærlig beskrivelse og køb via Tradera.`
-    : "GrandpasHeritage kuraterer vintage ure med karakter, patina og ærlige beskrivelser.";
+      `View ${product.title} at GrandpasHeritage. A vintage watch with an honest description and purchase through Tradera.`
+    : "GrandpasHeritage curates vintage watches with character, patina, and honest descriptions.";
 
   const showPreviousImage = () => {
     if (galleryImages.length < 2) return;
@@ -86,7 +86,7 @@ const ProductDetail = () => {
   return (
     <div className="min-h-screen bg-background paper-texture">
       <SEO
-        title={product ? `${product.title} | GrandpasHeritage` : "Vintage ur | GrandpasHeritage"}
+        title={product ? `${product.title} | GrandpasHeritage` : "Vintage watch | GrandpasHeritage"}
         description={seoDescription}
         canonicalPath={slug ? `/watch/${slug}` : "/"}
         image={product?.imageUrl}

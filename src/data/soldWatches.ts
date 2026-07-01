@@ -1,35 +1,91 @@
-import hMoserImage1 from "@/assets/sold-watches/h-moser-14k-01.png";
-import hMoserImage2 from "@/assets/sold-watches/h-moser-14k-02.png";
-import hMoserImage3 from "@/assets/sold-watches/h-moser-14k-03.png";
-import hMoserImage4 from "@/assets/sold-watches/h-moser-14k-04.png";
-import hMoserImage5 from "@/assets/sold-watches/h-moser-14k-05.png";
-import hMoserImage6 from "@/assets/sold-watches/h-moser-14k-06.png";
-import hMoserImage7 from "@/assets/sold-watches/h-moser-14k-07.png";
-import hMoserImage8 from "@/assets/sold-watches/h-moser-14k-08.png";
-import hMoserImage9 from "@/assets/sold-watches/h-moser-14k-09.png";
-import omegaSeamasterImage1 from "@/assets/sold-watches/omega-seamaster-deville-01.png";
-import omegaSeamasterImage2 from "@/assets/sold-watches/omega-seamaster-deville-02.png";
-import cymaPocketImage1 from "@/assets/sold-watches/cyma-pocket-990-01.png";
-import cymaPocketImage2 from "@/assets/sold-watches/cyma-pocket-990-02.png";
-import cymaPocketImage3 from "@/assets/sold-watches/cyma-pocket-990-03.png";
-import cymaPocketImage4 from "@/assets/sold-watches/cyma-pocket-990-04.png";
-import cymaPocketImage5 from "@/assets/sold-watches/cyma-pocket-990-05.png";
-import cymaPocketImage6 from "@/assets/sold-watches/cyma-pocket-990-06.png";
-import seikoActusImage1 from "@/assets/sold-watches/seiko-5-actus-7019-7350-01.png";
-import seikoActusImage2 from "@/assets/sold-watches/seiko-5-actus-7019-7350-02.png";
-import seikoActusImage3 from "@/assets/sold-watches/seiko-5-actus-7019-7350-03.png";
-import seikoActusImage4 from "@/assets/sold-watches/seiko-5-actus-7019-7350-04.png";
-import seikoActusImage5 from "@/assets/sold-watches/seiko-5-actus-7019-7350-05.png";
-import fiveSilverPocketWatchesImage1 from "@/assets/sold-watches/five-antique-silver-pocket-watches-01.png";
-import fiveSilverPocketWatchesImage2 from "@/assets/sold-watches/five-antique-silver-pocket-watches-02.png";
-import radoFlorenceImage1 from "@/assets/sold-watches/rado-florence-quartz-01.png";
-import radoFlorenceImage2 from "@/assets/sold-watches/rado-florence-quartz-02.png";
-import radoFlorenceImage3 from "@/assets/sold-watches/rado-florence-quartz-03.png";
-import radoFlorenceImage4 from "@/assets/sold-watches/rado-florence-quartz-04.png";
-import omegaPocketSilverImage1 from "@/assets/sold-watches/omega-pocket-silver-0800-01.png";
-import omegaPocketSilverImage2 from "@/assets/sold-watches/omega-pocket-silver-0800-02.png";
-import omegaPocketSilverImage3 from "@/assets/sold-watches/omega-pocket-silver-0800-03.png";
-import omegaPocketSilverImage4 from "@/assets/sold-watches/omega-pocket-silver-0800-04.png";
+import hMoserImage1 from "@/assets/sold-watches/optimized/h-moser-14k-01.jpg";
+import hMoserImage2 from "@/assets/sold-watches/optimized/h-moser-14k-02.jpg";
+import hMoserImage3 from "@/assets/sold-watches/optimized/h-moser-14k-03.jpg";
+import hMoserImage4 from "@/assets/sold-watches/optimized/h-moser-14k-04.jpg";
+import hMoserImage5 from "@/assets/sold-watches/optimized/h-moser-14k-05.jpg";
+import hMoserImage6 from "@/assets/sold-watches/optimized/h-moser-14k-06.jpg";
+import hMoserImage7 from "@/assets/sold-watches/optimized/h-moser-14k-07.jpg";
+import hMoserImage8 from "@/assets/sold-watches/optimized/h-moser-14k-08.jpg";
+import hMoserImage9 from "@/assets/sold-watches/optimized/h-moser-14k-09.jpg";
+import omegaSeamasterImage1 from "@/assets/sold-watches/optimized/omega-seamaster-deville-01.jpg";
+import omegaSeamasterImage2 from "@/assets/sold-watches/optimized/omega-seamaster-deville-02.jpg";
+import cymaPocketImage1 from "@/assets/sold-watches/optimized/cyma-pocket-990-01.jpg";
+import cymaPocketImage2 from "@/assets/sold-watches/optimized/cyma-pocket-990-02.jpg";
+import cymaPocketImage3 from "@/assets/sold-watches/optimized/cyma-pocket-990-03.jpg";
+import cymaPocketImage4 from "@/assets/sold-watches/optimized/cyma-pocket-990-04.jpg";
+import cymaPocketImage5 from "@/assets/sold-watches/optimized/cyma-pocket-990-05.jpg";
+import cymaPocketImage6 from "@/assets/sold-watches/optimized/cyma-pocket-990-06.jpg";
+import seikoActusImage1 from "@/assets/sold-watches/optimized/seiko-5-actus-7019-7350-01.jpg";
+import seikoActusImage2 from "@/assets/sold-watches/optimized/seiko-5-actus-7019-7350-02.jpg";
+import seikoActusImage3 from "@/assets/sold-watches/optimized/seiko-5-actus-7019-7350-03.jpg";
+import seikoActusImage4 from "@/assets/sold-watches/optimized/seiko-5-actus-7019-7350-04.jpg";
+import seikoActusImage5 from "@/assets/sold-watches/optimized/seiko-5-actus-7019-7350-05.jpg";
+import fiveSilverPocketWatchesImage1 from "@/assets/sold-watches/optimized/five-antique-silver-pocket-watches-01.jpg";
+import fiveSilverPocketWatchesImage2 from "@/assets/sold-watches/optimized/five-antique-silver-pocket-watches-02.jpg";
+import radoFlorenceImage1 from "@/assets/sold-watches/optimized/rado-florence-quartz-01.jpg";
+import radoFlorenceImage2 from "@/assets/sold-watches/optimized/rado-florence-quartz-02.jpg";
+import radoFlorenceImage3 from "@/assets/sold-watches/optimized/rado-florence-quartz-03.jpg";
+import radoFlorenceImage4 from "@/assets/sold-watches/optimized/rado-florence-quartz-04.jpg";
+import omegaPocketSilverImage1 from "@/assets/sold-watches/optimized/omega-pocket-silver-0800-01.jpg";
+import omegaPocketSilverImage2 from "@/assets/sold-watches/optimized/omega-pocket-silver-0800-02.jpg";
+import omegaPocketSilverImage3 from "@/assets/sold-watches/optimized/omega-pocket-silver-0800-03.jpg";
+import omegaPocketSilverImage4 from "@/assets/sold-watches/optimized/omega-pocket-silver-0800-04.jpg";
+import certinaMayfairImage from "@/assets/sold-watches/optimized/certina-mayfair-automatic-vintage-dykkerur.jpg";
+import citizenEcoDriveTitaniumImage from "@/assets/sold-watches/optimized/citizen-eco-drive-titanium-wr100.jpg";
+import omegaSeamasterDeVilleAugustImage from "@/assets/sold-watches/optimized/omega-seamaster-de-ville-dameur-2025-08-02.jpg";
+import vintageEternaMaticImage from "@/assets/sold-watches/optimized/vintage-eterna-matic-herreur.jpg";
+import omegaDeVilleJulyImage from "@/assets/sold-watches/optimized/omega-de-ville-dameur-2025-07-20.jpg";
+import certinaDsTitaniumImage from "@/assets/sold-watches/optimized/certina-ds-titanium-100m-armbandsur.jpg";
+import vintageZodiacImage from "@/assets/sold-watches/optimized/vintage-zodiac-armbandsur.jpg";
+import longinesVintageImage from "@/assets/sold-watches/optimized/longines-vintage.jpg";
+import lemaniaDameurVintageImage from "@/assets/sold-watches/optimized/lemania-dameur-vintage.jpg";
+import casioCasiotronChronographImage from "@/assets/sold-watches/optimized/casio-casiotron-chronograph-digital.jpg";
+import casio52qsMintImage from "@/assets/sold-watches/optimized/casio-52qs-14-mint.jpg";
+import casioChronographH101Image from "@/assets/sold-watches/optimized/casio-chronograph-h101-marlin.jpg";
+import omegaLadymaticGoldImage from "@/assets/sold-watches/optimized/omega-ladymatic-80-microns-gold.jpg";
+import vintageZenithDameurImage from "@/assets/sold-watches/optimized/vintage-zenith-dameur.jpg";
+import breitlingPartsImage from "@/assets/sold-watches/optimized/breitling-rem-og-reservedele.jpg";
+import tissotPr50Image from "@/assets/sold-watches/optimized/tissot-1853-pr-50.jpg";
+import orisAntiShockImage from "@/assets/sold-watches/optimized/oris-anti-shock-vintage-ur.jpg";
+import radoJubileImage from "@/assets/sold-watches/optimized/rado-jubile.jpg";
+import omegaLadyAutomaticImage from "@/assets/sold-watches/optimized/omega-lady-automatic-5660083.jpg";
+import junghans17JewelsImage from "@/assets/sold-watches/optimized/junghans-17-jewels-vintage-ur.jpg";
+import omegaSpeedmasterPartsImage from "@/assets/sold-watches/optimized/omega-speedmaster-reservedele.jpg";
+import technosIncablocImage from "@/assets/sold-watches/optimized/technos-incabloc-vintage-ur.jpg";
+import seiko5BlueDialImage from "@/assets/sold-watches/optimized/seiko-5-automatic-herreur-blaa-urskive.jpg";
+import wilsonDeLuxeImage from "@/assets/sold-watches/optimized/wilson-de-luxe-vintage-ur.jpg";
+import sekelVintageImage from "@/assets/sold-watches/optimized/sekel-vintage-ur-swiss-made.jpg";
+import nisusAutomaticImage from "@/assets/sold-watches/optimized/nisus-automatic-herre-ur.jpg";
+import dugenaMaticImage from "@/assets/sold-watches/optimized/dugena-matic-herre-ur-med-dato.jpg";
+import citizenCrystronImage from "@/assets/sold-watches/optimized/citizen-quartz-crystron-vintage.jpg";
+import casioQuartzVintageImage from "@/assets/sold-watches/optimized/casio-quartz-vintage.jpg";
+import tissotSeastarDameurImage from "@/assets/sold-watches/optimized/tissot-seastar-dameur.jpg";
+import certinaClub2000Image from "@/assets/sold-watches/optimized/certina-club-2000-dameur.jpg";
+import vintageTissotHerreurImage from "@/assets/sold-watches/optimized/vintage-tissot-herreur.jpg";
+import vintageCasioAnalogDigitalImage from "@/assets/sold-watches/optimized/vintage-casio-quartz-analog-digital-ur.jpg";
+import tissotPr100DameurImage from "@/assets/sold-watches/optimized/tissot-pr-100-vintage-dameur.jpg";
+import citizenParawaterDameurImage from "@/assets/sold-watches/optimized/citizen-17-jewels-parawater-dameur.jpg";
+import vintageCitizenQuartzDameurImage from "@/assets/sold-watches/optimized/vintage-citizen-quartz-dameur.jpg";
+import royceDameurImage from "@/assets/sold-watches/optimized/royce-dameur-17-jewels-shockprotected.jpg";
+import vintageLancoDameurImage from "@/assets/sold-watches/optimized/vintage-lanco-dameur.jpg";
+import glycineCompressorDameurImage from "@/assets/sold-watches/optimized/glycine-compressor-automatic-dameur.jpg";
+import orisAntiShockDameurImage from "@/assets/sold-watches/optimized/oris-anti-shock-dameur.jpg";
+import vintageTissotStylistImage from "@/assets/sold-watches/optimized/vintage-tissot-stylist-dameur.jpg";
+import vintageTissotDameurImage from "@/assets/sold-watches/optimized/vintage-tissot-dameur.jpg";
+import vostokMens2609Image from "@/assets/sold-watches/optimized/vostok-mens-watch-2609.jpg";
+import vintageTimexDameurSeptImage from "@/assets/sold-watches/optimized/vintage-timex-dameur-2024-09-08.jpg";
+import citizenDameurImage from "@/assets/sold-watches/optimized/citizen-dameur.jpg";
+import emporioArmaniUrImage from "@/assets/sold-watches/optimized/emporio-armani-ur.jpg";
+import vintageTimexDameurAugustImage from "@/assets/sold-watches/optimized/vintage-timex-dameur-2024-08-11.jpg";
+import moraDameurImage from "@/assets/sold-watches/optimized/mora-dameur-17-jewels.jpg";
+import timexVintageImage from "@/assets/sold-watches/optimized/timex-vintage.jpg";
+import emporioArmaniAro145Image from "@/assets/sold-watches/optimized/emporio-armani-aro145.jpg";
+import zenithVintageArmbandsur2026Image from "@/assets/sold-watches/optimized/zenith-vintage-armbandsur-2026.jpg";
+import vintageRevueSamlingImage from "@/assets/sold-watches/optimized/vintage-revue-samling.jpg";
+import fireVintageTimexUreImage from "@/assets/sold-watches/optimized/fire-vintage-timex-ure.jpg";
+import niVintageLommeureImage from "@/assets/sold-watches/optimized/ni-vintage-lommeure-serkisof-marathon-ussr.jpg";
+import samlingVintageUreImage from "@/assets/sold-watches/optimized/samling-vintage-ure-oris-zodiac-certina-silvana.jpg";
+import fireCasioArmbandsureImage from "@/assets/sold-watches/optimized/fire-casio-armbandsure-a158we-mtp-1260-mq-555-mtp-1096.jpg";
 
 export type SoldWatch = {
   id: string;
@@ -39,6 +95,7 @@ export type SoldWatch = {
   soldPrice: number;
   currency: string;
   priceLabel?: string;
+  itemNumber?: string;
   soldDate?: string;
   numberOfBids?: number;
   shortDescription?: string;
@@ -47,6 +104,626 @@ export type SoldWatch = {
 };
 
 export const soldWatches: SoldWatch[] = [
+  {
+    id: "fire-casio-armbandsure-a158we-mtp-1260-mq-555-mtp-1096",
+    title: "Fire Casio armbåndsure: A158WE, MTP-1260, MQ-555, MTP-1096",
+    imageUrl: fireCasioArmbandsureImage,
+    soldPrice: 109,
+    currency: "DKK",
+    itemNumber: "722436699",
+    soldDate: "16 apr. 2026 00:12",
+    shortDescription: "Fire Casio armbåndsure solgt samlet.",
+    traderaUrl:
+      "https://www.tradera.com/da/item/1902/722436699/fire-casio-armbandsure-a158we-mtp-1260-mq-555-mtp-1096",
+  },
+  {
+    id: "samling-vintage-ure-oris-zodiac-certina-silvana",
+    title: "Samling vintage ure - Oris, Zodiac, Certina, Silvana m.fl.",
+    imageUrl: samlingVintageUreImage,
+    soldPrice: 489,
+    currency: "DKK",
+    itemNumber: "725860385",
+    soldDate: "15 apr. 2026 18:33",
+    numberOfBids: 4,
+    shortDescription: "Samling vintage ure solgt samlet.",
+    traderaUrl:
+      "https://www.tradera.com/da/item/1000984/725860385/samling-vintage-ure-oris-zodiac-certina-silvana-m-fl-s%C3%A6lges-samlet",
+  },
+  {
+    id: "ni-vintage-lommeure-serkisof-marathon-ussr",
+    title: "9 stk. vintage lommeure - Serkisof / Marathon / USSR",
+    imageUrl: niVintageLommeureImage,
+    soldPrice: 851,
+    currency: "DKK",
+    itemNumber: "721060810",
+    soldDate: "18 mar. 2026 21:01",
+    numberOfBids: 22,
+    shortDescription: "9 vintage lommeure med lokomotivmotiv.",
+    traderaUrl:
+      "https://www.tradera.com/da/item/191302/721060810/9-stk-vintage-lommeure-serkisof-marathon-ussr-lokomotiv-motiv",
+  },
+  {
+    id: "fire-vintage-timex-ure",
+    title: "Fire Vintage Timex ure",
+    imageUrl: fireVintageTimexUreImage,
+    soldPrice: 97,
+    currency: "DKK",
+    itemNumber: "721062713",
+    soldDate: "18 mar. 2026 18:49",
+    numberOfBids: 1,
+    shortDescription: "Fire vintage Timex ure solgt samlet.",
+    traderaUrl: "https://www.tradera.com/da/item/1000984/721062713/fire-vintage-timex-ure",
+  },
+  {
+    id: "zenith-vintage-armbandsur-2026",
+    title: "Zenith Vintage Armbandsur",
+    imageUrl: zenithVintageArmbandsur2026Image,
+    soldPrice: 310,
+    currency: "DKK",
+    itemNumber: "717509357",
+    soldDate: "25 feb. 2026",
+    shortDescription: "Zenith vintage armbandsur.",
+  },
+  {
+    id: "vintage-revue-samling",
+    title: "Vintage Revue Samling",
+    imageUrl: vintageRevueSamlingImage,
+    soldPrice: 277,
+    currency: "DKK",
+    itemNumber: "714833528",
+    soldDate: "9 feb. 2026",
+    numberOfBids: 23,
+    shortDescription: "Vintage Revue samling.",
+  },
+  {
+    id: "certina-ds-titanium-100m-armbandsur",
+    title: "Certina DS Titanium 100M Armbandsur",
+    imageUrl: certinaDsTitaniumImage,
+    soldPrice: 351,
+    currency: "DKK",
+    itemNumber: "690948865",
+    soldDate: "10 sept. 2025",
+    numberOfBids: 8,
+    shortDescription: "Certina DS Titanium 100M armbandsur.",
+  },
+  {
+    id: "citizen-eco-drive-titanium-wr100",
+    title: "Citizen Eco-Drive Titanium WR100",
+    imageUrl: citizenEcoDriveTitaniumImage,
+    soldPrice: 455,
+    currency: "DKK",
+    itemNumber: "688660157",
+    soldDate: "24 aug. 2025",
+    numberOfBids: 1,
+    shortDescription: "Citizen Eco-Drive Titanium WR100.",
+  },
+  {
+    id: "certina-mayfair-automatic-vintage-dykkerur",
+    title: "Certina Mayfair Automatic Vintage dykkerur",
+    imageUrl: certinaMayfairImage,
+    soldPrice: 720,
+    currency: "DKK",
+    itemNumber: "685554953",
+    soldDate: "13 aug. 2025",
+    numberOfBids: 7,
+    shortDescription: "Certina Mayfair Automatic vintage dykkerur.",
+  },
+  {
+    id: "omega-seamaster-de-ville-dameur-2025-08-02",
+    title: "Omega Seamaster De Ville Dameur",
+    imageUrl: omegaSeamasterDeVilleAugustImage,
+    soldPrice: 850,
+    currency: "DKK",
+    itemNumber: "685411664",
+    soldDate: "2 aug. 2025",
+    numberOfBids: 11,
+    shortDescription: "Omega Seamaster De Ville dameur.",
+  },
+  {
+    id: "vintage-eterna-matic-herreur",
+    title: "Vintage Eterna-Matic Herreur",
+    imageUrl: vintageEternaMaticImage,
+    soldPrice: 722,
+    currency: "DKK",
+    itemNumber: "684303641",
+    soldDate: "27 juli 2025",
+    numberOfBids: 18,
+    shortDescription: "Vintage Eterna-Matic herreur.",
+  },
+  {
+    id: "vintage-zodiac-armbandsur",
+    title: "Vintage Zodiac armbandsur",
+    imageUrl: vintageZodiacImage,
+    soldPrice: 253,
+    currency: "DKK",
+    itemNumber: "683608188",
+    soldDate: "20 juli 2025",
+    numberOfBids: 1,
+    shortDescription: "Vintage Zodiac armbandsur.",
+  },
+  {
+    id: "longines-vintage",
+    title: "Longines Vintage",
+    imageUrl: longinesVintageImage,
+    soldPrice: 1100,
+    currency: "DKK",
+    itemNumber: "683608039",
+    soldDate: "20 juli 2025",
+    numberOfBids: 5,
+    shortDescription: "Longines vintage armbandsur.",
+  },
+  {
+    id: "omega-de-ville-dameur-2025-07-20",
+    title: "Omega De Ville Dameur",
+    imageUrl: omegaDeVilleJulyImage,
+    soldPrice: 557,
+    currency: "DKK",
+    itemNumber: "683608100",
+    soldDate: "20 juli 2025",
+    numberOfBids: 11,
+    shortDescription: "Omega De Ville dameur.",
+  },
+  {
+    id: "citizen-quartz-crystron-vintage",
+    title: "Citizen Quartz Crystron Vintage",
+    imageUrl: citizenCrystronImage,
+    soldPrice: 99,
+    currency: "DKK",
+    itemNumber: "678109981",
+    soldDate: "7 juni 2025",
+    numberOfBids: 1,
+    shortDescription: "Citizen Quartz Crystron vintage.",
+  },
+  {
+    id: "casio-quartz-vintage",
+    title: "Casio Quartz Vintage",
+    imageUrl: casioQuartzVintageImage,
+    soldPrice: 79,
+    currency: "DKK",
+    itemNumber: "678110912",
+    soldDate: "7 juni 2025",
+    numberOfBids: 1,
+    shortDescription: "Casio Quartz vintage.",
+  },
+  {
+    id: "lemania-dameur-vintage",
+    title: "Lemania Dameur - Vintage",
+    imageUrl: lemaniaDameurVintageImage,
+    soldPrice: 179,
+    currency: "DKK",
+    itemNumber: "672270223",
+    soldDate: "27 apr. 2025",
+    numberOfBids: 7,
+    shortDescription: "Lemania dameur - vintage.",
+  },
+  {
+    id: "casio-casiotron-chronograph-digital",
+    title: "Casio Casiotron Chronograph Digital",
+    imageUrl: casioCasiotronChronographImage,
+    soldPrice: 447,
+    currency: "DKK",
+    itemNumber: "672265886",
+    soldDate: "27 apr. 2025",
+    numberOfBids: 1,
+    shortDescription: "Casio Casiotron Chronograph digitalur.",
+  },
+  {
+    id: "casio-52qs-14-mint",
+    title: "Casio 52QS-14 MINT",
+    imageUrl: casio52qsMintImage,
+    soldPrice: 486,
+    currency: "DKK",
+    itemNumber: "672268676",
+    soldDate: "27 apr. 2025",
+    numberOfBids: 10,
+    shortDescription: "Casio 52QS-14 MINT.",
+  },
+  {
+    id: "casio-chronograph-h101-marlin",
+    title: "Casio Chronograph H101 Marlin",
+    imageUrl: casioChronographH101Image,
+    soldPrice: 489,
+    currency: "DKK",
+    itemNumber: "672267413",
+    soldDate: "27 apr. 2025",
+    numberOfBids: 3,
+    shortDescription: "Casio Chronograph H101 Marlin.",
+  },
+  {
+    id: "tissot-seastar-dameur",
+    title: "Tissot Seastar Dameur",
+    imageUrl: tissotSeastarDameurImage,
+    soldPrice: 79,
+    currency: "DKK",
+    itemNumber: "668745966",
+    soldDate: "4 apr. 2025",
+    numberOfBids: 1,
+    shortDescription: "Tissot Seastar dameur.",
+  },
+  {
+    id: "citizen-17-jewels-parawater-dameur",
+    title: "Citizen 17 Jewels Parawater dameur",
+    imageUrl: citizenParawaterDameurImage,
+    soldPrice: 67,
+    currency: "DKK",
+    itemNumber: "668745900",
+    soldDate: "4 apr. 2025",
+    numberOfBids: 0,
+    shortDescription: "Citizen 17 Jewels Parawater dameur.",
+  },
+  {
+    id: "omega-ladymatic-80-microns-gold",
+    title: "Omega Ladymatic 80 microns Gold",
+    imageUrl: omegaLadymaticGoldImage,
+    soldPrice: 385,
+    currency: "DKK",
+    itemNumber: "668746103",
+    soldDate: "4 apr. 2025",
+    numberOfBids: 9,
+    shortDescription: "Omega Ladymatic 80 microns Gold.",
+  },
+  {
+    id: "vintage-zenith-dameur",
+    title: "Vintage Zenith Dameur",
+    imageUrl: vintageZenithDameurImage,
+    soldPrice: 101,
+    currency: "DKK",
+    itemNumber: "664854582",
+    soldDate: "8 mar. 2025",
+    numberOfBids: 4,
+    shortDescription: "Vintage Zenith dameur.",
+  },
+  {
+    id: "certina-club-2000-dameur",
+    title: "Certina Club 2000 Dameur",
+    imageUrl: certinaClub2000Image,
+    soldPrice: 65,
+    currency: "DKK",
+    itemNumber: "664855024",
+    soldDate: "8 mar. 2025",
+    numberOfBids: 1,
+    shortDescription: "Certina Club 2000 dameur.",
+  },
+  {
+    id: "tissot-1853-pr-50",
+    title: "Tissot 1853 PR 50",
+    imageUrl: tissotPr50Image,
+    soldPrice: 186,
+    currency: "DKK",
+    itemNumber: "663980091",
+    soldDate: "3 mar. 2025",
+    numberOfBids: 10,
+    shortDescription: "Tissot 1853 PR 50.",
+  },
+  {
+    id: "vintage-citizen-quartz-dameur",
+    title: "Vintage Citizen Quartz dameur",
+    imageUrl: vintageCitizenQuartzDameurImage,
+    soldPrice: 145,
+    currency: "DKK",
+    itemNumber: "663976973",
+    soldDate: "3 mar. 2025",
+    numberOfBids: 11,
+    shortDescription: "Vintage Citizen Quartz dameur.",
+  },
+  {
+    id: "vintage-tissot-herreur",
+    title: "Vintage Tissot Herreur",
+    imageUrl: vintageTissotHerreurImage,
+    soldPrice: 88,
+    currency: "DKK",
+    itemNumber: "663961279",
+    soldDate: "2 mar. 2025",
+    numberOfBids: 4,
+    shortDescription: "Vintage Tissot herreur.",
+  },
+  {
+    id: "royce-dameur-17-jewels-shockprotected",
+    title: "Royce Dameur 17 Jewels Shockprotected",
+    imageUrl: royceDameurImage,
+    soldPrice: 81,
+    currency: "DKK",
+    itemNumber: "663961216",
+    soldDate: "2 mar. 2025",
+    numberOfBids: 1,
+    shortDescription: "Royce dameur 17 Jewels Shockprotected.",
+  },
+  {
+    id: "breitling-rem-og-reservedele",
+    title: "Breitling Rem & reservedele",
+    imageUrl: breitlingPartsImage,
+    soldPrice: 830,
+    currency: "DKK",
+    itemNumber: "663961050",
+    soldDate: "2 mar. 2025",
+    numberOfBids: 29,
+    shortDescription: "Breitling rem og reservedele.",
+  },
+  {
+    id: "tissot-pr-100-vintage-dameur",
+    title: "Tissot PR 100 Vintage Dameur",
+    imageUrl: tissotPr100DameurImage,
+    soldPrice: 377,
+    currency: "DKK",
+    itemNumber: "661454606",
+    soldDate: "13 feb. 2025",
+    numberOfBids: 18,
+    shortDescription: "Tissot PR 100 vintage dameur.",
+  },
+  {
+    id: "vintage-casio-quartz-analog-digital-ur",
+    title: "Vintage Casio Quartz Analog-Digital Ur",
+    imageUrl: vintageCasioAnalogDigitalImage,
+    soldPrice: 111,
+    currency: "DKK",
+    itemNumber: "661071017",
+    soldDate: "10 feb. 2025",
+    numberOfBids: 6,
+    shortDescription: "Vintage Casio quartz analog-digital ur.",
+  },
+  {
+    id: "vintage-lanco-dameur",
+    title: "Vintage Lanco dameur",
+    imageUrl: vintageLancoDameurImage,
+    soldPrice: 66,
+    currency: "DKK",
+    itemNumber: "657217063",
+    soldDate: "13 jan. 2025",
+    numberOfBids: 2,
+    shortDescription: "Vintage Lanco dameur.",
+  },
+  {
+    id: "oris-anti-shock-vintage-ur",
+    title: "Oris Anti-Shock Vintage Ur",
+    imageUrl: orisAntiShockImage,
+    soldPrice: 135,
+    currency: "DKK",
+    itemNumber: "656086042",
+    soldDate: "3 jan. 2025",
+    numberOfBids: 15,
+    shortDescription: "Oris Anti-Shock vintage ur.",
+  },
+  {
+    id: "glycine-compressor-automatic-dameur",
+    title: "Glycine Compressor Automatic Dameur",
+    imageUrl: glycineCompressorDameurImage,
+    soldPrice: 104,
+    currency: "DKK",
+    itemNumber: "656085697",
+    soldDate: "3 jan. 2025",
+    numberOfBids: 1,
+    shortDescription: "Glycine Compressor Automatic dameur.",
+  },
+  {
+    id: "oris-anti-shock-dameur",
+    title: "Oris Anti-Shock Dameur",
+    imageUrl: orisAntiShockDameurImage,
+    soldPrice: 73,
+    currency: "DKK",
+    itemNumber: "656087986",
+    soldDate: "3 jan. 2025",
+    numberOfBids: 1,
+    shortDescription: "Oris Anti-Shock dameur.",
+  },
+  {
+    id: "vintage-tissot-stylist-dameur",
+    title: "Vintage Tissot Stylist Dameur",
+    imageUrl: vintageTissotStylistImage,
+    soldPrice: 92,
+    currency: "DKK",
+    itemNumber: "656087265",
+    soldDate: "3 jan. 2025",
+    numberOfBids: 3,
+    shortDescription: "Vintage Tissot Stylist dameur.",
+  },
+  {
+    id: "vintage-tissot-dameur",
+    title: "Vintage Tissot dameur",
+    imageUrl: vintageTissotDameurImage,
+    soldPrice: 104,
+    currency: "DKK",
+    itemNumber: "656086901",
+    soldDate: "3 jan. 2025",
+    numberOfBids: 1,
+    shortDescription: "Vintage Tissot dameur.",
+  },
+  {
+    id: "rado-jubile",
+    title: "Rado Jubile",
+    imageUrl: radoJubileImage,
+    soldPrice: 565,
+    currency: "DKK",
+    itemNumber: "651522718",
+    soldDate: "25 nov. 2024",
+    numberOfBids: 24,
+    shortDescription: "Rado Jubile.",
+  },
+  {
+    id: "omega-lady-automatic-5660083",
+    title: "Omega Lady Automatic 5660083",
+    imageUrl: omegaLadyAutomaticImage,
+    soldPrice: 538,
+    currency: "DKK",
+    itemNumber: "648890630",
+    soldDate: "29 okt. 2024",
+    numberOfBids: 17,
+    shortDescription: "Omega Lady Automatic 5660083.",
+  },
+  {
+    id: "junghans-17-jewels-vintage-ur",
+    title: "Junghans 17 Jewels Vintage Ur",
+    imageUrl: junghans17JewelsImage,
+    soldPrice: 194,
+    currency: "DKK",
+    itemNumber: "648735793",
+    soldDate: "29 okt. 2024",
+    numberOfBids: 2,
+    shortDescription: "Junghans 17 Jewels vintage ur.",
+  },
+  {
+    id: "omega-speedmaster-reservedele",
+    title: "Omega Speedmaster Reservedele",
+    imageUrl: omegaSpeedmasterPartsImage,
+    soldPrice: 1436,
+    currency: "DKK",
+    itemNumber: "648080358",
+    soldDate: "22 okt. 2024",
+    numberOfBids: 36,
+    shortDescription: "Omega Speedmaster reservedele.",
+  },
+  {
+    id: "technos-incabloc-vintage-ur",
+    title: "Technos Incabloc Vintage Ur",
+    imageUrl: technosIncablocImage,
+    soldPrice: 119,
+    currency: "DKK",
+    itemNumber: "643328493",
+    soldDate: "8 sept. 2024",
+    numberOfBids: 3,
+    shortDescription: "Technos Incabloc vintage ur.",
+  },
+  {
+    id: "vostok-mens-watch-2609",
+    title: "Vostok Men's Watch 2609",
+    imageUrl: vostokMens2609Image,
+    soldPrice: 103,
+    currency: "DKK",
+    itemNumber: "643328415",
+    soldDate: "8 sept. 2024",
+    numberOfBids: 1,
+    shortDescription: "Vostok Men's Watch 2609.",
+  },
+  {
+    id: "vintage-timex-dameur-2024-09-08",
+    title: "Vintage Timex dameur",
+    imageUrl: vintageTimexDameurSeptImage,
+    soldPrice: 62,
+    currency: "DKK",
+    itemNumber: "643328051",
+    soldDate: "8 sept. 2024",
+    numberOfBids: 1,
+    shortDescription: "Vintage Timex dameur.",
+  },
+  {
+    id: "citizen-dameur",
+    title: "Citizen Dameur",
+    imageUrl: citizenDameurImage,
+    soldPrice: 62,
+    currency: "DKK",
+    itemNumber: "643327643",
+    soldDate: "8 sept. 2024",
+    numberOfBids: 1,
+    shortDescription: "Citizen dameur.",
+  },
+  {
+    id: "seiko-5-automatic-herreur-blaa-urskive",
+    title: "Seiko 5 Automatic Herre ur med blå urskive",
+    imageUrl: seiko5BlueDialImage,
+    soldPrice: 369,
+    currency: "DKK",
+    itemNumber: "641719449",
+    soldDate: "23 aug. 2024",
+    numberOfBids: 11,
+    shortDescription: "Seiko 5 Automatic herreur med blå urskive.",
+  },
+  {
+    id: "emporio-armani-ur",
+    title: "Emporio Armani Ur",
+    imageUrl: emporioArmaniUrImage,
+    soldPrice: 172,
+    currency: "DKK",
+    itemNumber: "640711048",
+    soldDate: "15 aug. 2024",
+    numberOfBids: 3,
+    shortDescription: "Emporio Armani ur.",
+  },
+  {
+    id: "emporio-armani-aro145",
+    title: "Emporio Armani ARO145",
+    imageUrl: emporioArmaniAro145Image,
+    soldPrice: 209,
+    currency: "DKK",
+    itemNumber: "640711127",
+    soldDate: "15 aug. 2024",
+    numberOfBids: 1,
+    shortDescription: "Emporio Armani ARO145.",
+  },
+  {
+    id: "vintage-timex-dameur-2024-08-11",
+    title: "Vintage Timex dameur",
+    imageUrl: vintageTimexDameurAugustImage,
+    soldPrice: 63,
+    currency: "DKK",
+    itemNumber: "640343394",
+    soldDate: "11 aug. 2024",
+    numberOfBids: 1,
+    shortDescription: "Vintage Timex dameur.",
+  },
+  {
+    id: "wilson-de-luxe-vintage-ur",
+    title: "Wilson De Luxe Vintage Ur",
+    imageUrl: wilsonDeLuxeImage,
+    soldPrice: 158,
+    currency: "DKK",
+    itemNumber: "640091034",
+    soldDate: "9 aug. 2024",
+    numberOfBids: 1,
+    shortDescription: "Wilson De Luxe vintage ur.",
+  },
+  {
+    id: "mora-dameur-17-jewels",
+    title: "Mora Dameur 17 Jewels",
+    imageUrl: moraDameurImage,
+    soldPrice: 84,
+    currency: "DKK",
+    itemNumber: "640090518",
+    soldDate: "9 aug. 2024",
+    numberOfBids: 1,
+    shortDescription: "Mora dameur 17 Jewels.",
+  },
+  {
+    id: "timex-vintage",
+    title: "Timex vintage",
+    imageUrl: timexVintageImage,
+    soldPrice: 53,
+    currency: "DKK",
+    itemNumber: "640089196",
+    soldDate: "9 aug. 2024",
+    numberOfBids: 1,
+    shortDescription: "Timex vintage.",
+  },
+  {
+    id: "sekel-vintage-ur-swiss-made",
+    title: "Sekel Vintage ur - Swiss made",
+    imageUrl: sekelVintageImage,
+    soldPrice: 105,
+    currency: "DKK",
+    soldDate: "9 aug. 2024",
+    numberOfBids: 1,
+    shortDescription: "Sekel vintage ur - Swiss made.",
+  },
+  {
+    id: "nisus-automatic-herre-ur",
+    title: "Nisus Automatic Herre ur",
+    imageUrl: nisusAutomaticImage,
+    soldPrice: 159,
+    currency: "DKK",
+    itemNumber: "639398211",
+    soldDate: "1 aug. 2024",
+    numberOfBids: 1,
+    shortDescription: "Nisus Automatic herreur.",
+  },
+  {
+    id: "dugena-matic-herre-ur-med-dato",
+    title: "Dugena-Matic Herre ur med dato",
+    imageUrl: dugenaMaticImage,
+    soldPrice: 155,
+    currency: "DKK",
+    itemNumber: "637720652",
+    soldDate: "11 juli 2024",
+    numberOfBids: 1,
+    shortDescription: "Dugena-Matic herreur med dato.",
+  },
   {
     id: "seiko-5-actus-7019-7350-groen-skive",
     title: "Vintage Seiko 5 Actus 7019-7350 - Grøn skive",

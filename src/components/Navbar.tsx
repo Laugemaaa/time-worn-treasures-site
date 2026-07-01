@@ -13,13 +13,13 @@ export function Navbar() {
   const { lang, setLang, t } = useLanguage();
 
   const navLinks = [
-    { label: "Hjem", to: "/" },
-    { label: "Kollektion", to: "/#collection" },
-    { label: "Om", to: "/#philosophy" },
-    { label: "Solgte ure", to: "/solgte-ure" },
+    { label: t("nav.home"), to: "/" },
+    { label: t("nav.collection"), to: "/#collection" },
+    { label: t("nav.about"), to: "/#philosophy" },
+    { label: t("nav.soldWatches"), to: "/solgte-ure" },
   ];
 
-  const instagramUrl = "https://www.instagram.com/granpasheritage/";
+  const instagramUrl = "https://www.instagram.com/grandpasheritage/";
 
   const handleNavClick = (to: string) => {
     setOpen(false);
