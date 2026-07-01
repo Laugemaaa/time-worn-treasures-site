@@ -140,7 +140,7 @@ const en: Dict = {
   "sold.archive": "Archive",
   "sold.title": "Sold watches",
   "sold.description":
-    "An archive of previously sold vintage watches from GrandpasHeritage, with photos, sale prices, and links to completed Tradera listings.",
+    "An archive of previously sold vintage watches from GrandpasHeritage. Kept for transparency, reference, and to show the kinds of pieces that have passed through the collection.",
   "sold.emptyTitle": "Sold watches coming soon",
   "sold.emptyDescription":
     "Previous sales can be added here with an image, sale price, and link to the completed Tradera listing.",
@@ -222,7 +222,7 @@ const da: Dict = {
   "sold.archive": "Arkiv",
   "sold.title": "Solgte ure",
   "sold.description":
-    "Et arkiv over tidligere solgte vintage-ure fra GrandpasHeritage med billeder, salgspriser og links til de afsluttede Tradera-annoncer.",
+    "Et arkiv over tidligere solgte vintage-ure fra GrandpasHeritage. Beholdt for gennemsigtighed, reference og for at vise de typer ure, der har været igennem samlingen.",
   "sold.emptyTitle": "Solgte ure kommer snart",
   "sold.emptyDescription":
     "Tidligere salg kan tilføjes her med billede, salgspris og link til den afsluttede Tradera-annonce.",
@@ -304,7 +304,7 @@ const sv: Dict = {
   "sold.archive": "Arkiv",
   "sold.title": "Sålda klockor",
   "sold.description":
-    "Ett arkiv över tidigare sålda vintageklockor från GrandpasHeritage med bilder, slutpriser och länkar till avslutade Tradera-annonser.",
+    "Ett arkiv över tidigare sålda vintageklockor från GrandpasHeritage. Sparat för transparens, referens och för att visa vilka typer av klockor som har passerat genom kollektionen.",
   "sold.emptyTitle": "Sålda klockor kommer snart",
   "sold.emptyDescription":
     "Tidigare försäljningar kan läggas till här med bild, slutpris och länk till den avslutade Tradera-annonsen.",
@@ -386,7 +386,7 @@ const no: Dict = {
   "sold.archive": "Arkiv",
   "sold.title": "Solgte klokker",
   "sold.description":
-    "Et arkiv over tidligere solgte vintageklokker fra GrandpasHeritage med bilder, salgspriser og lenker til avsluttede Tradera-annonser.",
+    "Et arkiv over tidligere solgte vintageklokker fra GrandpasHeritage. Beholdt for åpenhet, referanse og for å vise hvilke typer klokker som har vært innom kolleksjonen.",
   "sold.emptyTitle": "Solgte klokker kommer snart",
   "sold.emptyDescription":
     "Tidligere salg kan legges til her med bilde, salgspris og lenke til den avsluttede Tradera-annonsen.",
