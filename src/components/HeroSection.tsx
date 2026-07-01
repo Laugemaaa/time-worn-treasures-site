@@ -14,7 +14,7 @@ export function HeroSection() {
 
   return (
     <section className="relative overflow-hidden bg-[#0f1412]">
-      <div className="relative min-h-[620px] md:min-h-[calc(100vh-116px)]">
+      <div className="relative min-h-[620px] md:min-h-[calc(100svh-96px)]">
         <img
           src={heroWatchLeather}
           alt="Gold vintage watch on warm brown leather"
@@ -28,7 +28,7 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,20,18,0.8)_0%,rgba(15,20,18,0.46)_38%,rgba(15,20,18,0.18)_66%,rgba(15,20,18,0.58)_100%)]" />
         <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-black/55 to-transparent" />
 
-        <div className="relative z-10 mx-auto flex min-h-[620px] max-w-[1240px] items-end px-6 pb-16 pt-24 md:min-h-[calc(100vh-116px)] md:pb-24">
+        <div className="relative z-10 mx-auto flex min-h-[620px] max-w-[1240px] items-end px-6 pb-16 pt-24 md:min-h-[calc(100svh-96px)] md:pb-24">
           <div className="max-w-2xl text-left text-white">
             <h1 className="font-serif text-5xl font-medium leading-[0.98] tracking-[-0.035em] text-white md:text-7xl lg:text-8xl">
               {t("hero.title")}
