@@ -44,7 +44,7 @@ export function Navbar() {
         {t("skip.toContent")}
       </a>
       <header className="sticky top-0 z-50 border-b border-[#3a2a1e]/80 bg-[linear-gradient(180deg,#2b2118_0%,#1d140f_74%,#100c09_100%)] shadow-[0_22px_50px_-28px_rgba(5,4,3,0.95)] after:pointer-events-none after:absolute after:inset-x-0 after:bottom-[-28px] after:h-7 after:bg-gradient-to-b after:from-[#100c09] after:to-transparent">
-        <div className="relative mx-auto h-[96px] max-w-[1920px] px-8 font-sans lg:px-11">
+        <div className="relative mx-auto h-[84px] max-w-[1920px] px-8 font-sans lg:px-11">
           <nav
             className="absolute left-8 top-1/2 hidden max-w-[calc(50%-175px)] -translate-y-1/2 items-center gap-12 overflow-hidden lg:left-14 lg:flex xl:gap-14"
             aria-label="Main navigation"
@@ -70,13 +70,13 @@ export function Navbar() {
             <img
               src={grandpasHeritageLogo}
               alt="Grandpa's Heritage"
-              className="h-[72px] w-auto max-w-[min(720px,calc(100vw-112px))] origin-center select-none object-contain transition-[filter,transform] duration-300 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover:scale-[1.025] motion-safe:group-hover:-translate-y-0.5 group-hover:drop-shadow-[0_0_18px_rgba(234,220,198,0.32)]"
+              className="h-[62px] w-auto max-w-[min(640px,calc(100vw-112px))] origin-center select-none object-contain transition-[filter,transform] duration-300 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover:scale-[1.025] motion-safe:group-hover:-translate-y-0.5 group-hover:drop-shadow-[0_0_18px_rgba(234,220,198,0.32)]"
               decoding="async"
             />
           </Link>
 
           <div className="absolute right-8 top-1/2 hidden -translate-y-1/2 items-center justify-end gap-3 lg:right-14 lg:flex">
-            <label className="inline-flex h-[32px] items-center gap-2 rounded-[7px] border border-[#d8c8aa]/35 bg-[#eadcc6]/5 px-2.5 font-serif text-[14px] font-semibold leading-none text-[#d8c8aa] focus-within:ring-2 focus-within:ring-[#d8c8aa] focus-within:ring-offset-2 focus-within:ring-offset-[#1d140f]">
+            <label className="inline-flex h-[30px] items-center gap-2 rounded-[7px] border border-[#d8c8aa]/35 bg-[#eadcc6]/5 px-2.5 font-serif text-[14px] font-semibold leading-none text-[#d8c8aa] focus-within:ring-2 focus-within:ring-[#d8c8aa] focus-within:ring-offset-2 focus-within:ring-offset-[#1d140f]">
               <Globe aria-hidden className="h-3.5 w-3.5" />
               <span className="sr-only">{t("footer.language")}</span>
               <select
@@ -98,12 +98,12 @@ export function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram (opens in new tab)"
-              className="inline-flex h-[42px] items-center gap-2 rounded-[12px] bg-[#eadcc6] px-4 font-serif text-[18px] font-semibold leading-none text-[#1d140f] transition-colors duration-150 hover:bg-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1d140f]"
+              className="inline-flex h-[38px] items-center gap-2 rounded-[11px] bg-[#eadcc6] px-4 font-serif text-[17px] font-semibold leading-none text-[#1d140f] transition-colors duration-150 hover:bg-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1d140f]"
             >
               <Instagram aria-hidden className="h-4 w-4" />
               <span>Instagram</span>
             </a>
-            <TraderaButton size="sm" className="h-[42px] px-5" />
+            <TraderaButton size="sm" className="h-[38px] px-5 text-[17px]" />
           </div>
 
           {/* Mobile hamburger */}
