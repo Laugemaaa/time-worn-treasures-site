@@ -64,13 +64,13 @@ export function Navbar() {
           <Link
             to="/"
             onClick={handleLogoClick}
-            className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center text-[#eadcc6] leading-[24px] transition-colors duration-150 hover:text-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1d140f]"
+            className="group absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center text-[#eadcc6] leading-[24px] transition-colors duration-150 hover:text-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1d140f]"
             aria-label="GrandpasHeritage home"
           >
             <img
               src={grandpasHeritageLogo}
               alt="Grandpa's Heritage"
-              className="h-[72px] w-auto max-w-[min(720px,calc(100vw-112px))] object-contain brightness-0 invert sepia saturate-[0.55] hue-rotate-[350deg]"
+              className="h-[72px] w-auto max-w-[min(720px,calc(100vw-112px))] origin-center object-contain brightness-0 invert sepia saturate-[0.55] hue-rotate-[350deg] transition-[filter,transform] duration-300 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover:scale-[1.025] motion-safe:group-hover:-translate-y-0.5 group-hover:drop-shadow-[0_0_18px_rgba(234,220,198,0.32)]"
               decoding="async"
             />
           </Link>

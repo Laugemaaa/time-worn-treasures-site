@@ -35,6 +35,21 @@ export type TranslationKey =
   | "founder.tagVintage"
   | "founder.tagCharacter"
   | "founder.tagProvenance"
+  | "founder.tag1"
+  | "founder.tag2"
+  | "founder.tag3"
+  | "curation.eyebrow"
+  | "curation.title"
+  | "curation.p1"
+  | "curation.p2"
+  | "curation.p3"
+  | "curation.p4"
+  | "curation.tag1"
+  | "curation.tag2"
+  | "curation.tag3"
+  | "curation.ctaEyebrow"
+  | "curation.ctaTitle"
+  | "curation.ctaLink"
   | "collection.title"
   | "collection.empty"
   | "collection.error"
@@ -75,6 +90,8 @@ export type TranslationKey =
   | "sold.itemNumber"
   | "sold.filterByBrand"
   | "sold.allBrands"
+  | "sold.categoryCount"
+  | "sold.chooseBrand"
   | "sold.showingCount";
 
 type Dict = Record<TranslationKey, string>;
@@ -113,7 +130,26 @@ const en: Dict = {
   "founder.tagVintage": "Vintage",
   "founder.tagCharacter": "Character",
   "founder.tagProvenance": "Provenance",
-  "collection.title": "The Collection",
+  "founder.tag1": "Vintage",
+  "founder.tag2": "Character",
+  "founder.tag3": "Provenance",
+  "curation.eyebrow": "The selection",
+  "curation.title": "Chosen for honesty, not perfection",
+  "curation.p1":
+    "Every piece is selected with the same question in mind: does it have a reason to exist in the collection? A good case shape, an interesting dial, a reliable quartz movement, a strap with the right character, a repair project, or simply the kind of quiet charm that makes you look twice.",
+  "curation.p2":
+    "We do not try to erase age or hide condition. Instead, each piece is presented with the details that matter: the marks, the wear, the patina, known service notes, defects, missing parts, and the small imperfections that help tell the truth of the piece.",
+  "curation.p3":
+    "The goal is to make buying vintage feel calm and transparent. Photos, descriptions, and condition notes are meant to give a clear sense of what the watch is, not a polished version of what it once was.",
+  "curation.p4":
+    "When a watch leaves Grandpa's Heritage, it does not disappear from the story. The sold watches archive is kept as a quiet record of the pieces that have passed through the collection - useful for reference, transparency, and a sense of the kind of watches we choose.",
+  "curation.tag1": "Honesty",
+  "curation.tag2": "Archive",
+  "curation.tag3": "Reference",
+  "curation.ctaEyebrow": "Archive",
+  "curation.ctaTitle": "See sold watches here",
+  "curation.ctaLink": "Open archive",
+  "collection.title": "Active auctions",
   "collection.empty": "No watches available at the moment. Check back soon.",
   "collection.error": "We couldn't load the collection right now. Please try again.",
   "collection.retry": "Try again",
@@ -158,6 +194,8 @@ const en: Dict = {
   "sold.itemNumber": "Item no.",
   "sold.filterByBrand": "Filter by brand",
   "sold.allBrands": "All brands",
+  "sold.categoryCount": "{count} sold",
+  "sold.chooseBrand": "Choose a brand to see previously sold watches from the archive.",
   "sold.showingCount": "Showing {count} of {total} sold watches",
 };
 
@@ -195,7 +233,26 @@ const da: Dict = {
   "founder.tagVintage": "Vintage",
   "founder.tagCharacter": "Karakter",
   "founder.tagProvenance": "Proveniens",
-  "collection.title": "Samlingen",
+  "founder.tag1": "Vintage",
+  "founder.tag2": "Karakter",
+  "founder.tag3": "Proveniens",
+  "curation.eyebrow": "Udvælgelsen",
+  "curation.title": "Udvalgt for ærlighed, ikke perfektion",
+  "curation.p1":
+    "Hvert stykke bliver valgt med det samme spørgsmål i tankerne: har det en grund til at høre til i samlingen? En god kasseform, en interessant skive, et pålideligt quartz-værk, en rem med den rette karakter, et reparationsprojekt, eller bare den stille charme, der får en til at kigge igen.",
+  "curation.p2":
+    "Vi prøver ikke at slette alder eller skjule stand. I stedet bliver hvert stykke vist med de detaljer, der betyder noget: mærker, slid, patina, kendt servicehistorik, defekter, manglende dele og de små ufuldkommenheder, der fortæller sandheden om stykket.",
+  "curation.p3":
+    "Målet er at gøre det roligt og gennemsigtigt at købe vintage. Billeder, beskrivelser og standnoter skal give et klart indtryk af, hvad uret er - ikke en poleret version af hvad det engang var.",
+  "curation.p4":
+    "Når et ur forlader Grandpa's Heritage, forsvinder det ikke fra historien. Arkivet med solgte ure bevares som en rolig oversigt over de ure, der har været igennem samlingen - nyttigt som reference, gennemsigtighed og som et billede af den slags ure, vi udvælger.",
+  "curation.tag1": "Ærlighed",
+  "curation.tag2": "Arkiv",
+  "curation.tag3": "Reference",
+  "curation.ctaEyebrow": "Arkiv",
+  "curation.ctaTitle": "Se solgte ure her",
+  "curation.ctaLink": "Åbn arkiv",
+  "collection.title": "Aktive auktioner",
   "collection.empty": "Ingen ure tilgængelige lige nu. Kig forbi snart.",
   "collection.error": "Vi kunne ikke indlæse samlingen lige nu. Prøv igen.",
   "collection.retry": "Prøv igen",
@@ -240,6 +297,8 @@ const da: Dict = {
   "sold.itemNumber": "Varenr.",
   "sold.filterByBrand": "Filtrer efter mærke",
   "sold.allBrands": "Alle mærker",
+  "sold.categoryCount": "{count} solgt",
+  "sold.chooseBrand": "Vælg et mærke for at se tidligere solgte ure fra arkivet.",
   "sold.showingCount": "Viser {count} af {total} solgte ure",
 };
 
@@ -277,7 +336,26 @@ const sv: Dict = {
   "founder.tagVintage": "Vintage",
   "founder.tagCharacter": "Karaktär",
   "founder.tagProvenance": "Härkomst",
-  "collection.title": "Kollektionen",
+  "founder.tag1": "Vintage",
+  "founder.tag2": "Karaktär",
+  "founder.tag3": "Härkomst",
+  "curation.eyebrow": "Urvalet",
+  "curation.title": "Valt för ärlighet, inte perfektion",
+  "curation.p1":
+    "Varje föremål väljs med samma fråga i åtanke: har det en anledning att finnas i samlingen? En bra boettform, en intressant urtavla, ett pålitligt quartzverk, ett band med rätt karaktär, ett reparationsprojekt, eller bara den stilla charm som får en att titta en gång till.",
+  "curation.p2":
+    "Vi försöker inte sudda ut ålder eller dölja skick. I stället visas varje föremål med detaljerna som betyder något: märken, slitage, patina, känd servicehistorik, defekter, saknade delar och de små ofullkomligheter som berättar sanningen om föremålet.",
+  "curation.p3":
+    "Målet är att göra vintageköp lugna och transparenta. Bilder, beskrivningar och skicknoter ska ge en tydlig känsla av vad klockan är - inte en polerad version av vad den en gång var.",
+  "curation.p4":
+    "När en klocka lämnar Grandpa's Heritage försvinner den inte ur berättelsen. Arkivet med sålda klockor sparas som en stillsam översikt över de klockor som har passerat genom kollektionen - användbart för referens, transparens och en känsla för vilken typ av klockor vi väljer.",
+  "curation.tag1": "Ärlighet",
+  "curation.tag2": "Arkiv",
+  "curation.tag3": "Referens",
+  "curation.ctaEyebrow": "Arkiv",
+  "curation.ctaTitle": "Se sålda klockor här",
+  "curation.ctaLink": "Öppna arkiv",
+  "collection.title": "Aktiva auktioner",
   "collection.empty": "Inga klockor tillgängliga just nu. Kom tillbaka snart.",
   "collection.error": "Vi kunde inte ladda kollektionen just nu. Försök igen.",
   "collection.retry": "Försök igen",
@@ -322,6 +400,8 @@ const sv: Dict = {
   "sold.itemNumber": "Varunr.",
   "sold.filterByBrand": "Filtrera efter märke",
   "sold.allBrands": "Alla märken",
+  "sold.categoryCount": "{count} sålda",
+  "sold.chooseBrand": "Välj ett märke för att se tidigare sålda klockor från arkivet.",
   "sold.showingCount": "Visar {count} av {total} sålda klockor",
 };
 
@@ -359,7 +439,26 @@ const no: Dict = {
   "founder.tagVintage": "Vintage",
   "founder.tagCharacter": "Karakter",
   "founder.tagProvenance": "Opprinnelse",
-  "collection.title": "Kolleksjonen",
+  "founder.tag1": "Vintage",
+  "founder.tag2": "Karakter",
+  "founder.tag3": "Opprinnelse",
+  "curation.eyebrow": "Utvalget",
+  "curation.title": "Valgt for ærlighet, ikke perfeksjon",
+  "curation.p1":
+    "Hvert objekt velges med det samme spørsmålet i tankene: har det en grunn til å høre hjemme i samlingen? En god kasseform, en interessant skive, et pålitelig quartzverk, en rem med riktig karakter, et reparasjonsprosjekt, eller bare den stille sjarmen som får deg til å se en gang til.",
+  "curation.p2":
+    "Vi prøver ikke å slette alder eller skjule tilstand. I stedet vises hvert objekt med detaljene som betyr noe: merker, slitasje, patina, kjent servicehistorikk, defekter, manglende deler og de små ufullkommenhetene som forteller sannheten om objektet.",
+  "curation.p3":
+    "Målet er å gjøre vintagekjøp rolige og transparente. Bilder, beskrivelser og tilstandsnotater skal gi en tydelig følelse av hva klokken er - ikke en polert versjon av hva den en gang var.",
+  "curation.p4":
+    "Når en klokke forlater Grandpa's Heritage, forsvinner den ikke fra historien. Arkivet med solgte klokker bevares som en rolig oversikt over klokkene som har vært innom kolleksjonen - nyttig som referanse, åpenhet og som et bilde av hva slags klokker vi velger.",
+  "curation.tag1": "Ærlighet",
+  "curation.tag2": "Arkiv",
+  "curation.tag3": "Referanse",
+  "curation.ctaEyebrow": "Arkiv",
+  "curation.ctaTitle": "Se solgte klokker her",
+  "curation.ctaLink": "Åpne arkiv",
+  "collection.title": "Aktive auksjoner",
   "collection.empty": "Ingen klokker tilgjengelig akkurat nå. Kom tilbake snart.",
   "collection.error": "Vi kunne ikke laste kolleksjonen akkurat nå. Prøv igjen.",
   "collection.retry": "Prøv igjen",
@@ -404,6 +503,8 @@ const no: Dict = {
   "sold.itemNumber": "Varenr.",
   "sold.filterByBrand": "Filtrer etter merke",
   "sold.allBrands": "Alle merker",
+  "sold.categoryCount": "{count} solgt",
+  "sold.chooseBrand": "Velg et merke for å se tidligere solgte klokker fra arkivet.",
   "sold.showingCount": "Viser {count} av {total} solgte klokker",
 };
 

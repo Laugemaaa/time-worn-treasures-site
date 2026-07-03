@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 const SITE_URL = "https://grandpasheritage.com";
 const SITE_NAME = "GrandpasHeritage";
-const DEFAULT_IMAGE = `${SITE_URL}/apple-touch-icon.png?v=gh-20260611`;
+const DEFAULT_IMAGE = `${SITE_URL}/site-logo.png?v=gh-20260703`;
 
 type SEOProps = {
   title: string;

@@ -160,6 +160,42 @@
   }
 }
 
+@keyframes sold-filter-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes page-transition-enter {
+  from {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+.page-transition {
+  animation: page-transition-enter 360ms var(--motion-ease-enter) both;
+  will-change: opacity, filter, transform;
+}
+
+.sold-category-enter,
+.sold-card-enter {
+  animation: sold-filter-enter 420ms var(--motion-ease-enter) both;
+}
+
 .testimonials-marquee {
   animation: testimonials-marquee 58s linear infinite;
   animation-play-state: running !important;

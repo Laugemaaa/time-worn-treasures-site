@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { CalendarDays, Filter, Gavel, PackageCheck } from "lucide-react";
+import { CalendarDays, Gavel, PackageCheck } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { SEO } from "@/components/SEO";
@@ -69,18 +69,21 @@ function getSoldWatchBrand(watch: SoldWatch): string {
 
 export default function SoldWatches() {
   const { t } = useLanguage();
-  const [selectedBrand, setSelectedBrand] = useState<string>("all");
+  const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
   const brandOptions = useMemo(
     () =>
-      FEATURED_FILTER_BRANDS.filter((brand) =>
-        soldWatches.some((watch) => getSoldWatchBrand(watch) === brand),
-      ),
+      FEATURED_FILTER_BRANDS.map((brand) => ({
+        name: brand,
+        count: soldWatches.filter((watch) => getSoldWatchBrand(watch) === brand).length,
+      })).filter((brand) => brand.count > 0),
     [],
   );
   const visibleWatches = useMemo(
     () => {
       const filteredWatches =
-        selectedBrand === "all"
+        selectedBrand === null
+          ? []
+          : selectedBrand === "all"
           ? soldWatches
           : soldWatches.filter((watch) => getSoldWatchBrand(watch) === selectedBrand);
 
@@ -111,50 +114,53 @@ export default function SoldWatches() {
             </p>
           </div>
 
-          <div className="mt-10 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-            <div className="text-sm text-muted-foreground">
-              {t("sold.showingCount", { count: visibleWatches.length, total: soldWatches.length })}
+          <div className="mt-12">
+            <div className="mb-5 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">
+                  {t("sold.filterByBrand")}
+                </p>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  {selectedBrand === null
+                    ? t("sold.chooseBrand")
+                    : t("sold.showingCount", { count: visibleWatches.length, total: soldWatches.length })}
+                </p>
+              </div>
             </div>
 
-            <div className="w-full rounded-lg border border-border/80 bg-card/70 p-3 shadow-[0_18px_45px_-34px_rgba(29,20,15,0.75)] lg:max-w-[520px]">
-              <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                <Filter className="h-3.5 w-3.5" />
-                {t("sold.filterByBrand")}
-              </div>
-              <div className="flex flex-wrap gap-2">
-                <button
-                  type="button"
-                  onClick={() => setSelectedBrand("all")}
-                  className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors duration-150 ${
-                    selectedBrand === "all"
-                      ? "border-primary bg-primary text-primary-foreground"
-                      : "border-border/80 bg-background/40 text-muted-foreground hover:border-primary/40 hover:text-foreground"
-                  }`}
-                >
-                  {t("sold.allBrands")}
-                </button>
-                {brandOptions.map((brand) => (
-                  <button
-                    key={brand}
-                    type="button"
-                    onClick={() => setSelectedBrand(brand)}
-                    className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors duration-150 ${
-                      selectedBrand === brand
-                        ? "border-primary bg-primary text-primary-foreground"
-                        : "border-border/80 bg-background/40 text-muted-foreground hover:border-primary/40 hover:text-foreground"
-                    }`}
-                  >
-                    {brand}
-                  </button>
-                ))}
-              </div>
+            <div className="grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+                <BrandCategoryButton
+                label={t("sold.allBrands")}
+                active={selectedBrand === "all"}
+                onClick={() => setSelectedBrand((current) => (current === "all" ? null : "all"))}
+                index={0}
+                countLabel={t("sold.categoryCount", { count: soldWatches.length })}
+              />
+              {brandOptions.map((brand, index) => (
+                <BrandCategoryButton
+                  key={brand.name}
+                  label={brand.name}
+                  active={selectedBrand === brand.name}
+                  onClick={() =>
+                    setSelectedBrand((current) => (current === brand.name ? null : brand.name))
+                  }
+                  index={index + 1}
+                  countLabel={t("sold.categoryCount", { count: brand.count })}
+                />
+              ))}
             </div>
           </div>
 
-          {soldWatches.length > 0 ? (
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-              {visibleWatches.map((watch) => (
-                <SoldWatchCard key={watch.id} watch={watch} />
+          {selectedBrand === null ? (
+            <div className="mt-12 rounded-lg border border-border/80 bg-card/55 px-6 py-12 text-center shadow-[0_18px_45px_-34px_rgba(29,20,15,0.75)]">
+              <p className="mx-auto max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
+                {t("sold.chooseBrand")}
+              </p>
+            </div>
+          ) : soldWatches.length > 0 ? (
+            <div key={selectedBrand} className="mt-10 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+              {visibleWatches.map((watch, index) => (
+                <SoldWatchCard key={watch.id} watch={watch} index={index} />
               ))}
             </div>
           ) : (
@@ -182,11 +188,50 @@ export default function SoldWatches() {
   );
 }
 
-function SoldWatchCard({ watch }: { watch: SoldWatch }) {
+function BrandCategoryButton({
+  active,
+  countLabel,
+  index,
+  label,
+  onClick,
+}: {
+  active: boolean;
+  countLabel: string;
+  index: number;
+  label: string;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={[
+        "sold-category-enter group flex min-h-[78px] items-center justify-between rounded-lg border px-4 py-3 text-left transition duration-200",
+        active
+          ? "border-primary bg-primary text-primary-foreground shadow-[0_18px_45px_-34px_rgba(29,20,15,0.95)]"
+          : "border-border/80 bg-card/65 text-foreground hover:-translate-y-0.5 hover:border-primary/40 hover:bg-card",
+      ].join(" ")}
+      style={{ animationDelay: `${Math.min(index * 45, 450)}ms` }}
+    >
+      <span>
+        <span className="block font-serif text-lg font-semibold leading-none">{label}</span>
+        <span className={`mt-2 block text-[11px] uppercase tracking-[0.18em] ${active ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
+          {countLabel}
+        </span>
+      </span>
+      <span className={`h-2 w-2 rounded-full transition-colors ${active ? "bg-primary-foreground" : "bg-primary/40 group-hover:bg-primary"}`} />
+    </button>
+  );
+}
+
+function SoldWatchCard({ watch, index }: { watch: SoldWatch; index: number }) {
   const { lang, t } = useLanguage();
 
   return (
-    <article className="group overflow-hidden rounded-lg border border-border/80 bg-card shadow-[0_18px_45px_-34px_rgba(29,20,15,0.8)] transition duration-200 hover:-translate-y-0.5 hover:border-primary/35 hover:shadow-[0_22px_55px_-34px_rgba(29,20,15,0.95)]">
+    <article
+      className="sold-card-enter group overflow-hidden rounded-lg border border-border/80 bg-card shadow-[0_18px_45px_-34px_rgba(29,20,15,0.8)] transition duration-200 hover:-translate-y-0.5 hover:border-primary/35 hover:shadow-[0_22px_55px_-34px_rgba(29,20,15,0.95)]"
+      style={{ animationDelay: `${Math.min(index * 35, 420)}ms` }}
+    >
       <div className="aspect-square overflow-hidden bg-secondary">
         <img
           src={watch.imageUrl}

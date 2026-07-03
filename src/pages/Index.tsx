@@ -41,7 +41,7 @@ const Index = () => {
             name: SITE_NAME,
             url: SITE_URL,
             description: brandSummary,
-            logo: `${SITE_URL}/apple-touch-icon.png?v=gh-20260611`,
+            logo: `${SITE_URL}/site-logo.png?v=gh-20260703`,
             sameAs: [
               "https://www.instagram.com/grandpasheritage/",
               "https://www.tradera.com/da/profile/items/6841860/grandpasheritage",
@@ -87,8 +87,8 @@ const Index = () => {
       <Navbar />
       <main id="main-content">
         <HeroSection />
-        <PhilosophySection />
         <FounderStorySection />
+        <PhilosophySection />
         <ProductGridSection />
         <TestimonialsSection />
       </main>
