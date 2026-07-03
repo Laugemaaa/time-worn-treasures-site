@@ -23,6 +23,7 @@ export type TranslationKey =
   | "hero.subtitle"
   | "hero.cta"
   | "philosophy.title"
+  | "philosophy.intro"
   | "philosophy.p1"
   | "philosophy.p2"
   | "philosophy.p3"
@@ -111,6 +112,8 @@ const en: Dict = {
     "A curated collection of vintage timepieces - chosen for character, provenance, and the kind of patina that only decades of real life can produce.",
   "hero.cta": "Explore the Collection",
   "philosophy.title": "Why vintage?",
+  "philosophy.intro":
+    "Because the marks, wear, and patina are part of the story, not something to hide.",
   "philosophy.p1":
     "A new watch tells you the time. A vintage watch tells you about time - decades of it, compressed into scratches on a case back, a dial that's slowly turned from silver to champagne, a movement that's been wound ten thousand mornings in a row.",
   "philosophy.p2":
@@ -214,6 +217,8 @@ const da: Dict = {
     "En kurateret samling af vintage-ure - udvalgt for karakter, proveniens og den slags patina, som kun årtiers virkeligt liv kan skabe.",
   "hero.cta": "Udforsk samlingen",
   "philosophy.title": "Hvorfor vintage?",
+  "philosophy.intro":
+    "Fordi mærkerne, sliddet og patinaen er en del af historien, ikke noget der skal skjules.",
   "philosophy.p1":
     "Et nyt ur fortæller dig tiden. Et vintage-ur fortæller dig om tiden - årtier af den, komprimeret i ridser på bagsiden, en skive der langsomt er blevet fra sølv til champagne, et værk der er trukket op ti tusind morgener i træk.",
   "philosophy.p2":
@@ -317,6 +322,8 @@ const sv: Dict = {
     "En kurerad samling vintageklockor - utvalda för karaktär, härkomst och den sortens patina som bara årtionden av verkligt liv kan ge.",
   "hero.cta": "Utforska kollektionen",
   "philosophy.title": "Varför vintage?",
+  "philosophy.intro":
+    "För att märkena, slitaget och patinan är en del av historien, inte något som ska döljas.",
   "philosophy.p1":
     "En ny klocka berättar tiden för dig. En vintageklocka berättar om tiden - årtionden av den, komprimerade i repor på baksidan, en urtavla som långsamt gått från silver till champagne, ett verk som dragits upp tiotusen morgnar i rad.",
   "philosophy.p2":
@@ -420,6 +427,8 @@ const no: Dict = {
     "En kuratert samling vintageklokker - valgt for karakter, opprinnelse og den typen patina som bare tiår med ekte liv kan skape.",
   "hero.cta": "Utforsk kolleksjonen",
   "philosophy.title": "Hvorfor vintage?",
+  "philosophy.intro":
+    "Fordi merkene, slitasjen og patinaen er en del av historien, ikke noe som skal skjules.",
   "philosophy.p1":
     "En ny klokke forteller deg klokkeslettet. En vintageklokke forteller deg om tiden - tiår av den, komprimert i riper på baksiden, en skive som sakte har gått fra sølv til champagne, et verk som er trukket opp ti tusen morgener på rad.",
   "philosophy.p2":

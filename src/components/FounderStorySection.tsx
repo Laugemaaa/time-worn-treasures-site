@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { WatchCarousel } from "@/components/WatchCarousel";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
-import { useReveal } from "@/hooks/useReveal";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import type { TranslationKey } from "@/i18n/translations";
 
@@ -56,16 +55,49 @@ function useSubtleParallax(strength: number) {
   return { ref, offset };
 }
 
+function useScrollPresence(threshold = 0.24) {
+  const ref = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    if (prefersReducedMotion) {
+      setVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setVisible(entry.isIntersecting);
+      },
+      {
+        rootMargin: "-10% 0px -16% 0px",
+        threshold,
+      }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [prefersReducedMotion, threshold]);
+
+  return { ref, visible };
+}
+
 function SoldWatchesCta() {
   const { t } = useLanguage();
-  const { ref, revealed } = useReveal(0.35);
+  const { ref, visible } = useScrollPresence(0.3);
 
   return (
     <div
       ref={ref}
       className={[
-        "absolute -left-4 bottom-8 z-20 max-w-[240px] transition-all duration-700 ease-out md:-left-8 lg:-left-12",
-        revealed ? "translate-x-0 opacity-100" : "-translate-x-10 opacity-0",
+        "absolute -left-4 bottom-8 z-20 max-w-[240px] transition-[filter,opacity,transform] duration-700 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] md:-left-8 lg:-left-12",
+        visible
+          ? "translate-x-0 translate-y-0 scale-100 opacity-100 blur-0"
+          : "pointer-events-none -translate-x-8 translate-y-3 scale-[0.96] opacity-0 blur-sm",
       ].join(" ")}
     >
       <Link
