@@ -5,7 +5,7 @@ import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { TraderaButton } from "@/components/TraderaButton";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { LANGUAGE_LABELS, SUPPORTED_LANGUAGES, type Language } from "@/i18n/translations";
-import grandpasHeritageLogo from "@/assets/grandpas-heritage-logo.png";
+import grandpasHeritageLogo from "@/assets/grandpas-heritage-logo-cream.png";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -70,7 +70,7 @@ export function Navbar() {
             <img
               src={grandpasHeritageLogo}
               alt="Grandpa's Heritage"
-              className="h-[72px] w-auto max-w-[min(720px,calc(100vw-112px))] origin-center object-contain brightness-0 invert sepia saturate-[0.55] hue-rotate-[350deg] transition-[filter,transform] duration-300 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover:scale-[1.025] motion-safe:group-hover:-translate-y-0.5 group-hover:drop-shadow-[0_0_18px_rgba(234,220,198,0.32)]"
+              className="h-[72px] w-auto max-w-[min(720px,calc(100vw-112px))] origin-center select-none object-contain transition-[filter,transform] duration-300 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover:scale-[1.025] motion-safe:group-hover:-translate-y-0.5 group-hover:drop-shadow-[0_0_18px_rgba(234,220,198,0.32)]"
               decoding="async"
             />
           </Link>

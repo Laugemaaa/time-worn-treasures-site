@@ -97,6 +97,9 @@
     line-height: 1.75;
     letter-spacing: -0.01em;
     color: hsl(var(--foreground) / 0.84);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   h1, h2, h3, h4, h5, h6 {
