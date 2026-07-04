@@ -153,6 +153,22 @@
   transform: scale(1.01);
 }
 
+.autoplay-background-video {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.autoplay-background-video::-webkit-media-controls,
+.autoplay-background-video::-webkit-media-controls-panel,
+.autoplay-background-video::-webkit-media-controls-play-button,
+.autoplay-background-video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 @keyframes testimonials-marquee {
   from {
     transform: translateX(0);

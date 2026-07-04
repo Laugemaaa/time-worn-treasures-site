@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { WatchCarousel } from "@/components/WatchCarousel";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
@@ -120,17 +120,87 @@ function SoldWatchesCta() {
 }
 
 function StoryVideo() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const playVideo = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) {
+      return;
+    }
+
+    video.controls = false;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+
+    void video.play().catch(() => {
+      // Some mobile browsers pause autoplay in Low Power Mode. Keep the element non-interactive.
+    });
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) {
+      return;
+    }
+
+    playVideo();
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          playVideo();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        playVideo();
+      }
+    };
+
+    const handlePause = () => {
+      window.setTimeout(playVideo, 80);
+    };
+
+    observer.observe(video);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("pageshow", playVideo);
+    video.addEventListener("loadedmetadata", playVideo);
+    video.addEventListener("canplay", playVideo);
+    video.addEventListener("pause", handlePause);
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("pageshow", playVideo);
+      video.removeEventListener("loadedmetadata", playVideo);
+      video.removeEventListener("canplay", playVideo);
+      video.removeEventListener("pause", handlePause);
+    };
+  }, [playVideo]);
+
   return (
     <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[16px] bg-black/20 shadow-[0_24px_70px_rgba(0,0,0,0.24)]">
       <video
-        className="h-full w-full object-cover"
+        ref={videoRef}
+        className="autoplay-background-video pointer-events-none h-full w-full object-cover"
         src="/media/selection-watch.mp4"
         autoPlay
         muted
         loop
         playsInline
-        preload="metadata"
-        aria-label="Vintage watch video"
+        preload="auto"
+        controls={false}
+        disablePictureInPicture
+        disableRemotePlayback
+        tabIndex={-1}
+        aria-hidden="true"
+        onContextMenu={(event) => event.preventDefault()}
       />
     </div>
   );
