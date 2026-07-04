@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { WatchCarousel } from "@/components/WatchCarousel";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
@@ -119,88 +119,15 @@ function SoldWatchesCta() {
   );
 }
 
-function StoryVideo() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  const playVideo = useCallback(() => {
-    const video = videoRef.current;
-    if (!video) {
-      return;
-    }
-
-    video.controls = false;
-    video.muted = true;
-    video.defaultMuted = true;
-    video.playsInline = true;
-    video.setAttribute("playsinline", "");
-    video.setAttribute("webkit-playsinline", "");
-
-    void video.play().catch(() => {
-      // Some mobile browsers pause autoplay in Low Power Mode. Keep the element non-interactive.
-    });
-  }, []);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) {
-      return;
-    }
-
-    playVideo();
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          playVideo();
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "visible") {
-        playVideo();
-      }
-    };
-
-    const handlePause = () => {
-      window.setTimeout(playVideo, 80);
-    };
-
-    observer.observe(video);
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    window.addEventListener("pageshow", playVideo);
-    video.addEventListener("loadedmetadata", playVideo);
-    video.addEventListener("canplay", playVideo);
-    video.addEventListener("pause", handlePause);
-
-    return () => {
-      observer.disconnect();
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-      window.removeEventListener("pageshow", playVideo);
-      video.removeEventListener("loadedmetadata", playVideo);
-      video.removeEventListener("canplay", playVideo);
-      video.removeEventListener("pause", handlePause);
-    };
-  }, [playVideo]);
-
+function StoryAnimation() {
   return (
     <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[16px] bg-black/20 shadow-[0_24px_70px_rgba(0,0,0,0.24)]">
-      <video
-        ref={videoRef}
-        className="autoplay-background-video pointer-events-none h-full w-full object-cover"
-        src="/media/selection-watch.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        controls={false}
-        disablePictureInPicture
-        disableRemotePlayback
-        tabIndex={-1}
+      <img
+        className="h-full w-full select-none object-cover"
+        src="/media/selection-watch.gif"
+        alt=""
         aria-hidden="true"
-        onContextMenu={(event) => event.preventDefault()}
+        draggable={false}
       />
     </div>
   );
@@ -224,7 +151,7 @@ function StoryImagePanel({
         className="relative w-full max-w-[580px] transition-transform duration-200 ease-out will-change-transform"
         style={{ transform: `translate3d(0, ${offset}px, 0)` }}
       >
-        {useVideo ? <StoryVideo /> : <WatchCarousel />}
+        {useVideo ? <StoryAnimation /> : <WatchCarousel />}
         {showSoldWatchesCta ? <SoldWatchesCta /> : null}
       </div>
     </div>

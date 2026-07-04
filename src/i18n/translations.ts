@@ -52,6 +52,11 @@ export type TranslationKey =
   | "curation.ctaTitle"
   | "curation.ctaLink"
   | "collection.title"
+  | "collection.infoEyebrow"
+  | "collection.infoTitle"
+  | "collection.infoBody"
+  | "collection.infoPoint1"
+  | "collection.infoPoint2"
   | "collection.empty"
   | "collection.error"
   | "collection.retry"
@@ -153,6 +158,12 @@ const en: Dict = {
   "curation.ctaTitle": "See sold watches here",
   "curation.ctaLink": "Open archive",
   "collection.title": "Active auctions",
+  "collection.infoEyebrow": "New finds",
+  "collection.infoTitle": "More watches are added regularly",
+  "collection.infoBody":
+    "The collection changes as new vintage pieces are found, checked, photographed, and listed for auction.",
+  "collection.infoPoint1": "Auctions are refreshed as listings go live on Tradera.",
+  "collection.infoPoint2": "Check back often for newly added pieces and returning archive updates.",
   "collection.empty": "No watches available at the moment. Check back soon.",
   "collection.error": "We couldn't load the collection right now. Please try again.",
   "collection.retry": "Try again",
@@ -258,6 +269,12 @@ const da: Dict = {
   "curation.ctaTitle": "Se solgte ure her",
   "curation.ctaLink": "Åbn arkiv",
   "collection.title": "Aktive auktioner",
+  "collection.infoEyebrow": "Nye fund",
+  "collection.infoTitle": "Der kommer løbende flere ure",
+  "collection.infoBody":
+    "Samlingen ændrer sig, når nye vintage-ure bliver fundet, tjekket, fotograferet og sat på auktion.",
+  "collection.infoPoint1": "Auktionerne opdateres, når nye annoncer går live på Tradera.",
+  "collection.infoPoint2": "Kig forbi løbende for nye ure og opdateringer fra arkivet.",
   "collection.empty": "Ingen ure tilgængelige lige nu. Kig forbi snart.",
   "collection.error": "Vi kunne ikke indlæse samlingen lige nu. Prøv igen.",
   "collection.retry": "Prøv igen",
@@ -363,6 +380,12 @@ const sv: Dict = {
   "curation.ctaTitle": "Se sålda klockor här",
   "curation.ctaLink": "Öppna arkiv",
   "collection.title": "Aktiva auktioner",
+  "collection.infoEyebrow": "Nya fynd",
+  "collection.infoTitle": "Fler klockor läggs till löpande",
+  "collection.infoBody":
+    "Kollektionen förändras när nya vintageklockor hittas, kontrolleras, fotograferas och läggs ut på auktion.",
+  "collection.infoPoint1": "Auktionerna uppdateras när nya annonser går live på Tradera.",
+  "collection.infoPoint2": "Titta förbi regelbundet för nya klockor och uppdateringar från arkivet.",
   "collection.empty": "Inga klockor tillgängliga just nu. Kom tillbaka snart.",
   "collection.error": "Vi kunde inte ladda kollektionen just nu. Försök igen.",
   "collection.retry": "Försök igen",
@@ -468,6 +491,12 @@ const no: Dict = {
   "curation.ctaTitle": "Se solgte klokker her",
   "curation.ctaLink": "Åpne arkiv",
   "collection.title": "Aktive auksjoner",
+  "collection.infoEyebrow": "Nye funn",
+  "collection.infoTitle": "Flere klokker legges til fortløpende",
+  "collection.infoBody":
+    "Kolleksjonen endrer seg når nye vintageklokker blir funnet, sjekket, fotografert og lagt ut på auksjon.",
+  "collection.infoPoint1": "Auksjonene oppdateres når nye annonser går live på Tradera.",
+  "collection.infoPoint2": "Kom innom jevnlig for nye klokker og oppdateringer fra arkivet.",
   "collection.empty": "Ingen klokker tilgjengelig akkurat nå. Kom tilbake snart.",
   "collection.error": "Vi kunne ikke laste kolleksjonen akkurat nå. Prøv igjen.",
   "collection.retry": "Prøv igjen",

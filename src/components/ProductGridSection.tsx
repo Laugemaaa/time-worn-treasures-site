@@ -1,13 +1,50 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { getProducts, type Product } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TraderaButton } from "@/components/TraderaButton";
 import { useLanguage } from "@/i18n/LanguageProvider";
-import { PackageOpen } from "lucide-react";
+import { Clock3, PackageOpen, RefreshCw } from "lucide-react";
 
 const LIVE_FEED_REFRESH_MS = 30_000;
+
+function AuctionInfoCard() {
+  const { t } = useLanguage();
+
+  return (
+    <article className="overflow-hidden rounded-lg border border-border bg-card shadow-[0_18px_45px_-34px_rgba(29,20,15,0.8)]">
+      <div className="flex aspect-square flex-col justify-between bg-[radial-gradient(circle_at_24%_18%,rgba(234,220,198,0.18),transparent_34%),linear-gradient(145deg,hsl(var(--card))_0%,hsl(var(--surface-espresso))_100%)] p-6">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full border border-primary/30 bg-background/35 text-primary">
+          <RefreshCw className="h-5 w-5" />
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">
+            {t("collection.infoEyebrow")}
+          </p>
+          <h3 className="font-serif text-3xl font-semibold leading-tight text-foreground">
+            {t("collection.infoTitle")}
+          </h3>
+          <p className="max-w-[18rem] text-sm leading-7 text-muted-foreground">
+            {t("collection.infoBody")}
+          </p>
+        </div>
+      </div>
+
+      <div className="space-y-3 p-4 text-sm text-muted-foreground">
+        <div className="flex items-start gap-2">
+          <Clock3 className="mt-1 h-4 w-4 shrink-0 text-primary" />
+          <span>{t("collection.infoPoint1")}</span>
+        </div>
+        <div className="flex items-start gap-2">
+          <RefreshCw className="mt-1 h-4 w-4 shrink-0 text-primary" />
+          <span>{t("collection.infoPoint2")}</span>
+        </div>
+      </div>
+    </article>
+  );
+}
 
 export function ProductGridSection() {
   const { t } = useLanguage();
@@ -105,8 +142,11 @@ export function ProductGridSection() {
 
       {!loading && !error && products.length > 0 && (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+          {products.map((product, index) => (
+            <Fragment key={product.id}>
+              <ProductCard product={product} />
+              {index === 0 ? <AuctionInfoCard /> : null}
+            </Fragment>
           ))}
         </div>
       )}
