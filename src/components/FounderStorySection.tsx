@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { WatchCarousel } from "@/components/WatchCarousel";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
@@ -119,15 +119,141 @@ function SoldWatchesCta() {
   );
 }
 
-function StoryAnimation() {
+function StoryVideoCanvas() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const playVideo = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) {
+      return;
+    }
+
+    video.controls = false;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+
+    void video.play().catch(() => {
+      // If autoplay is delayed, the canvas keeps the latest painted frame without exposing native controls.
+    });
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+    if (!video || !canvas) {
+      return;
+    }
+
+    let animationFrameId = 0;
+    let isDisposed = false;
+
+    const syncCanvasSize = () => {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 3);
+      const width = Math.max(1, Math.round(rect.width * dpr));
+      const height = Math.max(1, Math.round(rect.height * dpr));
+
+      if (canvas.width !== width || canvas.height !== height) {
+        canvas.width = width;
+        canvas.height = height;
+      }
+    };
+
+    const drawFrame = () => {
+      if (video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA || !video.videoWidth || !video.videoHeight) {
+        return;
+      }
+
+      syncCanvasSize();
+
+      const context = canvas.getContext("2d");
+      if (!context) {
+        return;
+      }
+
+      const canvasRatio = canvas.width / canvas.height;
+      const videoRatio = video.videoWidth / video.videoHeight;
+      const drawWidth = videoRatio > canvasRatio ? canvas.height * videoRatio : canvas.width;
+      const drawHeight = videoRatio > canvasRatio ? canvas.height : canvas.width / videoRatio;
+      const dx = (canvas.width - drawWidth) / 2;
+      const dy = (canvas.height - drawHeight) / 2;
+
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(video, dx, dy, drawWidth, drawHeight);
+    };
+
+    const drawLoop = () => {
+      if (isDisposed) {
+        return;
+      }
+
+      drawFrame();
+      animationFrameId = window.requestAnimationFrame(drawLoop);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          playVideo();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    const resizeObserver = new ResizeObserver(() => {
+      syncCanvasSize();
+      drawFrame();
+    });
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        playVideo();
+      }
+    };
+
+    playVideo();
+    drawLoop();
+    observer.observe(canvas);
+    resizeObserver.observe(canvas);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("pageshow", playVideo);
+    video.addEventListener("loadedmetadata", drawFrame);
+    video.addEventListener("canplay", playVideo);
+
+    return () => {
+      isDisposed = true;
+      window.cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
+      resizeObserver.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("pageshow", playVideo);
+      video.removeEventListener("loadedmetadata", drawFrame);
+      video.removeEventListener("canplay", playVideo);
+    };
+  }, [playVideo]);
+
   return (
     <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[16px] bg-black/20 shadow-[0_24px_70px_rgba(0,0,0,0.24)]">
-      <img
-        className="h-full w-full select-none object-cover"
-        src="/media/selection-watch.gif"
-        alt=""
+      <canvas ref={canvasRef} className="h-full w-full select-none object-cover" aria-hidden="true" />
+      <video
+        ref={videoRef}
+        className="autoplay-background-video pointer-events-none absolute left-0 top-0 h-px w-px opacity-0"
+        src="/media/selection-watch.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        controls={false}
+        disablePictureInPicture
+        disableRemotePlayback
+        tabIndex={-1}
         aria-hidden="true"
-        draggable={false}
+        onContextMenu={(event) => event.preventDefault()}
       />
     </div>
   );
@@ -151,7 +277,7 @@ function StoryImagePanel({
         className="relative w-full max-w-[580px] transition-transform duration-200 ease-out will-change-transform"
         style={{ transform: `translate3d(0, ${offset}px, 0)` }}
       >
-        {useVideo ? <StoryAnimation /> : <WatchCarousel />}
+        {useVideo ? <StoryVideoCanvas /> : <WatchCarousel />}
         {showSoldWatchesCta ? <SoldWatchesCta /> : null}
       </div>
     </div>
