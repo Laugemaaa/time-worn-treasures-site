@@ -215,14 +215,26 @@ function StoryVideoCanvas() {
       }
     };
 
+    const handleUserMotion = () => {
+      playVideo();
+    };
+
+    const handlePause = () => {
+      window.setTimeout(playVideo, 80);
+    };
+
     playVideo();
     drawLoop();
     observer.observe(canvas);
     resizeObserver.observe(canvas);
     document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("scroll", handleUserMotion, { passive: true });
+    window.addEventListener("touchstart", handleUserMotion, { passive: true });
+    window.addEventListener("pointerdown", handleUserMotion, { passive: true });
     window.addEventListener("pageshow", playVideo);
     video.addEventListener("loadedmetadata", drawFrame);
     video.addEventListener("canplay", playVideo);
+    video.addEventListener("pause", handlePause);
 
     return () => {
       isDisposed = true;
@@ -230,18 +242,26 @@ function StoryVideoCanvas() {
       observer.disconnect();
       resizeObserver.disconnect();
       document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("scroll", handleUserMotion);
+      window.removeEventListener("touchstart", handleUserMotion);
+      window.removeEventListener("pointerdown", handleUserMotion);
       window.removeEventListener("pageshow", playVideo);
       video.removeEventListener("loadedmetadata", drawFrame);
       video.removeEventListener("canplay", playVideo);
+      video.removeEventListener("pause", handlePause);
     };
   }, [playVideo]);
 
   return (
     <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[16px] bg-black/20 shadow-[0_24px_70px_rgba(0,0,0,0.24)]">
-      <canvas ref={canvasRef} className="h-full w-full select-none object-cover" aria-hidden="true" />
+      <canvas
+        ref={canvasRef}
+        className="relative z-10 h-full w-full select-none object-cover"
+        aria-hidden="true"
+      />
       <video
         ref={videoRef}
-        className="autoplay-background-video pointer-events-none absolute left-0 top-0 h-px w-px opacity-0"
+        className="autoplay-background-video pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-[0.001]"
         src="/media/selection-watch.mp4"
         autoPlay
         muted
