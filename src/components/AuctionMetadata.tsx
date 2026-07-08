@@ -1,48 +1,57 @@
+import { useEffect, useMemo, useState } from "react";
 import { type Product } from "@/data/products";
 import { Clock, Eye, Gavel } from "lucide-react";
 
-function parseISO8601Duration(duration: string): string {
+const SECOND_MS = 1000;
+const MINUTE_MS = 60 * SECOND_MS;
+const HOUR_MS = 60 * MINUTE_MS;
+const DAY_MS = 24 * HOUR_MS;
+
+function padTime(value: number): string {
+  return value.toString().padStart(2, "0");
+}
+
+function formatDuration(milliseconds: number): string {
+  const safeMilliseconds = Math.max(0, milliseconds);
+  const days = Math.floor(safeMilliseconds / DAY_MS);
+  const hours = Math.floor((safeMilliseconds % DAY_MS) / HOUR_MS);
+  const minutes = Math.floor((safeMilliseconds % HOUR_MS) / MINUTE_MS);
+  const seconds = Math.floor((safeMilliseconds % MINUTE_MS) / SECOND_MS);
+
+  if (days > 0) return `${days}d ${hours}h ${padTime(minutes)}m ${padTime(seconds)}s`;
+  if (hours > 0) return `${hours}h ${padTime(minutes)}m ${padTime(seconds)}s`;
+  if (minutes > 0) return `${minutes}m ${padTime(seconds)}s`;
+  return `${seconds}s`;
+}
+
+function parseISO8601DurationToMilliseconds(duration: string): number | undefined {
   const match = duration.match(/P(?:(\d+)D)?T?(?:(\d+)H)?(?:(\d+)M)?/);
-  if (!match) return duration;
+  if (!match) return undefined;
+
   const days = parseInt(match[1] || "0");
   const hours = parseInt(match[2] || "0");
   const minutes = parseInt(match[3] || "0");
-  const totalHours = days * 24 + hours;
 
-  if (totalHours > 24) return `${days}d ${hours}h`;
-  if (totalHours > 0) return `${totalHours}h ${minutes}m`;
-  return `${minutes}m`;
+  return days * DAY_MS + hours * HOUR_MS + minutes * MINUTE_MS;
 }
 
-function isUrgent(duration: string): boolean {
-  const match = duration.match(/P(?:(\d+)D)?T?(?:(\d+)H)?(?:(\d+)M)?/);
-  if (!match) return false;
-  const days = parseInt(match[1] || "0");
-  const hours = parseInt(match[2] || "0");
-  return days === 0 && hours < 1;
+function formatISO8601Duration(duration: string): string {
+  const milliseconds = parseISO8601DurationToMilliseconds(duration);
+  return milliseconds == null ? duration : formatDuration(milliseconds);
 }
 
-function durationFromEndDate(endDateString?: string): string | undefined {
-  if (!endDateString) return undefined;
+function useNow(intervalMs: number): number {
+  const [now, setNow] = useState(() => Date.now());
 
-  const endDate = new Date(endDateString);
-  const diff = endDate.getTime() - Date.now();
-  if (!Number.isFinite(diff) || diff <= 0) return undefined;
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setNow(Date.now());
+    }, intervalMs);
 
-  const totalMinutes = Math.floor(diff / 60000);
-  const days = Math.floor(totalMinutes / (24 * 60));
-  const hours = Math.floor((totalMinutes % (24 * 60)) / 60);
-  const minutes = totalMinutes % 60;
+    return () => window.clearInterval(timer);
+  }, [intervalMs]);
 
-  let duration = "P";
-  if (days > 0) duration += `${days}D`;
-  if (hours > 0 || minutes > 0) {
-    duration += "T";
-    if (hours > 0) duration += `${hours}H`;
-    if (minutes > 0) duration += `${minutes}M`;
-  }
-
-  return duration === "P" ? "PT0M" : duration;
+  return now;
 }
 
 type Props = {
@@ -51,12 +60,37 @@ type Props = {
 };
 
 export function AuctionMetadata({ product, compact = false }: Props) {
-  const liveDuration = durationFromEndDate(product.auctionEndDate) ?? product.timeRemaining;
+  const now = useNow(SECOND_MS);
+  const auctionEndTime = useMemo(() => {
+    if (!product.auctionEndDate) return undefined;
+
+    const time = new Date(product.auctionEndDate).getTime();
+    return Number.isFinite(time) ? time : undefined;
+  }, [product.auctionEndDate]);
+  const liveMilliseconds = auctionEndTime == null ? undefined : Math.max(0, auctionEndTime - now);
+  const fallbackMilliseconds = product.timeRemaining
+    ? parseISO8601DurationToMilliseconds(product.timeRemaining)
+    : undefined;
+  const countdownLabel =
+    liveMilliseconds != null
+      ? formatDuration(liveMilliseconds)
+      : product.timeRemaining
+        ? formatISO8601Duration(product.timeRemaining)
+        : undefined;
   const hasAnyData =
-    product.currentBidPrice || product.startingBidPrice || product.numberOfBids || product.numberOfViewers || liveDuration;
+    product.currentBidPrice ||
+    product.startingBidPrice ||
+    product.numberOfBids ||
+    product.numberOfViewers ||
+    countdownLabel;
   if (!hasAnyData) return null;
 
-  const urgent = liveDuration ? isUrgent(liveDuration) : false;
+  const urgent =
+    liveMilliseconds != null
+      ? liveMilliseconds < HOUR_MS
+      : fallbackMilliseconds != null
+        ? fallbackMilliseconds < HOUR_MS
+        : false;
   const currency = product.currency || "SEK";
   const currentPrice = product.currentBidPrice;
   const startingPrice = product.startingBidPrice;
@@ -90,10 +124,10 @@ export function AuctionMetadata({ product, compact = false }: Props) {
           {product.numberOfViewers}
         </span>
       )}
-      {liveDuration && (
+      {countdownLabel && (
         <span className={`inline-flex items-center gap-1 ${urgent ? "font-medium text-primary" : ""}`}>
           <Clock className="h-3 w-3" />
-          {parseISO8601Duration(liveDuration)}
+          {countdownLabel}
         </span>
       )}
     </div>
