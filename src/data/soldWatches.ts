@@ -86,6 +86,7 @@ import fireVintageTimexUreImage from "@/assets/sold-watches/optimized/fire-vinta
 import niVintageLommeureImage from "@/assets/sold-watches/optimized/ni-vintage-lommeure-serkisof-marathon-ussr.jpg";
 import samlingVintageUreImage from "@/assets/sold-watches/optimized/samling-vintage-ure-oris-zodiac-certina-silvana.jpg";
 import fireCasioArmbandsureImage from "@/assets/sold-watches/optimized/fire-casio-armbandsure-a158we-mtp-1260-mq-555-mtp-1096.jpg";
+import citizenSevenStarV2Image from "@/assets/sold-watches/optimized/citizen-seven-star-v2-automatisk-herreur.jpg";
 
 export type SoldWatch = {
   id: string;
@@ -104,6 +105,19 @@ export type SoldWatch = {
 };
 
 export const soldWatches: SoldWatch[] = [
+  {
+    id: "citizen-seven-star-v2-automatisk-herreur",
+    title: "Citizen Seven Star V2 Automatisk Herreur",
+    imageUrl: citizenSevenStarV2Image,
+    soldPrice: 873,
+    currency: "DKK",
+    itemNumber: "738615592",
+    soldDate: "8 juli 2026 19:49",
+    numberOfBids: 56,
+    shortDescription: "Citizen Seven Star V2 automatisk herreur.",
+    traderaUrl:
+      "https://www.tradera.com/da/item/1000985/738615592/citizen-seven-star-v2-automatisk-herreur",
+  },
   {
     id: "fire-casio-armbandsure-a158we-mtp-1260-mq-555-mtp-1096",
     title: "Fire Casio armbåndsure: A158WE, MTP-1260, MQ-555, MTP-1096",
