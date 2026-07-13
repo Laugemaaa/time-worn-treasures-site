@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer";
 import { HeroSection } from "@/components/HeroSection";
 import { PhilosophySection } from "@/components/PhilosophySection";
 import { FounderStorySection } from "@/components/FounderStorySection";
+import { InstagramStorySection } from "@/components/InstagramStorySection";
 import { ProductGridSection } from "@/components/ProductGridSection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { SEO, SITE_NAME, SITE_URL } from "@/components/SEO";
@@ -89,6 +90,7 @@ const Index = () => {
         <HeroSection />
         <FounderStorySection />
         <PhilosophySection />
+        <InstagramStorySection />
         <ProductGridSection />
         <TestimonialsSection />
       </main>

@@ -51,6 +51,12 @@ export type TranslationKey =
   | "curation.ctaEyebrow"
   | "curation.ctaTitle"
   | "curation.ctaLink"
+  | "instagram.eyebrow"
+  | "instagram.title"
+  | "instagram.p1"
+  | "instagram.p2"
+  | "instagram.cta"
+  | "instagram.videoLabel"
   | "collection.title"
   | "collection.infoEyebrow"
   | "collection.infoTitle"
@@ -157,6 +163,14 @@ const en: Dict = {
   "curation.ctaEyebrow": "Archive",
   "curation.ctaTitle": "See sold watches here",
   "curation.ctaLink": "Open archive",
+  "instagram.eyebrow": "Instagram",
+  "instagram.title": "See the details in motion",
+  "instagram.p1":
+    "On Instagram I share the small moments that still photos do not always catch: the way a dial changes in the light, the sound of a hand-wound movement, and the marks that make each watch feel alive.",
+  "instagram.p2":
+    "The videos are a closer look at the watches before they become listings - slower, more tactile, and focused on the details that give vintage pieces their character.",
+  "instagram.cta": "Follow on Instagram",
+  "instagram.videoLabel": "Instagram video showing a vintage watch from Grandpa's Heritage",
   "collection.title": "Active auctions",
   "collection.infoEyebrow": "New finds",
   "collection.infoTitle": "More watches are added regularly",
@@ -268,6 +282,14 @@ const da: Dict = {
   "curation.ctaEyebrow": "Arkiv",
   "curation.ctaTitle": "Se solgte ure her",
   "curation.ctaLink": "Åbn arkiv",
+  "instagram.eyebrow": "Instagram",
+  "instagram.title": "Se detaljerne i bevægelse",
+  "instagram.p1":
+    "På Instagram deler jeg de små øjeblikke, som billeder ikke altid fanger: hvordan en urskive skifter i lyset, lyden af et manuelt optrukket værk og de mærker, der giver hvert ur liv.",
+  "instagram.p2":
+    "Videoerne er et tættere kig på urene, før de bliver til annoncer - roligere, mere taktile og med fokus på de detaljer, der giver vintage-ure deres karakter.",
+  "instagram.cta": "Følg med på Instagram",
+  "instagram.videoLabel": "Instagram-video med et vintage-ur fra Grandpa's Heritage",
   "collection.title": "Aktive auktioner",
   "collection.infoEyebrow": "Nye fund",
   "collection.infoTitle": "Der kommer løbende flere ure",
@@ -379,6 +401,14 @@ const sv: Dict = {
   "curation.ctaEyebrow": "Arkiv",
   "curation.ctaTitle": "Se sålda klockor här",
   "curation.ctaLink": "Öppna arkiv",
+  "instagram.eyebrow": "Instagram",
+  "instagram.title": "Se detaljerna i rörelse",
+  "instagram.p1":
+    "På Instagram delar jag de små ögonblick som stillbilder inte alltid fångar: hur en urtavla skiftar i ljuset, ljudet av ett manuellt uppdraget verk och märkena som ger varje klocka liv.",
+  "instagram.p2":
+    "Videorna är en närmare titt på klockorna innan de blir annonser - lugnare, mer taktila och med fokus på detaljerna som ger vintageklockor deras karaktär.",
+  "instagram.cta": "Följ på Instagram",
+  "instagram.videoLabel": "Instagram-video med en vintageklocka från Grandpa's Heritage",
   "collection.title": "Aktiva auktioner",
   "collection.infoEyebrow": "Nya fynd",
   "collection.infoTitle": "Fler klockor läggs till löpande",
@@ -490,6 +520,14 @@ const no: Dict = {
   "curation.ctaEyebrow": "Arkiv",
   "curation.ctaTitle": "Se solgte klokker her",
   "curation.ctaLink": "Åpne arkiv",
+  "instagram.eyebrow": "Instagram",
+  "instagram.title": "Se detaljene i bevegelse",
+  "instagram.p1":
+    "På Instagram deler jeg de små øyeblikkene som stillbilder ikke alltid fanger: hvordan en urskive skifter i lyset, lyden av et manuelt opptrekt verk og merkene som gir hver klokke liv.",
+  "instagram.p2":
+    "Videoene er en nærmere titt på klokkene før de blir annonser - roligere, mer taktile og med fokus på detaljene som gir vintageklokker karakter.",
+  "instagram.cta": "Følg på Instagram",
+  "instagram.videoLabel": "Instagram-video med en vintageklokke fra Grandpa's Heritage",
   "collection.title": "Aktive auksjoner",
   "collection.infoEyebrow": "Nye funn",
   "collection.infoTitle": "Flere klokker legges til fortløpende",
