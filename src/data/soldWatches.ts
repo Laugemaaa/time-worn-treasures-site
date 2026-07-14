@@ -87,6 +87,8 @@ import niVintageLommeureImage from "@/assets/sold-watches/optimized/ni-vintage-l
 import samlingVintageUreImage from "@/assets/sold-watches/optimized/samling-vintage-ure-oris-zodiac-certina-silvana.jpg";
 import fireCasioArmbandsureImage from "@/assets/sold-watches/optimized/fire-casio-armbandsure-a158we-mtp-1260-mq-555-mtp-1096.jpg";
 import citizenSevenStarV2Image from "@/assets/sold-watches/optimized/citizen-seven-star-v2-automatisk-herreur.jpg";
+import citizenQuartz2110Image from "@/assets/sold-watches/optimized/citizen-quartz-2110-895878-smt.png";
+import certinaDs100mQuartzImage from "@/assets/sold-watches/optimized/certina-ds-100m-quartz.png";
 
 export type SoldWatch = {
   id: string;
@@ -105,6 +107,32 @@ export type SoldWatch = {
 };
 
 export const soldWatches: SoldWatch[] = [
+  {
+    id: "citizen-quartz-2110-895878-smt",
+    title: "Citizen Quartz 2110-895878 SMT",
+    imageUrl: citizenQuartz2110Image,
+    soldPrice: 130,
+    currency: "DKK",
+    itemNumber: "739144161",
+    soldDate: "12 juli 2026 00:01",
+    numberOfBids: 15,
+    shortDescription: "Citizen Quartz 2110-895878 SMT.",
+    traderaUrl:
+      "https://www.tradera.com/da/item/1902/739144161/citizen-quartz-2110-895878-smt",
+  },
+  {
+    id: "certina-ds-100m-quartz",
+    title: "Certina DS 100M Quartz",
+    imageUrl: certinaDs100mQuartzImage,
+    soldPrice: 143,
+    currency: "DKK",
+    itemNumber: "739138493",
+    soldDate: "11 juli 2026 22:42",
+    numberOfBids: 16,
+    shortDescription: "Certina DS 100M Quartz.",
+    traderaUrl:
+      "https://www.tradera.com/da/item/1902/739138493/certina-ds-100m-quartz",
+  },
   {
     id: "citizen-seven-star-v2-automatisk-herreur",
     title: "Citizen Seven Star V2 Automatisk Herreur",
