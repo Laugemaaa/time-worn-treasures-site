@@ -94,6 +94,9 @@ export function AuctionMetadata({ product, compact = false }: Props) {
   const currency = product.currency || "SEK";
   const currentPrice = product.currentBidPrice;
   const startingPrice = product.startingBidPrice;
+  const countdownClassName = compact
+    ? "font-semibold text-[hsl(var(--auction-countdown))]"
+    : "rounded-full border border-[hsl(var(--auction-countdown)/0.35)] bg-[hsl(var(--auction-countdown-soft)/0.28)] px-2.5 py-0.5 font-semibold text-[hsl(var(--auction-countdown))]";
 
   return (
     <div className={`flex flex-wrap items-center gap-x-4 gap-y-1 text-muted-foreground ${compact ? "text-xs" : "text-sm"}`}>
@@ -125,7 +128,7 @@ export function AuctionMetadata({ product, compact = false }: Props) {
         </span>
       )}
       {countdownLabel && (
-        <span className={`inline-flex items-center gap-1 ${urgent ? "font-medium text-primary" : ""}`}>
+        <span className={`inline-flex items-center gap-1 ${countdownClassName} ${urgent ? "animate-pulse" : ""}`}>
           <Clock className="h-3 w-3" />
           {countdownLabel}
         </span>

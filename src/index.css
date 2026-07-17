@@ -60,6 +60,9 @@
     --tradera-hover: 56 98% 83%;
     --tradera-active: 56 98% 65%;
     --tradera-foreground: 0 0% 7%;
+
+    --auction-countdown: 46 88% 72%;
+    --auction-countdown-soft: 46 72% 28%;
   }
 
   .dark {
