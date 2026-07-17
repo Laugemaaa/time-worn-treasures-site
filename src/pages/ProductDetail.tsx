@@ -14,7 +14,7 @@ const LIVE_PRODUCT_REFRESH_MS = 30_000;
 
 const ProductDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   const [product, setProduct] = useState<Product | undefined>();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -67,10 +67,18 @@ const ProductDetail = () => {
 
   const galleryImages = product?.images?.length ? product.images : product ? [product.imageUrl] : [];
   const selectedImage = galleryImages[selectedImageIndex] || product?.imageUrl || "";
+  const productDescription =
+    product && lang === "da" && product.fullDescription
+      ? product.fullDescription
+      : product
+        ? t("detail.descriptionFallback")
+        : undefined;
   const seoDescription = product
-    ? product.shortDescription ||
-      product.fullDescription?.slice(0, 155) ||
-      `View ${product.title} at GrandpasHeritage. A vintage watch with an honest description and purchase through Tradera.`
+    ? lang === "da"
+      ? product.shortDescription ||
+        product.fullDescription?.slice(0, 155) ||
+        `View ${product.title} at GrandpasHeritage. A vintage watch with an honest description and purchase through Tradera.`
+      : t("detail.descriptionFallback")
     : "GrandpasHeritage curates vintage watches with character, patina, and honest descriptions.";
 
   const showPreviousImage = () => {
@@ -275,9 +283,9 @@ const ProductDetail = () => {
                 </a>
               </div>
 
-              {product.fullDescription && (
+              {productDescription && (
                 <div className="space-y-4">
-                  {product.fullDescription.split("\n\n").map((para, i) => (
+                  {productDescription.split("\n\n").map((para, i) => (
                     <p key={i} className="text-base leading-relaxed text-muted-foreground">
                       {para}
                     </p>

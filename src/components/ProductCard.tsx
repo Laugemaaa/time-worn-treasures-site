@@ -1,12 +1,16 @@
 import { Link } from "react-router-dom";
 import { type Product } from "@/data/products";
 import { AuctionMetadata } from "./AuctionMetadata";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 type Props = {
   product: Product;
 };
 
 export function ProductCard({ product }: Props) {
+  const { lang, t } = useLanguage();
+  const description = lang === "da" ? product.shortDescription : t("collection.productSummary");
+
   return (
     <Link
       to={`/watch/${product.slug}`}
@@ -29,9 +33,9 @@ export function ProductCard({ product }: Props) {
           {product.title}
         </h3>
 
-        {product.shortDescription && (
+        {description && (
           <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
-            {product.shortDescription}
+            {description}
           </p>
         )}
 

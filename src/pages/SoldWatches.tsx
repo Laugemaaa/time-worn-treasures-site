@@ -226,6 +226,7 @@ function BrandCategoryButton({
 
 function SoldWatchCard({ watch, index }: { watch: SoldWatch; index: number }) {
   const { lang, t } = useLanguage();
+  const description = lang === "da" ? watch.shortDescription : t("sold.genericDescription");
 
   return (
     <article
@@ -255,9 +256,9 @@ function SoldWatchCard({ watch, index }: { watch: SoldWatch; index: number }) {
           {watch.title}
         </h2>
 
-        {watch.shortDescription && (
+        {description && (
           <p className="text-xs leading-relaxed text-muted-foreground line-clamp-2">
-            {watch.shortDescription}
+            {description}
           </p>
         )}
 

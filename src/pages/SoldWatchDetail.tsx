@@ -60,12 +60,13 @@ function SoldWatchDetailContent({ watch }: { watch: SoldWatch }) {
   const { lang, t } = useLanguage();
   const images = watch.images?.length ? watch.images : [watch.imageUrl];
   const [activeImage, setActiveImage] = useState(images[0]);
+  const description = lang === "da" ? watch.shortDescription : t("sold.genericDescription");
 
   return (
     <div className="min-h-screen bg-background paper-texture">
       <SEO
         title={`${watch.title} | ${t("sold.title")}`}
-        description={watch.shortDescription ?? `${t("sold.itemLabel")}: ${watch.title}.`}
+        description={description ?? `${t("sold.itemLabel")}: ${watch.title}.`}
         canonicalPath={`/solgte-ure/${watch.id}`}
       />
       <Navbar />
@@ -132,9 +133,9 @@ function SoldWatchDetailContent({ watch }: { watch: SoldWatch }) {
                 </p>
               )}
 
-              {watch.shortDescription && (
+              {description && (
                 <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-                  {watch.shortDescription}
+                  {description}
                 </p>
               )}
 

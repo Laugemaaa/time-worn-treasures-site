@@ -63,6 +63,7 @@ export type TranslationKey =
   | "collection.infoBody"
   | "collection.infoPoint1"
   | "collection.infoPoint2"
+  | "collection.productSummary"
   | "collection.empty"
   | "collection.error"
   | "collection.retry"
@@ -78,6 +79,7 @@ export type TranslationKey =
   | "detail.auctionDetails"
   | "detail.viewOnTradera"
   | "detail.handoff"
+  | "detail.descriptionFallback"
   | "detail.notFound"
   | "detail.return"
   | "detail.errorLoad"
@@ -104,6 +106,7 @@ export type TranslationKey =
   | "sold.allBrands"
   | "sold.categoryCount"
   | "sold.chooseBrand"
+  | "sold.genericDescription"
   | "sold.showingCount";
 
 type Dict = Record<TranslationKey, string>;
@@ -178,6 +181,7 @@ const en: Dict = {
     "The collection changes as new vintage pieces are found, checked, photographed, and listed for auction.",
   "collection.infoPoint1": "Auctions are refreshed as listings go live on Tradera.",
   "collection.infoPoint2": "Check back often for newly added pieces and returning archive updates.",
+  "collection.productSummary": "Vintage watch listed on Tradera with photos, condition notes, and live auction details.",
   "collection.empty": "No watches available at the moment. Check back soon.",
   "collection.error": "We couldn't load the collection right now. Please try again.",
   "collection.retry": "Try again",
@@ -196,6 +200,8 @@ const en: Dict = {
   "detail.viewOnTradera": "View on Tradera",
   "detail.handoff":
     "This listing is presented here, but the auction and checkout continue on Tradera.",
+  "detail.descriptionFallback":
+    "The original auction text is available on Tradera. Review the photos, condition notes, and live listing details before bidding.",
   "detail.notFound": "This watch could not be found.",
   "detail.return": "Return to the collection",
   "detail.errorLoad": "We couldn't load this watch right now. Please try again.",
@@ -224,6 +230,7 @@ const en: Dict = {
   "sold.allBrands": "All brands",
   "sold.categoryCount": "{count} sold",
   "sold.chooseBrand": "Choose a brand to see previously sold watches from the archive.",
+  "sold.genericDescription": "Previously sold vintage watch from the GrandpasHeritage archive.",
   "sold.showingCount": "Showing {count} of {total} sold watches",
 };
 
@@ -297,6 +304,7 @@ const da: Dict = {
     "Samlingen ændrer sig, når nye vintage-ure bliver fundet, tjekket, fotograferet og sat på auktion.",
   "collection.infoPoint1": "Auktionerne opdateres, når nye annoncer går live på Tradera.",
   "collection.infoPoint2": "Kig forbi løbende for nye ure og opdateringer fra arkivet.",
+  "collection.productSummary": "Vintage-ur på Tradera med billeder, standnoter og live auktionsoplysninger.",
   "collection.empty": "Ingen ure tilgængelige lige nu. Kig forbi snart.",
   "collection.error": "Vi kunne ikke indlæse samlingen lige nu. Prøv igen.",
   "collection.retry": "Prøv igen",
@@ -315,6 +323,8 @@ const da: Dict = {
   "detail.viewOnTradera": "Se på Tradera",
   "detail.handoff":
     "Denne visning præsenteres her, men auktionen og betalingen fortsætter på Tradera.",
+  "detail.descriptionFallback":
+    "Den originale auktionstekst findes på Tradera. Gennemgå billeder, standnoter og de live auktionsoplysninger før du byder.",
   "detail.notFound": "Dette ur kunne ikke findes.",
   "detail.return": "Tilbage til samlingen",
   "detail.errorLoad": "Vi kunne ikke indlæse dette ur lige nu. Prøv igen.",
@@ -343,6 +353,7 @@ const da: Dict = {
   "sold.allBrands": "Alle mærker",
   "sold.categoryCount": "{count} solgt",
   "sold.chooseBrand": "Vælg et mærke for at se tidligere solgte ure fra arkivet.",
+  "sold.genericDescription": "Tidligere solgt vintage-ur fra GrandpasHeritage-arkivet.",
   "sold.showingCount": "Viser {count} af {total} solgte ure",
 };
 
@@ -416,6 +427,7 @@ const sv: Dict = {
     "Kollektionen förändras när nya vintageklockor hittas, kontrolleras, fotograferas och läggs ut på auktion.",
   "collection.infoPoint1": "Auktionerna uppdateras när nya annonser går live på Tradera.",
   "collection.infoPoint2": "Titta förbi regelbundet för nya klockor och uppdateringar från arkivet.",
+  "collection.productSummary": "Vintageklocka på Tradera med bilder, skicknoteringar och live auktionsdetaljer.",
   "collection.empty": "Inga klockor tillgängliga just nu. Kom tillbaka snart.",
   "collection.error": "Vi kunde inte ladda kollektionen just nu. Försök igen.",
   "collection.retry": "Försök igen",
@@ -434,6 +446,8 @@ const sv: Dict = {
   "detail.viewOnTradera": "Visa på Tradera",
   "detail.handoff":
     "Den här visningen presenteras här, men auktionen och köpet fortsätter på Tradera.",
+  "detail.descriptionFallback":
+    "Den ursprungliga auktionstexten finns på Tradera. Granska bilder, skicknoteringar och aktuella auktionsdetaljer innan du lägger bud.",
   "detail.notFound": "Den här klockan kunde inte hittas.",
   "detail.return": "Tillbaka till kollektionen",
   "detail.errorLoad": "Vi kunde inte ladda den här klockan just nu. Försök igen.",
@@ -462,6 +476,7 @@ const sv: Dict = {
   "sold.allBrands": "Alla märken",
   "sold.categoryCount": "{count} sålda",
   "sold.chooseBrand": "Välj ett märke för att se tidigare sålda klockor från arkivet.",
+  "sold.genericDescription": "Tidigare såld vintageklocka från GrandpasHeritage-arkivet.",
   "sold.showingCount": "Visar {count} av {total} sålda klockor",
 };
 
@@ -535,6 +550,7 @@ const no: Dict = {
     "Kolleksjonen endrer seg når nye vintageklokker blir funnet, sjekket, fotografert og lagt ut på auksjon.",
   "collection.infoPoint1": "Auksjonene oppdateres når nye annonser går live på Tradera.",
   "collection.infoPoint2": "Kom innom jevnlig for nye klokker og oppdateringer fra arkivet.",
+  "collection.productSummary": "Vintageklokke på Tradera med bilder, tilstandsnotater og live auksjonsdetaljer.",
   "collection.empty": "Ingen klokker tilgjengelig akkurat nå. Kom tilbake snart.",
   "collection.error": "Vi kunne ikke laste kolleksjonen akkurat nå. Prøv igjen.",
   "collection.retry": "Prøv igjen",
@@ -553,6 +569,8 @@ const no: Dict = {
   "detail.viewOnTradera": "Se på Tradera",
   "detail.handoff":
     "Denne visningen presenteres her, men auksjonen og kjøpet fortsetter på Tradera.",
+  "detail.descriptionFallback":
+    "Den opprinnelige auksjonsteksten finnes på Tradera. Se gjennom bilder, tilstandsnotater og live auksjonsdetaljer før du byr.",
   "detail.notFound": "Denne klokken kunne ikke finnes.",
   "detail.return": "Tilbake til kolleksjonen",
   "detail.errorLoad": "Vi kunne ikke laste denne klokken akkurat nå. Prøv igjen.",
@@ -581,6 +599,7 @@ const no: Dict = {
   "sold.allBrands": "Alle merker",
   "sold.categoryCount": "{count} solgt",
   "sold.chooseBrand": "Velg et merke for å se tidligere solgte klokker fra arkivet.",
+  "sold.genericDescription": "Tidligere solgt vintageklokke fra GrandpasHeritage-arkivet.",
   "sold.showingCount": "Viser {count} av {total} solgte klokker",
 };
 
