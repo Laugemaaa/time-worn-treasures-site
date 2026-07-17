@@ -51,6 +51,12 @@ function translateListingValue(value: string, lang: string): string {
       sv: "Damklocka",
       no: "Dameklokke",
     },
+    unisex: {
+      en: "Unisex watch",
+      da: "Unisex-ur",
+      sv: "Unisexklocka",
+      no: "Unisexklokke",
+    },
     "god brugt stand": {
       en: "Good used condition",
       da: "God brugt stand",
@@ -414,14 +420,6 @@ const ProductDetail = () => {
                     ))}
                   </div>
                 </section>
-              )}
-
-              {descriptionParagraphs.length === 0 && (
-                <div className="rounded-lg border border-border/70 bg-card/70 p-5">
-                  <p className="text-base leading-relaxed text-muted-foreground">
-                    {t("detail.descriptionFallback")}
-                  </p>
-                </div>
               )}
 
               {product.historyNote && (
