@@ -6,11 +6,81 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { ArrowLeft, ChevronLeft, ChevronRight, Expand, ExternalLink } from "lucide-react";
+import {
+  ArrowLeft,
+  BadgeCheck,
+  CalendarDays,
+  ChevronLeft,
+  ChevronRight,
+  Expand,
+  ExternalLink,
+  Ruler,
+  ShieldCheck,
+  Tag,
+} from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { SEO, SITE_NAME, SITE_URL } from "@/components/SEO";
 
 const LIVE_PRODUCT_REFRESH_MS = 30_000;
+
+function getItemNumber(product: Product): string | undefined {
+  const urlMatch = product.traderaUrl.match(/\/item\/\d+\/(\d+)\//);
+  return urlMatch?.[1] || product.id || undefined;
+}
+
+function getListingParts(description: string | undefined): string[] {
+  if (!description) return [];
+  return description
+    .split("|")
+    .map((part) => part.trim().split(/\r?\n/)[0]?.trim() ?? "")
+    .filter(Boolean);
+}
+
+function translateListingValue(value: string, lang: string): string {
+  const lower = value.toLowerCase();
+  const translations: Record<string, Record<string, string>> = {
+    herre: {
+      en: "Men's watch",
+      da: "Herreur",
+      sv: "Herrklocka",
+      no: "Herreklokke",
+    },
+    dame: {
+      en: "Women's watch",
+      da: "Dameur",
+      sv: "Damklocka",
+      no: "Dameklokke",
+    },
+    "god brugt stand": {
+      en: "Good used condition",
+      da: "God brugt stand",
+      sv: "Gott begagnat skick",
+      no: "God brukt tilstand",
+    },
+    "meget god stand": {
+      en: "Very good condition",
+      da: "Meget god stand",
+      sv: "Mycket gott skick",
+      no: "Meget god tilstand",
+    },
+    "ingen eller minimale tegn på brug": {
+      en: "No or minimal signs of use",
+      da: "Ingen eller minimale tegn på brug",
+      sv: "Inga eller minimala tecken på användning",
+      no: "Ingen eller minimale tegn til bruk",
+    },
+  };
+
+  return translations[lower]?.[lang] ?? value;
+}
+
+function getDescriptionParagraphs(description: string | undefined): string[] {
+  if (!description) return [];
+  return description
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
+}
 
 const ProductDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -67,12 +137,25 @@ const ProductDetail = () => {
 
   const galleryImages = product?.images?.length ? product.images : product ? [product.imageUrl] : [];
   const selectedImage = galleryImages[selectedImageIndex] || product?.imageUrl || "";
-  const productDescription =
-    product && lang === "da" && product.fullDescription
-      ? product.fullDescription
-      : product
-        ? t("detail.descriptionFallback")
-        : undefined;
+  const listingParts = product ? getListingParts(product.shortDescription) : [];
+  const listingLabels = [
+    t("detail.specAudience"),
+    t("detail.specCondition"),
+    t("detail.specBrand"),
+    t("detail.specSize"),
+    t("detail.specPeriod"),
+  ];
+  const listingFacts = product
+    ? [
+        { label: t("detail.specItem"), value: getItemNumber(product), icon: Tag },
+        ...listingParts.map((value, index) => ({
+          label: listingLabels[index] ?? t("detail.specNotes"),
+          value: translateListingValue(value, lang),
+          icon: [BadgeCheck, ShieldCheck, Tag, Ruler, CalendarDays][index] ?? BadgeCheck,
+        })),
+      ].filter((fact) => fact.value)
+    : [];
+  const descriptionParagraphs = product ? getDescriptionParagraphs(product.fullDescription) : [];
   const seoDescription = product
     ? lang === "da"
       ? product.shortDescription ||
@@ -283,13 +366,61 @@ const ProductDetail = () => {
                 </a>
               </div>
 
-              {productDescription && (
-                <div className="space-y-4">
-                  {productDescription.split("\n\n").map((para, i) => (
-                    <p key={i} className="text-base leading-relaxed text-muted-foreground">
-                      {para}
-                    </p>
-                  ))}
+              {listingFacts.length > 0 && (
+                <section className="rounded-lg border border-border/70 bg-card/80 p-5 shadow-[0_16px_42px_-28px_rgba(44,33,24,0.5)]">
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+                    {t("detail.listingInfoEyebrow")}
+                  </p>
+                  <h2 className="mt-2 font-serif text-2xl font-semibold text-foreground">
+                    {t("detail.listingInfoTitle")}
+                  </h2>
+
+                  <dl className="mt-5 grid gap-x-6 gap-y-0 sm:grid-cols-2">
+                    {listingFacts.map((fact) => {
+                      const Icon = fact.icon;
+
+                      return (
+                        <div
+                          key={`${fact.label}-${fact.value}`}
+                          className="border-t border-border/70 py-4"
+                        >
+                          <dt className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                            <Icon className="h-3.5 w-3.5 text-primary" />
+                            {fact.label}
+                          </dt>
+                          <dd className="mt-2 text-base font-medium leading-snug text-foreground">
+                            {fact.value}
+                          </dd>
+                        </div>
+                      );
+                    })}
+                  </dl>
+                </section>
+              )}
+
+              {descriptionParagraphs.length > 0 && (
+                <section className="rounded-lg border border-border/70 bg-card/70 p-5">
+                  <h2 className="font-serif text-2xl font-semibold text-foreground">
+                    {t("detail.originalNotesTitle")}
+                  </h2>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {t("detail.originalNotesIntro")}
+                  </p>
+                  <div className="mt-5 space-y-4">
+                    {descriptionParagraphs.map((para, i) => (
+                      <p key={i} className="text-base leading-relaxed text-muted-foreground">
+                        {para}
+                      </p>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {descriptionParagraphs.length === 0 && (
+                <div className="rounded-lg border border-border/70 bg-card/70 p-5">
+                  <p className="text-base leading-relaxed text-muted-foreground">
+                    {t("detail.descriptionFallback")}
+                  </p>
                 </div>
               )}
 

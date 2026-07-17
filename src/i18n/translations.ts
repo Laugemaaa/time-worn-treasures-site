@@ -80,6 +80,17 @@ export type TranslationKey =
   | "detail.viewOnTradera"
   | "detail.handoff"
   | "detail.descriptionFallback"
+  | "detail.listingInfoEyebrow"
+  | "detail.listingInfoTitle"
+  | "detail.originalNotesTitle"
+  | "detail.originalNotesIntro"
+  | "detail.specItem"
+  | "detail.specAudience"
+  | "detail.specCondition"
+  | "detail.specBrand"
+  | "detail.specSize"
+  | "detail.specPeriod"
+  | "detail.specNotes"
   | "detail.notFound"
   | "detail.return"
   | "detail.errorLoad"
@@ -202,6 +213,18 @@ const en: Dict = {
     "This listing is presented here, but the auction and checkout continue on Tradera.",
   "detail.descriptionFallback":
     "The original auction text is available on Tradera. Review the photos, condition notes, and live listing details before bidding.",
+  "detail.listingInfoEyebrow": "From the Tradera listing",
+  "detail.listingInfoTitle": "Watch details at a glance",
+  "detail.originalNotesTitle": "Original listing notes",
+  "detail.originalNotesIntro":
+    "These notes come from the active Tradera auction and are kept in the seller's original wording.",
+  "detail.specItem": "Item no.",
+  "detail.specAudience": "Audience",
+  "detail.specCondition": "Condition",
+  "detail.specBrand": "Brand",
+  "detail.specSize": "Case size",
+  "detail.specPeriod": "Period",
+  "detail.specNotes": "Notes",
   "detail.notFound": "This watch could not be found.",
   "detail.return": "Return to the collection",
   "detail.errorLoad": "We couldn't load this watch right now. Please try again.",
@@ -325,6 +348,18 @@ const da: Dict = {
     "Denne visning præsenteres her, men auktionen og betalingen fortsætter på Tradera.",
   "detail.descriptionFallback":
     "Den originale auktionstekst findes på Tradera. Gennemgå billeder, standnoter og de live auktionsoplysninger før du byder.",
+  "detail.listingInfoEyebrow": "Fra Tradera-annoncen",
+  "detail.listingInfoTitle": "Urets detaljer kort fortalt",
+  "detail.originalNotesTitle": "Originale annoncenoter",
+  "detail.originalNotesIntro":
+    "Disse noter kommer fra den aktive Tradera-auktion og vises med sælgerens originale formulering.",
+  "detail.specItem": "Varenr.",
+  "detail.specAudience": "Målgruppe",
+  "detail.specCondition": "Stand",
+  "detail.specBrand": "Mærke",
+  "detail.specSize": "Kassestørrelse",
+  "detail.specPeriod": "Periode",
+  "detail.specNotes": "Noter",
   "detail.notFound": "Dette ur kunne ikke findes.",
   "detail.return": "Tilbage til samlingen",
   "detail.errorLoad": "Vi kunne ikke indlæse dette ur lige nu. Prøv igen.",
@@ -448,6 +483,18 @@ const sv: Dict = {
     "Den här visningen presenteras här, men auktionen och köpet fortsätter på Tradera.",
   "detail.descriptionFallback":
     "Den ursprungliga auktionstexten finns på Tradera. Granska bilder, skicknoteringar och aktuella auktionsdetaljer innan du lägger bud.",
+  "detail.listingInfoEyebrow": "Från Tradera-annonsen",
+  "detail.listingInfoTitle": "Klockans detaljer i korthet",
+  "detail.originalNotesTitle": "Originala annonsnoter",
+  "detail.originalNotesIntro":
+    "Dessa noter kommer från den aktiva Tradera-auktionen och visas med säljarens ursprungliga formulering.",
+  "detail.specItem": "Varunr.",
+  "detail.specAudience": "Målgrupp",
+  "detail.specCondition": "Skick",
+  "detail.specBrand": "Märke",
+  "detail.specSize": "Boettstorlek",
+  "detail.specPeriod": "Period",
+  "detail.specNotes": "Noter",
   "detail.notFound": "Den här klockan kunde inte hittas.",
   "detail.return": "Tillbaka till kollektionen",
   "detail.errorLoad": "Vi kunde inte ladda den här klockan just nu. Försök igen.",
@@ -571,6 +618,18 @@ const no: Dict = {
     "Denne visningen presenteres her, men auksjonen og kjøpet fortsetter på Tradera.",
   "detail.descriptionFallback":
     "Den opprinnelige auksjonsteksten finnes på Tradera. Se gjennom bilder, tilstandsnotater og live auksjonsdetaljer før du byr.",
+  "detail.listingInfoEyebrow": "Fra Tradera-annonsen",
+  "detail.listingInfoTitle": "Klokkens detaljer kort fortalt",
+  "detail.originalNotesTitle": "Originale annonsenotater",
+  "detail.originalNotesIntro":
+    "Disse notatene kommer fra den aktive Tradera-auksjonen og vises med selgerens opprinnelige formulering.",
+  "detail.specItem": "Varenr.",
+  "detail.specAudience": "Målgruppe",
+  "detail.specCondition": "Tilstand",
+  "detail.specBrand": "Merke",
+  "detail.specSize": "Kassestørrelse",
+  "detail.specPeriod": "Periode",
+  "detail.specNotes": "Notater",
   "detail.notFound": "Denne klokken kunne ikke finnes.",
   "detail.return": "Tilbake til kolleksjonen",
   "detail.errorLoad": "Vi kunne ikke laste denne klokken akkurat nå. Prøv igjen.",
