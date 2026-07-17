@@ -1,6 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import {
-  SUPPORTED_LANGUAGES,
   translations,
   type Language,
   type TranslationKey,
@@ -14,16 +13,8 @@ type Ctx = {
 
 const LanguageContext = createContext<Ctx | null>(null);
 
-const STORAGE_KEY = "gh.lang";
 const LEGACY_STORAGE_KEY = "vw.lang";
-
-function normalize(code: string | undefined | null): Language | null {
-  if (!code) return null;
-  const lower = code.toLowerCase().split(/[-_]/)[0];
-  if ((SUPPORTED_LANGUAGES as string[]).includes(lower)) return lower as Language;
-  if (lower === "nb" || lower === "nn") return "no";
-  return null;
-}
+const STORED_LANGUAGE_KEY = "gh.lang";
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Language>("en");
@@ -31,14 +22,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       localStorage.removeItem(LEGACY_STORAGE_KEY);
+      localStorage.removeItem(STORED_LANGUAGE_KEY);
     } catch {
       /* ignore */
-    }
-
-    const stored = typeof localStorage !== "undefined" ? localStorage.getItem(STORAGE_KEY) : null;
-    const storedLang = normalize(stored);
-    if (storedLang) {
-      setLangState(storedLang);
     }
   }, []);
 
@@ -48,11 +34,6 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const setLang = useCallback((l: Language) => {
     setLangState(l);
-    try {
-      localStorage.setItem(STORAGE_KEY, l);
-    } catch {
-      /* ignore */
-    }
   }, []);
 
   const t = useCallback(
