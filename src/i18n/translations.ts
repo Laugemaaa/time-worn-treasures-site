@@ -84,6 +84,9 @@ export type TranslationKey =
   | "detail.listingInfoTitle"
   | "detail.originalNotesTitle"
   | "detail.originalNotesIntro"
+  | "detail.keyNotesTitle"
+  | "detail.specificationsTitle"
+  | "detail.sellerNotesTitle"
   | "detail.specItem"
   | "detail.specAudience"
   | "detail.specCondition"
@@ -218,6 +221,9 @@ const en: Dict = {
   "detail.originalNotesTitle": "Original listing notes",
   "detail.originalNotesIntro":
     "These notes come from the active Tradera auction and are kept in the seller's original wording.",
+  "detail.keyNotesTitle": "Key notes",
+  "detail.specificationsTitle": "Specifications",
+  "detail.sellerNotesTitle": "Seller notes",
   "detail.specItem": "Item no.",
   "detail.specAudience": "Audience",
   "detail.specCondition": "Condition",
@@ -353,6 +359,9 @@ const da: Dict = {
   "detail.originalNotesTitle": "Originale annoncenoter",
   "detail.originalNotesIntro":
     "Disse noter kommer fra den aktive Tradera-auktion og vises med sælgerens originale formulering.",
+  "detail.keyNotesTitle": "Vigtige noter",
+  "detail.specificationsTitle": "Specifikationer",
+  "detail.sellerNotesTitle": "Sælgernoter",
   "detail.specItem": "Varenr.",
   "detail.specAudience": "Målgruppe",
   "detail.specCondition": "Stand",
@@ -488,6 +497,9 @@ const sv: Dict = {
   "detail.originalNotesTitle": "Originala annonsnoter",
   "detail.originalNotesIntro":
     "Dessa noter kommer från den aktiva Tradera-auktionen och visas med säljarens ursprungliga formulering.",
+  "detail.keyNotesTitle": "Viktiga noter",
+  "detail.specificationsTitle": "Specifikationer",
+  "detail.sellerNotesTitle": "Säljarnoter",
   "detail.specItem": "Varunr.",
   "detail.specAudience": "Målgrupp",
   "detail.specCondition": "Skick",
@@ -623,6 +635,9 @@ const no: Dict = {
   "detail.originalNotesTitle": "Originale annonsenotater",
   "detail.originalNotesIntro":
     "Disse notatene kommer fra den aktive Tradera-auksjonen og vises med selgerens opprinnelige formulering.",
+  "detail.keyNotesTitle": "Viktige notater",
+  "detail.specificationsTitle": "Spesifikasjoner",
+  "detail.sellerNotesTitle": "Selgernotater",
   "detail.specItem": "Varenr.",
   "detail.specAudience": "Målgruppe",
   "detail.specCondition": "Tilstand",

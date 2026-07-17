@@ -80,12 +80,48 @@ function translateListingValue(value: string, lang: string): string {
   return translations[lower]?.[lang] ?? value;
 }
 
-function getDescriptionParagraphs(description: string | undefined): string[] {
-  if (!description) return [];
-  return description
-    .split(/\n{2,}/)
-    .map((paragraph) => paragraph.trim())
-    .filter(Boolean);
+type OriginalListingSections = {
+  keyNotes: string[];
+  specifications: string[];
+  sellerNotes: string[];
+};
+
+function getOriginalListingSections(
+  description: string | undefined,
+  listingParts: string[],
+): OriginalListingSections {
+  const sections: OriginalListingSections = {
+    keyNotes: [],
+    specifications: [],
+    sellerNotes: [],
+  };
+  if (!description) return sections;
+
+  const listingPartSet = new Set(listingParts.map((part) => part.toLowerCase()));
+  let currentSection: keyof OriginalListingSections = "keyNotes";
+
+  for (const rawLine of description.split(/\r?\n/)) {
+    const line = rawLine.trim();
+    if (!line || line === "|" || listingPartSet.has(line.toLowerCase())) continue;
+
+    if (/^specifications$/i.test(line)) {
+      currentSection = "specifications";
+      continue;
+    }
+
+    if (line.startsWith("•")) {
+      sections.specifications.push(line.replace(/^•\s*/, ""));
+      continue;
+    }
+
+    if (currentSection === "specifications") {
+      currentSection = "sellerNotes";
+    }
+
+    sections[currentSection].push(line);
+  }
+
+  return sections;
 }
 
 const ProductDetail = () => {
@@ -161,7 +197,13 @@ const ProductDetail = () => {
         })),
       ].filter((fact) => fact.value)
     : [];
-  const descriptionParagraphs = product ? getDescriptionParagraphs(product.fullDescription) : [];
+  const originalListingSections = product
+    ? getOriginalListingSections(product.fullDescription, listingParts)
+    : { keyNotes: [], specifications: [], sellerNotes: [] };
+  const hasOriginalListingNotes =
+    originalListingSections.keyNotes.length > 0 ||
+    originalListingSections.specifications.length > 0 ||
+    originalListingSections.sellerNotes.length > 0;
   const seoDescription = product
     ? lang === "da"
       ? product.shortDescription ||
@@ -404,7 +446,7 @@ const ProductDetail = () => {
                 </section>
               )}
 
-              {descriptionParagraphs.length > 0 && (
+              {hasOriginalListingNotes && (
                 <section className="rounded-lg border border-border/70 bg-card/70 p-5">
                   <h2 className="font-serif text-2xl font-semibold text-foreground">
                     {t("detail.originalNotesTitle")}
@@ -412,12 +454,56 @@ const ProductDetail = () => {
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                     {t("detail.originalNotesIntro")}
                   </p>
-                  <div className="mt-5 space-y-4">
-                    {descriptionParagraphs.map((para, i) => (
-                      <p key={i} className="text-base leading-relaxed text-muted-foreground">
-                        {para}
-                      </p>
-                    ))}
+
+                  <div className="mt-5 space-y-6">
+                    {originalListingSections.keyNotes.length > 0 && (
+                      <div className="border-t border-border/70 pt-4">
+                        <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                          {t("detail.keyNotesTitle")}
+                        </h3>
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {originalListingSections.keyNotes.map((note) => (
+                            <span
+                              key={note}
+                              className="rounded-full border border-border/80 bg-background/35 px-3 py-1 text-sm leading-relaxed text-foreground/85"
+                            >
+                              {note}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {originalListingSections.specifications.length > 0 && (
+                      <div className="border-t border-border/70 pt-4">
+                        <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                          {t("detail.specificationsTitle")}
+                        </h3>
+                        <ul className="mt-3 grid gap-x-5 gap-y-2 text-sm leading-relaxed text-muted-foreground sm:grid-cols-2">
+                          {originalListingSections.specifications.map((spec) => (
+                            <li key={spec} className="flex gap-2">
+                              <span className="mt-[0.72em] h-1.5 w-1.5 shrink-0 rounded-full bg-primary/80" />
+                              <span>{spec}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {originalListingSections.sellerNotes.length > 0 && (
+                      <div className="border-t border-border/70 pt-4">
+                        <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                          {t("detail.sellerNotesTitle")}
+                        </h3>
+                        <div className="mt-3 space-y-3">
+                          {originalListingSections.sellerNotes.map((note) => (
+                            <p key={note} className="text-sm leading-relaxed text-muted-foreground">
+                              {note}
+                            </p>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </section>
               )}
