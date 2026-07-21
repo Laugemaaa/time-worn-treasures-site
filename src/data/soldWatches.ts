@@ -53,6 +53,8 @@ import junghans17JewelsImage from "@/assets/sold-watches/optimized/junghans-17-j
 import omegaSpeedmasterPartsImage from "@/assets/sold-watches/optimized/omega-speedmaster-reservedele.jpg";
 import technosIncablocImage from "@/assets/sold-watches/optimized/technos-incabloc-vintage-ur.jpg";
 import seiko5BlueDialImage from "@/assets/sold-watches/optimized/seiko-5-automatic-herreur-blaa-urskive.jpg";
+import seikoAdvan6106Image from "@/assets/sold-watches/optimized/vintage-seiko-advan-automatic-6106-7670.jpg";
+import seikoLmSpecial5216Image from "@/assets/sold-watches/optimized/vintage-seiko-lm-special-automatic-5216-7080.jpg";
 import wilsonDeLuxeImage from "@/assets/sold-watches/optimized/wilson-de-luxe-vintage-ur.jpg";
 import sekelVintageImage from "@/assets/sold-watches/optimized/sekel-vintage-ur-swiss-made.jpg";
 import nisusAutomaticImage from "@/assets/sold-watches/optimized/nisus-automatic-herre-ur.jpg";
@@ -107,6 +109,32 @@ export type SoldWatch = {
 };
 
 export const soldWatches: SoldWatch[] = [
+  {
+    id: "vintage-seiko-advan-automatic-6106-7670",
+    title: "Vintage Seiko Advan Automatic 6106-7670",
+    imageUrl: seikoAdvan6106Image,
+    soldPrice: 941,
+    currency: "DKK",
+    itemNumber: "740494537",
+    soldDate: "21 juli 2026 18:48",
+    numberOfBids: 16,
+    shortDescription: "Vintage Seiko Advan Automatic 6106-7670.",
+    traderaUrl:
+      "https://www.tradera.com/da/item/1000985/740494537/vintage-seiko-advan-automatic-6106-7670",
+  },
+  {
+    id: "vintage-seiko-lm-special-automatic-5216-7080",
+    title: "Vintage Seiko LM Special Automatic 5216-7080",
+    imageUrl: seikoLmSpecial5216Image,
+    soldPrice: 926,
+    currency: "DKK",
+    itemNumber: "740496306",
+    soldDate: "21 juli 2026 19:00",
+    numberOfBids: 25,
+    shortDescription: "Vintage Seiko LM Special Automatic 5216-7080.",
+    traderaUrl:
+      "https://www.tradera.com/da/item/1000985/740496306/vintage-seiko-lm-special-automatic-5216-7080",
+  },
   {
     id: "citizen-quartz-2110-895878-smt",
     title: "Citizen Quartz 2110-895878 SMT",
