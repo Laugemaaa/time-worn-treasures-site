@@ -1,13 +1,15 @@
 import { Fragment, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getProducts, type Product } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TraderaButton } from "@/components/TraderaButton";
 import { useLanguage } from "@/i18n/LanguageProvider";
-import { Clock3, PackageOpen, RefreshCw } from "lucide-react";
+import { ArrowRight, Clock3, PackageOpen, RefreshCw } from "lucide-react";
 
 const LIVE_FEED_REFRESH_MS = 30_000;
+const HOMEPAGE_PREVIEW_COUNT = 5;
 
 function AuctionInfoCard() {
   const { t } = useLanguage();
@@ -51,6 +53,7 @@ export function ProductGridSection() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const previewProducts = products.slice(0, HOMEPAGE_PREVIEW_COUNT);
 
   const fetchProducts = async (showLoading = false) => {
     if (showLoading) {
@@ -90,9 +93,26 @@ export function ProductGridSection() {
 
   return (
     <SectionWrapper id="collection" className="py-16 md:py-24">
-      <h2 className="font-serif text-3xl font-semibold text-foreground mb-8 md:text-4xl">
-        {t("collection.title")}
-      </h2>
+      <div className="mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+        <div className="max-w-2xl">
+          <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">
+            Live on Tradera
+          </p>
+          <h2 className="font-serif text-3xl font-semibold text-foreground md:text-4xl">
+            {t("collection.title")}
+          </h2>
+          <p className="mt-3 text-sm leading-7 text-muted-foreground md:text-base">
+            A preview of current auctions. Open the full auction page for the latest live listings and bidding details.
+          </p>
+        </div>
+        <Link
+          to="/auctions"
+          className="cta-press inline-flex h-11 w-fit items-center gap-2 rounded-md bg-primary px-5 font-serif text-base font-semibold text-primary-foreground transition-colors duration-150 hover:bg-navy-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        >
+          View all auctions
+          <ArrowRight className="h-4 w-4" />
+        </Link>
+      </div>
 
       {loading && (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -132,7 +152,7 @@ export function ProductGridSection() {
                 {t("collection.empty")}
               </h3>
               <p className="text-sm leading-relaxed text-muted-foreground">
-                {t("detail.handoff")}
+                {t("collection.emptyDescription")}
               </p>
             </div>
             <TraderaButton className="mt-2" />
@@ -142,7 +162,7 @@ export function ProductGridSection() {
 
       {!loading && !error && products.length > 0 && (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {products.map((product, index) => (
+          {previewProducts.map((product, index) => (
             <Fragment key={product.id}>
               <ProductCard product={product} />
               {index === 0 ? <AuctionInfoCard /> : null}

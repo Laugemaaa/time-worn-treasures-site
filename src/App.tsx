@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
+import AvailableWatches from "./pages/AvailableWatches.tsx";
 import ProductDetail from "./pages/ProductDetail.tsx";
 import SoldWatches from "./pages/SoldWatches.tsx";
 import SoldWatchDetail from "./pages/SoldWatchDetail.tsx";
@@ -19,6 +20,8 @@ const AnimatedRoutes = () => {
     <div key={location.pathname} className="page-transition">
       <Routes location={location}>
         <Route path="/" element={<Index />} />
+        <Route path="/auctions" element={<AvailableWatches />} />
+        <Route path="/available-watches" element={<AvailableWatches />} />
         <Route path="/solgte-ure" element={<SoldWatches />} />
         <Route path="/solgte-ure/:id" element={<SoldWatchDetail />} />
         <Route path="/watch/:slug" element={<ProductDetail />} />

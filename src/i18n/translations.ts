@@ -12,6 +12,7 @@ export const LANGUAGE_LABELS: Record<Language, string> = {
 export type TranslationKey =
   | "nav.home"
   | "nav.collection"
+  | "nav.available"
   | "nav.about"
   | "nav.soldWatches"
   | "nav.tradera"
@@ -65,6 +66,7 @@ export type TranslationKey =
   | "collection.infoPoint2"
   | "collection.productSummary"
   | "collection.empty"
+  | "collection.emptyDescription"
   | "collection.error"
   | "collection.retry"
   | "testimonials.title"
@@ -128,6 +130,7 @@ type Dict = Record<TranslationKey, string>;
 const en: Dict = {
   "nav.home": "Home",
   "nav.collection": "Collection",
+  "nav.available": "Auctions",
   "nav.about": "About",
   "nav.soldWatches": "Sold watches",
   "nav.tradera": "Tradera",
@@ -197,6 +200,7 @@ const en: Dict = {
   "collection.infoPoint2": "Check back often for newly added pieces and returning archive updates.",
   "collection.productSummary": "Vintage watch listed on Tradera with photos, condition notes, and live auction details.",
   "collection.empty": "No watches available at the moment. Check back soon.",
+  "collection.emptyDescription": "New auctions are added whenever fresh vintage pieces are ready for Tradera.",
   "collection.error": "We couldn't load the collection right now. Please try again.",
   "collection.retry": "Try again",
   "testimonials.title": "What collectors say",
@@ -266,6 +270,7 @@ const en: Dict = {
 const da: Dict = {
   "nav.home": "Hjem",
   "nav.collection": "Kollektion",
+  "nav.available": "Auktioner",
   "nav.about": "Om",
   "nav.soldWatches": "Solgte ure",
   "nav.tradera": "Tradera",
@@ -335,6 +340,7 @@ const da: Dict = {
   "collection.infoPoint2": "Kig forbi løbende for nye ure og opdateringer fra arkivet.",
   "collection.productSummary": "Vintage-ur på Tradera med billeder, standnoter og live auktionsoplysninger.",
   "collection.empty": "Ingen ure tilgængelige lige nu. Kig forbi snart.",
+  "collection.emptyDescription": "Nye auktioner bliver tilføjet, når friske vintage-ure er klar til Tradera.",
   "collection.error": "Vi kunne ikke indlæse samlingen lige nu. Prøv igen.",
   "collection.retry": "Prøv igen",
   "testimonials.title": "Hvad samlere siger",
@@ -404,6 +410,7 @@ const da: Dict = {
 const sv: Dict = {
   "nav.home": "Hem",
   "nav.collection": "Kollektionen",
+  "nav.available": "Auktioner",
   "nav.about": "Om",
   "nav.soldWatches": "Sålda klockor",
   "nav.tradera": "Tradera",
@@ -473,6 +480,7 @@ const sv: Dict = {
   "collection.infoPoint2": "Titta förbi regelbundet för nya klockor och uppdateringar från arkivet.",
   "collection.productSummary": "Vintageklocka på Tradera med bilder, skicknoteringar och live auktionsdetaljer.",
   "collection.empty": "Inga klockor tillgängliga just nu. Kom tillbaka snart.",
+  "collection.emptyDescription": "Nya auktioner läggs till när nya vintageklockor är redo för Tradera.",
   "collection.error": "Vi kunde inte ladda kollektionen just nu. Försök igen.",
   "collection.retry": "Försök igen",
   "testimonials.title": "Vad samlare säger",
@@ -542,6 +550,7 @@ const sv: Dict = {
 const no: Dict = {
   "nav.home": "Hjem",
   "nav.collection": "Kolleksjonen",
+  "nav.available": "Auksjoner",
   "nav.about": "Om",
   "nav.soldWatches": "Solgte klokker",
   "nav.tradera": "Tradera",
@@ -611,6 +620,7 @@ const no: Dict = {
   "collection.infoPoint2": "Kom innom jevnlig for nye klokker og oppdateringer fra arkivet.",
   "collection.productSummary": "Vintageklokke på Tradera med bilder, tilstandsnotater og live auksjonsdetaljer.",
   "collection.empty": "Ingen klokker tilgjengelig akkurat nå. Kom tilbake snart.",
+  "collection.emptyDescription": "Nye auksjoner legges til når nye vintageklokker er klare for Tradera.",
   "collection.error": "Vi kunne ikke laste kolleksjonen akkurat nå. Prøv igjen.",
   "collection.retry": "Prøv igjen",
   "testimonials.title": "Hva samlere sier",

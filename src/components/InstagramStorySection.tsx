@@ -25,16 +25,19 @@ export function InstagramStorySection() {
               <p>{t("instagram.p2")}</p>
             </div>
 
-            <a
-              href="https://www.instagram.com/grandpasheritage/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cta-press mt-8 inline-flex h-11 items-center gap-2 rounded-md bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors duration-150 hover:bg-navy-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            >
-              <Instagram className="h-4 w-4" aria-hidden="true" />
-              {t("instagram.cta")}
-              <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-            </a>
+            <div className="relative mt-8 inline-flex">
+              <div className="pointer-events-none absolute -inset-x-4 -inset-y-2 rounded-full bg-primary/18 blur-xl transition-opacity duration-300" />
+              <a
+                href="https://www.instagram.com/grandpasheritage/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cta-press relative inline-flex h-11 items-center gap-2 rounded-md bg-primary px-5 text-sm font-medium text-primary-foreground shadow-[0_0_18px_rgba(216,200,170,0.16)] transition-colors duration-150 hover:bg-navy-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                <Instagram className="h-4 w-4" aria-hidden="true" />
+                {t("instagram.cta")}
+                <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+              </a>
+            </div>
           </div>
 
           <div className="mx-auto w-full max-w-[330px] lg:mr-8">
