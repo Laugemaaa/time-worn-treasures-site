@@ -8,6 +8,7 @@ import AvailableWatches from "./pages/AvailableWatches.tsx";
 import ProductDetail from "./pages/ProductDetail.tsx";
 import SoldWatches from "./pages/SoldWatches.tsx";
 import SoldWatchDetail from "./pages/SoldWatchDetail.tsx";
+import BuyWatches from "./pages/BuyWatches.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import { LanguageProvider } from "@/i18n/LanguageProvider";
 
@@ -24,6 +25,7 @@ const AnimatedRoutes = () => {
         <Route path="/available-watches" element={<AvailableWatches />} />
         <Route path="/solgte-ure" element={<SoldWatches />} />
         <Route path="/solgte-ure/:id" element={<SoldWatchDetail />} />
+        <Route path="/opkoeb" element={<BuyWatches />} />
         <Route path="/watch/:slug" element={<ProductDetail />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />

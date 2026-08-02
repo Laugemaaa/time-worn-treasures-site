@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getProducts, type Product } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
@@ -15,9 +15,9 @@ function AuctionInfoCard() {
   const { t } = useLanguage();
 
   return (
-    <article className="overflow-hidden rounded-lg border border-border bg-card shadow-[0_18px_45px_-34px_rgba(29,20,15,0.8)]">
-      <div className="flex aspect-square flex-col justify-between bg-[radial-gradient(circle_at_24%_18%,rgba(234,220,198,0.18),transparent_34%),linear-gradient(145deg,hsl(var(--card))_0%,hsl(var(--surface-espresso))_100%)] p-6">
-        <div className="flex h-12 w-12 items-center justify-center rounded-full border border-primary/30 bg-background/35 text-primary">
+    <article className="group/info overflow-hidden rounded-lg border border-border bg-card shadow-[0_18px_45px_-34px_rgba(29,20,15,0.8)] transition-[border-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-1 hover:border-[#eadcc6]/45 hover:shadow-[0_28px_70px_-38px_rgba(234,220,198,0.34)]">
+      <div className="flex aspect-square flex-col justify-between bg-[radial-gradient(circle_at_24%_18%,rgba(234,220,198,0.18),transparent_34%),linear-gradient(145deg,hsl(var(--card))_0%,hsl(var(--surface-espresso))_100%)] p-6 transition-[filter] duration-300 group-hover/info:brightness-110">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full border border-primary/30 bg-background/35 text-primary transition-[background-color,border-color,transform] duration-300 group-hover/info:rotate-45 group-hover/info:border-[#eadcc6]/65 group-hover/info:bg-[#eadcc6]/12">
           <RefreshCw className="h-5 w-5" />
         </div>
 
@@ -34,7 +34,7 @@ function AuctionInfoCard() {
         </div>
       </div>
 
-      <div className="space-y-3 p-4 text-sm text-muted-foreground">
+      <div className="space-y-3 p-4 text-sm text-muted-foreground transition-colors duration-300 group-hover/info:text-[#eadcc6]/86">
         <div className="flex items-start gap-2">
           <Clock3 className="mt-1 h-4 w-4 shrink-0 text-primary" />
           <span>{t("collection.infoPoint1")}</span>
@@ -162,12 +162,10 @@ export function ProductGridSection() {
 
       {!loading && !error && products.length > 0 && (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {previewProducts.map((product, index) => (
-            <Fragment key={product.id}>
-              <ProductCard product={product} />
-              {index === 0 ? <AuctionInfoCard /> : null}
-            </Fragment>
+          {previewProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
           ))}
+          <AuctionInfoCard />
         </div>
       )}
     </SectionWrapper>

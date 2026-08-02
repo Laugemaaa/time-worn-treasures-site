@@ -17,6 +17,7 @@ export function Navbar() {
     { label: t("nav.collection"), to: "/#collection" },
     { label: t("nav.about"), to: "/#philosophy" },
     { label: t("nav.soldWatches"), to: "/solgte-ure" },
+    { label: t("nav.buyWatches"), to: "/opkoeb" },
   ];
 
   const instagramUrl = "https://www.instagram.com/grandpasheritage/";

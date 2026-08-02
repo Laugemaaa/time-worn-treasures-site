@@ -68,9 +68,6 @@ export function AuctionMetadata({ product, compact = false }: Props) {
     return Number.isFinite(time) ? time : undefined;
   }, [product.auctionEndDate]);
   const liveMilliseconds = auctionEndTime == null ? undefined : Math.max(0, auctionEndTime - now);
-  const fallbackMilliseconds = product.timeRemaining
-    ? parseISO8601DurationToMilliseconds(product.timeRemaining)
-    : undefined;
   const countdownLabel =
     liveMilliseconds != null
       ? formatDuration(liveMilliseconds)
@@ -85,18 +82,12 @@ export function AuctionMetadata({ product, compact = false }: Props) {
     countdownLabel;
   if (!hasAnyData) return null;
 
-  const urgent =
-    liveMilliseconds != null
-      ? liveMilliseconds < HOUR_MS
-      : fallbackMilliseconds != null
-        ? fallbackMilliseconds < HOUR_MS
-        : false;
   const currency = product.currency || "SEK";
   const currentPrice = product.currentBidPrice;
   const startingPrice = product.startingBidPrice;
   const countdownClassName = compact
-    ? "font-semibold text-[hsl(var(--auction-countdown))]"
-    : "rounded-full border border-[hsl(var(--auction-countdown)/0.35)] bg-[hsl(var(--auction-countdown-soft)/0.28)] px-2.5 py-0.5 font-semibold text-[hsl(var(--auction-countdown))]";
+    ? "text-[hsl(var(--auction-countdown)/0.82)]"
+    : "rounded-full border border-[hsl(var(--auction-countdown)/0.32)] bg-[hsl(var(--auction-countdown-soft)/0.24)] px-2.5 py-0.5 text-[hsl(var(--auction-countdown)/0.88)]";
 
   return (
     <div className={`flex flex-wrap items-center gap-x-4 gap-y-1 text-muted-foreground ${compact ? "text-xs" : "text-sm"}`}>
@@ -128,7 +119,7 @@ export function AuctionMetadata({ product, compact = false }: Props) {
         </span>
       )}
       {countdownLabel && (
-        <span className={`inline-flex items-center gap-1 ${countdownClassName} ${urgent ? "animate-pulse" : ""}`}>
+        <span className={`inline-flex items-center gap-1 ${countdownClassName}`}>
           <Clock className="h-3 w-3" />
           {countdownLabel}
         </span>

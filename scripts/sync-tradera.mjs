@@ -281,7 +281,11 @@ async function scrapeItemPage(itemUrl, referenceDate) {
   const title = matchText(text, /#?\s*([^\n]+?)\n\s*Slutter\s+\d{1,2}\s+\w+\s+\d{2}:\d{2}/i)
     || matchMeta(html, "og:title")
     || matchTag(html, "h1");
-  const endLabel = matchText(text, /Slutter\s+([^\n]+)/i);
+  const embeddedAuctionEndDate = matchEmbeddedAuctionEndDate(html);
+  const endLabel = matchText(
+    text,
+    /Slutter\s+([\s\S]*?\d{1,2}\s+[A-Za-zÆØÅæøå]{3,}\.?\s+\d{2}:\d{2})/i
+  );
   const leadingBidPriceText = matchText(
     text,
     /(?:Førende bud|Ledande bud|Leading bid|Højeste bud|Högsta bud)[\s\S]*?([\d.\u00a0 ]+\s*(?:DKK|SEK|NOK))/i
@@ -310,7 +314,7 @@ async function scrapeItemPage(itemUrl, referenceDate) {
 
   const parsedPrice = parseMoney(priceText);
   const parsedStartingPrice = parseMoney(startPriceText);
-  const auctionEndDate = parseTraderaDate(endLabel, referenceDate);
+  const auctionEndDate = embeddedAuctionEndDate || parseTraderaDate(endLabel, referenceDate);
 
   return {
     id: itemNumber || itemUrl.match(/\/(\d+)\/[a-z0-9-]+$/i)?.[1] || slugify(title),
@@ -476,8 +480,16 @@ function parseMoney(raw) {
   };
 }
 
+function matchEmbeddedAuctionEndDate(html) {
+  const match = html.match(/"(?:endDate|endTime|endsAt|auctionEndDate|EndDate)"\s*:\s*"([^"]+)"/i);
+  if (!match) return undefined;
+
+  const timestamp = new Date(match[1]).getTime();
+  return Number.isFinite(timestamp) ? new Date(timestamp).toISOString() : undefined;
+}
+
 function parseTraderaDate(label, referenceDate) {
-  const match = label.match(/(\d{1,2})\s+([A-Za-zÆØÅæøå]{3,})\s+(\d{2}:\d{2})/i);
+  const match = label.match(/(\d{1,2})\s+([A-Za-zÆØÅæøå]{3,})\.?\s+(\d{2}:\d{2})/i);
   if (!match) return undefined;
 
   const monthMap = {

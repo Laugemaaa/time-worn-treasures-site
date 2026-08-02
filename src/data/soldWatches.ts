@@ -91,6 +91,8 @@ import fireCasioArmbandsureImage from "@/assets/sold-watches/optimized/fire-casi
 import citizenSevenStarV2Image from "@/assets/sold-watches/optimized/citizen-seven-star-v2-automatisk-herreur.jpg";
 import citizenQuartz2110Image from "@/assets/sold-watches/optimized/citizen-quartz-2110-895878-smt.png";
 import certinaDs100mQuartzImage from "@/assets/sold-watches/optimized/certina-ds-100m-quartz.png";
+import vintageTissotSeastar10AtmImage from "@/assets/sold-watches/optimized/vintage-tissot-seastar-10-atm.png";
+import seikoActusSsAutomatic6106Image from "@/assets/sold-watches/optimized/seiko-actus-ss-automatic-6106-8910.png";
 
 export type SoldWatch = {
   id: string;
@@ -109,6 +111,30 @@ export type SoldWatch = {
 };
 
 export const soldWatches: SoldWatch[] = [
+  {
+    id: "vintage-tissot-seastar-10-atm",
+    title: "Vintage Tissot Seastar 10 ATM",
+    imageUrl: vintageTissotSeastar10AtmImage,
+    soldPrice: 324,
+    currency: "DKK",
+    itemNumber: "741773805",
+    soldDate: "31 juli 2026 20:10",
+    shortDescription: "Vintage Tissot Seastar 10 ATM.",
+    traderaUrl:
+      "https://www.tradera.com/da/item/1902/741773805/vintage-tissot-seastar-10-atm",
+  },
+  {
+    id: "seiko-actus-ss-automatic-reference-6106-8910",
+    title: "Seiko Actus SS Automatic, reference 6106-8910",
+    imageUrl: seikoActusSsAutomatic6106Image,
+    soldPrice: 981,
+    currency: "DKK",
+    itemNumber: "741773218",
+    soldDate: "31 juli 2026 19:31",
+    shortDescription: "Seiko Actus SS Automatic, reference 6106-8910.",
+    traderaUrl:
+      "https://www.tradera.com/da/item/1000985/741773218/seiko-actus-ss-automatic-reference-6106-8910",
+  },
   {
     id: "vintage-seiko-advan-automatic-6106-7670",
     title: "Vintage Seiko Advan Automatic 6106-7670",

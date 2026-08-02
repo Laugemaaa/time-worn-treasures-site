@@ -15,6 +15,7 @@ export type TranslationKey =
   | "nav.available"
   | "nav.about"
   | "nav.soldWatches"
+  | "nav.buyWatches"
   | "nav.tradera"
   | "nav.openMenu"
   | "nav.closeMenu"
@@ -133,6 +134,7 @@ const en: Dict = {
   "nav.available": "Auctions",
   "nav.about": "About",
   "nav.soldWatches": "Sold watches",
+  "nav.buyWatches": "Sell a watch",
   "nav.tradera": "Tradera",
   "nav.openMenu": "Open menu",
   "nav.closeMenu": "Close menu",
@@ -273,6 +275,7 @@ const da: Dict = {
   "nav.available": "Auktioner",
   "nav.about": "Om",
   "nav.soldWatches": "Solgte ure",
+  "nav.buyWatches": "Opkøb",
   "nav.tradera": "Tradera",
   "nav.openMenu": "Åbn menu",
   "nav.closeMenu": "Luk menu",
@@ -413,6 +416,7 @@ const sv: Dict = {
   "nav.available": "Auktioner",
   "nav.about": "Om",
   "nav.soldWatches": "Sålda klockor",
+  "nav.buyWatches": "Sälj klocka",
   "nav.tradera": "Tradera",
   "nav.openMenu": "Öppna meny",
   "nav.closeMenu": "Stäng meny",
@@ -553,6 +557,7 @@ const no: Dict = {
   "nav.available": "Auksjoner",
   "nav.about": "Om",
   "nav.soldWatches": "Solgte klokker",
+  "nav.buyWatches": "Selg klokke",
   "nav.tradera": "Tradera",
   "nav.openMenu": "Åpne meny",
   "nav.closeMenu": "Lukk meny",

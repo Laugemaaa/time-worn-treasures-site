@@ -219,7 +219,7 @@
 }
 
 .testimonials-marquee {
-  animation: testimonials-marquee 58s linear infinite;
+  animation: testimonials-marquee 100s linear infinite;
   animation-play-state: running !important;
 }
 
