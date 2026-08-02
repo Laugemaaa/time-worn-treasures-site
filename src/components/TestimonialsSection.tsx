@@ -32,7 +32,12 @@ export function TestimonialsSection() {
     if (!el) return;
 
     const observer = new IntersectionObserver(
-      ([entry]) => setRatingVisible(entry.isIntersecting),
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setRatingVisible(true);
+          observer.unobserve(el);
+        }
+      },
       {
         rootMargin: "-12% 0px -12% 0px",
         threshold: 0.65,
@@ -61,9 +66,9 @@ export function TestimonialsSection() {
               {Array.from({ length: 5 }).map((_, index) => (
                 <Star
                   key={index}
-                  className="testimonial-star h-4 w-4 fill-current"
+                  className="testimonial-star h-5 w-5 fill-current"
                   style={{ animationDelay: `${index * 90}ms` }}
-                  strokeWidth={2.85}
+                  strokeWidth={2.35}
                 />
               ))}
             </span>

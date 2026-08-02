@@ -234,19 +234,6 @@
   }
 }
 
-@keyframes testimonial-stars-exit {
-  from {
-    opacity: 1;
-    filter: blur(0);
-    transform: translateY(0) scale(1) rotate(0deg);
-  }
-
-  to {
-    opacity: 0;
-    filter: blur(2px);
-    transform: translateY(-8px) scale(0.78) rotate(10deg);
-  }
-}
 
 @keyframes testimonial-badge-in {
   from {
@@ -260,15 +247,13 @@
   }
 }
 
-@keyframes testimonial-badge-out {
+@keyframes testimonial-badge-shine {
   from {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateX(-130%) skewX(-18deg);
   }
 
   to {
-    opacity: 0;
-    transform: translateY(-10px) scale(0.97);
+    transform: translateX(130%) skewX(-18deg);
   }
 }
 @keyframes sold-filter-enter {
@@ -449,23 +434,45 @@
 
 .testimonial-rating-badge {
   opacity: 0;
-  transform: translateY(-10px) scale(0.97);
-  animation: testimonial-badge-out 260ms var(--motion-ease-standard) both;
+  transform: translateY(14px) scale(0.96);
   will-change: opacity, transform;
+}
+
+.testimonial-rating-badge::after {
+  content: "";
+  position: absolute;
+  inset: -40% auto -40% -35%;
+  width: 42%;
+  background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.28), transparent);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .testimonial-rating-badge.is-visible {
   animation: testimonial-badge-in 430ms var(--motion-ease-enter) both;
+  border-color: hsl(var(--auction-countdown) / 0.42);
+  background:
+    linear-gradient(180deg, hsl(var(--primary) / 0.15), hsl(var(--primary) / 0.08)),
+    hsl(var(--card));
+  box-shadow:
+    0 18px 55px -36px hsl(var(--auction-countdown) / 1),
+    inset 0 1px 0 hsl(var(--foreground) / 0.08);
+}
+
+.testimonial-rating-badge.is-visible::after {
+  opacity: 1;
+  animation: testimonial-badge-shine 780ms var(--motion-ease-enter) 230ms both;
 }
 
 .testimonial-star {
   opacity: 0;
-  color: hsl(var(--auction-countdown) / 0.94);
-  filter: drop-shadow(0 0 5px hsl(var(--auction-countdown) / 0.28));
+  color: hsl(45 88% 72%);
+  filter:
+    drop-shadow(0 0 1px hsl(46 82% 92% / 0.45))
+    drop-shadow(0 4px 8px hsl(var(--auction-countdown) / 0.18));
   transform-origin: center;
   shape-rendering: geometricPrecision;
   stroke-linejoin: round;
-  animation: testimonial-stars-exit 240ms var(--motion-ease-standard) both;
   will-change: opacity, filter, transform;
 }
 
