@@ -84,9 +84,12 @@ export default function BuyWatches() {
       <Navbar />
 
       <main id="main-content">
-        <section className="relative overflow-hidden border-b border-border/70 bg-[linear-gradient(150deg,#2b2118_0%,#1d140f_48%,#100c09_100%)]">
+        <section className="sell-watch-hero relative overflow-hidden border-b border-border/70 bg-[linear-gradient(150deg,#2b2118_0%,#1d140f_48%,#100c09_100%)]">
+          <div className="sell-watch-aurora" aria-hidden="true" />
+          <div className="sell-watch-dial sell-watch-dial-large" aria-hidden="true" />
+          <div className="sell-watch-dial sell-watch-dial-small" aria-hidden="true" />
           <div className="mx-auto grid max-w-[1200px] gap-12 px-6 pb-16 pt-20 md:pb-24 md:pt-28 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
-            <div className="max-w-2xl">
+            <div className="sell-watch-intro relative z-10 max-w-2xl">
               <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
                 Opkøb af ure
               </p>
@@ -98,13 +101,13 @@ export default function BuyWatches() {
               </p>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+            <div className="relative z-10 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
               {[
                 { icon: Watch, title: "Vintage armbåndsure", text: "Mekaniske, quartz, dress, diver og samlerure." },
                 { icon: Camera, title: "Billeder hjælper", text: "Skive, bagside, krone, rem og eventuelle mærker." },
                 { icon: ShieldCheck, title: "Ærlig dialog", text: "Ingen pres, bare en klar vurdering og næste skridt." },
               ].map((item) => (
-                <div key={item.title} className="rounded-md border border-[#eadcc6]/18 bg-[#eadcc6]/7 p-4">
+                <div key={item.title} className="sell-watch-feature rounded-md border border-[#eadcc6]/18 bg-[#eadcc6]/7 p-4">
                   <item.icon className="mb-3 h-5 w-5 text-primary" />
                   <h2 className="font-serif text-lg font-semibold text-foreground">{item.title}</h2>
                   <p className="mt-1 text-sm leading-6 text-[#d8c8aa]">{item.text}</p>
@@ -117,7 +120,7 @@ export default function BuyWatches() {
         <section className="px-6 py-16 md:py-24">
           <div className="mx-auto grid max-w-[1200px] gap-10 lg:grid-cols-[0.72fr_1.28fr]">
             <aside className="space-y-5">
-              <div className="rounded-lg border border-border bg-card p-6 shadow-[0_18px_45px_-34px_rgba(29,20,15,0.8)]">
+              <div className="sell-watch-side-card rounded-lg border border-border bg-card p-6 shadow-[0_18px_45px_-34px_rgba(29,20,15,0.8)]">
                 <Sparkles className="mb-5 h-6 w-6 text-primary" />
                 <h2 className="font-serif text-2xl font-semibold text-foreground">Sådan fungerer det</h2>
                 <div className="mt-6 space-y-5 text-sm leading-7 text-muted-foreground">
@@ -127,7 +130,7 @@ export default function BuyWatches() {
                 </div>
               </div>
 
-              <div className="rounded-lg border border-primary/20 bg-primary/8 p-6">
+              <div className="sell-watch-side-card rounded-lg border border-primary/20 bg-primary/8 p-6">
                 <Mail className="mb-4 h-5 w-5 text-primary" />
                 <p className="text-sm leading-7 text-muted-foreground">
                   Mailen sendes til <span className="text-foreground">{CONTACT_EMAIL}</span>. Du kan altid rette i mailen, før du sender den.
@@ -137,7 +140,7 @@ export default function BuyWatches() {
 
             <form
               onSubmit={handleSubmit}
-              className="rounded-lg border border-border bg-card p-5 shadow-[0_22px_65px_-48px_rgba(0,0,0,0.9)] md:p-8"
+              className="sell-watch-form rounded-lg border border-border bg-card p-5 shadow-[0_22px_65px_-48px_rgba(0,0,0,0.9)] md:p-8"
             >
               <div className="mb-8">
                 <h2 className="font-serif text-3xl font-semibold text-foreground">Fortæl mig om uret</h2>

@@ -2,7 +2,7 @@ import type { Testimonial } from "@/data/testimonials";
 
 export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   const content = (
-    <blockquote className="h-full rounded-lg border border-border bg-card p-6 space-y-4 shadow-[0_14px_35px_rgba(43,30,22,0.08)]">
+    <blockquote className="testimonial-card h-full rounded-lg border border-border bg-card p-6 space-y-4 shadow-[0_14px_35px_rgba(43,30,22,0.08)]">
       <p className="text-sm leading-relaxed text-foreground italic">
         "{testimonial.quote}"
       </p>

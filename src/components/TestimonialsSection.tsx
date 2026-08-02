@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Star } from "lucide-react";
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { TestimonialCard } from "@/components/TestimonialCard";
 import { fallbackTestimonials, getTestimonials, type Testimonial } from "@/data/testimonials";
 import { useLanguage } from "@/i18n/LanguageProvider";
+import { cn } from "@/lib/utils";
 
 export function TestimonialsSection() {
   const { t } = useLanguage();
+  const ratingRef = useRef<HTMLDivElement>(null);
+  const [ratingVisible, setRatingVisible] = useState(false);
   const [testimonials, setTestimonials] = useState<Testimonial[]>(fallbackTestimonials);
   const marqueeTestimonials = [...testimonials, ...testimonials];
 
@@ -23,12 +27,49 @@ export function TestimonialsSection() {
     };
   }, []);
 
+  useEffect(() => {
+    const el = ratingRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setRatingVisible(entry.isIntersecting),
+      {
+        rootMargin: "-12% 0px -12% 0px",
+        threshold: 0.65,
+      }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="overflow-hidden bg-sand py-16 md:py-24">
       <SectionWrapper as="div" reveal="fade" className="space-y-10">
-        <h2 className="font-serif text-3xl font-semibold text-foreground mb-8 text-center md:text-4xl">
-          {t("testimonials.title")}
-        </h2>
+        <div className="space-y-5 text-center">
+          <h2 className="font-serif text-3xl font-semibold text-foreground md:text-4xl">
+            {t("testimonials.title")}
+          </h2>
+          <div
+            ref={ratingRef}
+            className={cn(
+              "testimonial-rating-badge mx-auto inline-flex items-center gap-3 rounded-full border border-primary/25 bg-primary/10 px-4 py-2 text-sm text-foreground shadow-[0_16px_45px_-30px_hsl(var(--primary)/0.9)]",
+              ratingVisible && "is-visible"
+            )}
+          >
+            <span className="inline-flex items-center gap-1 text-primary" aria-hidden="true">
+              {Array.from({ length: 5 }).map((_, index) => (
+                <Star
+                  key={index}
+                  className="testimonial-star h-4 w-4 fill-current"
+                  style={{ animationDelay: `${index * 90}ms` }}
+                  strokeWidth={2.85}
+                />
+              ))}
+            </span>
+            <span>5/5 på Tradera</span>
+          </div>
+        </div>
 
         <div className="relative -mx-6 overflow-hidden px-6 md:-mx-10 md:px-10">
           <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-sand to-transparent md:w-28" />
