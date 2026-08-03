@@ -172,6 +172,94 @@
   pointer-events: none !important;
 }
 
+.story-watch-hover {
+  --story-hover-x: 50%;
+  --story-hover-y: 50%;
+  --story-rotate-x: 0deg;
+  --story-rotate-y: 0deg;
+  isolation: isolate;
+  perspective: 1100px;
+}
+
+.story-watch-surface {
+  transform: rotateX(var(--story-rotate-x)) rotateY(var(--story-rotate-y));
+  transform-style: preserve-3d;
+  transition:
+    transform 480ms var(--motion-ease-enter),
+    box-shadow 480ms var(--motion-ease-standard),
+    filter 480ms var(--motion-ease-standard);
+  will-change: transform;
+}
+
+.story-watch-aura {
+  position: absolute;
+  z-index: -1;
+  inset: 12% 4% 1%;
+  border-radius: 28%;
+  background: radial-gradient(
+    circle at var(--story-hover-x) var(--story-hover-y),
+    rgba(232, 161, 90, 0.42),
+    rgba(137, 62, 25, 0.12) 42%,
+    transparent 70%
+  );
+  filter: blur(36px);
+  opacity: 0.22;
+  pointer-events: none;
+  transform: translateY(20px) scale(0.94);
+  transition: opacity 380ms ease, transform 480ms var(--motion-ease-enter);
+}
+
+.story-watch-glare {
+  position: absolute;
+  z-index: 20;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(
+      circle at var(--story-hover-x) var(--story-hover-y),
+      rgba(255, 242, 208, 0.3),
+      rgba(255, 189, 109, 0.08) 20%,
+      transparent 43%
+    ),
+    linear-gradient(
+      112deg,
+      transparent 28%,
+      rgba(255, 255, 255, 0.18) 44%,
+      rgba(255, 255, 255, 0.035) 52%,
+      transparent 65%
+    );
+  background-position: center, 120% 0;
+  background-size: 100% 100%, 220% 100%;
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 280ms ease, background-position 700ms var(--motion-ease-enter);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .story-watch-hover[data-hovered="true"] .story-watch-surface {
+    box-shadow:
+      0 38px 84px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(234, 220, 198, 0.18);
+    filter: saturate(1.06) contrast(1.025) brightness(1.025);
+    transform:
+      rotateX(var(--story-rotate-x))
+      rotateY(var(--story-rotate-y))
+      translateY(-10px)
+      scale(1.012);
+  }
+
+  .story-watch-hover[data-hovered="true"] .story-watch-aura {
+    opacity: 0.82;
+    transform: translateY(26px) scale(1.04);
+  }
+
+  .story-watch-hover[data-hovered="true"] .story-watch-glare {
+    background-position: center, -60% 0;
+    opacity: 1;
+  }
+}
+
 @keyframes testimonials-marquee {
   from {
     transform: translateX(0);

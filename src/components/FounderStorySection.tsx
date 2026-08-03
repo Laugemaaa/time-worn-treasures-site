@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { PointerEvent as ReactPointerEvent } from "react";
 import { Link } from "react-router-dom";
 import { WatchCarousel } from "@/components/WatchCarousel";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
@@ -122,6 +123,41 @@ function SoldWatchesCta() {
 function StoryVideoCanvas() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const hoverRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  const handlePointerMove = useCallback(
+    (event: ReactPointerEvent<HTMLDivElement>) => {
+      const element = hoverRef.current;
+      if (!element || prefersReducedMotion || event.pointerType === "touch") {
+        return;
+      }
+
+      const rect = element.getBoundingClientRect();
+      const x = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+      const y = Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height));
+
+      element.dataset.hovered = "true";
+      element.style.setProperty("--story-hover-x", `${(x * 100).toFixed(1)}%`);
+      element.style.setProperty("--story-hover-y", `${(y * 100).toFixed(1)}%`);
+      element.style.setProperty("--story-rotate-x", `${((0.5 - y) * 6).toFixed(2)}deg`);
+      element.style.setProperty("--story-rotate-y", `${((x - 0.5) * 8).toFixed(2)}deg`);
+    },
+    [prefersReducedMotion]
+  );
+
+  const resetHover = useCallback(() => {
+    const element = hoverRef.current;
+    if (!element) {
+      return;
+    }
+
+    delete element.dataset.hovered;
+    element.style.setProperty("--story-hover-x", "50%");
+    element.style.setProperty("--story-hover-y", "50%");
+    element.style.setProperty("--story-rotate-x", "0deg");
+    element.style.setProperty("--story-rotate-y", "0deg");
+  }, []);
 
   const playVideo = useCallback(() => {
     const video = videoRef.current;
@@ -253,28 +289,37 @@ function StoryVideoCanvas() {
   }, [playVideo]);
 
   return (
-    <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[16px] bg-black/20 shadow-[0_24px_70px_rgba(0,0,0,0.24)]">
-      <canvas
-        ref={canvasRef}
-        className="relative z-10 h-full w-full select-none object-cover"
-        aria-hidden="true"
-      />
-      <video
-        ref={videoRef}
-        className="autoplay-background-video pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-[0.001]"
-        src="/media/selection-watch.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        controls={false}
-        disablePictureInPicture
-        disableRemotePlayback
-        tabIndex={-1}
-        aria-hidden="true"
-        onContextMenu={(event) => event.preventDefault()}
-      />
+    <div
+      ref={hoverRef}
+      className="story-watch-hover relative w-full"
+      onPointerMove={handlePointerMove}
+      onPointerLeave={resetHover}
+    >
+      <div className="story-watch-aura" aria-hidden="true" />
+      <div className="story-watch-surface relative aspect-[4/5] w-full overflow-hidden rounded-[16px] bg-black/20 shadow-[0_24px_70px_rgba(0,0,0,0.24)]">
+        <canvas
+          ref={canvasRef}
+          className="relative z-10 h-full w-full select-none object-cover"
+          aria-hidden="true"
+        />
+        <video
+          ref={videoRef}
+          className="autoplay-background-video pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-[0.001]"
+          src="/media/selection-watch.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          controls={false}
+          disablePictureInPicture
+          disableRemotePlayback
+          tabIndex={-1}
+          aria-hidden="true"
+          onContextMenu={(event) => event.preventDefault()}
+        />
+        <div className="story-watch-glare" aria-hidden="true" />
+      </div>
     </div>
   );
 }
