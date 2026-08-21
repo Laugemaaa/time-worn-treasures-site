@@ -79,10 +79,28 @@ async function fetchProductsFromApi(referenceDate) {
     return [];
   }
 
-  return findBlocks(xml, "Item")
+  const apiProducts = findBlocks(xml, "Item")
     .map((itemXml) => mapItem(itemXml, referenceDate))
     .filter(Boolean)
     .sort((a, b) => new Date(a.auctionEndDate).getTime() - new Date(b.auctionEndDate).getTime());
+
+  return enrichProductsFromItemPages(apiProducts, referenceDate);
+}
+
+async function enrichProductsFromItemPages(products, referenceDate) {
+  const enrichedProducts = [];
+
+  for (const product of products) {
+    try {
+      const scrapedProduct = await scrapeItemPage(product.traderaUrl, referenceDate);
+      enrichedProducts.push(scrapedProduct ? { ...product, ...scrapedProduct } : product);
+    } catch (error) {
+      console.warn(`Tradera item enrichment failed for ${product.traderaUrl}: ${error.message}`);
+      enrichedProducts.push(product);
+    }
+  }
+
+  return enrichedProducts.sort((a, b) => new Date(a.auctionEndDate).getTime() - new Date(b.auctionEndDate).getTime());
 }
 
 async function scrapeProductsFromSellerProfile(referenceDate) {
