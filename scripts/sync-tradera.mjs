@@ -49,6 +49,8 @@ await fs.writeFile(sitemapOutputPath, buildSitemap(products), "utf8");
 
 console.log(`Wrote sitemap with ${products.length + 1} URLs to public/sitemap.xml`);
 
+process.exit(0);
+
 async function fetchProductsFromApi(referenceDate) {
   const endpoint = new URL("https://api.tradera.com/v3/PublicService.asmx/GetSellerItems");
   endpoint.search = new URLSearchParams({
