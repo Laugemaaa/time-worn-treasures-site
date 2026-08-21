@@ -291,7 +291,7 @@ async function scrapeItemPage(itemUrl, referenceDate) {
     /(?:Førende bud|Ledande bud|Leading bid|Højeste bud|Högsta bud)[\s\S]*?([\d.\u00a0 ]+\s*(?:DKK|SEK|NOK))/i
   );
   const priceText = leadingBidPriceText || matchText(text, /Udbudspris\s+([\d.\u00a0 ]+)\s*(DKK|SEK|NOK)/i);
-  const embeddedBidCount = Number((matchText(html, /"bidCount"\s*:\s*(\d+)/i) || "").replace(/[^\d]/g, ""));
+  const embeddedBidCount = matchEmbeddedNumber(html, "bidCount");
   const visibleBidCount = Number((matchText(text, /(\d+)\s+bud/i) || "").replace(/[^\d]/g, ""));
   const bidCount = embeddedBidCount || visibleBidCount || (leadingBidPriceText ? 1 : 0);
   const startPriceText = matchText(text, /(?:Startpris|Udbudspris)\s+([\d.\u00a0 ]+)\s*(DKK|SEK|NOK)/i);
@@ -481,11 +481,17 @@ function parseMoney(raw) {
 }
 
 function matchEmbeddedAuctionEndDate(html) {
-  const match = html.match(/"(?:endDate|endTime|endsAt|auctionEndDate|EndDate)"\s*:\s*"([^"]+)"/i);
+  const match = html.match(/\\?"(?:endDate|endTime|endsAt|auctionEndDate|EndDate)\\?"\s*:\s*\\?"([^"\\]+)\\?"/i);
   if (!match) return undefined;
 
   const timestamp = new Date(match[1]).getTime();
   return Number.isFinite(timestamp) ? new Date(timestamp).toISOString() : undefined;
+}
+
+function matchEmbeddedNumber(html, property) {
+  const escaped = property.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const match = html.match(new RegExp(`\\\\?"${escaped}\\\\?"\\s*:\\s*(\\d+)`, "i"));
+  return match ? Number(match[1]) : 0;
 }
 
 function parseTraderaDate(label, referenceDate) {
