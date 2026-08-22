@@ -140,6 +140,11 @@ export function AuctionMetadata({ product, compact = false }: Props) {
           {currentPrice.toLocaleString("sv-SE")} {currency}
         </span>
       )}
+      {currentPrice == null && startingPrice != null && compact && (
+        <span className="font-semibold text-foreground">
+          Start: {startingPrice.toLocaleString("sv-SE")} {currency}
+        </span>
+      )}
       {currentPrice != null && !compact && (
         <span className="inline-flex items-center gap-1 font-semibold text-foreground">
           Live: {currentPrice.toLocaleString("sv-SE")} {currency}

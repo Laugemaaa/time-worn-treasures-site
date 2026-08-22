@@ -311,15 +311,16 @@ async function scrapeItemPage(itemUrl, referenceDate) {
     /(?:Førende bud|Ledande bud|Leading bid|Højeste bud|Högsta bud)[\s\S]*?([\d.\u00a0 ]+\s*(?:DKK|SEK|NOK))/i
   );
   const priceText = leadingBidPriceText || matchText(text, /Udbudspris\s+([\d.\u00a0 ]+)\s*(DKK|SEK|NOK)/i);
-  const embeddedBidCount = matchEmbeddedNumber(html, "bidCount");
+  const legacyEmbeddedBidCount = matchEmbeddedNumber(html, "bidCount");
   const visibleBidCount = Number((matchText(text, /(\d+)\s+bud/i) || "").replace(/[^\d]/g, ""));
-  const bidCount = embeddedBidCount || visibleBidCount || (leadingBidPriceText ? 1 : 0);
+  const bidCount = legacyEmbeddedBidCount || visibleBidCount || (leadingBidPriceText ? 1 : 0);
   const startPriceText = matchText(text, /(?:Startpris|Udbudspris)\s+([\d.\u00a0 ]+)\s*(DKK|SEK|NOK)/i);
   const description = cleanDescription(
     matchText(text, /Beskrivelse\s+([\s\S]*?)\s+Varenr\./i)
     || ""
   );
   const itemNumber = matchText(text, /Varenr\.\s*([\d\u00a0 ]+)/i)?.replace(/[^\d]/g, "");
+  const embeddedItemData = matchEmbeddedItemData(html, itemNumber || itemUrl.match(/\/(\d+)\/[a-z0-9-]+$/i)?.[1]);
   const views = Number((matchText(text, /Visninger\s+(\d+)/i) || "").replace(/[^\d]/g, "")) || undefined;
   const published = matchText(text, /Publiceret\s+([^\n]+)/i);
   const imageUrls = extractImageUrls(html);
@@ -335,6 +336,10 @@ async function scrapeItemPage(itemUrl, referenceDate) {
   const parsedPrice = parseMoney(priceText);
   const parsedStartingPrice = parseMoney(startPriceText);
   const auctionEndDate = embeddedAuctionEndDate || parseTraderaDate(endLabel, referenceDate);
+  const embeddedPrice = embeddedItemData?.price;
+  const embeddedStartingPrice = embeddedItemData?.openingBid;
+  const embeddedBidCount = embeddedItemData?.totalBids ?? bidCount;
+  const hasActiveBids = embeddedBidCount > 0 || embeddedPrice != null;
 
   return {
     id: itemNumber || itemUrl.match(/\/(\d+)\/[a-z0-9-]+$/i)?.[1] || slugify(title),
@@ -344,10 +349,10 @@ async function scrapeItemPage(itemUrl, referenceDate) {
     images: imageUrls.length > 0 ? imageUrls : [imageUrl],
     shortDescription: buildShortDescription(description),
     fullDescription: description || undefined,
-    currentBidPrice: parsedPrice.amount,
-    startingBidPrice: parsedStartingPrice.amount || parsedPrice.amount,
-    currency: parsedPrice.currency,
-    numberOfBids: bidCount,
+    currentBidPrice: hasActiveBids ? (embeddedPrice || parsedPrice.amount) : undefined,
+    startingBidPrice: embeddedStartingPrice || embeddedPrice || parsedStartingPrice.amount || parsedPrice.amount,
+    currency: embeddedItemData?.currency || parsedPrice.currency,
+    numberOfBids: hasActiveBids && embeddedBidCount === 0 ? undefined : embeddedBidCount,
     numberOfViewers: views,
     timeRemaining: auctionEndDate ? toDuration(referenceDate, auctionEndDate) : undefined,
     auctionEndDate: auctionEndDate || published || undefined,
@@ -514,6 +519,39 @@ function matchEmbeddedNumber(html, property) {
   return match ? Number(match[1]) : 0;
 }
 
+function matchEmbeddedItemData(html, itemId) {
+  if (!itemId) return undefined;
+
+  const escapedItemId = String(itemId).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const match =
+    html.match(new RegExp(`\\\\?"itemId\\\\?"\\s*:\\s*${escapedItemId}[\\s\\S]{0,18000}`, "i"))
+    || html.match(new RegExp(`"itemId"\\s*:\\s*${escapedItemId}[\\s\\S]{0,18000}`, "i"));
+
+  if (!match) return undefined;
+
+  const block = match[0];
+  const price =
+    matchEmbeddedNumber(block, "leadingBid")
+    || matchEmbeddedNumber(block, "currentBid")
+    || matchEmbeddedNumber(block, "maxBid");
+  const openingBid = matchEmbeddedNumber(block, "openingBid");
+  const totalBids = matchEmbeddedNumber(block, "bidCount") || matchEmbeddedNumber(block, "totalBids");
+  const currency = matchEmbeddedString(block, "currency") || "SEK";
+
+  return {
+    price: price || undefined,
+    openingBid: openingBid || undefined,
+    totalBids,
+    currency,
+  };
+}
+
+function matchEmbeddedString(html, property) {
+  const escaped = property.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const match = html.match(new RegExp(`\\\\?"${escaped}\\\\?"\\s*:\\s*\\\\?"([^"\\\\]+)\\\\?"`, "i"));
+  return match ? decodeXml(match[1]).trim() : "";
+}
+
 function parseTraderaDate(label, referenceDate) {
   const match = label.match(/(\d{1,2})\s+([A-Za-zÆØÅæøå]{3,})\.?\s+(\d{2}:\d{2})/i);
   if (!match) return undefined;
@@ -560,7 +598,8 @@ function mapItem(itemXml, referenceDate) {
   const maxBid = toNumber(readTag(itemXml, "MaxBid"));
   const openingBid = toNumber(readTag(itemXml, "OpeningBid"));
   const buyItNowPrice = toNumber(readTag(itemXml, "BuyItNowPrice"));
-  const currentBidPrice = maxBid || openingBid || buyItNowPrice || undefined;
+  const totalBids = toNumber(readTag(itemXml, "TotalBids"));
+  const currentBidPrice = totalBids > 0 ? (maxBid || openingBid || buyItNowPrice || undefined) : undefined;
 
   return {
     id,
@@ -573,7 +612,7 @@ function mapItem(itemXml, referenceDate) {
     currentBidPrice,
     startingBidPrice: openingBid || buyItNowPrice || currentBidPrice,
     currency: "SEK",
-    numberOfBids: toNumber(readTag(itemXml, "TotalBids")) || undefined,
+    numberOfBids: totalBids,
     timeRemaining: toDuration(referenceDate, endDate),
     auctionEndDate: endDate,
     traderaUrl: itemLink,
