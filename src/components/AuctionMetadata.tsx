@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { type Product } from "@/data/products";
-import { Clock, Eye, Gavel } from "lucide-react";
+import { Clock, Eye, Gavel, Tag } from "lucide-react";
 
 const SECOND_MS = 1000;
 const MINUTE_MS = 60 * SECOND_MS;
@@ -54,6 +54,46 @@ function useNow(intervalMs: number): number {
   return now;
 }
 
+const WATCH_BRANDS = [
+  "Omega",
+  "Seiko",
+  "Orient",
+  "Citizen",
+  "Tissot",
+  "Certina",
+  "Enicar",
+  "Cimier",
+  "Rado",
+  "Longines",
+  "Zenith",
+  "Oris",
+  "Breitling",
+  "Casio",
+  "Timex",
+  "Eterna",
+  "Lemania",
+  "Junghans",
+  "Technos",
+  "Zodiac",
+  "Glycine",
+  "Moser",
+  "Dugena",
+  "Lanco",
+  "Vostok",
+  "Royce",
+  "Mora",
+  "Nisus",
+  "Sekel",
+  "Wilson",
+];
+
+function getWatchBrand(product: Product): string | undefined {
+  const haystack = `${product.title} ${product.fullDescription ?? ""} ${product.shortDescription ?? ""}`;
+  const normalizedHaystack = haystack.toLowerCase();
+
+  return WATCH_BRANDS.find((brand) => normalizedHaystack.includes(brand.toLowerCase()));
+}
+
 type Props = {
   product: Product;
   compact?: boolean;
@@ -85,9 +125,13 @@ export function AuctionMetadata({ product, compact = false }: Props) {
   const currency = product.currency || "SEK";
   const currentPrice = product.currentBidPrice;
   const startingPrice = product.startingBidPrice;
+  const brand = getWatchBrand(product);
   const countdownClassName = compact
     ? "text-[hsl(var(--auction-countdown)/0.82)]"
     : "rounded-full border border-[hsl(var(--auction-countdown)/0.32)] bg-[hsl(var(--auction-countdown-soft)/0.24)] px-2.5 py-0.5 text-[hsl(var(--auction-countdown)/0.88)]";
+  const brandClassName = compact
+    ? "border border-primary/18 bg-primary/8 px-1.5 py-0.5 text-[10px] uppercase tracking-[0.13em] text-primary"
+    : "rounded-full border border-primary/24 bg-primary/10 px-2.5 py-0.5 text-[11px] uppercase tracking-[0.14em] text-primary";
 
   return (
     <div className={`flex flex-wrap items-center gap-x-4 gap-y-1 text-muted-foreground ${compact ? "text-xs" : "text-sm"}`}>
@@ -122,6 +166,12 @@ export function AuctionMetadata({ product, compact = false }: Props) {
         <span className={`inline-flex items-center gap-1 ${countdownClassName}`}>
           <Clock className="h-3 w-3" />
           {countdownLabel}
+        </span>
+      )}
+      {brand && (
+        <span className={`inline-flex items-center gap-1 rounded-full ${brandClassName}`}>
+          <Tag className="h-3 w-3" />
+          {brand}
         </span>
       )}
     </div>
