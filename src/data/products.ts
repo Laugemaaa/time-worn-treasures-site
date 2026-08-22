@@ -46,7 +46,7 @@ async function loadGeneratedProducts(): Promise<Product[]> {
       return [];
     }
 
-    return json.map(normalizeProduct).filter(Boolean);
+    return json.map(normalizeProduct).filter(Boolean).sort(sortNewestTraderaItemsFirst);
   } catch {
     console.warn("Failed to load generated Tradera product feed.");
     return [];
@@ -98,4 +98,15 @@ function normalizeProduct(value: unknown): Product {
       product.traderaUrl ?? "https://www.tradera.com/da/profile/items/6841860/grandpasheritage"
     ),
   };
+}
+
+function sortNewestTraderaItemsFirst(a: Product, b: Product) {
+  const bId = Number(b.id);
+  const aId = Number(a.id);
+
+  if (Number.isFinite(aId) && Number.isFinite(bId) && aId !== bId) {
+    return bId - aId;
+  }
+
+  return new Date(b.auctionEndDate ?? 0).getTime() - new Date(a.auctionEndDate ?? 0).getTime();
 }
