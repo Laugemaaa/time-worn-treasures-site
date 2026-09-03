@@ -271,20 +271,15 @@
 @keyframes page-transition-enter {
   from {
     opacity: 0;
-    filter: blur(5px);
-    transform: translateY(12px);
   }
 
   to {
     opacity: 1;
-    filter: blur(0);
-    transform: translateY(0);
   }
 }
 
 .page-transition {
-  animation: page-transition-enter 360ms var(--motion-ease-enter) both;
-  will-change: opacity, filter, transform;
+  animation: page-transition-enter 240ms var(--motion-ease-standard) both;
 }
 
 .sold-category-enter,
