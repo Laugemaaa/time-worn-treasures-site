@@ -93,6 +93,17 @@ import citizenQuartz2110Image from "@/assets/sold-watches/optimized/citizen-quar
 import certinaDs100mQuartzImage from "@/assets/sold-watches/optimized/certina-ds-100m-quartz.png";
 import vintageTissotSeastar10AtmImage from "@/assets/sold-watches/optimized/vintage-tissot-seastar-10-atm.png";
 import seikoActusSsAutomatic6106Image from "@/assets/sold-watches/optimized/seiko-actus-ss-automatic-6106-8910.png";
+import vintageCimierAntimagneticImage from "@/assets/sold-watches/optimized/vintage-cimier-antimagnetic-swiss-made-mechanical-watch.png";
+import seikoKingQuartz4823Image from "@/assets/sold-watches/optimized/seiko-king-quartz-4823-8010-1976.png";
+import vintageEnicarMro200Image from "@/assets/sold-watches/optimized/vintage-enicar-mro200-automatic-775-14-01b.png";
+import vintageCitizenCosmotronBlueDialImage from "@/assets/sold-watches/optimized/vintage-citizen-cosmotron-electronic-blue-dial.png";
+import sovietPocketWatchesCollectionImage from "@/assets/sold-watches/optimized/collection-5-vintage-soviet-ussr-pocket-watches.png";
+import vintageCertinaCal1930Image from "@/assets/sold-watches/optimized/vintage-certina-cal-19-30.png";
+import tissot1853T020309Image from "@/assets/sold-watches/optimized/tissot-1853-t020309.png";
+import vintageOrientQuartz100mImage from "@/assets/sold-watches/optimized/vintage-orient-quartz-100m-two-tone-day-date.png";
+import vintageSeiko5ActusSs6106Image from "@/assets/sold-watches/optimized/vintage-seiko-5-actus-ss-6106-7440.png";
+import vintageCitizenAlarmQuartzImage from "@/assets/sold-watches/optimized/vintage-citizen-alarm-quartz-2400-240054-ki.png";
+import vintageOmegaSensorquartzImage from "@/assets/sold-watches/optimized/vintage-omega-sensorquartz-186-0011-386-0811.png";
 
 export type SoldWatch = {
   id: string;
@@ -111,6 +122,147 @@ export type SoldWatch = {
 };
 
 export const soldWatches: SoldWatch[] = [
+  {
+    id: "vintage-omega-sensorquartz-ref-186-0011-386-0811",
+    title: "Vintage Omega Sensorquartz - Ref. 186.0011 / 386.0811",
+    imageUrl: vintageOmegaSensorquartzImage,
+    soldPrice: 624,
+    currency: "DKK",
+    itemNumber: "746510624",
+    soldDate: "29 aug. 2026 18:28",
+    numberOfBids: 22,
+    shortDescription: "Vintage Omega Sensorquartz - Ref. 186.0011 / 386.0811.",
+    traderaUrl:
+      "https://www.tradera.com/da/item/1902/746510624/vintage-omega-sensorquartz-ref-186-0011-386-0811",
+  },
+  {
+    id: "vintage-citizen-alarm-quartz-2400-240054-ki-gold-tone-square-watch",
+    title: "Vintage Citizen Alarm Quartz 2400-240054-KI - Gold-Tone Square Watch",
+    imageUrl: vintageCitizenAlarmQuartzImage,
+    soldPrice: 182,
+    currency: "DKK",
+    itemNumber: "746494680",
+    soldDate: "29 aug. 2026 16:52",
+    numberOfBids: 17,
+    shortDescription: "Vintage Citizen Alarm Quartz 2400-240054-KI - Gold-Tone Square Watch.",
+    traderaUrl:
+      "https://www.tradera.com/da/item/1902/746494680/vintage-citizen-alarm-quartz-2400-240054-ki-gold-tone-square-watch",
+  },
+  {
+    id: "vintage-seiko-5-actus-ss-6106-7440",
+    title: "Vintage Seiko 5 Actus SS - 6106-7440",
+    imageUrl: vintageSeiko5ActusSs6106Image,
+    soldPrice: 1009,
+    currency: "DKK",
+    itemNumber: "746493681",
+    soldDate: "29 aug. 2026 16:46",
+    numberOfBids: 47,
+    shortDescription: "Vintage Seiko 5 Actus SS - 6106-7440.",
+    traderaUrl:
+      "https://www.tradera.com/da/item/1000985/746493681/vintage-seiko-5-actus-ss-6106-7440",
+  },
+  {
+    id: "vintage-orient-quartz-100m-two-tone-day-date",
+    title: "Vintage Orient Quartz 100m - Two-Tone - Day/Date",
+    imageUrl: vintageOrientQuartz100mImage,
+    soldPrice: 509,
+    currency: "DKK",
+    itemNumber: "746415854",
+    soldDate: "29 aug. 2026 00:28",
+    numberOfBids: 31,
+    shortDescription: "Vintage Orient Quartz 100m - Two-Tone - Day/Date.",
+    traderaUrl:
+      "https://www.tradera.com/da/item/1902/746415854/vintage-orient-quartz-100m-two-tone-day-date",
+  },
+  {
+    id: "tissot-1853-t020309",
+    title: "Tissot 1853, T020309",
+    imageUrl: tissot1853T020309Image,
+    soldPrice: 50,
+    currency: "DKK",
+    itemNumber: "746415156",
+    soldDate: "29 aug. 2026 00:16",
+    numberOfBids: 14,
+    shortDescription: "Tissot 1853, T020309.",
+    traderaUrl: "https://www.tradera.com/da/item/1902/746415156/tissot-1853-t020309",
+  },
+  {
+    id: "vintage-certina-cal-19-30",
+    title: "Vintage Certina - Cal. 19-30",
+    imageUrl: vintageCertinaCal1930Image,
+    soldPrice: 153,
+    currency: "DKK",
+    itemNumber: "746414606",
+    soldDate: "29 aug. 2026 00:07",
+    numberOfBids: 15,
+    shortDescription: "Vintage Certina - Cal. 19-30.",
+    traderaUrl: "https://www.tradera.com/da/item/1000984/746414606/vintage-certina-cal-19-30",
+  },
+  {
+    id: "collection-of-5-vintage-soviet-ussr-pocket-watches",
+    title: "Collection of 5 Vintage Soviet / USSR Pocket Watches",
+    imageUrl: sovietPocketWatchesCollectionImage,
+    soldPrice: 711,
+    currency: "DKK",
+    itemNumber: "746249692",
+    soldDate: "27 aug. 2026 20:53",
+    numberOfBids: 33,
+    shortDescription: "Collection of 5 Vintage Soviet / USSR Pocket Watches.",
+    traderaUrl:
+      "https://www.tradera.com/da/item/191302/746249692/collection-of-5-vintage-soviet-ussr-pocket-watches",
+  },
+  {
+    id: "vintage-citizen-cosmotron-electronic-4-790472-k-blue-dial",
+    title: "Vintage Citizen Cosmotron Electronic - 4-790472 K - Blue Dial",
+    imageUrl: vintageCitizenCosmotronBlueDialImage,
+    soldPrice: 607,
+    currency: "DKK",
+    itemNumber: "745842495",
+    soldDate: "25 aug. 2026 00:47",
+    numberOfBids: 53,
+    shortDescription: "Vintage Citizen Cosmotron Electronic - 4-790472 K - Blue Dial.",
+    traderaUrl:
+      "https://www.tradera.com/da/item/1000983/745842495/vintage-citizen-cosmotron-electronic-4-790472-k-blue-dial",
+  },
+  {
+    id: "vintage-enicar-mro200-automatic-775-14-01b",
+    title: "Vintage Enicar MRO200 Automatic - 775-14-01B",
+    imageUrl: vintageEnicarMro200Image,
+    soldPrice: 361,
+    currency: "DKK",
+    itemNumber: "745841271",
+    soldDate: "25 aug. 2026 00:13",
+    numberOfBids: 38,
+    shortDescription: "Vintage Enicar MRO200 Automatic - 775-14-01B.",
+    traderaUrl:
+      "https://www.tradera.com/da/item/1000985/745841271/vintage-enicar-mro200-automatic-775-14-01b",
+  },
+  {
+    id: "seiko-king-quartz-4823-8010-1976-vintage-japanese-day-date-watch",
+    title: "Seiko King Quartz 4823-8010 - 1976 - Vintage Japanese Day-Date Watch",
+    imageUrl: seikoKingQuartz4823Image,
+    soldPrice: 653,
+    currency: "DKK",
+    itemNumber: "745841066",
+    soldDate: "25 aug. 2026 00:06",
+    numberOfBids: 30,
+    shortDescription: "Seiko King Quartz 4823-8010 - 1976 - Vintage Japanese Day-Date Watch.",
+    traderaUrl:
+      "https://www.tradera.com/da/item/1902/745841066/seiko-king-quartz-4823-8010-1976-vintage-japanese-day-date-watch",
+  },
+  {
+    id: "vintage-cimier-antimagnetic-swiss-made-mechanical-watch",
+    title: "Vintage Cimier Antimagnetic Swiss Made Mechanical Watch",
+    imageUrl: vintageCimierAntimagneticImage,
+    soldPrice: 20,
+    currency: "DKK",
+    itemNumber: "745840674",
+    soldDate: "24 aug. 2026 23:57",
+    numberOfBids: 5,
+    shortDescription: "Vintage Cimier Antimagnetic Swiss Made Mechanical Watch.",
+    traderaUrl:
+      "https://www.tradera.com/da/item/1000984/745840674/vintage-cimier-antimagnetic-swiss-made-mechanical-watch",
+  },
   {
     id: "vintage-tissot-seastar-10-atm",
     title: "Vintage Tissot Seastar 10 ATM",
