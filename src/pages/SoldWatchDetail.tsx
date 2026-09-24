@@ -1,3 +1,4 @@
+import { useLocalizedContent, formatArchiveDate } from "@/i18n/localizedContent";
 import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
@@ -57,16 +58,17 @@ export default function SoldWatchDetail() {
 }
 
 function SoldWatchDetailContent({ watch }: { watch: SoldWatch }) {
+  const content = useLocalizedContent();
   const { lang, t } = useLanguage();
   const images = watch.images?.length ? watch.images : [watch.imageUrl];
   const [activeImage, setActiveImage] = useState(images[0]);
-  const description = lang === "da" ? watch.shortDescription : t("sold.genericDescription");
+  const description = watch.shortDescription ? content(watch.shortDescription) : t("sold.genericDescription");
 
   return (
     <div className="min-h-screen bg-background paper-texture">
       <SEO
-        title={`${watch.title} | ${t("sold.title")}`}
-        description={description ?? `${t("sold.itemLabel")}: ${watch.title}.`}
+        title={`${content(watch.title)} | ${t("sold.title")}`}
+        description={description ?? `${t("sold.itemLabel")}: ${content(watch.title)}.`}
         canonicalPath={`/solgte-ure/${watch.id}`}
       />
       <Navbar />
@@ -85,7 +87,7 @@ function SoldWatchDetailContent({ watch }: { watch: SoldWatch }) {
               <div className="overflow-hidden rounded-lg border border-border bg-card">
                 <img
                   src={activeImage}
-                  alt={watch.title}
+                  alt={content(watch.title)}
                   className="aspect-[4/5] w-full object-cover"
                   loading="eager"
                   decoding="async"
@@ -99,7 +101,7 @@ function SoldWatchDetailContent({ watch }: { watch: SoldWatch }) {
                       key={image}
                       type="button"
                       onClick={() => setActiveImage(image)}
-                      aria-label={t("sold.imageLabel", { index: index + 1, title: watch.title })}
+                      aria-label={t("sold.imageLabel", { index: index + 1, title: content(watch.title) })}
                       aria-current={activeImage === image}
                       className={`aspect-square overflow-hidden rounded-md border bg-secondary transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                         activeImage === image
@@ -125,11 +127,11 @@ function SoldWatchDetailContent({ watch }: { watch: SoldWatch }) {
                 {t("sold.itemLabel")}
               </p>
               <h1 className="font-serif text-3xl font-semibold leading-tight text-foreground md:text-5xl">
-                {watch.title}
+                {content(watch.title)}
               </h1>
               {watch.soldDate && (
                 <p className="mt-4 text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                  {t("sold.ended", { date: watch.soldDate })}
+                  {t("sold.ended", { date: formatArchiveDate(watch.soldDate, lang) })}
                 </p>
               )}
 
@@ -157,7 +159,7 @@ function SoldWatchDetailContent({ watch }: { watch: SoldWatch }) {
               {watch.details && (
                 <ul className="mt-6 space-y-2 text-sm leading-relaxed text-muted-foreground">
                   {watch.details.map((detail) => (
-                    <li key={detail}>{detail}</li>
+                    <li key={content(detail)}>{detail}</li>
                   ))}
                 </ul>
               )}

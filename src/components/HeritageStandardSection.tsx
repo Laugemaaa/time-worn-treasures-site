@@ -1,3 +1,4 @@
+import { useLocalizedText } from "@/i18n/localizedText";
 import { useEffect, useRef, useState } from "react";
 import { SectionWrapper } from "@/components/SectionWrapper";
 
@@ -15,6 +16,7 @@ const steps = [
 ];
 
 export function HeritageStandardSection() {
+  const tx = useLocalizedText();
   const timelineRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -56,15 +58,9 @@ export function HeritageStandardSection() {
       <div className="sell-watch-dial sell-watch-dial-small" aria-hidden="true" />
       <SectionWrapper as="div" className="relative z-10">
         <div ref={headingReveal.ref} className={`max-w-3xl standard-heading-group ${headingReveal.revealed ? "is-visible" : ""}`}>
-          <p className="standard-heading-reveal text-[11px] font-semibold uppercase tracking-[0.32em] text-primary">
-            The GrandpasHeritage Standard
-          </p>
-          <h2 className="standard-heading-reveal mt-5 font-serif text-4xl font-medium uppercase leading-[1.08] tracking-[0.08em] text-foreground md:text-5xl lg:text-6xl">
-            Every watch deserves a closer look
-          </h2>
-          <p className="standard-heading-reveal mt-7 max-w-2xl text-sm leading-7 text-muted-foreground md:text-[15px]">
-            Before a watch is offered for sale, the details that matter are examined, tested and documented. Vintage watches are not expected to be perfect — but their condition should be understood.
-          </p>
+          <p className="standard-heading-reveal text-[11px] font-semibold uppercase tracking-[0.32em] text-primary">{tx("The GrandpasHeritage Standard")}</p>
+          <h2 className="standard-heading-reveal mt-5 font-serif text-4xl font-medium uppercase leading-[1.08] tracking-[0.08em] text-foreground md:text-5xl lg:text-6xl">{tx("Every watch deserves a closer look")}</h2>
+          <p className="standard-heading-reveal mt-7 max-w-2xl text-sm leading-7 text-muted-foreground md:text-[15px]">{tx("Before a watch is offered for sale, the details that matter are examined, tested and documented. Vintage watches are not expected to be perfect — but their condition should be understood.")}</p>
         </div>
 
         <div
@@ -76,7 +72,7 @@ export function HeritageStandardSection() {
           <ol className="grid gap-0 lg:grid-cols-6">
             {steps.map((step, index) => (
               <li
-                key={step.title}
+                key={tx(step.title)}
                 className="standard-step group relative border-l border-primary/20 pb-11 pl-10 last:pb-0 lg:min-h-[310px] lg:border-l-0 lg:px-3 lg:pb-0 xl:px-5"
                 style={{
                   opacity: prefersReducedMotion ? 1 : Math.max(0.85, Math.min(1, (progress * 1.45 - index * 0.105) * 2.2)),
@@ -92,7 +88,7 @@ export function HeritageStandardSection() {
                     {step.title}
                   </h3>
                   <p className="mt-4 text-xs leading-6 text-muted-foreground transition-colors duration-500 group-hover:text-foreground/80">
-                    {step.body}
+                    {tx(step.body)}
                   </p>
                 </div>
               </li>

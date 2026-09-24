@@ -1,3 +1,4 @@
+import { useLocalizedText } from "@/i18n/localizedText";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getProducts, type Product } from "@/data/products";
@@ -49,6 +50,7 @@ function AuctionInfoCard() {
 }
 
 export function ProductGridSection() {
+  const tx = useLocalizedText();
   const { t } = useLanguage();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -95,9 +97,7 @@ export function ProductGridSection() {
     <SectionWrapper id="collection" className="py-16 md:py-24">
       <div className="mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
         <div className="max-w-2xl">
-          <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">
-            Live on Tradera
-          </p>
+          <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">{tx("Live on Tradera")}</p>
           <h2 className="font-serif text-3xl font-semibold text-foreground md:text-4xl">
             {t("collection.title")}
           </h2>

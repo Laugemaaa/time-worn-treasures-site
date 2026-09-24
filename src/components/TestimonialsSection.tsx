@@ -1,3 +1,4 @@
+import { useLocalizedText } from "@/i18n/localizedText";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, Star, Pause, Play } from "lucide-react";
 import { SectionWrapper } from "@/components/SectionWrapper";
@@ -12,6 +13,7 @@ import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/com
 const TRADERA_URL = "https://www.tradera.com/da/profile/items/6841860/grandpasheritage";
 
 export function TestimonialsSection() {
+  const tx = useLocalizedText();
   const { t } = useLanguage();
   const ratingRef = useRef<HTMLDivElement>(null);
   const [api, setApi] = useState<CarouselApi>();
@@ -87,7 +89,7 @@ export function TestimonialsSection() {
       <SectionWrapper as="div" reveal="fade" className="space-y-10">
         <div className="grid gap-7 border-b border-primary/20 pb-9 md:grid-cols-[1fr_auto] md:items-end">
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-primary">Collector feedback</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-primary">{tx("Collector feedback")}</p>
             <h2 className="mt-4 font-serif text-4xl font-semibold text-foreground md:text-5xl">{t("testimonials.title")}</h2>
           </div>
           <div className="flex flex-wrap items-center gap-4 md:justify-end">
@@ -95,11 +97,11 @@ export function TestimonialsSection() {
               <span className="inline-flex items-center gap-1 text-primary" aria-hidden="true">
                 {Array.from({ length: 5 }).map((_, index) => <Star key={index} className="testimonial-star h-4 w-4 fill-current" style={{ animationDelay: `${index * 90}ms` }} />)}
               </span>
-              <span>5/5 på Tradera</span>
+              <span>{tx("5/5 på Tradera")}</span>
             </div>
-            <div className="flex gap-2" aria-label="Review carousel controls">
-              <button type="button" onClick={() => move(-1)} className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-primary/25 text-foreground transition-colors hover:border-primary/55 hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" aria-label="Previous reviews"><ArrowLeft className="h-4 w-4" /></button>
-              <button type="button" onClick={() => move(1)} className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-primary/25 text-foreground transition-colors hover:border-primary/55 hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" aria-label="Next reviews"><ArrowRight className="h-4 w-4" /></button>
+            <div className="flex gap-2" aria-label={tx("Review carousel controls")}>
+              <button type="button" onClick={() => move(-1)} className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-primary/25 text-foreground transition-colors hover:border-primary/55 hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" aria-label={tx("Previous reviews")}><ArrowLeft className="h-4 w-4" /></button>
+              <button type="button" onClick={() => move(1)} className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-primary/25 text-foreground transition-colors hover:border-primary/55 hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" aria-label={tx("Next reviews")}><ArrowRight className="h-4 w-4" /></button>
             </div>
           </div>
         </div>
@@ -107,7 +109,7 @@ export function TestimonialsSection() {
         <Carousel
           setApi={setApi}
           opts={{ loop: true, align: "center", duration: reducedMotion ? 0 : 35 }}
-          aria-label="Collector reviews"
+          aria-label={tx("Collector reviews")}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
           onFocusCapture={() => setPaused(true)}
@@ -115,7 +117,7 @@ export function TestimonialsSection() {
         >
           <CarouselContent className="-ml-5 py-6">
             {testimonials.map((testimonial, index) => (
-              <CarouselItem key={testimonial.id ?? `${testimonial.name}-${index}`} className="basis-[90%] pl-5 sm:basis-[60%] lg:basis-[38%]" aria-label={`${index + 1} of ${testimonials.length}`}>
+              <CarouselItem key={testimonial.id ?? `${testimonial.name}-${index}`} className="basis-[90%] pl-5 sm:basis-[60%] lg:basis-[38%]" aria-label={tx("{n} of {total}", { n: index + 1, total: testimonials.length })}>
                 <div className={cn(
                   "h-full origin-center transition-[transform,opacity,filter] duration-700 motion-reduce:transition-none [&_.testimonial-card]:rounded-xl [&_.testimonial-card]:border-primary/25 [&_.testimonial-card]:bg-background/35 [&_.testimonial-card]:shadow-[inset_0_1px_0_hsl(var(--primary)/0.12)] [&_.testimonial-card_p]:text-base [&_.testimonial-card_p]:leading-8",
                   selected === index ? "scale-100 opacity-100 [&_.testimonial-card]:border-primary/60 [&_.testimonial-card]:bg-card" : "scale-[0.94] opacity-70 hover:opacity-100 focus-within:opacity-100"
@@ -126,9 +128,9 @@ export function TestimonialsSection() {
             ))}
           </CarouselContent>
           <div className="mt-5 flex flex-wrap items-center justify-center gap-5">
-            <div className="flex max-w-full flex-wrap justify-center gap-1" aria-label="Choose review">
+            <div className="flex max-w-full flex-wrap justify-center gap-1" aria-label={tx("Choose review")}>
               {Array.from({ length: snapCount }, (_, index) => (
-                <button key={index} type="button" aria-label={`Show review ${index + 1}`} aria-current={selected === index ? "true" : undefined}
+                <button key={index} type="button" aria-label={tx("Show review {n}", { n: index + 1 })} aria-current={selected === index ? "true" : undefined}
                   onClick={() => { setPaused(true); api?.scrollTo(index, reducedMotion); }}
                   className="group flex h-8 min-w-8 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
                   <span className={cn("h-1.5 rounded-full transition-all duration-500 motion-reduce:transition-none", selected === index ? "w-7 bg-primary shadow-[0_0_12px_hsl(var(--primary)/0.4)]" : "w-1.5 bg-primary/30 group-hover:bg-primary/70")} />
@@ -137,15 +139,14 @@ export function TestimonialsSection() {
             </div>
             <span className="text-xs tabular-nums tracking-widest text-muted-foreground">{String(selected + 1).padStart(2, "0")} / {String(snapCount).padStart(2, "0")}</span>
             {!reducedMotion && snapCount > 1 && (
-              <button type="button" onClick={() => setPaused(value => !value)} aria-label={paused ? "Start automatic reviews" : "Pause automatic reviews"}
+              <button type="button" onClick={() => setPaused(value => !value)} aria-label={paused ? tx("Start automatic reviews") : tx("Pause automatic reviews")}
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-primary/25 text-primary transition-colors hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
                 {paused ? <Play className="h-3.5 w-3.5" /> : <Pause className="h-3.5 w-3.5" />}
               </button>
             )}
           </div>
         </Carousel>
-        <a href={TRADERA_URL} target="_blank" rel="noopener noreferrer" className="editorial-link inline-flex items-center gap-3 border-b border-primary/35 pb-2 text-xs font-semibold uppercase tracking-[0.18em] text-foreground">
-          See all feedback on Tradera <span aria-hidden="true">→</span>
+        <a href={TRADERA_URL} target="_blank" rel="noopener noreferrer" className="editorial-link inline-flex items-center gap-3 border-b border-primary/35 pb-2 text-xs font-semibold uppercase tracking-[0.18em] text-foreground">{tx("See all feedback on Tradera")}<span aria-hidden="true">→</span>
         </a>
       </SectionWrapper>
     </section>

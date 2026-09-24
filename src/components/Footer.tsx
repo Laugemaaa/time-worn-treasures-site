@@ -1,3 +1,4 @@
+import { useLocalizedText } from "@/i18n/localizedText";
 import { Link } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageProvider";
@@ -5,6 +6,7 @@ import { LanguageSelector } from "@/components/LanguageSelector";
 import grandpasHeritageLogo from "@/assets/grandpas-heritage-logo.png";
 
 export function Footer() {
+  const tx = useLocalizedText();
   const { t } = useLanguage();
   return (
     <footer className="bg-espresso text-[#eadcc6]">
@@ -23,7 +25,7 @@ export function Footer() {
 
           <div>
             <h4 className="text-sm font-semibold uppercase tracking-wider mb-4 text-[#b9a98f]">{t("footer.navigate")}</h4>
-            <nav className="flex flex-col gap-2" aria-label="Footer navigation">
+            <nav className="flex flex-col gap-2" aria-label={tx("Footer navigation")}>
               <Link to="/" className="text-sm text-[#d8c8aa] transition-colors duration-150 hover:text-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa] rounded-sm w-fit">
                 {t("nav.home")}
               </Link>

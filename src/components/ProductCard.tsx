@@ -1,3 +1,5 @@
+import { useLocalizedContent } from "@/i18n/localizedContent";
+import { useLocalizedText } from "@/i18n/localizedText";
 import { Link } from "react-router-dom";
 import { type Product } from "@/data/products";
 import { AuctionMetadata } from "./AuctionMetadata";
@@ -8,20 +10,22 @@ type Props = {
 };
 
 export function ProductCard({ product }: Props) {
+  const content = useLocalizedContent();
+  const tx = useLocalizedText();
   const { lang, t } = useLanguage();
-  const description = lang === "da" ? product.shortDescription : t("collection.productSummary");
+  const description = t("collection.productSummary");
 
   return (
     <Link
       to={`/watch/${product.slug}`}
       className="group block rounded-lg border border-border bg-card overflow-hidden card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-      aria-label={`View ${product.title}`}
+      aria-label={tx("View {name}", {name: content(product.title)})}
     >
       {/* Image */}
       <div className="aspect-square overflow-hidden bg-secondary">
         <img
           src={product.imageUrl}
-          alt={product.title}
+          alt={content(product.title)}
           className="h-full w-full object-cover card-hover-media"
           loading="lazy"
         />

@@ -1,3 +1,4 @@
+import { useLocalizedContent, formatArchiveDate } from "@/i18n/localizedContent";
 import { useMemo, useState } from "react";
 import { CalendarDays, Gavel, PackageCheck } from "lucide-react";
 import { Footer } from "@/components/Footer";
@@ -225,8 +226,9 @@ function BrandCategoryButton({
 }
 
 function SoldWatchCard({ watch, index }: { watch: SoldWatch; index: number }) {
+  const content = useLocalizedContent();
   const { lang, t } = useLanguage();
-  const description = lang === "da" ? watch.shortDescription : t("sold.genericDescription");
+  const description = watch.shortDescription ? content(watch.shortDescription) : t("sold.genericDescription");
 
   return (
     <article
@@ -236,7 +238,7 @@ function SoldWatchCard({ watch, index }: { watch: SoldWatch; index: number }) {
       <div className="aspect-square overflow-hidden bg-secondary">
         <img
           src={watch.imageUrl}
-          alt={watch.title}
+          alt={content(watch.title)}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.07]"
           loading="lazy"
           decoding="async"
@@ -253,7 +255,7 @@ function SoldWatchCard({ watch, index }: { watch: SoldWatch; index: number }) {
         )}
 
         <h2 className="font-serif text-base font-semibold leading-tight text-foreground line-clamp-2">
-          {watch.title}
+          {content(watch.title)}
         </h2>
 
         {description && (
@@ -273,7 +275,7 @@ function SoldWatchCard({ watch, index }: { watch: SoldWatch; index: number }) {
           {watch.soldDate && (
             <span className="inline-flex items-center gap-1">
               <CalendarDays className="h-3 w-3" />
-              {watch.soldDate}
+              {formatArchiveDate(watch.soldDate, lang)}
             </span>
           )}
         </div>

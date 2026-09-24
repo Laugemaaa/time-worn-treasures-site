@@ -17,16 +17,18 @@ const LEGACY_STORAGE_KEY = "vw.lang";
 const STORED_LANGUAGE_KEY = "gh.lang";
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Language>("en");
+  const [lang, setLangState] = useState<Language>(() => {
+    try { const saved = localStorage.getItem(STORED_LANGUAGE_KEY); return saved && ["en", "da", "sv", "no"].includes(saved) ? saved as Language : "en"; } catch { return "en"; }
+  });
 
   useEffect(() => {
     try {
       localStorage.removeItem(LEGACY_STORAGE_KEY);
-      localStorage.removeItem(STORED_LANGUAGE_KEY);
+      localStorage.setItem(STORED_LANGUAGE_KEY, lang);
     } catch {
       /* ignore */
     }
-  }, []);
+  }, [lang]);
 
   useEffect(() => {
     if (typeof document !== "undefined") document.documentElement.lang = lang;

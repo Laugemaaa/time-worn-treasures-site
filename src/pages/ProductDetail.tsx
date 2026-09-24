@@ -1,3 +1,5 @@
+import { useLocalizedContent } from "@/i18n/localizedContent";
+import { useLocalizedText } from "@/i18n/localizedText";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getProductBySlug, type Product } from "@/data/products";
@@ -125,6 +127,8 @@ function getOriginalListingSections(
 }
 
 const ProductDetail = () => {
+  const content = useLocalizedContent();
+  const tx = useLocalizedText();
   const { slug } = useParams<{ slug: string }>();
   const { lang, t } = useLanguage();
   const [product, setProduct] = useState<Product | undefined>();
@@ -208,7 +212,7 @@ const ProductDetail = () => {
     ? lang === "da"
       ? product.shortDescription ||
         product.fullDescription?.slice(0, 155) ||
-        `View ${product.title} at GrandpasHeritage. A vintage watch with an honest description and purchase through Tradera.`
+        `View ${content(product.title)} at GrandpasHeritage. A vintage watch with an honest description and purchase through Tradera.`
       : t("detail.descriptionFallback")
     : "GrandpasHeritage curates vintage watches with character, patina, and honest descriptions.";
 
@@ -225,7 +229,7 @@ const ProductDetail = () => {
   return (
     <div className="min-h-screen bg-background paper-texture">
       <SEO
-        title={product ? `${product.title} | GrandpasHeritage` : "Vintage watch | GrandpasHeritage"}
+        title={product ? `${content(product.title)} | GrandpasHeritage` : "Vintage watch | GrandpasHeritage"}
         description={seoDescription}
         canonicalPath={slug ? `/watch/${slug}` : "/"}
         image={product?.imageUrl}
@@ -329,7 +333,7 @@ const ProductDetail = () => {
                       type="button"
                       onClick={showPreviousImage}
                       className="absolute left-3 top-1/2 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/35 bg-black/35 text-white backdrop-blur-sm transition-all duration-150 hover:bg-black/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-                      aria-label={`Show previous image for ${product.title}`}
+                      aria-label={tx("Previous image")}
                     >
                       <ChevronLeft className="h-5 w-5" />
                     </button>
@@ -337,7 +341,7 @@ const ProductDetail = () => {
                       type="button"
                       onClick={showNextImage}
                       className="absolute right-3 top-1/2 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/35 bg-black/35 text-white backdrop-blur-sm transition-all duration-150 hover:bg-black/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-                      aria-label={`Show next image for ${product.title}`}
+                      aria-label={tx("Next image")}
                     >
                       <ChevronRight className="h-5 w-5" />
                     </button>
@@ -352,11 +356,9 @@ const ProductDetail = () => {
                     type="button"
                     onClick={() => setLightboxOpen(true)}
                     className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/35 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm transition-all duration-150 hover:bg-black/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-                    aria-label={`Open larger image view for ${product.title}`}
+                    aria-label={tx("View larger")}
                   >
-                    <Expand className="h-3.5 w-3.5" />
-                    View larger
-                  </button>
+                    <Expand className="h-3.5 w-3.5" />{tx("View larger")}</button>
                 </div>
               </div>
 
@@ -375,7 +377,7 @@ const ProductDetail = () => {
                             ? "border-primary shadow-[0_10px_24px_-16px_rgba(27,58,92,0.65)]"
                             : "border-border hover:border-primary/50"
                         }`}
-                        aria-label={`Show image ${index + 1} for ${product.title}`}
+                        aria-label={tx("Show image {n}", {n: index + 1})}
                       >
                         <img
                           src={image}
@@ -464,7 +466,7 @@ const ProductDetail = () => {
                         <div className="mt-3 flex flex-wrap gap-2">
                           {originalListingSections.keyNotes.map((note) => (
                             <span
-                              key={note}
+                              key={content(note)}
                               className="rounded-full border border-border/80 bg-background/35 px-3 py-1 text-sm leading-relaxed text-foreground/85"
                             >
                               {note}
@@ -481,7 +483,7 @@ const ProductDetail = () => {
                         </h3>
                         <ul className="mt-3 grid gap-x-5 gap-y-2 text-sm leading-relaxed text-muted-foreground sm:grid-cols-2">
                           {originalListingSections.specifications.map((spec) => (
-                            <li key={spec} className="flex gap-2">
+                            <li key={content(spec)} className="flex gap-2">
                               <span className="mt-[0.72em] h-1.5 w-1.5 shrink-0 rounded-full bg-primary/80" />
                               <span>{spec}</span>
                             </li>
@@ -511,7 +513,7 @@ const ProductDetail = () => {
               {product.historyNote && (
                 <blockquote className="border-l-2 border-primary/30 pl-4 py-2">
                   <p className="text-sm italic leading-relaxed text-muted-foreground">
-                    {product.historyNote}
+                    {content(product.historyNote)}
                   </p>
                 </blockquote>
               )}
@@ -524,7 +526,7 @@ const ProductDetail = () => {
       <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
         <DialogContent className="max-w-5xl border-border/70 bg-card p-3 sm:p-4">
           <DialogTitle className="sr-only">
-            {product ? `${product.title} image gallery` : "Image gallery"}
+            {product ? `${product.title} image gallery` : tx("Image gallery")}
           </DialogTitle>
 
           {product && (
@@ -542,7 +544,7 @@ const ProductDetail = () => {
                       type="button"
                       onClick={showPreviousImage}
                       className="absolute left-3 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-black/40 text-white backdrop-blur-sm transition-all duration-150 hover:bg-black/55 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-                      aria-label={`Show previous image for ${product.title}`}
+                      aria-label={tx("Previous image")}
                     >
                       <ChevronLeft className="h-5 w-5" />
                     </button>
@@ -550,7 +552,7 @@ const ProductDetail = () => {
                       type="button"
                       onClick={showNextImage}
                       className="absolute right-3 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-black/40 text-white backdrop-blur-sm transition-all duration-150 hover:bg-black/55 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-                      aria-label={`Show next image for ${product.title}`}
+                      aria-label={tx("Next image")}
                     >
                       <ChevronRight className="h-5 w-5" />
                     </button>
@@ -571,7 +573,7 @@ const ProductDetail = () => {
                         className={`shrink-0 overflow-hidden rounded-md border bg-secondary transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
                           isActive ? "border-primary" : "border-border hover:border-primary/50"
                         }`}
-                        aria-label={`Show image ${index + 1} for ${product.title}`}
+                        aria-label={tx("Show image {n}", {n: index + 1})}
                       >
                         <img
                           src={image}

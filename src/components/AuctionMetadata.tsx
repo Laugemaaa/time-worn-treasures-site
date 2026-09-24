@@ -1,3 +1,5 @@
+import { useLanguage } from "@/i18n/LanguageProvider";
+import { useLocalizedText } from "@/i18n/localizedText";
 import { useEffect, useMemo, useState } from "react";
 import { type Product } from "@/data/products";
 import { Clock, Eye, Gavel, Tag } from "lucide-react";
@@ -11,15 +13,15 @@ function padTime(value: number): string {
   return value.toString().padStart(2, "0");
 }
 
-function formatDuration(milliseconds: number): string {
+function formatDuration(milliseconds: number, hour = "h"): string {
   const safeMilliseconds = Math.max(0, milliseconds);
   const days = Math.floor(safeMilliseconds / DAY_MS);
   const hours = Math.floor((safeMilliseconds % DAY_MS) / HOUR_MS);
   const minutes = Math.floor((safeMilliseconds % HOUR_MS) / MINUTE_MS);
   const seconds = Math.floor((safeMilliseconds % MINUTE_MS) / SECOND_MS);
 
-  if (days > 0) return `${days}d ${hours}h ${padTime(minutes)}m ${padTime(seconds)}s`;
-  if (hours > 0) return `${hours}h ${padTime(minutes)}m ${padTime(seconds)}s`;
+  if (days > 0) return `${days}d ${hours}${hour} ${padTime(minutes)}m ${padTime(seconds)}s`;
+  if (hours > 0) return `${hours}${hour} ${padTime(minutes)}m ${padTime(seconds)}s`;
   if (minutes > 0) return `${minutes}m ${padTime(seconds)}s`;
   return `${seconds}s`;
 }
@@ -35,9 +37,9 @@ function parseISO8601DurationToMilliseconds(duration: string): number | undefine
   return days * DAY_MS + hours * HOUR_MS + minutes * MINUTE_MS;
 }
 
-function formatISO8601Duration(duration: string): string {
+function formatISO8601Duration(duration: string, hour: string): string {
   const milliseconds = parseISO8601DurationToMilliseconds(duration);
-  return milliseconds == null ? duration : formatDuration(milliseconds);
+  return milliseconds == null ? duration : formatDuration(milliseconds, hour);
 }
 
 function useNow(intervalMs: number): number {
@@ -100,6 +102,9 @@ type Props = {
 };
 
 export function AuctionMetadata({ product, compact = false }: Props) {
+  const tx = useLocalizedText();
+ const {lang} = useLanguage();
+ const locale = lang === "no" ? "nb-NO" : lang;
   const now = useNow(SECOND_MS);
   const auctionEndTime = useMemo(() => {
     if (!product.auctionEndDate) return undefined;
@@ -110,9 +115,9 @@ export function AuctionMetadata({ product, compact = false }: Props) {
   const liveMilliseconds = auctionEndTime == null ? undefined : Math.max(0, auctionEndTime - now);
   const countdownLabel =
     liveMilliseconds != null
-      ? formatDuration(liveMilliseconds)
+      ? formatDuration(liveMilliseconds, tx("h"))
       : product.timeRemaining
-        ? formatISO8601Duration(product.timeRemaining)
+        ? formatISO8601Duration(product.timeRemaining, tx("h"))
         : undefined;
   const hasAnyData =
     product.currentBidPrice ||
@@ -137,29 +142,25 @@ export function AuctionMetadata({ product, compact = false }: Props) {
     <div className={`flex flex-wrap items-center gap-x-4 gap-y-1 text-muted-foreground ${compact ? "text-xs" : "text-sm"}`}>
       {currentPrice != null && compact && (
         <span className="font-semibold text-foreground">
-          {currentPrice.toLocaleString("sv-SE")} {currency}
+          {currentPrice.toLocaleString(locale)} {currency}
         </span>
       )}
       {currentPrice == null && startingPrice != null && compact && (
-        <span className="font-semibold text-foreground">
-          Start: {startingPrice.toLocaleString("sv-SE")} {currency}
+        <span className="font-semibold text-foreground">{tx("Start:")} {startingPrice.toLocaleString(locale)} {currency}
         </span>
       )}
       {currentPrice != null && !compact && (
-        <span className="inline-flex items-center gap-1 font-semibold text-foreground">
-          Live: {currentPrice.toLocaleString("sv-SE")} {currency}
+        <span className="inline-flex items-center gap-1 font-semibold text-foreground">{tx("Live:")} {currentPrice.toLocaleString(locale)} {currency}
         </span>
       )}
       {startingPrice != null && !compact && (
-        <span className="inline-flex items-center gap-1">
-          Start: {startingPrice.toLocaleString("sv-SE")} {currency}
+        <span className="inline-flex items-center gap-1">{tx("Start:")}{startingPrice.toLocaleString(locale)} {currency}
         </span>
       )}
       {product.numberOfBids != null && (
         <span className="inline-flex items-center gap-1">
           <Gavel className="h-3 w-3" />
-          {product.numberOfBids} bids
-        </span>
+          {product.numberOfBids} {tx("bids")}</span>
       )}
       {product.numberOfViewers != null && (
         <span className="inline-flex items-center gap-1">

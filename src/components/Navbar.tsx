@@ -1,3 +1,4 @@
+import { useLocalizedText } from "@/i18n/localizedText";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronDown, Globe, Instagram, Menu, X } from "lucide-react";
@@ -8,6 +9,7 @@ import { LANGUAGE_LABELS, SUPPORTED_LANGUAGES, type Language } from "@/i18n/tran
 import grandpasHeritageLogo from "@/assets/grandpas-heritage-logo-cream.png";
 
 export function Navbar() {
+  const tx = useLocalizedText();
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const { lang, setLang, t } = useLanguage();
@@ -48,7 +50,7 @@ export function Navbar() {
         <div className="relative mx-auto h-[84px] max-w-[1920px] px-8 font-sans lg:px-11">
           <nav
             className="absolute left-8 top-1/2 hidden max-w-[calc(50%-175px)] -translate-y-1/2 items-center gap-12 overflow-hidden lg:left-14 lg:flex xl:gap-14"
-            aria-label="Main navigation"
+            aria-label={tx("Main navigation")}
           >
             {navLinks.map((link) => (
               <Link
@@ -66,7 +68,7 @@ export function Navbar() {
             to="/"
             onClick={handleLogoClick}
             className="group absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center text-[#eadcc6] leading-[24px] transition-colors duration-150 hover:text-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1d140f]"
-            aria-label="GrandpasHeritage home"
+            aria-label={tx("GrandpasHeritage home")}
           >
             <img
               src={grandpasHeritageLogo}
@@ -98,7 +100,7 @@ export function Navbar() {
               href={instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Instagram (opens in new tab)"
+              aria-label={tx("Instagram (opens in new tab)")}
               className="inline-flex h-[38px] items-center gap-2 rounded-[11px] bg-[#eadcc6] px-4 font-serif text-[17px] font-semibold leading-none text-[#1d140f] transition-colors duration-150 hover:bg-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1d140f]"
             >
               <Instagram aria-hidden className="h-4 w-4" />
@@ -130,7 +132,7 @@ export function Navbar() {
                 <X className="h-5 w-5" />
               </button>
             </div>
-            <nav className="flex flex-col gap-4 px-6 pt-4" aria-label="Mobile navigation">
+            <nav className="flex flex-col gap-4 px-6 pt-4" aria-label={tx("Mobile navigation")}>
               {navLinks.map((link) => (
                 <Link
                   key={link.to}

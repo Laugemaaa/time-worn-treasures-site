@@ -1,3 +1,4 @@
+import { useLocalizedText } from "@/i18n/localizedText";
 import { useEffect, useState } from "react";
 import { ExternalLink, PackageOpen } from "lucide-react";
 import { Footer } from "@/components/Footer";
@@ -12,6 +13,7 @@ const LIVE_FEED_REFRESH_MS = 30_000;
 const TRADERA_URL = "https://www.tradera.com/da/profile/items/6841860/grandpasheritage";
 
 export default function AvailableWatches() {
+  const tx = useLocalizedText();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -56,8 +58,8 @@ export default function AvailableWatches() {
   return (
     <div className="min-h-screen bg-background paper-texture">
       <SEO
-        title="Current auctions | GrandpasHeritage"
-        description="Active Tradera auctions from GrandpasHeritage. Vintage watches listed with photos, condition notes, and live bidding details."
+        title={`${tx("Current auctions")} | GrandpasHeritage`}
+        description={tx("Active Tradera auctions from GrandpasHeritage. Vintage watches listed with photos, condition notes, and live bidding details.")}
         canonicalPath="/auctions"
       />
       <Navbar />
@@ -67,16 +69,9 @@ export default function AvailableWatches() {
           <SectionWrapper className="py-16 md:py-24">
             <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
               <div className="max-w-3xl">
-                <p className="mb-5 text-[12px] font-semibold uppercase tracking-[0.34em] text-primary">
-                  Live on Tradera
-                </p>
-                <h1 className="font-serif text-5xl font-semibold leading-[0.98] text-foreground md:text-7xl">
-                  Current auctions
-                </h1>
-                <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">
-                  A clean overview of the vintage watches currently listed by GrandpasHeritage.
-                  Each piece opens with more photos and details before bidding continues on Tradera.
-                </p>
+                <p className="mb-5 text-[12px] font-semibold uppercase tracking-[0.34em] text-primary">{tx("Live on Tradera")}</p>
+                <h1 className="font-serif text-5xl font-semibold leading-[0.98] text-foreground md:text-7xl">{tx("Current auctions")}</h1>
+                <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">{tx("A clean overview of the vintage watches currently listed by GrandpasHeritage. Each piece opens with more photos and details before bidding continues on Tradera.")}</p>
               </div>
 
               <a
@@ -84,9 +79,7 @@ export default function AvailableWatches() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="cta-press inline-flex h-11 w-fit items-center gap-2 rounded-md bg-primary px-5 font-serif text-base font-semibold text-primary-foreground transition-colors duration-150 hover:bg-navy-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              >
-                Open Tradera
-                <ExternalLink className="h-4 w-4" />
+              >{tx("Open Tradera")}<ExternalLink className="h-4 w-4" />
               </a>
             </div>
           </SectionWrapper>
@@ -108,15 +101,13 @@ export default function AvailableWatches() {
             </div>
           ) : error ? (
             <EmptyPanel
-              title="We could not load the auctions"
-              text="Try again, or open Tradera directly."
+              title={tx("We could not load the auctions")}
+              text={tx("Try again, or open Tradera directly.")}
               action={
                 <button
                   onClick={() => fetchProducts(true)}
                   className="cta-press inline-flex h-10 items-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground transition-colors duration-150 hover:bg-navy-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                >
-                  Try again
-                </button>
+                >{tx("Try again")}</button>
               }
             />
           ) : products.length > 0 ? (
@@ -127,8 +118,8 @@ export default function AvailableWatches() {
             </div>
           ) : (
             <EmptyPanel
-              title="No live auctions right now"
-              text="New auctions will appear here automatically when they go live."
+              title={tx("No live auctions right now")}
+              text={tx("New auctions will appear here automatically when they go live.")}
             />
           )}
         </SectionWrapper>

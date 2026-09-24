@@ -1,3 +1,5 @@
+import { useLanguage } from "@/i18n/LanguageProvider";
+import { useLocalizedText } from "@/i18n/localizedText";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { HeroSection } from "@/components/HeroSection";
@@ -12,9 +14,10 @@ import { homepageFaqs } from "@/data/homepageFaqs";
 import { SEO, SITE_NAME, SITE_URL } from "@/components/SEO";
 
 const Index = () => {
-  const title = "GrandpasHeritage | Vintage watches with history";
-  const description =
-    "GrandpasHeritage curates vintage watches, pocket watches, and collectible timepieces with character, patina, and honest descriptions. View current auctions and buy securely through Tradera.";
+ const {t} = useLanguage();
+ const tx = useLocalizedText();
+  const title = `GrandpasHeritage | ${t("hero.title")}`;
+  const description = t("hero.subtitle");
   const brandSummary =
     "GrandpasHeritage is a curated vintage watch archive and storefront focused on vintage wristwatches, pocket watches, and collectible timepieces with character, patina, and honest descriptions.";
 
@@ -86,10 +89,10 @@ const Index = () => {
               },
               ...homepageFaqs.map((item) => ({
                 "@type": "Question",
-                name: item.question,
+                name: tx(item.question),
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: item.answer,
+                  text: tx(item.answer),
                 },
               })),
             ],

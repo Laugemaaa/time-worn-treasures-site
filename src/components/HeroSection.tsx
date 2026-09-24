@@ -1,8 +1,10 @@
+import { useLocalizedText } from "@/i18n/localizedText";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import heroWatchLeather from "@/assets/hero-watch-leather.png";
 
 export function HeroSection() {
+  const tx = useLocalizedText();
   const prefersReducedMotion = usePrefersReducedMotion();
   const { t } = useLanguage();
 
@@ -17,7 +19,7 @@ export function HeroSection() {
       <div className="relative min-h-[620px] md:min-h-[calc(100svh-96px)]">
         <img
           src={heroWatchLeather}
-          alt="Gold vintage watch on warm brown leather"
+          alt={tx("Gold vintage watch on warm brown leather")}
           width={1600}
           height={1000}
           className="absolute inset-0 h-full w-full object-cover object-center"

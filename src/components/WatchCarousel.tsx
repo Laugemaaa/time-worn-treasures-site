@@ -1,3 +1,4 @@
+import { useLocalizedText } from "@/i18n/localizedText";
 import { useEffect, useState } from "react";
 import carouselWatch2 from "@/assets/carousel-watch-2.png";
 import carouselWatch5 from "@/assets/carousel-watch-5.png";
@@ -10,6 +11,7 @@ const carouselImages = [
 ];
 
 export function WatchCarousel() {
+  const tx = useLocalizedText();
   const [activeImage, setActiveImage] = useState(0);
 
   useEffect(() => {
@@ -26,7 +28,7 @@ export function WatchCarousel() {
         <img
           key={image.src}
           src={image.src}
-          alt={image.alt}
+          alt={tx(image.alt)}
           className={[
             "absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out",
             index === activeImage ? "opacity-100" : "opacity-0",
@@ -42,7 +44,7 @@ export function WatchCarousel() {
             key={image.src}
             type="button"
             onClick={() => setActiveImage(index)}
-            aria-label={`Vis billede ${index + 1}`}
+            aria-label={tx("Show image {n}", { n: index + 1 })}
             aria-current={index === activeImage}
             className={[
               "h-3 w-3 rounded-[4px] border border-white/45 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground",
