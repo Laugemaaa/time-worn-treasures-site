@@ -1,13 +1,19 @@
 import { ExternalLink, Instagram } from "lucide-react";
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { useLanguage } from "@/i18n/LanguageProvider";
-import instagramWatchVideo from "@/assets/instagram-watch-video.mp4";
+import instagramWatchVideo from "@/assets/rado-champio.mp4";
+import instagramWatchPoster from "@/assets/rado-champio-poster.jpg";
+import { useDeferredMedia } from "@/hooks/useDeferredMedia";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 export function InstagramStorySection() {
   const { t } = useLanguage();
+  const deferredVideo = useDeferredMedia();
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const videoReady = deferredVideo.ready && !prefersReducedMotion;
 
   return (
-    <section className="border-b border-border/70 bg-[linear-gradient(180deg,hsl(var(--background))_0%,hsl(var(--card))_100%)] text-foreground">
+    <section ref={deferredVideo.ref} id="instagram" className="border-b border-border/70 bg-[linear-gradient(180deg,hsl(var(--background))_0%,hsl(var(--card))_100%)] text-foreground">
       <SectionWrapper className="py-16 md:py-24" reveal="up">
         <div className="grid items-center gap-12 lg:grid-cols-[0.95fr_0.72fr] lg:gap-16">
           <div className="max-w-[620px]">
@@ -45,13 +51,27 @@ export function InstagramStorySection() {
               <div className="absolute left-1/2 top-2 z-10 h-1.5 w-16 -translate-x-1/2 rounded-full bg-[#eadcc6]/30" />
               <div className="relative aspect-[9/16] overflow-hidden rounded-[1.55rem] bg-background">
                 <video
-                  className="h-full w-full object-cover"
-                  src={instagramWatchVideo}
-                  autoPlay
+                  key={videoReady ? "instagram-video-ready" : "instagram-video-poster"}
+                  className="autoplay-background-video pointer-events-none h-full w-full select-none object-cover"
+                  src={videoReady ? instagramWatchVideo : undefined}
+                  poster={instagramWatchPoster}
+                  autoPlay={videoReady}
                   muted
                   loop
                   playsInline
-                  preload="metadata"
+                  preload={videoReady ? "auto" : "none"}
+                  controls={false}
+                  disablePictureInPicture
+                  disableRemotePlayback
+                  controlsList="nodownload noplaybackrate nofullscreen"
+                  tabIndex={-1}
+                  onLoadedData={(event) => void event.currentTarget.play().catch(() => undefined)}
+                  onCanPlay={(event) => void event.currentTarget.play().catch(() => undefined)}
+                  onPause={(event) => {
+                    if (document.visibilityState === "visible") {
+                      void event.currentTarget.play().catch(() => undefined);
+                    }
+                  }}
                   aria-label={t("instagram.videoLabel")}
                 />
                 <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(18,13,10,0.1)_0%,rgba(18,13,10,0)_45%,rgba(18,13,10,0.28)_100%)]" />

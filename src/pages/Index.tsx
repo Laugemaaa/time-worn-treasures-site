@@ -6,6 +6,9 @@ import { FounderStorySection } from "@/components/FounderStorySection";
 import { InstagramStorySection } from "@/components/InstagramStorySection";
 import { ProductGridSection } from "@/components/ProductGridSection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
+import { HeritageStandardSection } from "@/components/HeritageStandardSection";
+import { FAQSection } from "@/components/FAQSection";
+import { homepageFaqs } from "@/data/homepageFaqs";
 import { SEO, SITE_NAME, SITE_URL } from "@/components/SEO";
 
 const Index = () => {
@@ -81,6 +84,14 @@ const Index = () => {
                   text: "GrandpasHeritage curates vintage watches, pocket watches, and collectible timepieces, with current purchases completed securely through Tradera.",
                 },
               },
+              ...homepageFaqs.map((item) => ({
+                "@type": "Question",
+                name: item.question,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: item.answer,
+                },
+              })),
             ],
           },
         ]}
@@ -89,10 +100,12 @@ const Index = () => {
       <main id="main-content">
         <HeroSection />
         <FounderStorySection />
+        <HeritageStandardSection />
+        <ProductGridSection />
         <PhilosophySection />
         <InstagramStorySection />
-        <ProductGridSection />
         <TestimonialsSection />
+        <FAQSection />
       </main>
       <Footer />
     </div>

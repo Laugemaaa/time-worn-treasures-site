@@ -1,0 +1,87 @@
+/* Original editorial timeline, with the motion language of the watch-buying section. */
+.standard-effects .sell-watch-aurora { opacity: .58; }
+.standard-effects .sell-watch-dial { opacity: .5; }
+.standard-effects .standard-step {
+  opacity: 1;
+  transform: none;
+}
+.standard-effects .standard-step > div {
+  position: relative;
+  transition: transform 450ms var(--motion-ease-enter);
+}
+.standard-effects .standard-step-number {
+  color: hsl(var(--primary) / .55);
+  transition: color 450ms ease, text-shadow 450ms ease;
+}
+.standard-effects .standard-step p { color: hsl(var(--foreground) / .74); }
+.standard-effects .standard-timeline-track span {
+  position: relative;
+  background: linear-gradient(180deg, hsl(var(--primary) / .35), hsl(var(--primary)));
+  box-shadow: 0 0 12px hsl(var(--primary) / .3);
+}
+.standard-effects .standard-timeline-track span::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -2px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ead8b5;
+  box-shadow: 0 0 8px #e4c993, 0 0 22px #d1ae7070;
+}
+.standard-effects .standard-step-dot {
+  background: hsl(var(--background));
+  border-color: hsl(var(--primary) / .8);
+  box-shadow: 0 0 0 4px hsl(var(--primary) / .045);
+}
+.standard-effects .standard-step-dot::after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border: 1px solid hsl(var(--primary) / .45);
+  border-radius: 50%;
+  opacity: 0;
+}
+@media (hover: hover) and (pointer: fine) {
+  .standard-effects .standard-step:hover > div { transform: translateY(-7px); }
+  .standard-effects .standard-step:hover .standard-step-number {
+    color: hsl(var(--primary));
+    text-shadow: 0 0 28px hsl(var(--primary) / .28);
+  }
+  .standard-effects .standard-step:hover .standard-step-dot {
+    background: #ead8b5;
+    box-shadow: 0 0 0 5px hsl(var(--primary) / .1), 0 0 24px hsl(var(--primary) / .5);
+  }
+}
+@media (min-width: 1024px) {
+  .standard-effects .standard-timeline-track { top: 0; }
+  .standard-effects .standard-timeline-track span {
+    background: linear-gradient(90deg, hsl(var(--primary) / .35), hsl(var(--primary)));
+  }
+  .standard-effects .standard-timeline-track span::after {
+    bottom: -2px; left: auto; right: 0;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .standard-effects .standard-step-dot::after {
+    animation: standard-node-ripple 6s ease-out infinite;
+    animation-delay: calc(var(--step-index) * .65s);
+  }
+}
+@keyframes standard-node-ripple {
+  0%, 60%, 100% { transform: scale(.5); opacity: 0; }
+  68% { opacity: .65; }
+  90% { transform: scale(1.65); opacity: 0; }
+}
+@media (max-width: 639px) {
+  .standard-effects .sell-watch-aurora { opacity: .42; }
+  .standard-effects .sell-watch-dial-large { opacity: .25; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .standard-effects .sell-watch-aurora,
+  .standard-effects .sell-watch-dial,
+  .standard-effects .standard-step-dot::after { animation: none; }
+  .standard-effects .standard-step > div,
+  .standard-effects .standard-step-number { transition: none; transform: none; }
+}

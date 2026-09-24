@@ -1,17 +1,11 @@
 import { useEffect, useState } from "react";
-import carouselWatch1 from "@/assets/carousel-watch-1.png";
 import carouselWatch2 from "@/assets/carousel-watch-2.png";
-import carouselWatch3 from "@/assets/carousel-watch-3.png";
-import carouselWatch4 from "@/assets/carousel-watch-4.png";
 import carouselWatch5 from "@/assets/carousel-watch-5.png";
 import carouselWatch6 from "@/assets/carousel-watch-6.png";
 
 const carouselImages = [
   { src: carouselWatch5, alt: "Small gold Omega Ladymatic watch worn on a wrist" },
-  { src: carouselWatch1, alt: "Vintage Pierce automatic watch on a leather strap" },
-  { src: carouselWatch2, alt: "Vintage Eterna watch on a brown leather strap" },
-  { src: carouselWatch3, alt: "Vintage Rado Golden Horse watch on a steel bracelet" },
-  { src: carouselWatch4, alt: "Vintage Omega Geneve watch on a brown leather strap" },
+  { src: carouselWatch2, alt: "Vintage Rado Golden Horse watch on a steel bracelet" },
   { src: carouselWatch6, alt: "Vintage Enicar Sherpa Guide watch on a steel bracelet" },
 ];
 

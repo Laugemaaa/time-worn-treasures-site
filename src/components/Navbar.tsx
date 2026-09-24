@@ -55,7 +55,7 @@ export function Navbar() {
                 key={link.to}
                 to={link.to}
                 onClick={() => handleNavClick(link.to)}
-                className="inline-flex items-center whitespace-nowrap rounded-sm py-0.5 font-serif text-[15px] font-semibold leading-none text-[#d8c8aa] transition-colors duration-150 hover:text-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1d140f]"
+                className="nav-editorial-link inline-flex items-center whitespace-nowrap rounded-sm py-1 font-serif text-[15px] font-semibold leading-none text-[#d8c8aa] transition-colors duration-150 hover:text-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1d140f]"
               >
                 {link.label}
               </Link>
