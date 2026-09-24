@@ -321,7 +321,8 @@ async function scrapeItemPage(itemUrl, referenceDate) {
   );
   const itemNumber = matchText(text, /Varenr\.\s*([\d\u00a0 ]+)/i)?.replace(/[^\d]/g, "");
   const embeddedItemData = matchEmbeddedItemData(html, itemNumber || itemUrl.match(/\/(\d+)\/[a-z0-9-]+$/i)?.[1]);
-  const views = Number((matchText(text, /Visninger\s+(\d+)/i) || "").replace(/[^\d]/g, "")) || undefined;
+  const viewText = matchText(text, /Visninger\s+(\d+(?:[., \u00a0\u202f]\d{3})*)(?!\d)/i);
+  const views = viewText === "" ? undefined : Number(viewText.replace(/[^\d]/g, ""));
   const published = matchText(text, /Publiceret\s+([^\n]+)/i);
   const imageUrls = extractImageUrls(html);
   const imageUrl = imageUrls[0]

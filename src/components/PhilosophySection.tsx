@@ -5,7 +5,7 @@ import { useLanguage } from "@/i18n/LanguageProvider";
 import philosophyVideoMobile from "@/assets/instagram-watch-video.mp4";
 import philosophyVideoDesktop from "@/assets/instagram-watch-video-desktop.mp4";
 import philosophyPoster from "@/assets/instagram-watch-poster.webp";
-import { useDeferredMedia } from "@/hooks/useDeferredMedia";
+
 
 function useScrollCardPresence(threshold = 0.28) {
   const ref = useRef<HTMLElement>(null);
@@ -71,14 +71,14 @@ function PhilosophyCard({
 
 export function PhilosophySection() {
   const { t } = useLanguage();
-  const deferredVideo = useDeferredMedia();
+
   const prefersReducedMotion = usePrefersReducedMotion();
-  const videoReady = deferredVideo.ready && !prefersReducedMotion;
+  const videoReady = !prefersReducedMotion;
 
   return (
-    <section ref={deferredVideo.ref} id="philosophy" className="relative isolate overflow-hidden border-b border-[#eadcc6]/15 bg-[#20140e] text-foreground">
+    <section id="philosophy" className="relative isolate overflow-hidden border-b border-[#eadcc6]/15 bg-[#20140e] text-foreground">
       <video
-        key={videoReady ? "philosophy-video-ready" : "philosophy-video-poster"}
+
         className="autoplay-background-video pointer-events-none absolute inset-0 -z-30 h-full w-full select-none object-cover object-center"
         poster={philosophyPoster}
         autoPlay={videoReady}
@@ -92,9 +92,9 @@ export function PhilosophySection() {
         controlsList="nodownload noplaybackrate nofullscreen"
         tabIndex={-1}
         aria-hidden="true"
-        onCanPlay={(event) => void event.currentTarget.play().catch(() => undefined)}
+        onCanPlay={(event) => { if (videoReady) void event.currentTarget.play().catch(() => undefined); }}
         onPause={(event) => {
-          if (document.visibilityState === "visible") void event.currentTarget.play().catch(() => undefined);
+          if (videoReady && document.visibilityState === "visible") void event.currentTarget.play().catch(() => undefined);
         }}
       >
         {videoReady ? (
