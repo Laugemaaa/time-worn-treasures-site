@@ -15,9 +15,9 @@ export function FAQSection() {
         </div>
         <Accordion type="single" collapsible className="border-t border-primary/25">
           {homepageFaqs.map((item, index) => (
-            <AccordionItem key={tx(item.question)} value={`faq-${index}`} className="border-primary/20">
+            <AccordionItem key={item.question} value={`faq-${index}`} className="border-primary/20">
               <AccordionTrigger className="gap-6 py-6 text-left font-serif text-xl font-medium text-foreground hover:no-underline md:text-2xl [&>svg]:text-primary">
-                <span className="flex gap-5"><span className="pt-1 text-[10px] font-semibold tracking-[0.18em] text-primary">{String(index + 1).padStart(2, "0")}</span>{item.question}</span>
+                <span className="flex gap-5"><span className="pt-1 text-[10px] font-semibold tracking-[0.18em] text-primary">{String(index + 1).padStart(2, "0")}</span>{tx(item.question)}</span>
               </AccordionTrigger>
               <AccordionContent className="pb-7 pl-10 pr-10 text-sm leading-7 text-muted-foreground md:max-w-2xl">
                 {tx(item.answer)}

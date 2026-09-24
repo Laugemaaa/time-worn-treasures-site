@@ -72,7 +72,7 @@ export function HeritageStandardSection() {
           <ol className="grid gap-0 lg:grid-cols-6">
             {steps.map((step, index) => (
               <li
-                key={tx(step.title)}
+                key={step.title}
                 className="standard-step group relative border-l border-primary/20 pb-11 pl-10 last:pb-0 lg:min-h-[310px] lg:border-l-0 lg:px-3 lg:pb-0 xl:px-5"
                 style={{
                   opacity: prefersReducedMotion ? 1 : Math.max(0.85, Math.min(1, (progress * 1.45 - index * 0.105) * 2.2)),
@@ -85,7 +85,7 @@ export function HeritageStandardSection() {
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <h3 className="mt-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground">
-                    {step.title}
+                    {tx(step.title)}
                   </h3>
                   <p className="mt-4 text-xs leading-6 text-muted-foreground transition-colors duration-500 group-hover:text-foreground/80">
                     {tx(step.body)}
