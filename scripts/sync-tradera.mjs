@@ -339,8 +339,8 @@ async function scrapeItemPage(itemUrl, referenceDate) {
   const auctionEndDate = embeddedAuctionEndDate || parseTraderaDate(endLabel, referenceDate);
   const embeddedPrice = embeddedItemData?.price;
   const embeddedStartingPrice = embeddedItemData?.openingBid;
-  const embeddedBidCount = embeddedItemData?.totalBids ?? bidCount;
-  const hasActiveBids = embeddedBidCount > 0 || embeddedPrice != null;
+  const embeddedBidCount = embeddedItemData?.totalBids;
+  const hasActiveBids = embeddedBidCount != null ? embeddedBidCount > 0 : embeddedPrice != null;
 
   return {
     id: itemNumber || itemUrl.match(/\/(\d+)\/[a-z0-9-]+$/i)?.[1] || slugify(title),
@@ -350,10 +350,10 @@ async function scrapeItemPage(itemUrl, referenceDate) {
     images: imageUrls.length > 0 ? imageUrls : [imageUrl],
     shortDescription: buildShortDescription(description),
     fullDescription: description || undefined,
-    currentBidPrice: hasActiveBids ? (embeddedPrice || parsedPrice.amount) : undefined,
-    startingBidPrice: embeddedStartingPrice || embeddedPrice || parsedStartingPrice.amount || parsedPrice.amount,
+    currentBidPrice: hasActiveBids ? embeddedPrice : undefined,
+    startingBidPrice: embeddedStartingPrice ?? parsedStartingPrice.amount,
     currency: embeddedItemData?.currency || parsedPrice.currency,
-    numberOfBids: hasActiveBids && embeddedBidCount === 0 ? undefined : embeddedBidCount,
+    numberOfBids: embeddedBidCount,
     numberOfViewers: views,
     timeRemaining: auctionEndDate ? toDuration(referenceDate, auctionEndDate) : undefined,
     auctionEndDate: auctionEndDate || published || undefined,
@@ -522,31 +522,41 @@ function matchEmbeddedNumber(html, property) {
 
 function matchEmbeddedItemData(html, itemId) {
   if (!itemId) return undefined;
-
-  const escapedItemId = String(itemId).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const match =
-    html.match(new RegExp(`\\\\?"itemId\\\\?"\\s*:\\s*${escapedItemId}[\\s\\S]{0,18000}`, "i"))
-    || html.match(new RegExp(`"itemId"\\s*:\\s*${escapedItemId}[\\s\\S]{0,18000}`, "i"));
-
-  if (!match) return undefined;
-
-  const block = match[0];
-  const price =
-    matchEmbeddedNumber(block, "leadingBid")
-    || matchEmbeddedNumber(block, "currentBid")
-    || matchEmbeddedNumber(block, "maxBid");
-  const openingBid = matchEmbeddedNumber(block, "openingBid");
-  const totalBids = matchEmbeddedNumber(block, "bidCount") || matchEmbeddedNumber(block, "totalBids");
-  const currency = matchEmbeddedString(block, "currency") || "SEK";
-
-  return {
-    price: price || undefined,
-    openingBid: openingBid || undefined,
-    totalBids,
-    currency,
-  };
+  // Decode Flight text once, then parse bounded JSON objects rather than
+  // scanning into recommendations belonging to other auctions.
+  const text = html.replace(/\\"/g, '"');
+  function readObject(start) {
+    let depth = 0, quoted = false, escaped = false;
+    for (let i = start; i < text.length; i++) {
+      const char = text[i];
+      if (quoted) {
+        if (escaped) escaped = false;
+        else if (char === "\\") escaped = true;
+        else if (char === '"') quoted = false;
+      } else if (char === '"') quoted = true;
+      else if (char === "{") depth++;
+      else if (char === "}" && --depth === 0) {
+        try { return { value: JSON.parse(text.slice(start, i + 1)), end: i + 1 }; }
+        catch { return undefined; }
+      }
+    }
+  }
+  for (const match of text.matchAll(/"itemDetails"\s*:\s*\{/g)) {
+    const details = readObject(match.index + match[0].length - 1);
+    if (!details || String(details.value.itemId) !== String(itemId)) continue;
+    const following = text.slice(details.end);
+    const bidMatch = following.match(/^\s*,\s*"bidInfo"\s*:\s*\{/);
+    const bids = bidMatch ? readObject(details.end + bidMatch[0].length - 1)?.value : undefined;
+    const item = details.value;
+    return {
+      price: bids?.leadingBidAmount ?? item.leadingBid,
+      openingBid: item.openingBid,
+      totalBids: bids?.bidCount,
+      currency: item.currency || "SEK",
+    };
+  }
+  return undefined;
 }
-
 function matchEmbeddedString(html, property) {
   const escaped = property.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const match = html.match(new RegExp(`\\\\?"${escaped}\\\\?"\\s*:\\s*\\\\?"([^"\\\\]+)\\\\?"`, "i"));
