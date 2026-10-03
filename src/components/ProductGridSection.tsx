@@ -1,7 +1,7 @@
 import { useLocalizedText } from "@/i18n/localizedText";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getProducts, type Product } from "@/data/products";
+import { getProducts, isFixedPriceProduct, isActiveProduct, type Product } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -64,7 +64,7 @@ export function ProductGridSection() {
     setError(false);
     try {
       const data = await getProducts();
-      setProducts(data);
+      setProducts(data.filter(p => !isFixedPriceProduct(p) && isActiveProduct(p)));
     } catch {
       setError(true);
     } finally {
@@ -106,10 +106,10 @@ export function ProductGridSection() {
           </p>
         </div>
         <Link
-          to="/auctions"
+          to="/buy-now"
           className="cta-press inline-flex h-11 w-fit items-center gap-2 rounded-md bg-primary px-5 font-serif text-base font-semibold text-primary-foreground transition-colors duration-150 hover:bg-navy-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
-          View all auctions
+          {tx("Buy now watches")}
           <ArrowRight className="h-4 w-4" />
         </Link>
       </div>

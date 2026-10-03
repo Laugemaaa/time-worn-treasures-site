@@ -3,6 +3,7 @@ import { useLocalizedText } from "@/i18n/localizedText";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getProductBySlug, type Product } from "@/data/products";
+import { FixedPriceMetadata } from "@/components/FixedPriceMetadata";
 import { AuctionMetadata } from "@/components/AuctionMetadata";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -252,7 +253,7 @@ const ProductDetail = () => {
                   "@type": "Offer",
                   url: product.traderaUrl,
                   priceCurrency: product.currency || "SEK",
-                  price: product.currentBidPrice || product.startingBidPrice || undefined,
+                  price: product.listingType === "fixed-price" ? product.fixedPrice : product.currentBidPrice || product.startingBidPrice || undefined,
                   availability: "https://schema.org/InStock",
                 },
               }
@@ -401,17 +402,17 @@ const ProductDetail = () => {
 
               <div className="rounded-lg border border-border bg-card p-5 space-y-3">
                 <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-                  {t("detail.auctionDetails")}
+                  {product.listingType === "fixed-price" ? tx("Fixed price") : t("detail.auctionDetails")}
                 </h2>
-                <AuctionMetadata product={product} />
-                <p className="text-xs leading-relaxed text-muted-foreground">{t("detail.handoff")}</p>
+                {product.listingType === "fixed-price" ? <FixedPriceMetadata product={product} /> : <AuctionMetadata product={product} />}
+                <p className="text-xs leading-relaxed text-muted-foreground">{product.listingType === "fixed-price" ? tx("Purchases are completed on Tradera. Shipping and any additional fees are shown on the listing.") : t("detail.handoff")}</p>
                 <a
                   href={product.traderaUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="cta-press inline-flex h-12 items-center gap-2 rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground transition-colors duration-150 hover:bg-navy-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
-                  {t("detail.viewOnTradera")}
+                  {product.listingType === "fixed-price" ? tx("Buy on Tradera") : t("detail.viewOnTradera")}
                   <ExternalLink className="h-4 w-4" />
                 </a>
               </div>

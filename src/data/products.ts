@@ -1,4 +1,6 @@
 export type Product = {
+  listingType?: "auction" | "fixed-price";
+  fixedPrice?: number;
   id: string;
   title: string;
   slug: string;
@@ -17,7 +19,12 @@ export type Product = {
   traderaUrl: string;
 };
 
-const GENERATED_PRODUCTS_PATH = "/tradera-products.json";
+const GENERATED_PRODUCTS_PATH = `${import.meta.env.BASE_URL}tradera-products.json`;
+
+export function isActiveProduct(product: Product) {
+  return !product.auctionEndDate || new Date(product.auctionEndDate).getTime() > Date.now();
+}
+export function isFixedPriceProduct(product: Product) { return product.listingType === "fixed-price"; }
 
 export async function getProducts(): Promise<Product[]> {
   return loadGeneratedProducts();
@@ -37,19 +44,19 @@ async function loadGeneratedProducts(): Promise<Product[]> {
     const response = await fetch(`${GENERATED_PRODUCTS_PATH}?v=${Date.now()}`, { cache: "no-store" });
     if (!response.ok) {
       console.warn("No generated Tradera product feed found at /tradera-products.json.");
-      return [];
+      throw new Error("Product feed unavailable");
     }
 
     const json = await response.json();
     if (!Array.isArray(json)) {
       console.warn("Generated Tradera product feed was not an array.");
-      return [];
+      throw new Error("Product feed unavailable");
     }
 
     return json.map(normalizeProduct).filter(Boolean).sort(sortNewestTraderaItemsFirst);
   } catch {
     console.warn("Failed to load generated Tradera product feed.");
-    return [];
+    throw new Error("Product feed unavailable");
   }
 }
 
@@ -57,6 +64,8 @@ function normalizeProduct(value: unknown): Product {
   const product = (value ?? {}) as Partial<Product>;
 
   return {
+    listingType: product.listingType === "fixed-price" ? "fixed-price" : "auction",
+    fixedPrice: Number.isFinite(Number(product.fixedPrice)) && Number(product.fixedPrice) > 0 ? Number(product.fixedPrice) : undefined,
     id: String(product.id ?? ""),
     title: String(product.title ?? "Untitled watch"),
     slug: String(product.slug ?? "untitled-watch"),

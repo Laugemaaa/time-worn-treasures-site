@@ -7,7 +7,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { SEO } from "@/components/SEO";
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { Skeleton } from "@/components/ui/skeleton";
-import { getProducts, type Product } from "@/data/products";
+import { getProducts, isFixedPriceProduct, isActiveProduct, type Product } from "@/data/products";
 
 const LIVE_FEED_REFRESH_MS = 30_000;
 const TRADERA_URL = "https://www.tradera.com/da/profile/items/6841860/grandpasheritage";
@@ -26,7 +26,7 @@ export default function AvailableWatches() {
     setError(false);
     try {
       const data = await getProducts();
-      setProducts(data);
+      setProducts(data.filter(p => !isFixedPriceProduct(p) && isActiveProduct(p)));
     } catch {
       setError(true);
     } finally {

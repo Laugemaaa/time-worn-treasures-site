@@ -2,6 +2,186 @@ import { useCallback } from "react";
 import { useLanguage } from "./LanguageProvider";
 import type { Language } from "./translations";
 export const phraseTranslations: Record<string, Record<Language, string>> = {
+  "{n} reviews": {
+    "en": "{n} reviews",
+    "da": "{n} anmeldelser",
+    "sv": "{n} omdömen",
+    "no": "{n} anmeldelser"
+  },
+  "Buy now watches": {
+    "en": "Buy now watches",
+    "da": "Se ure til fast pris",
+    "sv": "Se klockor till fast pris",
+    "no": "Se klokker til fast pris"
+  },
+  "Vintage watches at a fixed price. Choose your watch and buy through Tradera.": {
+    "en": "Vintage watches at a fixed price. Choose your watch and buy through Tradera.",
+    "da": "Vintageure til fast pris. Find dit ur, og køb det gennem Tradera.",
+    "sv": "Vintageklockor till fast pris. Hitta din klocka och köp via Tradera.",
+    "no": "Vintageklokker til fast pris. Finn din klokke og kjøp gjennom Tradera."
+  },
+  "Buy now": {
+    "en": "Buy now",
+    "da": "Køb nu",
+    "sv": "Köp nu",
+    "no": "Kjøp nå"
+  },
+  "Live auctions": {
+    "en": "Live auctions",
+    "da": "Liveauktioner",
+    "sv": "Liveauktioner",
+    "no": "Liveauksjoner"
+  },
+  "Fixed price": {
+    "en": "Fixed price",
+    "da": "Fast pris",
+    "sv": "Fast pris",
+    "no": "Fast pris"
+  },
+  "See price on Tradera": {
+    "en": "See price on Tradera",
+    "da": "Se pris på Tradera",
+    "sv": "Se pris på Tradera",
+    "no": "Se pris på Tradera"
+  },
+  "Buy on Tradera": {
+    "en": "Buy on Tradera",
+    "da": "Køb på Tradera",
+    "sv": "Köp på Tradera",
+    "no": "Kjøp på Tradera"
+  },
+  "A life before you.": {
+    "en": "A life before you.",
+    "da": "Et liv før dig.",
+    "sv": "Ett liv före dig.",
+    "no": "Et liv før deg."
+  },
+  "A place with you.": {
+    "en": "A place with you.",
+    "da": "En plads hos dig.",
+    "sv": "En plats hos dig.",
+    "no": "En plass hos deg."
+  },
+  "Vintage watches, ready for their next chapter. Discover our fixed-price selection.": {
+    "en": "Vintage watches, ready for their next chapter. Discover our fixed-price selection.",
+    "da": "Vintageure, klar til deres næste kapitel. Gå på opdagelse i vores udvalg til fast pris.",
+    "sv": "Vintageklockor, redo för nästa kapitel. Upptäck vårt utbud till fast pris.",
+    "no": "Vintageklokker, klare for sitt neste kapittel. Oppdag vårt utvalg til fast pris."
+  },
+  "Explore the selection": {
+    "en": "Explore the selection",
+    "da": "Se udvalget",
+    "sv": "Se utbudet",
+    "no": "Se utvalget"
+  },
+  "One watch. One price. Your next chapter.": {
+    "en": "One watch. One price. Your next chapter.",
+    "da": "Ét ur. Én pris. Dit næste kapitel.",
+    "sv": "En klocka. Ett pris. Ditt nästa kapitel.",
+    "no": "Én klokke. Én pris. Ditt neste kapittel."
+  },
+  "Time, with character.": {
+    "en": "Time, with character.",
+    "da": "Tid med karakter.",
+    "sv": "Tid med karaktär.",
+    "no": "Tid med karakter."
+  },
+  "From our archive": {
+    "en": "From our archive",
+    "da": "Fra vores arkiv",
+    "sv": "Ur vårt arkiv",
+    "no": "Fra vårt arkiv"
+  },
+  "Fixed prices": {
+    "en": "Fixed prices",
+    "da": "Faste priser",
+    "sv": "Fasta priser",
+    "no": "Faste priser"
+  },
+  "Character in every detail": {
+    "en": "Character in every detail",
+    "da": "Karakter i hver detalje",
+    "sv": "Karaktär i varje detalj",
+    "no": "Karakter i hver detalj"
+  },
+  "Purchase through Tradera": {
+    "en": "Purchase through Tradera",
+    "da": "Køb gennem Tradera",
+    "sv": "Köp via Tradera",
+    "no": "Kjøp gjennom Tradera"
+  },
+  "THE FIXED-PRICE EDIT": {
+    "en": "THE FIXED-PRICE EDIT",
+    "da": "UDVALGT TIL FAST PRIS",
+    "sv": "UTVALT TILL FAST PRIS",
+    "no": "UTVALGT TIL FAST PRIS"
+  },
+  "Find your next companion.": {
+    "en": "Find your next companion.",
+    "da": "Find din næste følgesvend.",
+    "sv": "Hitta din nästa följeslagare.",
+    "no": "Finn din neste følgesvenn."
+  },
+  "Loading watches": {
+    "en": "Loading watches",
+    "da": "Indlæser ure",
+    "sv": "Laddar klockor",
+    "no": "Laster klokker"
+  },
+  "We could not load the watches": {
+    "en": "We could not load the watches",
+    "da": "Vi kunne ikke indlæse urene",
+    "sv": "Vi kunde inte ladda klockorna",
+    "no": "Vi kunne ikke laste klokkene"
+  },
+  "Discover this watch": {
+    "en": "Discover this watch",
+    "da": "Se nærmere på uret",
+    "sv": "Upptäck klockan",
+    "no": "Se nærmere på klokken"
+  },
+  "A little anticipation": {
+    "en": "A little anticipation",
+    "da": "Noget at glæde sig til",
+    "sv": "Något att se fram emot",
+    "no": "Noe å glede seg til"
+  },
+  "The next chapter is coming.": {
+    "en": "The next chapter is coming.",
+    "da": "Det næste kapitel er på vej.",
+    "sv": "Nästa kapitel är på väg.",
+    "no": "Neste kapittel er på vei."
+  },
+  "Our fixed-price selection is being prepared. New watches will appear here as soon as they are available.": {
+    "en": "Our fixed-price selection is being prepared. New watches will appear here as soon as they are available.",
+    "da": "Vores udvalg til fast pris er på vej. Nye ure vises her, så snart de er til salg.",
+    "sv": "Vårt utbud till fast pris är på väg. Nya klockor visas här så snart de är till salu.",
+    "no": "Vårt utvalg til fast pris er på vei. Nye klokker vises her så snart de er til salgs."
+  },
+  "Explore live auctions": {
+    "en": "Explore live auctions",
+    "da": "Se liveauktionerne",
+    "sv": "Se liveauktionerna",
+    "no": "Se liveauksjonene"
+  },
+  "Purchases are completed on Tradera. Shipping and any additional fees are shown on the listing.": {
+    "en": "Purchases are completed on Tradera. Shipping and any additional fees are shown on the listing.",
+    "da": "Købet gennemføres på Tradera. Fragt og eventuelle ekstra gebyrer fremgår af annoncen.",
+    "sv": "Köpet slutförs på Tradera. Frakt och eventuella extra avgifter visas i annonsen.",
+    "no": "Kjøpet fullføres på Tradera. Frakt og eventuelle ekstra gebyrer vises i annonsen."
+  },
+  "Seiko 5 Actus watch on a black leather strap": {
+    "en": "Seiko 5 Actus watch on a black leather strap",
+    "da": "Seiko 5 Actus-ur med sort læderrem",
+    "sv": "Seiko 5 Actus-klocka med svart läderarmband",
+    "no": "Seiko 5 Actus-klokke med svart lærrem"
+  },
+  "Rado Companion watch on a steel bracelet": {
+    "en": "Rado Companion watch on a steel bracelet",
+    "da": "Rado Companion-ur med stållænke",
+    "sv": "Rado Companion-klocka med stållänk",
+    "no": "Rado Companion-klokke med stållenke"
+  },
   "The GrandpasHeritage Standard": {
     "en": "The GrandpasHeritage Standard",
     "da": "GrandpasHeritage-standarden",

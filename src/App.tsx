@@ -1,8 +1,11 @@
+import { revealNavigationTarget } from "@/lib/navigationMotion";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { useEffect } from "react";
+import BuyNow from "./pages/BuyNow";
 import Index from "./pages/Index.tsx";
 import AvailableWatches from "./pages/AvailableWatches.tsx";
 import ProductDetail from "./pages/ProductDetail.tsx";
@@ -17,10 +20,17 @@ const queryClient = new QueryClient();
 const AnimatedRoutes = () => {
   const location = useLocation();
 
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      revealNavigationTarget(location.hash, Boolean(location.hash));
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [location.pathname, location.hash, location.key]);
   return (
-    <div key={location.pathname} className="page-transition">
+    <div key={location.pathname} className={location.pathname === "/buy-now" ? "buy-route" : "navigation-route"}>
       <Routes location={location}>
         <Route path="/" element={<Index />} />
+        <Route path="/buy-now" element={<BuyNow />} />
         <Route path="/auctions" element={<AvailableWatches />} />
         <Route path="/available-watches" element={<AvailableWatches />} />
         <Route path="/solgte-ure" element={<SoldWatches />} />

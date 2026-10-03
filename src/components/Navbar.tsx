@@ -1,3 +1,4 @@
+import { revealNavigationTarget } from "@/lib/navigationMotion";
 import { useLocalizedText } from "@/i18n/localizedText";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -16,7 +17,8 @@ export function Navbar() {
 
   const navLinks = [
     { label: t("nav.home"), to: "/" },
-    { label: t("nav.collection"), to: "/#collection" },
+    { label: tx("Live auctions"), to: "/#collection" },
+    { label: tx("Buy now"), to: "/buy-now" },
     { label: t("nav.about"), to: "/#philosophy" },
     { label: t("nav.soldWatches"), to: "/solgte-ure" },
     { label: t("nav.buyWatches"), to: "/opkoeb" },
@@ -26,20 +28,13 @@ export function Navbar() {
 
   const handleNavClick = (to: string) => {
     setOpen(false);
-    if (to.startsWith("/#")) {
-      const id = to.slice(2);
-      if (location.pathname === "/") {
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-      }
+    if (to === location.pathname + location.hash) {
+      requestAnimationFrame(() => revealNavigationTarget(location.hash));
     }
   };
 
-  const handleLogoClick = () => {
-    setOpen(false);
-    if (location.pathname === "/") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
+  const handleLogoClick = () => handleNavClick("/");
+  const isActive = (to: string) => to === location.pathname + location.hash;
 
   return (
     <>
@@ -56,6 +51,7 @@ export function Navbar() {
               <Link
                 key={link.to}
                 to={link.to}
+                aria-current={isActive(link.to) ? (link.to.includes("#") ? "location" : "page") : undefined}
                 onClick={() => handleNavClick(link.to)}
                 className="nav-editorial-link inline-flex items-center whitespace-nowrap rounded-sm py-1 font-serif text-[15px] font-semibold leading-none text-[#d8c8aa] transition-colors duration-150 hover:text-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1d140f]"
               >
@@ -137,8 +133,9 @@ export function Navbar() {
                 <Link
                   key={link.to}
                   to={link.to}
+                aria-current={isActive(link.to) ? (link.to.includes("#") ? "location" : "page") : undefined}
                   onClick={() => handleNavClick(link.to)}
-                  className="inline-flex items-center rounded-sm py-2 font-serif text-[24px] font-semibold leading-none text-[#d8c8aa] transition-colors duration-150 hover:text-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa]"
+                  className="nav-editorial-link inline-flex items-center rounded-sm py-2 font-serif text-[24px] font-semibold leading-none text-[#d8c8aa] transition-colors duration-150 hover:text-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa]"
                 >
                   {link.label}
                 </Link>

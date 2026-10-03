@@ -1,5 +1,104 @@
 [
   {
+    "id": "327750630",
+    "quote": "Good communication and delivery. The watch looks even better than expected.",
+    "name": "Bas Hekkenberg",
+    "descriptor": "Tradera-køber · 2026-10-01 16:05 · Seiko 5 Actus SS 6106-7470 Automatic 23J Vintage 1970",
+    "rating": "Positive",
+    "createdDateTime": "2026-10-01T16:05:07",
+    "traderaUrl": "https://www.tradera.com/item/1000985/751611229/seiko-5-actus-ss-6106-7470-automatic-23j-vintage-1970"
+  },
+  {
+    "id": "327011635",
+    "quote": "Allt löste sig jättebra många pluss 👍👍",
+    "name": "linkan 62",
+    "descriptor": "Tradera-køber · 2026-09-16 12:05 · Collection of 5 Vintage Soviet / USSR Pocket Watches",
+    "rating": "Positive",
+    "createdDateTime": "2026-09-16T12:05:19",
+    "traderaUrl": "https://www.tradera.com/item/191302/746249692/collection-of-5-vintage-soviet-ussr-pocket-watches"
+  },
+  {
+    "id": "326808331",
+    "quote": "Tolle Uhr. Schnelle Lieferung.\nAlles wie beschrieben. 👍👍👍",
+    "name": "funny_metin95",
+    "descriptor": "Tradera-køber · 2026-09-11 17:01 · Vintage Enicar MRO200 Automatic – 775-14-01B",
+    "rating": "Positive",
+    "createdDateTime": "2026-09-11T17:01:59",
+    "traderaUrl": "https://www.tradera.com/item/1000985/745841271/vintage-enicar-mro200-automatic-775-14-01b"
+  },
+  {
+    "id": "326743318",
+    "quote": "Bra",
+    "name": "exponiering424",
+    "descriptor": "Tradera-køber · 2026-09-10 12:20 · Vintage Citizen Cosmotron Electronic – 4-790472 K – Blue Dial",
+    "rating": "Positive",
+    "createdDateTime": "2026-09-10T12:20:51",
+    "traderaUrl": "https://www.tradera.com/item/1000983/745842495/vintage-citizen-cosmotron-electronic-4-790472-k-blue-dial"
+  },
+  {
+    "id": "326538931",
+    "quote": "Riktig bra,perfekt packning, hjälpsam",
+    "name": "missmah",
+    "descriptor": "Tradera-køber · 2026-09-06 10:15 · Tissot 1853, T020309",
+    "rating": "Positive",
+    "createdDateTime": "2026-09-06T10:15:41",
+    "traderaUrl": "https://www.tradera.com/item/1902/746415156/tissot-1853-t020309"
+  },
+  {
+    "id": "326528569",
+    "quote": "Allt var perfekt! Tack så mycket för en smidig och trevlig affär! Rekommenderas",
+    "name": "Mo102",
+    "descriptor": "Tradera-køber · 2026-09-05 21:37 · Vintage Certina – Cal. 19-30",
+    "rating": "Positive",
+    "createdDateTime": "2026-09-05T21:37:46",
+    "traderaUrl": "https://www.tradera.com/item/1000984/746414606/vintage-certina-cal-19-30"
+  },
+  {
+    "id": "326520026",
+    "quote": "Super! A++++",
+    "name": "Alexander.LZ",
+    "descriptor": "Tradera-køber · 2026-09-05 17:36 · Vintage Omega Sensorquartz – Ref. 186.0011 / 386.0811",
+    "rating": "Positive",
+    "createdDateTime": "2026-09-05T17:36:14",
+    "traderaUrl": "https://www.tradera.com/item/1902/746510624/vintage-omega-sensorquartz-ref-186-0011-386-0811"
+  },
+  {
+    "id": "326363385",
+    "quote": "Bra packat och bra kommunikation 👍",
+    "name": "Henrysvintagetees",
+    "descriptor": "Tradera-køber · 2026-09-02 17:11 · Vintage Orient Quartz 100m – Two-Tone – Day/Date",
+    "rating": "Positive",
+    "createdDateTime": "2026-09-02T17:11:00",
+    "traderaUrl": "https://www.tradera.com/item/1902/746415854/vintage-orient-quartz-100m-two-tone-day-date"
+  },
+  {
+    "id": "326360900",
+    "quote": "Positiv anmeldelse på Tradera.",
+    "name": "ArchiveSpec",
+    "descriptor": "Tradera-køber · 2026-09-02 16:35 · Vintage Seiko 5 Actus SS – 6106-7440",
+    "rating": "Positive",
+    "createdDateTime": "2026-09-02T16:35:36",
+    "traderaUrl": "https://www.tradera.com/item/1000985/746493681/vintage-seiko-5-actus-ss-6106-7440"
+  },
+  {
+    "id": "326253579",
+    "quote": "Positiv anmeldelse på Tradera.",
+    "name": "Loppis_online",
+    "descriptor": "Tradera-køber · 2026-08-31 15:41 · Vintage Cimier Antimagnetic Swiss Made Mechanical Watch",
+    "rating": "Positive",
+    "createdDateTime": "2026-08-31T15:41:36",
+    "traderaUrl": "https://www.tradera.com/item/1000984/745840674/vintage-cimier-antimagnetic-swiss-made-mechanical-watch"
+  },
+  {
+    "id": "326113070",
+    "quote": "Positiv anmeldelse på Tradera.",
+    "name": "sociable_lukas",
+    "descriptor": "Tradera-køber · 2026-08-28 10:23 · Seiko King Quartz 4823-8010 – 1976 – Vintage Japanese Day-Date Watch",
+    "rating": "Positive",
+    "createdDateTime": "2026-08-28T10:23:59",
+    "traderaUrl": "https://www.tradera.com/item/1902/745841066/seiko-king-quartz-4823-8010-1976-vintage-japanese-day-date-watch"
+  },
+  {
     "id": "325727923",
     "quote": "Positiv anmeldelse på Tradera.",
     "name": "sven get",

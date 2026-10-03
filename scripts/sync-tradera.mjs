@@ -248,6 +248,7 @@ function buildSitemap(items) {
       changefreq: "daily",
       priority: "1.0",
     },
+    { loc: `${SITE_URL}/buy-now`, changefreq: "daily", priority: "0.9" },
     ...items
       .filter((item) => item?.slug)
       .map((item) => ({
@@ -330,7 +331,7 @@ async function scrapeItemPage(itemUrl, referenceDate) {
     || matchMeta(html, "twitter:image")
     || "https://placehold.co/600x600/d7c7ad/2f2117?text=Grandpa%27s+Heritage";
 
-  if (!title || !endLabel) {
+  if (!title || (!endLabel && embeddedItemData?.listingType !== "fixed-price") || embeddedItemData?.active === false) {
     return null;
   }
 
@@ -350,6 +351,8 @@ async function scrapeItemPage(itemUrl, referenceDate) {
     images: imageUrls.length > 0 ? imageUrls : [imageUrl],
     shortDescription: buildShortDescription(description),
     fullDescription: description || undefined,
+    listingType: embeddedItemData?.listingType,
+    fixedPrice: embeddedItemData?.listingType === "fixed-price" ? embeddedItemData.fixedPrice : undefined,
     currentBidPrice: hasActiveBids ? embeddedPrice : undefined,
     startingBidPrice: embeddedStartingPrice ?? parsedStartingPrice.amount,
     currency: embeddedItemData?.currency || parsedPrice.currency,
@@ -549,6 +552,9 @@ function matchEmbeddedItemData(html, itemId) {
     const bids = bidMatch ? readObject(details.end + bidMatch[0].length - 1)?.value : undefined;
     const item = details.value;
     return {
+      listingType: classifyListingType(item.itemType),
+      fixedPrice: item.fixedPrice,
+      active: item.isActive !== false && item.hasEnded !== true && item.forciblyClosed !== true,
       price: bids?.leadingBidAmount ?? item.leadingBid,
       openingBid: item.openingBid,
       totalBids: bids?.bidCount,
@@ -588,6 +594,12 @@ function parseTraderaDate(label, referenceDate) {
   return date.toISOString();
 }
 
+function classifyListingType(type) {
+  if ([3, 4, "3", "4", "PureBuyItNow", "Shop", "ShopItem", "FixedPrice"].includes(type)) return "fixed-price";
+  if ([1, "1", "Auction", "AuctionBin"].includes(type)) return "auction";
+  return undefined;
+}
+
 function mapItem(itemXml, referenceDate) {
   const id = readTag(itemXml, "Id");
   const title = normalizeWhitespace(readTag(itemXml, "ShortDescription"));
@@ -620,6 +632,8 @@ function mapItem(itemXml, referenceDate) {
     images: uniqueImages.length > 0 ? uniqueImages : undefined,
     shortDescription: buildShortDescription(longDescription),
     fullDescription: longDescription || undefined,
+    listingType: classifyListingType(readTag(itemXml, "ItemType")),
+    fixedPrice: classifyListingType(readTag(itemXml, "ItemType")) === "fixed-price" ? buyItNowPrice : undefined,
     currentBidPrice,
     startingBidPrice: openingBid || buyItNowPrice || currentBidPrice,
     currency: "SEK",

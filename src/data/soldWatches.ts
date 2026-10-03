@@ -1,3 +1,5 @@
+import seikoSeptemberSteel from "@/assets/sold-watches/optimized/seiko-6106-7470-september-2026.png";
+import seikoSeptemberLeather from "@/assets/sold-watches/optimized/seiko-6106-7740-september-2026.png";
 import hMoserImage1 from "@/assets/sold-watches/optimized/h-moser-14k-01.jpg";
 import hMoserImage2 from "@/assets/sold-watches/optimized/h-moser-14k-02.jpg";
 import hMoserImage3 from "@/assets/sold-watches/optimized/h-moser-14k-03.jpg";
@@ -122,6 +124,28 @@ export type SoldWatch = {
 };
 
 export const soldWatches: SoldWatch[] = [
+  {
+    id: "seiko-5-actus-6106-7470-751611229",
+    title: "Seiko 5 Actus SS 6106-7470 Automatic 23J Vintage 1970",
+    imageUrl: seikoSeptemberSteel,
+    soldPrice: 801,
+    currency: "DKK",
+    itemNumber: "751611229",
+    soldDate: "28 sept. 2026 00:19",
+    numberOfBids: 40,
+    traderaUrl: "https://www.tradera.com/da/item/1000985/751611229/seiko-5-actus-ss-6106-7470-automatic-23j-vintage-1970",
+  },
+  {
+    id: "seiko-5-actus-6106-7740-751611825",
+    title: "Vintage Seiko 5 Actus SS 6106-7740 Automatic 25 Jewels 1974",
+    imageUrl: seikoSeptemberLeather,
+    soldPrice: 513,
+    currency: "DKK",
+    itemNumber: "751611825",
+    soldDate: "28 sept. 2026 00:31",
+    numberOfBids: 23,
+    traderaUrl: "https://www.tradera.com/da/item/1000985/751611825/vintage-seiko-5-actus-ss-6106-7740-automatic-25-jewels-1974",
+  },
   {
     id: "vintage-omega-sensorquartz-ref-186-0011-386-0811",
     title: "Vintage Omega Sensorquartz - Ref. 186.0011 / 386.0811",

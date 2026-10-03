@@ -30,8 +30,9 @@ export function Footer() {
                 {t("nav.home")}
               </Link>
               <Link to="/#collection" className="text-sm text-[#d8c8aa] transition-colors duration-150 hover:text-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa] rounded-sm w-fit">
-                {t("nav.collection")}
+                {tx("Live auctions")}
               </Link>
+              <Link to="/buy-now" className="text-sm text-[#d8c8aa] hover:text-[#fff4dc]">{tx("Buy now")}</Link>
               <Link to="/#philosophy" className="text-sm text-[#d8c8aa] transition-colors duration-150 hover:text-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa] rounded-sm w-fit">
                 {t("nav.about")}
               </Link>
