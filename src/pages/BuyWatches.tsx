@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
-const CONTACT_EMAIL = "Laugemunktradera@gmail.com";
+const CONTACT_EMAIL = "laugegrandpasheritage@gmail.com";
 
 type FormState = {
   name: string;
