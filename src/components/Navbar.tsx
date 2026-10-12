@@ -2,7 +2,7 @@ import { revealNavigationTarget } from "@/lib/navigationMotion";
 import { useLocalizedText } from "@/i18n/localizedText";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ChevronDown, Globe, Instagram, Menu, X } from "lucide-react";
+import { ChevronDown, Globe, Facebook, Instagram, Menu, X } from "lucide-react";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { TraderaButton } from "@/components/TraderaButton";
 import { useLanguage } from "@/i18n/LanguageProvider";
@@ -24,6 +24,7 @@ export function Navbar() {
     { label: t("nav.buyWatches"), to: "/opkoeb" },
   ];
 
+  const facebookUrl = "https://www.facebook.com/profile.php?id=61595507451393";
   const instagramUrl = "https://www.instagram.com/grandpasheritage/";
 
   const handleNavClick = (to: string) => {
@@ -103,6 +104,16 @@ export function Navbar() {
               <Instagram aria-hidden className="h-4 w-4" />
               <span>Instagram</span>
             </a>
+<a
+              href={facebookUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="inline-flex h-[38px] items-center gap-2 rounded-[11px] bg-[#eadcc6] px-4 font-serif text-[17px] font-semibold leading-none text-[#1d140f] transition-colors duration-150 hover:bg-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1d140f]"
+            >
+              <Facebook aria-hidden className="h-4 w-4" />
+              <span className="hidden 2xl:inline">Facebook</span>
+            </a>
             <TraderaButton size="sm" className="h-[38px] px-5 text-[17px]" />
           </div>
 
@@ -168,6 +179,15 @@ export function Navbar() {
                 >
                   <Instagram aria-hidden className="h-4 w-4" />
                   <span>Instagram</span>
+                </a>
+<a
+                  href={facebookUrl} aria-label="Facebook"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-11 w-fit items-center gap-2 rounded-[12px] bg-[#eadcc6] px-4 font-serif text-[18px] font-semibold leading-none text-[#1d140f]"
+                >
+                  <Facebook aria-hidden className="h-4 w-4" />
+                  <span>Facebook</span>
                 </a>
                 <TraderaButton />
               </div>
