@@ -44,13 +44,14 @@ export function Navbar() {
       <header className="sticky top-0 z-50 border-b border-[#3a2a1e]/80 bg-[linear-gradient(180deg,#2b2118_0%,#1d140f_74%,#100c09_100%)] shadow-[0_22px_50px_-28px_rgba(5,4,3,0.95)] after:pointer-events-none after:absolute after:inset-x-0 after:bottom-[-28px] after:h-7 after:bg-gradient-to-b after:from-[#100c09] after:to-transparent">
         <div className="relative mx-auto h-[84px] max-w-[1920px] px-8 font-sans lg:px-11">
           <nav
-            className="absolute left-8 top-1/2 hidden max-w-[calc(50%-175px)] -translate-y-1/2 items-center gap-12 overflow-hidden lg:left-14 lg:flex xl:gap-14"
+            className="absolute left-8 top-1/2 hidden max-w-[calc(50%-175px)] -translate-y-1/2 items-center gap-12 overflow-hidden py-3 lg:left-14 lg:flex xl:gap-14"
             aria-label={tx("Main navigation")}
           >
             {navLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
+                data-featured={link.to === "/#collection" || link.to === "/buy-now" ? true : undefined}
                 aria-current={isActive(link.to) ? (link.to.includes("#") ? "location" : "page") : undefined}
                 onClick={() => handleNavClick(link.to)}
                 className="nav-editorial-link inline-flex items-center whitespace-nowrap rounded-sm py-1 font-serif text-[15px] font-semibold leading-none text-[#d8c8aa] transition-colors duration-150 hover:text-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1d140f]"
@@ -133,6 +134,7 @@ export function Navbar() {
                 <Link
                   key={link.to}
                   to={link.to}
+                data-featured={link.to === "/#collection" || link.to === "/buy-now" ? true : undefined}
                 aria-current={isActive(link.to) ? (link.to.includes("#") ? "location" : "page") : undefined}
                   onClick={() => handleNavClick(link.to)}
                   className="nav-editorial-link inline-flex items-center rounded-sm py-2 font-serif text-[24px] font-semibold leading-none text-[#d8c8aa] transition-colors duration-150 hover:text-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa]"

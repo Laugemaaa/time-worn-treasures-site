@@ -651,3 +651,28 @@
   .nav-editorial-link { transition: none; }
   .nav-editorial-link:active { transform: none; }
 }
+
+/* Frame the two shopping links without moving the surrounding navigation. */
+.nav-editorial-link[data-featured] {
+  border-radius: 999px;
+  padding: 10px 12px;
+  margin-inline: -12px;
+  background-color: rgba(203, 177, 128, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(203, 177, 128, 0.62);
+  color: #ead8b6;
+  transition: color 180ms ease, background-color 220ms ease, box-shadow 220ms ease;
+}
+.nav-editorial-link[data-featured]::after { display: none; }
+.nav-editorial-link[data-featured]:hover,
+.nav-editorial-link[data-featured]:focus-visible,
+.nav-editorial-link[data-featured][aria-current] {
+  background-color: rgba(203, 177, 128, 0.13);
+  box-shadow: inset 0 0 0 1px #cbb180, 0 0 14px rgba(203, 177, 128, 0.12);
+  color: #fff0d6;
+}
+@media (max-width: 1023px) {
+  .nav-editorial-link[data-featured] { padding-block: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-editorial-link[data-featured] { transition: none; }
+}
