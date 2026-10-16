@@ -156,7 +156,7 @@ async function fetchFeedbackFromProfile() {
     return [];
   }
 
-  const feedbackApiUrl = new URL("https://www.tradera.com/api/webapi/member/web/profile-feedback");
+  const feedbackApiUrl = new URL(`https://www.tradera.com/api/webclient/profiles/${SELLER_ID}/feedback`);
   feedbackApiUrl.search = new URLSearchParams({
     memberId: SELLER_ID,
     role: "seller",
@@ -204,7 +204,7 @@ function mapFeedbackItem(value) {
   }
 
   const item = value;
-  const quote = normalizeWhitespace(String(item.text || "Positiv anmeldelse på Tradera.")).trim();
+  const quote = normalizeWhitespace(String(item.text || "")).trim();
   const createdDateTime = String(item.createdDateTime || "");
 
   if (!createdDateTime) {

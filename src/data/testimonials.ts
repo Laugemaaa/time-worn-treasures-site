@@ -12,6 +12,24 @@ const GENERATED_FEEDBACK_PATH = "/tradera-feedback.json";
 
 export const fallbackTestimonials: Testimonial[] = [
   {
+    "id": "328435010",
+    "quote": "++++",
+    "name": "mtias79",
+    "descriptor": "Tradera-køber · 2026-10-15 05:50 · Vintage Tissot Visodate Seastar Seven Automatic Ladies Watch",
+    "rating": "Positive",
+    "createdDateTime": "2026-10-15T05:50:23",
+    "traderaUrl": "https://www.tradera.com/item/1000985/753469777/vintage-tissot-visodate-seastar-seven-automatic-ladies-watch"
+  },
+  {
+    "id": "328435006",
+    "quote": "+++++",
+    "name": "mtias79",
+    "descriptor": "Tradera-køber · 2026-10-15 05:50 · Vintage Certina Blue Ribbon – Cal. 25-651 – 21 Jewels – Automatic – Defective",
+    "rating": "Positive",
+    "createdDateTime": "2026-10-15T05:50:05",
+    "traderaUrl": "https://www.tradera.com/item/1000985/753468798/vintage-certina-blue-ribbon-cal-25-651-21-jewels-automatic-defective"
+  },
+  {
     "id": "327750630",
     "quote": "Good communication and delivery. The watch looks even better than expected.",
     "name": "Bas Hekkenberg",
@@ -31,7 +49,7 @@ export const fallbackTestimonials: Testimonial[] = [
   },
   {
     "id": "326808331",
-    "quote": "Tolle Uhr. Schnelle Lieferung.\nAlles wie beschrieben. 👍👍👍",
+    "quote": "Tolle Uhr. Schnelle Lieferung. Alles wie beschrieben. 👍👍👍",
     "name": "funny_metin95",
     "descriptor": "Tradera-køber · 2026-09-11 17:01 · Vintage Enicar MRO200 Automatic – 775-14-01B",
     "rating": "Positive",
@@ -85,7 +103,7 @@ export const fallbackTestimonials: Testimonial[] = [
   },
   {
     "id": "326360900",
-    "quote": "Positiv anmeldelse på Tradera.",
+    "quote": "",
     "name": "ArchiveSpec",
     "descriptor": "Tradera-køber · 2026-09-02 16:35 · Vintage Seiko 5 Actus SS – 6106-7440",
     "rating": "Positive",
@@ -94,7 +112,7 @@ export const fallbackTestimonials: Testimonial[] = [
   },
   {
     "id": "326253579",
-    "quote": "Positiv anmeldelse på Tradera.",
+    "quote": "",
     "name": "Loppis_online",
     "descriptor": "Tradera-køber · 2026-08-31 15:41 · Vintage Cimier Antimagnetic Swiss Made Mechanical Watch",
     "rating": "Positive",
@@ -103,7 +121,7 @@ export const fallbackTestimonials: Testimonial[] = [
   },
   {
     "id": "326113070",
-    "quote": "Positiv anmeldelse på Tradera.",
+    "quote": "",
     "name": "sociable_lukas",
     "descriptor": "Tradera-køber · 2026-08-28 10:23 · Seiko King Quartz 4823-8010 – 1976 – Vintage Japanese Day-Date Watch",
     "rating": "Positive",
@@ -112,7 +130,7 @@ export const fallbackTestimonials: Testimonial[] = [
   },
   {
     "id": "325727923",
-    "quote": "Positiv anmeldelse på Tradera.",
+    "quote": "",
     "name": "sven get",
     "descriptor": "Tradera-køber · 2026-08-19 20:42 · Vintage Seiko Digital Alarm Chronograph",
     "rating": "Positive",
@@ -121,7 +139,7 @@ export const fallbackTestimonials: Testimonial[] = [
   },
   {
     "id": "325212234",
-    "quote": "Positiv anmeldelse på Tradera.",
+    "quote": "",
     "name": "matket1",
     "descriptor": "Tradera-køber · 2026-08-07 19:14 · Vintage Tissot Seastar 10 ATM",
     "rating": "Positive",
@@ -139,7 +157,7 @@ export const fallbackTestimonials: Testimonial[] = [
   },
   {
     "id": "324719190",
-    "quote": "Positiv anmeldelse på Tradera.",
+    "quote": "",
     "name": "CrownCollective",
     "descriptor": "Tradera-køber · 2026-07-27 18:24 · Vintage Seiko LM Special Automatic 5216-7080",
     "rating": "Positive",
@@ -157,7 +175,7 @@ export const fallbackTestimonials: Testimonial[] = [
   },
   {
     "id": "324327382",
-    "quote": "Positiv anmeldelse på Tradera.",
+    "quote": "",
     "name": "Cos008",
     "descriptor": "Tradera-køber · 2026-07-16 21:42 · Certina DS 100M Quartz",
     "rating": "Positive",
@@ -166,7 +184,7 @@ export const fallbackTestimonials: Testimonial[] = [
   },
   {
     "id": "324177806",
-    "quote": "Positiv anmeldelse på Tradera.",
+    "quote": "",
     "name": "legolas4",
     "descriptor": "Tradera-køber · 2026-07-13 08:09 · Citizen Quartz 2110-895878 SMT",
     "rating": "Positive",
@@ -202,7 +220,7 @@ export const fallbackTestimonials: Testimonial[] = [
   },
   {
     "id": "320336055",
-    "quote": "Positiv anmeldelse på Tradera.",
+    "quote": "",
     "name": "inik771",
     "descriptor": "Tradera-køber · 2026-04-14 19:02",
     "rating": "Positive",
@@ -211,7 +229,7 @@ export const fallbackTestimonials: Testimonial[] = [
   },
   {
     "id": "319347644",
-    "quote": "🌟🌟🌟🌟🌟\nSuper nöjd, bra kommunikation och mycket trevlig säljare! 🙏",
+    "quote": "🌟🌟🌟🌟🌟 Super nöjd, bra kommunikation och mycket trevlig säljare! 🙏",
     "name": "SPalangi",
     "descriptor": "Tradera-køber · 2026-03-25 11:30",
     "rating": "Positive",
@@ -220,7 +238,7 @@ export const fallbackTestimonials: Testimonial[] = [
   },
   {
     "id": "319347643",
-    "quote": "🌟🌟🌟🌟🌟\nSuper nöjd, bra kommunikation och mycket trevlig säljare! 🙏",
+    "quote": "🌟🌟🌟🌟🌟 Super nöjd, bra kommunikation och mycket trevlig säljare! 🙏",
     "name": "SPalangi",
     "descriptor": "Tradera-køber · 2026-03-25 11:30",
     "rating": "Positive",
@@ -229,7 +247,7 @@ export const fallbackTestimonials: Testimonial[] = [
   },
   {
     "id": "319318465",
-    "quote": "Positiv anmeldelse på Tradera.",
+    "quote": "",
     "name": "Daniel_Gråhns",
     "descriptor": "Tradera-køber · 2026-03-24 18:46",
     "rating": "Positive",
@@ -238,7 +256,7 @@ export const fallbackTestimonials: Testimonial[] = [
   },
   {
     "id": "318910048",
-    "quote": "Positiv anmeldelse på Tradera.",
+    "quote": "",
     "name": "simonandersson04",
     "descriptor": "Tradera-køber · 2026-03-16 12:43",
     "rating": "Positive",
@@ -265,7 +283,7 @@ export const fallbackTestimonials: Testimonial[] = [
   },
   {
     "id": "316937011",
-    "quote": "Positiv anmeldelse på Tradera.",
+    "quote": "",
     "name": "inik771",
     "descriptor": "Tradera-køber · 2026-02-04 18:12",
     "rating": "Positive",
@@ -290,7 +308,7 @@ export async function getTestimonials(): Promise<Testimonial[]> {
       .map(normalizeTestimonial)
       .filter(Boolean);
 
-    return liveTestimonials.length > 0 ? liveTestimonials : fallbackTestimonials;
+    return liveTestimonials;
   } catch {
     return fallbackTestimonials;
   }
@@ -301,7 +319,7 @@ function normalizeTestimonial(value: unknown): Testimonial | null {
   const quote = String(testimonial.quote ?? "").trim();
   const name = String(testimonial.name ?? "").trim();
 
-  if (!quote || !name) {
+  if (!name) {
     return null;
   }
 
@@ -314,4 +332,10 @@ function normalizeTestimonial(value: unknown): Testimonial | null {
     createdDateTime: testimonial.createdDateTime ? String(testimonial.createdDateTime) : undefined,
     traderaUrl: testimonial.traderaUrl ? String(testimonial.traderaUrl) : undefined,
   };
+}
+
+// Older feeds used a generated sentence for ratings without a written comment.
+export function hasWrittenReview(item: Testimonial): boolean {
+  const quote = item.quote.trim();
+  return /\p{L}/u.test(quote) && !/^(?:Positiv anmeldelse på Tradera|Positive feedback on Tradera|Positivt omdöme på Tradera)[.!]?$/i.test(quote);
 }

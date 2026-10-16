@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Star } from "lucide-react";
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { TestimonialCard } from "@/components/TestimonialCard";
-import { fallbackTestimonials, getTestimonials, type Testimonial } from "@/data/testimonials";
+import { fallbackTestimonials, getTestimonials, hasWrittenReview, type Testimonial } from "@/data/testimonials";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { cn } from "@/lib/utils";
@@ -24,13 +24,16 @@ export function TestimonialsSection() {
   const [ratingVisible, setRatingVisible] = useState(false);
   const [testimonials, setTestimonials] = useState<Testimonial[]>(fallbackTestimonials);
   const reducedMotion = usePrefersReducedMotion();
+  const writtenTestimonials = testimonials.filter(hasWrittenReview);
 
   useEffect(() => {
     let cancelled = false;
-    getTestimonials().then((items) => {
-      if (!cancelled) setTestimonials(items);
-    });
-    return () => { cancelled = true; };
+    const refresh = () => getTestimonials().then(items => { if (!cancelled) setTestimonials(items); });
+    void refresh();
+    const timer = window.setInterval(() => { if (!document.hidden) void refresh(); }, 60000);
+    const onVisible = () => { if (!document.hidden) void refresh(); };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => { cancelled = true; window.clearInterval(timer); document.removeEventListener("visibilitychange", onVisible); };
   }, []);
 
   useEffect(() => {
@@ -95,14 +98,14 @@ export function TestimonialsSection() {
           </div>
         </div>
 
-        <Carousel
+        {writtenTestimonials.length > 0 && <Carousel
           setApi={setApi}
           opts={{ loop: true, align: "center", duration: reducedMotion ? 0 : 50 }}
           aria-label={tx("Collector reviews")}
         >
           <CarouselContent className="-ml-5 py-6">
-            {testimonials.map((testimonial, index) => (
-              <CarouselItem key={testimonial.id ?? `${testimonial.name}-${index}`} className="basis-[90%] pl-5 sm:basis-[60%] lg:basis-[38%]" aria-label={tx("{n} of {total}", { n: index + 1, total: testimonials.length })}>
+            {writtenTestimonials.map((testimonial, index) => (
+              <CarouselItem key={testimonial.id ?? `${testimonial.name}-${index}`} className="basis-[90%] pl-5 sm:basis-[60%] lg:basis-[38%]" aria-label={tx("{n} of {total}", { n: index + 1, total: writtenTestimonials.length })}>
                 <div className={cn(
                   "h-full origin-center transition-[transform,opacity] duration-1000 ease-in-out motion-reduce:transition-none [&_.testimonial-card]:rounded-xl [&_.testimonial-card]:border-primary/25 [&_.testimonial-card]:bg-background/35 [&_.testimonial-card]:shadow-[inset_0_1px_0_hsl(var(--primary)/0.12)] [&_.testimonial-card_p]:text-base [&_.testimonial-card_p]:leading-8",
                   selected === index ? "scale-100 opacity-100 [&_.testimonial-card]:border-primary/60 [&_.testimonial-card]:bg-card" : "scale-[0.97] opacity-80 hover:opacity-100 focus-within:opacity-100"
@@ -112,7 +115,7 @@ export function TestimonialsSection() {
               </CarouselItem>
             ))}
           </CarouselContent>
-        </Carousel>
+        </Carousel>}
         <a href={TRADERA_URL} target="_blank" rel="noopener noreferrer" className="editorial-link inline-flex items-center gap-3 border-b border-primary/35 pb-2 text-xs font-semibold uppercase tracking-[0.18em] text-foreground">{tx("See all feedback on Tradera")}<span aria-hidden="true">→</span>
         </a>
       </SectionWrapper>
