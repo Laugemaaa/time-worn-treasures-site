@@ -10,6 +10,9 @@ import { cn } from "@/lib/utils";
 
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
 
+// Verified total on Tradera; includes ratings without a written comment.
+const VERIFIED_REVIEW_TOTAL = 31;
+
 const TRADERA_URL = "https://www.tradera.com/da/profile/feedback/6841860/grandpasheritage";
 
 export function TestimonialsSection() {
@@ -25,6 +28,7 @@ export function TestimonialsSection() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>(fallbackTestimonials);
   const reducedMotion = usePrefersReducedMotion();
   const writtenTestimonials = testimonials.filter(hasWrittenReview);
+  const totalReviews = Math.max(VERIFIED_REVIEW_TOTAL, testimonials.length);
 
   useEffect(() => {
     let cancelled = false;
@@ -92,7 +96,7 @@ export function TestimonialsSection() {
               <span className="inline-flex items-center gap-1 text-primary" aria-hidden="true">
                 {Array.from({ length: 5 }).map((_, index) => <Star key={index} className="testimonial-star h-4 w-4 fill-current" style={{ animationDelay: `${index * 90}ms` }} />)}
               </span>
-              <span>{tx("5/5 på Tradera")} · {tx("{n} reviews", { n: testimonials.length })}</span>
+              <span>{tx("5/5 på Tradera")} · {tx("{n} reviews", { n: totalReviews })}</span>
             </div>
 
           </div>
