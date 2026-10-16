@@ -1,3 +1,4 @@
+import { BuyNowSection } from "@/components/BuyNowSection";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { useLocalizedText } from "@/i18n/localizedText";
 import { Navbar } from "@/components/Navbar";
@@ -105,6 +106,7 @@ const Index = () => {
         <FounderStorySection />
         <HeritageStandardSection />
         <ProductGridSection />
+        <BuyNowSection />
         <PhilosophySection />
         <InstagramStorySection />
         <TestimonialsSection />

@@ -676,3 +676,11 @@
 @media (prefers-reduced-motion: reduce) {
   .nav-editorial-link[data-featured] { transition: none; }
 }
+/* Warm ambient light, fading into the site's deep espresso palette. */
+.buy-now-editorial {
+  background-color: #19130f;
+  background-image:
+    radial-gradient(ellipse at 16% 0%, rgba(190, 158, 104, 0.18), transparent 52%),
+    radial-gradient(ellipse at 0% 42%, rgba(133, 100, 64, 0.09), transparent 58%);
+}
+#buy-now-preview { scroll-margin-top: 110px; }

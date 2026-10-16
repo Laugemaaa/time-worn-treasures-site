@@ -64,7 +64,8 @@ function normalizeProduct(value: unknown): Product {
   const product = (value ?? {}) as Partial<Product>;
 
   return {
-    listingType: product.listingType === "fixed-price" ? "fixed-price" : "auction",
+    // This confirmed Buy now listing is missing its type in the generated feed.
+    listingType: product.listingType === "fixed-price" || (!product.listingType && String(product.id) === "755495019") ? "fixed-price" : "auction",
     fixedPrice: Number.isFinite(Number(product.fixedPrice)) && Number(product.fixedPrice) > 0 ? Number(product.fixedPrice) : undefined,
     id: String(product.id ?? ""),
     title: String(product.title ?? "Untitled watch"),
