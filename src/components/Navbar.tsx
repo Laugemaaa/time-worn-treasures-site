@@ -99,7 +99,7 @@ export function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={tx("Instagram (opens in new tab)")}
-              className="inline-flex h-[38px] items-center gap-2 rounded-[11px] bg-[#eadcc6] px-4 font-serif text-[17px] font-semibold leading-none text-[#1d140f] transition-colors duration-150 hover:bg-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1d140f]"
+              className="inline-flex h-[38px] items-center gap-2 rounded-[11px] border border-[#d8c8aa]/35 bg-[#eadcc6]/5 px-4 font-serif text-[17px] font-semibold leading-none text-[#d8c8aa] transition-colors duration-150 hover:bg-[#eadcc6]/10 hover:border-[#d8c8aa]/60 hover:text-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1d140f]"
             >
               <Instagram aria-hidden className="h-4 w-4" />
               <span>Instagram</span>
@@ -109,7 +109,7 @@ export function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
-              className="inline-flex h-[38px] items-center gap-2 rounded-[11px] bg-[#eadcc6] px-4 font-serif text-[17px] font-semibold leading-none text-[#1d140f] transition-colors duration-150 hover:bg-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1d140f]"
+              className="inline-flex h-[38px] items-center gap-2 rounded-[11px] border border-[#d8c8aa]/35 bg-[#eadcc6]/5 px-4 font-serif text-[17px] font-semibold leading-none text-[#d8c8aa] transition-colors duration-150 hover:bg-[#eadcc6]/10 hover:border-[#d8c8aa]/60 hover:text-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1d140f]"
             >
               <Facebook aria-hidden className="h-4 w-4" />
               <span className="hidden 2xl:inline">Facebook</span>
@@ -175,7 +175,7 @@ export function Navbar() {
                   href={instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-11 w-fit items-center gap-2 rounded-[12px] bg-[#eadcc6] px-4 font-serif text-[18px] font-semibold leading-none text-[#1d140f]"
+                  className="inline-flex h-11 w-fit items-center gap-2 rounded-[12px] border border-[#d8c8aa]/35 bg-[#eadcc6]/5 px-4 font-serif text-[18px] font-semibold leading-none text-[#d8c8aa] transition-colors duration-150 hover:bg-[#eadcc6]/10 hover:border-[#d8c8aa]/60 hover:text-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa]"
                 >
                   <Instagram aria-hidden className="h-4 w-4" />
                   <span>Instagram</span>
@@ -184,7 +184,7 @@ export function Navbar() {
                   href={facebookUrl} aria-label="Facebook"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-11 w-fit items-center gap-2 rounded-[12px] bg-[#eadcc6] px-4 font-serif text-[18px] font-semibold leading-none text-[#1d140f]"
+                  className="inline-flex h-11 w-fit items-center gap-2 rounded-[12px] border border-[#d8c8aa]/35 bg-[#eadcc6]/5 px-4 font-serif text-[18px] font-semibold leading-none text-[#d8c8aa] transition-colors duration-150 hover:bg-[#eadcc6]/10 hover:border-[#d8c8aa]/60 hover:text-[#fff4dc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c8aa]"
                 >
                   <Facebook aria-hidden className="h-4 w-4" />
                   <span>Facebook</span>
